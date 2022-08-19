@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.StartActivity">
+
+    <Button
+        android:id="@+id/STCBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:backgroundTint="@color/yellow"
+        android:text="@string/back"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp" />
+
+    <TextView
+        android:id="@+id/StartStageNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:text="@string/s1start"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/StartScrollView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ScrollView
+        android:id="@+id/StartScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/StartStageNum">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/StartLeftButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:scaleType="center"
+                    android:src="@drawable/arrow3" />
+
+                <LinearLayout
+                    android:id="@+id/StartCarNumLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/StartCarNumLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="top|center_horizontal"
+                        android:text="@string/cn"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/StartCarNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="center"
+                        android:text="59"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/SOLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/SOLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="top|center_horizontal"
+                        android:text="@string/so"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/StartOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="center"
+                        android:text="53"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/StartRightButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/arrow1" />
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/StartTC"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp">
+
+                <LinearLayout
+                    android:id="@+id/StartTCHLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/STCBlue"
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/STCTC1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/dark_blue"
+                            android:gravity="center|top"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="3dp"
+                            android:text="@string/TC1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/STCKM"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@color/dark_blue"
+                            android:gravity="center"
+                            android:text="@string/stage1km"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/STCTC2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/dark_blue"
+                            android:gravity="bottom|center"
+                            android:paddingBottom="5dp"
+                            android:text="@string/TC2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/StartTCMain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/STCRow1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:orientation="horizontal"
+                            android:paddingTop="2dp">
+
+                            <TextView
+                                android:id="@+id/STCStage1"
+                                android:layout_width="160dp"
+                                android:layout_height="match_parent"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="2dp"
+                                android:text="@string/stage1"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCFT"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/FT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR1V1"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/STCRow2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/STCDist"
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:gravity="top"
+                                android:paddingLeft="2dp"
+                                android:text="@string/stage1dist"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCFTH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCFTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCFTS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgrounds"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCFTMS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/background10"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR2V1"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:id="@+id/STCFlag"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:padding="6dp"
+                                app:srcCompat="@drawable/flag" />
+
+                            <View
+                                android:id="@+id/STCR2V2"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/STCRow3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/STCPS"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="@string/PS"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR3V1"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/STCAS"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/AS"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR3V2"
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/STCTargT"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TargT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR3V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/STCRow4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/STCPSH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCPSM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/STCArrow1"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/arrow1" />
+
+                            <EditText
+                                android:id="@+id/STCASH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/blueh"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/STCASM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/bluem"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/STCArrow2"
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/arrow2" />
+
+                            <TextView
+                                android:id="@+id/STCTaTH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/border"
+                                android:gravity="center"
+                                android:text="@string/S1TTH"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCTaTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/border"
+                                android:gravity="center"
+                                android:text="@string/S1TTM"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/STCArrow3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/arrow1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/STCRow5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/STCSS"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/SS1"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR5V1"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/STCTT"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR5V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/STCAT"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/AT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR5V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/STCRow6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/STCOval"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/oval"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="34sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/STCStop"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:padding="6dp"
+                                app:srcCompat="@drawable/stop" />
+
+                            <TextView
+                                android:id="@+id/STCTTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCTTS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgrounds"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCTTMS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/background10"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR6V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/STCATH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/blueh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCATM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/bluem"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR6V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/STCRow7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingBottom="2dp">
+
+                            <TextView
+                                android:id="@+id/STCSO"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/SO"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR7V1"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/STCStage2"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/stage1"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR7V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/STCTC"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TC2"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCR7V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/STCYellow"
+                        android:layout_width="110dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/STCYellow1"
+                            android:layout_width="match_parent"
+                            android:layout_height="73dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:gravity="center|top"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:text="@string/CU"
+                            android:textColor="@color/black"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/STCYellow2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/STCDT"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/DT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCY2V"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/STCYellow3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/STCDTH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/STCDTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCY3V"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/STCYellow4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/STCYellowTC"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TC2"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/STCY4V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/STCYellow5"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

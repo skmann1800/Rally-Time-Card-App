@@ -1,0 +1,1551 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AControlActivity">
+
+    <ScrollView
+        android:id="@+id/ControlScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/CTCBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="@color/yellow"
+                android:text="@string/back"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp" />
+
+            <TextView
+                android:id="@+id/ControlStageNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="25dp"
+                android:text="@string/s1control"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/ControlLeftButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:scaleType="center"
+                    android:src="@drawable/arrow3" />
+
+                <LinearLayout
+                    android:id="@+id/ControlCarNumLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ControlCarNumLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="top|center_horizontal"
+                        android:text="@string/cn"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ControlCarNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="center"
+                        android:text="59"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ControlSOLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ControlSOLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="top|center_horizontal"
+                        android:text="@string/so"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ControlStartOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="center"
+                        android:text="53"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/ControlRightButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/arrow1" />
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/ControlTC1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp">
+
+                <LinearLayout
+                    android:id="@+id/ControlTC1HLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/CTC1Blue"
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/CTC1TC1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/dark_blue"
+                            android:gravity="center|top"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="3dp"
+                            android:text="@string/TC1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/CTC1KM"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@color/dark_blue"
+                            android:gravity="center"
+                            android:text="@string/stage1km"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/CTC1TC2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/dark_blue"
+                            android:gravity="bottom|center"
+                            android:paddingBottom="5dp"
+                            android:text="@string/TC2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ControlTC1Main"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Row1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:orientation="horizontal"
+                            android:paddingTop="2dp">
+
+                            <TextView
+                                android:id="@+id/CTC1Stage1"
+                                android:layout_width="160dp"
+                                android:layout_height="match_parent"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="2dp"
+                                android:text="@string/stage1"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1FT"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/FT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R1V1"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Row2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC1Dist"
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:gravity="top"
+                                android:paddingLeft="2dp"
+                                android:text="@string/stage1dist"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1FTH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1FTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1FTS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgrounds"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1FTMS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/background10"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R2V1"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:id="@+id/CTC1Flag"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:padding="6dp"
+                                app:srcCompat="@drawable/flag" />
+
+                            <View
+                                android:id="@+id/CTC1R2V2"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Row3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC1PS"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="@string/PS"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R3V1"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC1AS"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/AS"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R3V2"
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC1TargT"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TargT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R3V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Row4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC1PSH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1PSM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/CTC1Arrow1"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/arrow1" />
+
+                            <TextView
+                                android:id="@+id/CTC1ASH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/blueh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1ASM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/bluem"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/CTC1Arrow2"
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/arrow2" />
+
+                            <TextView
+                                android:id="@+id/CTC1TaTH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/border"
+                                android:gravity="center"
+                                android:text="@string/S1TTH"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1TaTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/border"
+                                android:gravity="center"
+                                android:text="@string/S1TTM"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/CTC1Arrow3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/arrow1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Row5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC1SS"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/SS1"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R5V1"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC1TT"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R5V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC1AT"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/AT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R5V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Row6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC1Oval"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/oval"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="34sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/CTC1Stop"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:padding="6dp"
+                                app:srcCompat="@drawable/stop" />
+
+                            <TextView
+                                android:id="@+id/CTC1TTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1TTS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgrounds"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1TTMS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/background10"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R6V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <EditText
+                                android:id="@+id/CTC1ATH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/blueh"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/CTC1ATM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/bluem"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R6V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Row7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingBottom="2dp">
+
+                            <TextView
+                                android:id="@+id/CTC1SO"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/SO"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R7V1"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC1Stage2"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/stage1"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R7V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC1TC"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TC2"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1R7V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ControlTC1Yellow"
+                        android:layout_width="110dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/CTC1Yellow1"
+                            android:layout_width="match_parent"
+                            android:layout_height="73dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:gravity="center|top"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:text="@string/CU"
+                            android:textColor="@color/black"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Yellow2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC1DT"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/DT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1Y2V"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Yellow3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC1DTH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC1DTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1Y3V"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC1Yellow4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC1YellowTC"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TC2"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC1Y4V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/CTC1Yellow5"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:id="@+id/ControlTC2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="4dp">
+
+                <LinearLayout
+                    android:id="@+id/ControlTC2HLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/CTC2Blue"
+                        android:layout_width="35dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/CTC2TC1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/dark_blue"
+                            android:gravity="center|top"
+                            android:paddingLeft="3dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="3dp"
+                            android:text="@string/TC2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/CTC2KM"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@color/dark_blue"
+                            android:gravity="center"
+                            android:text="@string/stage2km"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/CTC2TC2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/dark_blue"
+                            android:gravity="bottom|center"
+                            android:paddingBottom="5dp"
+                            android:text="@string/TC3"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ControlTC2Main"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Row1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:orientation="horizontal"
+                            android:paddingTop="2dp">
+
+                            <TextView
+                                android:id="@+id/CTC2Stage1"
+                                android:layout_width="160dp"
+                                android:layout_height="match_parent"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="2dp"
+                                android:text="@string/stage2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2FT"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/FT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R1V1"
+                                android:layout_width="120dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Row2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC2Dist"
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:gravity="top"
+                                android:paddingLeft="2dp"
+                                android:text="@string/stage2dist"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2FTH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2FTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2FTS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgrounds"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2FTMS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/background10"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R2V1"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:id="@+id/CTC2Flag"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:padding="6dp"
+                                app:srcCompat="@drawable/flag" />
+
+                            <View
+                                android:id="@+id/CTC2R2V2"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Row3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC2PS"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="@string/PS"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R3V1"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC2AS"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/AS"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R3V2"
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC2TargT"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TargT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R3V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Row4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/CTC2PSH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundh"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/CTC2PSM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/CTC2Arrow1"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/arrow1" />
+
+                            <TextView
+                                android:id="@+id/CTC2ASH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/blueh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2ASM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/bluem"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/CTC2Arrow2"
+                                android:layout_width="110dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/arrow2" />
+
+                            <TextView
+                                android:id="@+id/CTC2TaTH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/border"
+                                android:gravity="center"
+                                android:text="@string/S2TTH"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2TaTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/border"
+                                android:gravity="center"
+                                android:text="@string/S2TTM"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/red"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/CTC2Arrow3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/arrow1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Row5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC2SS"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/SS2"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R5V1"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC2TT"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R5V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC2AT"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/AT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R5V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Row6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/CTC2Oval"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/oval"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="34sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/CTC2Stop"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:padding="6dp"
+                                app:srcCompat="@drawable/stop" />
+
+                            <TextView
+                                android:id="@+id/CTC2TTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2TTS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgrounds"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2TTMS"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/background10"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R6V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC2ATH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/blueh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2ATM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/bluem"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R6V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Row7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:paddingBottom="2dp">
+
+                            <TextView
+                                android:id="@+id/CTC2SO"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/SO"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R7V1"
+                                android:layout_width="60dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC2Stage2"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/stage2"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R7V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/CTC2TC"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TC3"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2R7V3"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ControlTC2Yellow"
+                        android:layout_width="110dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/CTC2Yellow1"
+                            android:layout_width="match_parent"
+                            android:layout_height="73dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:gravity="center|top"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:text="@string/CU"
+                            android:textColor="@color/black"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Yellow2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC2DT"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/DT"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2Y2V"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Yellow3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC2DTH"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundh"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/CTC2DTM"
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/backgroundm"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2Y3V"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/CTC2Yellow4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/CTC2YellowTC"
+                                android:layout_width="100dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/TC3"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:id="@+id/CTC2Y4V2"
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/CTC2Yellow5"
+                            android:layout_width="match_parent"
+                            android:layout_height="65dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,7 +66,8 @@
     <string name="back">BACK</string>
     <string name="signout">SIGN OUT</string>
     <string name="login">LOGIN</string>
-    <string name="confirm">CONFIRM</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
     <string name="checkin1">Check In to Stage 1?</string>
     <string name="checkin2">Check In to Stage 2?</string>
     <string name="checkin3">Check In to Stage 3?</string>

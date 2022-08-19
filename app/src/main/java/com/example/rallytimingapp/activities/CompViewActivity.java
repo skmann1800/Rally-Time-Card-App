@@ -87,12 +87,20 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         TextView text = layout.findViewById(R.id.ConfirmCheckIn);
         text.setText(message);
 
-        Button confirmCheckIn = layout.findViewById(R.id.ConfirmCheckInButton);
-        confirmCheckIn.setOnClickListener(new View.OnClickListener() {
+        Button yesCheckIn = layout.findViewById(R.id.YesCheckInButton);
+        yesCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Do Something
 
+                checkInPopup.dismiss();
+            }
+        });
+
+        Button noCheckIn = layout.findViewById(R.id.NoCheckInButton);
+        noCheckIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 checkInPopup.dismiss();
             }
         });
@@ -117,12 +125,20 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         TextView text = layout.findViewById(R.id.ConfirmReqTime);
         text.setText(message);
 
-        Button confirmCheckIn = layout.findViewById(R.id.ConfirmReqTimeButton);
-        confirmCheckIn.setOnClickListener(new View.OnClickListener() {
+        Button yesReqTime = layout.findViewById(R.id.YesReqTimeButton);
+        yesReqTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Do Something
 
+                reqTimePopup.dismiss();
+            }
+        });
+
+        Button noReqTime = layout.findViewById(R.id.NoReqTimeButton);
+        noReqTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 reqTimePopup.dismiss();
             }
         });

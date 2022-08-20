@@ -2,10 +2,15 @@ package com.example.rallytimingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
@@ -13,6 +18,8 @@ import com.example.rallytimingapp.R;
 public class FinishActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button backButton;
+    private Button returnTCButton;
+
     private TextView stageNumTV;
     private TextView stageLabel1;
     private TextView stageLabel2;
@@ -25,6 +32,10 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     private TextView yellowTC;
     private TextView TTH;
     private TextView TTM;
+
+    private TextView carNum;
+
+    private PopupWindow returnTCPopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,15 +120,64 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         yellowTC = findViewById(R.id.FTCYellowTC);
         TTH = findViewById(R.id.FTCTaTH);
         TTM = findViewById(R.id.FTCTaTM);
+        carNum = findViewById(R.id.FinishCarNum);
+        returnTCButton = findViewById(R.id.FReturnButton);
     }
 
     private void initListeners() {
         backButton.setOnClickListener(this);
+        returnTCButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(this, ChooseFinishActivity.class);
-        startActivity(intent);
+        switch (view.getId()) {
+            case R.id.FTCBackButton:
+                Intent intent = new Intent(this, ChooseStartActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.FReturnButton:
+                ShowReturnTCPopup();
+                break;
+        }
+    }
+
+    private void ShowReturnTCPopup() {
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.return_timecard_popup, null);
+
+        returnTCPopup = new PopupWindow(this);
+        returnTCPopup.setContentView(layout);
+        returnTCPopup.setWidth(width);
+        returnTCPopup.setHeight(height);
+        returnTCPopup.setFocusable(true);
+        returnTCPopup.setBackgroundDrawable(null);
+        returnTCPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
+
+        String currCarNum = carNum.getText().toString();
+        TextView text = layout.findViewById(R.id.ReturnTC);
+        text.setText("Return Time Card to Car " + currCarNum + "?");
+
+        Button yesReturn = layout.findViewById(R.id.YesReturnButton);
+        yesReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Do Something
+
+                returnTCPopup.dismiss();
+            }
+        });
+
+        Button noReturn = layout.findViewById(R.id.NoReturnButton);
+        noReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                returnTCPopup.dismiss();
+            }
+        });
     }
 }

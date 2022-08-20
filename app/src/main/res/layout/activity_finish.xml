@@ -60,7 +60,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/FinishLeftButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -69,7 +69,7 @@
                     android:src="@drawable/arrow3" />
 
                 <LinearLayout
-                    android:id="@+id/CarNumLayout"
+                    android:id="@+id/FinishCarNumLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -79,7 +79,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/carNumLabel"
+                        android:id="@+id/FinishCarNumLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -92,7 +92,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/CarNum"
+                        android:id="@+id/FinishCarNum"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_weight="1"
@@ -862,6 +862,19 @@
                     </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <Button
+                android:id="@+id/FReturnButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/yellow"
+                android:text="@string/returnTC"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp" />
 
         </LinearLayout>
     </ScrollView>

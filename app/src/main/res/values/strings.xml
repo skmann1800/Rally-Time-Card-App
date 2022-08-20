@@ -76,4 +76,5 @@
     <string name="reqtime2">Request Time for Stage 2?</string>
     <string name="reqtime3">Request Time for Stage 3?</string>
     <string name="reqtime4">Request Time for Stage 4?</string>
+    <string name="returnTC">RETURN TIME CARD</string>
 </resources>

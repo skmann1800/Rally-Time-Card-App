@@ -1545,6 +1545,19 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
+            <Button
+                android:id="@+id/CReturnButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/yellow"
+                android:text="@string/returnTC"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp" />
+
         </LinearLayout>
     </ScrollView>
 

@@ -15,7 +15,7 @@ import java.util.List;
 public class CompDatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "CompetitorManager.db";
@@ -61,8 +61,6 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
     public void addCompetitor(Competitor competitor) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-
-
         ContentValues values = new ContentValues();
         values.put(COLUMN_COMP_CARNUM, competitor.getCarNum());
         values.put(COLUMN_COMP_DRIVER, competitor.getDriver());
@@ -75,6 +73,82 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         // Inserting Row
         db.insert(TABLE_COMP, null, values);
         db.close();
+    }
+
+    public int getCompId(int carNum) {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_COMP_ID
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection criteria
+        String selection = COLUMN_COMP_CARNUM + " = ?";
+        // selection argument
+        String[] selectionArgs = {String.valueOf(carNum)};
+        // query user table with condition
+
+        Cursor cursor = db.query(TABLE_COMP, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+
+        int compID = 0;
+        if (cursor.moveToFirst()) {
+            compID = cursor.getInt(0);
+        }
+        cursor.close();
+        db.close();
+
+        return compID;
+    }
+
+    @SuppressLint("Range")
+    public Competitor getCompetitor(int compID) {
+        String[] columns = {
+                COLUMN_COMP_ID,
+                COLUMN_COMP_CARNUM,
+                COLUMN_COMP_DRIVER,
+                COLUMN_COMP_CODRIVER,
+                COLUMN_COMP_STAGE1ID,
+                COLUMN_COMP_STAGE2ID,
+                COLUMN_COMP_STAGE3ID,
+                COLUMN_COMP_STAGE4ID
+        };
+
+        Competitor competitor = new Competitor();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_COMP_ID + " = ?";
+        // selection argument
+        String[] selectionArgs = {String.valueOf(compID)};
+
+        Cursor cursor = db.query(TABLE_COMP, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        if (cursor.moveToFirst()) {
+                competitor.setCompId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_ID))));
+                competitor.setCarNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_CARNUM))));
+                competitor.setDriver(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_DRIVER)));
+                competitor.setCodriver(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_CODRIVER)));
+                competitor.setStage1Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE1ID))));
+                competitor.setStage2Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE2ID))));
+                competitor.setStage3Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE3ID))));
+                competitor.setStage4Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE4ID))));
+        }
+        cursor.close();
+        db.close();
+
+        return competitor;
     }
 
     @SuppressLint("Range")
@@ -147,7 +221,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public boolean checkCompetitor(String carNum) {
+    public boolean checkCompetitor(int carNum) {
         // array of columns to fetch
         String[] columns = {
                 COLUMN_COMP_ID
@@ -156,7 +230,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         // selection criteria
         String selection = COLUMN_COMP_CARNUM + " = ?";
         // selection argument
-        String[] selectionArgs = {carNum};
+        String[] selectionArgs = {String.valueOf(carNum)};
         // query user table with condition
 
         Cursor cursor = db.query(TABLE_COMP, //Table to query

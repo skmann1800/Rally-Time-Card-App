@@ -14,8 +14,18 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
+import com.example.rallytimingapp.helpers.InputValidation;
+import com.example.rallytimingapp.model.Competitor;
+import com.example.rallytimingapp.model.Stage;
+import com.example.rallytimingapp.model.User;
+import com.example.rallytimingapp.sql.CompDatabaseHelper;
+import com.example.rallytimingapp.sql.StageDatabaseHelper;
+import com.example.rallytimingapp.sql.UserDatabaseHelper;
+
+import java.util.ArrayList;
 
 public class CompViewActivity extends AppCompatActivity implements View.OnClickListener {
+    private final AppCompatActivity activity = CompViewActivity.this;
 
     private ScrollView scrollView;
 
@@ -29,6 +39,11 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
     private Button checkIn4;
     private Button reqTime4;
 
+    private CompDatabaseHelper compDatabaseHelper;
+    private StageDatabaseHelper stageDatabaseHelper;
+    private Competitor competitor;
+    private Stage stage;
+
     private PopupWindow checkInPopup;
     private PopupWindow reqTimePopup;
 
@@ -38,10 +53,20 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_comp_view);
 
         initViews();
+        initObjects();
         initListeners();
 
-        int carNum = getIntent().getIntExtra("CAR_NUM", 0);
+        int compID = getIntent().getIntExtra("COMP_ID", 0);
+        Competitor competitor = compDatabaseHelper.getCompetitor(compID);
+        int carNum = competitor.getCarNum();
         carNumTV.setText(String.valueOf(carNum));
+    }
+
+    private void initObjects() {
+        compDatabaseHelper = new CompDatabaseHelper(activity);
+        stageDatabaseHelper = new StageDatabaseHelper(activity);
+        competitor = new Competitor();
+        stage = new Stage();
     }
 
     private void initViews() {

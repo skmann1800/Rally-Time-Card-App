@@ -15,7 +15,7 @@ import java.util.List;
 public class StageDatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "StageManager.db";
@@ -25,7 +25,8 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
 
     // User Table Columns names
     private static final String COLUMN_STAGE_ID = "stage_id";
-    private static final String COLUMN_STAGE_NUM = "stage_num";
+    private static final String COLUMN_STAGE_CARNUM = "stage_car_num";
+    private static final String COLUMN_STAGE_STAGENUM = "stage_stage_num";
     private static final String COLUMN_STAGE_SO = "stage_start_order";
     private static final String COLUMN_STAGE_PS = "stage_prov_start";
     private static final String COLUMN_STAGE_AS = "stage_actual_start";
@@ -36,9 +37,9 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
 
     // Create table SQL query
     private String CREATE_STAGE_TABLE = "CREATE TABLE " + TABLE_STAGE + "("
-            + COLUMN_STAGE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_STAGE_NUM + " INTEGER,"
-            + COLUMN_STAGE_SO + " TEXT," + COLUMN_STAGE_PS + " TEXT," + COLUMN_STAGE_AS
-            + " TEXT," + COLUMN_STAGE_FT + " TEXT," + COLUMN_STAGE_ST + " TEXT,"
+            + COLUMN_STAGE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_STAGE_CARNUM + " INTEGER,"
+            + COLUMN_STAGE_STAGENUM + " INTEGER," + COLUMN_STAGE_SO + " TEXT," + COLUMN_STAGE_PS + " TEXT,"
+            + COLUMN_STAGE_AS + " TEXT," + COLUMN_STAGE_FT + " TEXT," + COLUMN_STAGE_ST + " TEXT,"
             + COLUMN_STAGE_AT + " TEXT," + COLUMN_STAGE_DT + " TEXT" + ")";
 
     // Drop table SQL query
@@ -63,7 +64,8 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_STAGE_NUM, stage.getStageNum());
+        values.put(COLUMN_STAGE_CARNUM, stage.getCarNum());
+        values.put(COLUMN_STAGE_STAGENUM, stage.getStageNum());
         values.put(COLUMN_STAGE_SO, stage.getStartOrder());
         values.put(COLUMN_STAGE_PS, stage.getProvStart());
         values.put(COLUMN_STAGE_AS, stage.getActualStart());
@@ -78,10 +80,42 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
+    public int getStageId(int carNum, int stageNum) {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_STAGE_ID
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection criteria
+        String selection = COLUMN_STAGE_CARNUM + " = ?" + " AND " + COLUMN_STAGE_STAGENUM + " = ?";
+        // selection argument
+        String[] selectionArgs = {String.valueOf(carNum), String.valueOf(stageNum)};
+        // query user table with condition
+
+        Cursor cursor = db.query(TABLE_STAGE, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+
+        int stageID = 0;
+        if (cursor.moveToFirst()) {
+            stageID = Integer.parseInt(cursor.getString(0));
+        }
+        cursor.close();
+        db.close();
+
+        return stageID;
+    }
+
+    @SuppressLint("Range")
     public List<Stage> getAllStages() {
         String[] columns = {
                 COLUMN_STAGE_ID,
-                COLUMN_STAGE_NUM,
+                COLUMN_STAGE_CARNUM,
+                COLUMN_STAGE_STAGENUM,
                 COLUMN_STAGE_SO,
                 COLUMN_STAGE_PS,
                 COLUMN_STAGE_AS,
@@ -108,7 +142,8 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
             do {
                 Stage stage = new Stage();
                 stage.setStageId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_ID))));
-                stage.setStageNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_NUM))));
+                stage.setCarNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_CARNUM))));
+                stage.setStageNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_STAGENUM))));
                 stage.setStartOrder(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_SO))));
                 stage.setProvStart(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_PS)));
                 stage.setActualStart(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_AS)));
@@ -128,7 +163,8 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
     public void updateStage(Stage stage) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_STAGE_NUM, stage.getStageNum());
+        values.put(COLUMN_STAGE_CARNUM, stage.getCarNum());
+        values.put(COLUMN_STAGE_STAGENUM, stage.getStageNum());
         values.put(COLUMN_STAGE_SO, stage.getStartOrder());
         values.put(COLUMN_STAGE_PS, stage.getProvStart());
         values.put(COLUMN_STAGE_AS, stage.getActualStart());
@@ -148,5 +184,33 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_STAGE, COLUMN_STAGE_ID + " = ?",
                 new String[]{String.valueOf(stage.getStageId())});
         db.close();
+    }
+
+    public boolean checkStage(int carNum, int stageNum) {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_STAGE_ID
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection criteria
+        String selection = COLUMN_STAGE_CARNUM + " = ?" + " AND " + COLUMN_STAGE_STAGENUM + " = ?";
+        // selection arguments
+        String[] selectionArgs = {String.valueOf(carNum), String.valueOf(stageNum)};
+        // query user table with conditions
+
+        Cursor cursor = db.query(TABLE_STAGE, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                       //filter by row groups
+                null);                      //The sort order
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+        if (cursorCount > 0) {
+            return true;
+        }
+        return false;
     }
 }

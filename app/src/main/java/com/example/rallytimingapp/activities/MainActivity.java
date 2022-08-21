@@ -10,8 +10,12 @@ import android.widget.ScrollView;
 
 import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.helpers.InputValidation;
+import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.User;
+import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
+import com.example.rallytimingapp.model.Competitor;
+import com.example.rallytimingapp.sql.CompDatabaseHelper;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,8 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private ScrollView scrollView;
 
     private InputValidation inputValidation;
-    private UserDatabaseHelper UserDatabaseHelper;
+    private UserDatabaseHelper userDatabaseHelper;
+    private CompDatabaseHelper compDatabaseHelper;
+    private StageDatabaseHelper stageDatabaseHelper;
     private User user;
+    private Competitor competitor;
+    private Stage stage;
     private List<User> userList;
 
     @Override
@@ -43,19 +51,49 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initObjects();
 
-        CreateLogin("Russell", "comp", "Competitor", 28);
-        CreateLogin("Jared", "start", "Start", 0);
-        CreateLogin("Sarah", "finish", "Finish", 0);
-        CreateLogin("George", "control", "A Control", 0);
+        int compID1 = CreateCompetitor(1, "Hayden Paddon", "John Kennard");
+        int compID2 = CreateCompetitor(5, "Emma Gilmour", "Mal Peden");
+
+        CreateLogin("Russell", "comp", "Competitor", compID1);
+        CreateLogin("Emma", "emma", "Competitor", compID2);
+        CreateLogin("Jared", "start", "Start", -1);
+        CreateLogin("Sarah", "finish", "Finish", -1);
+        CreateLogin("George", "control", "A Control", -1);
     }
 
-    private void CreateLogin(String username, String password, String role, int carNum) {
-        if (!UserDatabaseHelper.checkUser(username)) {
+    private int CreateStage(int carNum, int stageNum) {
+        if (!stageDatabaseHelper.checkStage(carNum, stageNum)) {
+            stage.setCarNum(carNum);
+            stage.setStageNum(stageNum);
+            stageDatabaseHelper.addStage(stage);
+        }
+        int stageID = stageDatabaseHelper.getStageId(carNum, stageNum);
+        return stageID;
+    }
+
+    private int CreateCompetitor(int carNum, String driver, String codriver) {
+        int compID = 0;
+        if (!compDatabaseHelper.checkCompetitor(carNum)) {
+            competitor.setCarNum(carNum);
+            competitor.setDriver(driver);
+            competitor.setCodriver(codriver);
+            competitor.setStage1Id(CreateStage(carNum, 1));
+            competitor.setStage2Id(CreateStage(carNum, 2));
+            competitor.setStage3Id(CreateStage(carNum, 3));
+            competitor.setStage4Id(CreateStage(carNum, 4));
+            compDatabaseHelper.addCompetitor(competitor);
+        }
+        compID = compDatabaseHelper.getCompId(carNum);
+        return compID;
+    }
+
+    private void CreateLogin(String username, String password, String role, int compId) {
+        if (!userDatabaseHelper.checkUser(username)) {
             user.setUsername(username);
             user.setPassword(password);
             user.setRole(role);
-            user.setCarNum(carNum);
-            UserDatabaseHelper.addUser(user);
+            user.setCompId(compId);
+            userDatabaseHelper.addUser(user);
         }
     }
 
@@ -68,9 +106,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initObjects() {
-        UserDatabaseHelper = new UserDatabaseHelper(activity);
+        userDatabaseHelper = new UserDatabaseHelper(activity);
+        compDatabaseHelper = new CompDatabaseHelper(activity);
+        stageDatabaseHelper = new StageDatabaseHelper(activity);
         inputValidation = new InputValidation(activity);
         user = new User();
+        competitor = new Competitor();
+        stage = new Stage();
         userList = new ArrayList<>();
     }
 
@@ -82,18 +124,18 @@ public class MainActivity extends AppCompatActivity {
         String role = checkedChip.getText().toString().trim();
 
         if (verifyLogin(username, password, role)) {
-            userList.addAll(UserDatabaseHelper.getAllUsers());
-            int carNum = 0;
+            userList.addAll(userDatabaseHelper.getAllUsers());
+            int compID = -1;
             for (int i = 0; i < userList.size(); i++) {
                 User currUser = userList.get(i);
                 if (username.equals(currUser.getUsername())) {
-                    carNum = currUser.getCarNum();
+                    compID = currUser.getCompId();
                 }
             }
 
             if (role.equals("Competitor")) {
                 Intent intent = new Intent(this, CompViewActivity.class);
-                intent.putExtra("CAR_NUM", carNum);
+                intent.putExtra("COMP_ID", compID);
                 clearInputs();
                 startActivity(intent);
             } else if (role.equals("Finish")) {
@@ -120,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         if (!inputValidation.isEditTextFilled(editTextPassword)) {
             return false;
         }
-        if (UserDatabaseHelper.checkUser(username, password, role)) {
+        if (userDatabaseHelper.checkUser(username, password, role)) {
             return true;
         } else {
             // Snack Bar to show success message that record is wrong

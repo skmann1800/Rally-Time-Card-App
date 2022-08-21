@@ -3,6 +3,7 @@ package com.example.rallytimingapp.model;
 public class Stage {
 
     private int stageId;
+    private int carNum;
     private int stageNum;
     private int startOrder;
     private String provStart;
@@ -18,6 +19,14 @@ public class Stage {
 
     public void setStageId(int id) {
         this.stageId = id;
+    }
+
+    public int getCarNum() {
+        return carNum;
+    }
+
+    public void setCarNum(int carNum) {
+        this.carNum = carNum;
     }
 
     public int getStageNum() {

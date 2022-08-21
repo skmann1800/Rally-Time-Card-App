@@ -2,18 +2,18 @@ package com.example.rallytimingapp.model;
 
 public class User {
 
-    private int id;
+    private int userId;
     private String username;
     private String password;
     private String role;
-    private int carNum;
+    private int compId;
 
-    public int getID() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setID(int id) {
-        this.id = id;
+    public void setUserId(int id) {
+        this.userId = id;
     }
 
     public String getUsername() {
@@ -40,11 +40,11 @@ public class User {
         this.role = role;
     }
 
-    public int getCarNum() {
-        return carNum;
+    public int getCompId() {
+        return compId;
     }
 
-    public void setCarNum(int carNum) {
-        this.carNum = carNum;
+    public void setCompId(int compId) {
+        this.compId = compId;
     }
 }

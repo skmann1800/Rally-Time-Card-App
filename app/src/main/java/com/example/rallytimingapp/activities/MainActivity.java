@@ -1,26 +1,17 @@
 package com.example.rallytimingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatTextView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.helpers.InputValidation;
 import com.example.rallytimingapp.model.User;
-import com.example.rallytimingapp.sql.DatabaseHelper;
+import com.example.rallytimingapp.sql.UserDatabaseHelper;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ScrollView scrollView;
 
     private InputValidation inputValidation;
-    private DatabaseHelper databaseHelper;
+    private UserDatabaseHelper UserDatabaseHelper;
     private User user;
     private List<User> userList;
 
@@ -59,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void CreateLogin(String username, String password, String role, int carNum) {
-        if (!databaseHelper.checkUser(username)) {
+        if (!UserDatabaseHelper.checkUser(username)) {
             user.setUsername(username);
             user.setPassword(password);
             user.setRole(role);
             user.setCarNum(carNum);
-            databaseHelper.addUser(user);
+            UserDatabaseHelper.addUser(user);
         }
     }
 
@@ -77,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initObjects() {
-        databaseHelper = new DatabaseHelper(activity);
+        UserDatabaseHelper = new UserDatabaseHelper(activity);
         inputValidation = new InputValidation(activity);
         user = new User();
         userList = new ArrayList<>();
@@ -91,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         String role = checkedChip.getText().toString().trim();
 
         if (verifyLogin(username, password, role)) {
-            userList.addAll(databaseHelper.getAllUsers());
+            userList.addAll(UserDatabaseHelper.getAllUsers());
             int carNum = 0;
             for (int i = 0; i < userList.size(); i++) {
                 User currUser = userList.get(i);
@@ -129,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         if (!inputValidation.isEditTextFilled(editTextPassword)) {
             return false;
         }
-        if (databaseHelper.checkUser(username, password, role)) {
+        if (UserDatabaseHelper.checkUser(username, password, role)) {
             return true;
         } else {
             // Snack Bar to show success message that record is wrong

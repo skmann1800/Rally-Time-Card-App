@@ -2,24 +2,21 @@ package com.example.rallytimingapp.model;
 
 public class Competitor {
 
-    private int id;
+    private int compId;
     private int carNum;
     private String driver;
     private String codriver;
-    private int[] provStarts;
-    private int[] actualStarts;
-    private int[] finishTimes;
-    private int[] stageTimes;
-    private int[] startOrders;
-    private int[] actualTimes;
-    private int[] dueTimes;
+    private int stage1Id;
+    private int stage2Id;
+    private int stage3Id;
+    private int stage4Id;
 
-    public int getId() {
-        return id;
+    public int getCompId() {
+        return compId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCompId(int id) {
+        this.compId = id;
     }
 
     public int getCarNum() {
@@ -46,36 +43,35 @@ public class Competitor {
         this.codriver = codriver;
     }
 
-    public int getProvStart(int stage) {
-        return provStarts[stage - 1];
+    public int getStage1Id() {
+        return stage1Id;
     }
 
-    public int[] getProvStarts() {
-        return provStarts;
+    public void setStage1Id(int id) {
+        this.stage1Id = id;
     }
 
-    public void setProvStart(int stage, int provStart) {
-        this.provStarts[stage] = provStart;
+    public int getStage2Id() {
+        return stage2Id;
     }
 
-    public void setProvStarts(int[] provStarts) {
-        this.provStarts = provStarts;
+    public void setStage2Id(int id) {
+        this.stage2Id = id;
     }
 
-    public int getActualStart(int stage) {
-        return actualStarts[stage - 1];
+    public int getStage3Id() {
+        return stage3Id;
     }
 
-    public int[] getActualStarts() {
-        return actualStarts;
+    public void setStage3Id(int id) {
+        this.stage3Id = id;
     }
 
-    public void setActualStart(int stage, int actualStart) {
-        this.actualStarts[stage] = actualStart;
+    public int getStage4Id() {
+        return stage4Id;
     }
 
-    public void setActualStarts(int[] actualStarts) {
-        this.actualStarts = actualStarts;
+    public void setStage4Id(int id) {
+        this.stage4Id = id;
     }
-
 }

@@ -12,10 +12,10 @@ import com.example.rallytimingapp.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class UserDatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "UserManager.db";
@@ -28,17 +28,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_USERNAME = "user_username";
     private static final String COLUMN_USER_PASSWORD = "user_password";
     private static final String COLUMN_USER_ROLE = "user_role";
-    private static final String COLUMN_USER_CARNUM = "user_carNum";
+    private static final String COLUMN_USER_COMPID = "user_comp_id";
 
     // Create table SQL query
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_USERNAME + " TEXT,"
-            + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_ROLE + " TEXT," + COLUMN_USER_CARNUM + " INTEGER" + ")";
+            + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_ROLE + " TEXT," + COLUMN_USER_COMPID + " INTEGER" + ")";
 
     // Drop table SQL query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
 
-    public DatabaseHelper(Context context) {
+    public UserDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_USERNAME, user.getUsername());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
         values.put(COLUMN_USER_ROLE, user.getRole());
-        values.put(COLUMN_USER_CARNUM, user.getCarNum());
+        values.put(COLUMN_USER_COMPID, user.getCompId());
 
         // Inserting Row
         db.insert(TABLE_USER, null, values);
@@ -74,7 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_USER_USERNAME,
                 COLUMN_USER_PASSWORD,
                 COLUMN_USER_ROLE,
-                COLUMN_USER_CARNUM
+                COLUMN_USER_COMPID
         };
 
         String sortOrder = COLUMN_USER_USERNAME + " ASC";
@@ -93,11 +93,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 User user = new User();
-                user.setID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
+                user.setUserId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
                 user.setUsername(cursor.getString(cursor.getColumnIndex(COLUMN_USER_USERNAME)));
                 user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
                 user.setRole(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE)));
-                user.setCarNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_CARNUM))));
+                user.setCompId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_COMPID))));
                 userList.add(user);
             } while (cursor.moveToNext());
         }
@@ -113,10 +113,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_USERNAME, user.getUsername());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
         values.put(COLUMN_USER_ROLE, user.getRole());
-        values.put(COLUMN_USER_CARNUM, user.getCarNum());
+        values.put(COLUMN_USER_COMPID, user.getCompId());
         // updating row
         db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
-                new String[]{String.valueOf(user.getID())});
+                new String[]{String.valueOf(user.getUserId())});
         db.close();
     }
 
@@ -124,7 +124,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         // delete user record by username
         db.delete(TABLE_USER, COLUMN_USER_ID + " = ?",
-                new String[]{String.valueOf(user.getID())});
+                new String[]{String.valueOf(user.getUserId())});
         db.close();
     }
 
@@ -139,11 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // selection argument
         String[] selectionArgs = {username};
         // query user table with condition
-        /**
-         * Here query function is used to fetch records from user table this function works like we use sql query.
-         * SQL query equivalent to this query function is
-         * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com';
-         */
+
         Cursor cursor = db.query(TABLE_USER, //Table to query
                 columns,                    //columns to return
                 selection,                  //columns for the WHERE clause
@@ -171,11 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // selection arguments
         String[] selectionArgs = {username, password, role};
         // query user table with conditions
-        /**
-         * Here query function is used to fetch records from user table this function works like we use sql query.
-         * SQL query equivalent to this query function is
-         * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com' AND user_password = 'qwerty';
-         */
+
         Cursor cursor = db.query(TABLE_USER, //Table to query
                 columns,                    //columns to return
                 selection,                  //columns for the WHERE clause

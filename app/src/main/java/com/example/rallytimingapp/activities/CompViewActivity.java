@@ -30,6 +30,75 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
     private ScrollView scrollView;
 
     private TextView carNumTV;
+
+    private TextView startOrder1;
+    private TextView provStartH1;
+    private TextView provStartM1;
+    private TextView actualStartH1;
+    private TextView actualStartM1;
+    private TextView finishTimeH1;
+    private TextView finishTimeM1;
+    private TextView finishTimeS1;
+    private TextView finishTimeMS1;
+    private TextView stageTimeM1;
+    private TextView stageTimeS1;
+    private TextView stageTimeMS1;
+    private TextView actualTimeH1;
+    private TextView actualTimeM1;
+    private TextView dueTimeH1;
+    private TextView dueTimeM1;
+
+    private TextView startOrder2;
+    private TextView provStartH2;
+    private TextView provStartM2;
+    private TextView actualStartH2;
+    private TextView actualStartM2;
+    private TextView finishTimeH2;
+    private TextView finishTimeM2;
+    private TextView finishTimeS2;
+    private TextView finishTimeMS2;
+    private TextView stageTimeM2;
+    private TextView stageTimeS2;
+    private TextView stageTimeMS2;
+    private TextView actualTimeH2;
+    private TextView actualTimeM2;
+    private TextView dueTimeH2;
+    private TextView dueTimeM2;
+
+    private TextView startOrder3;
+    private TextView provStartH3;
+    private TextView provStartM3;
+    private TextView actualStartH3;
+    private TextView actualStartM3;
+    private TextView finishTimeH3;
+    private TextView finishTimeM3;
+    private TextView finishTimeS3;
+    private TextView finishTimeMS3;
+    private TextView stageTimeM3;
+    private TextView stageTimeS3;
+    private TextView stageTimeMS3;
+    private TextView actualTimeH3;
+    private TextView actualTimeM3;
+    private TextView dueTimeH3;
+    private TextView dueTimeM3;
+
+    private TextView startOrder4;
+    private TextView provStartH4;
+    private TextView provStartM4;
+    private TextView actualStartH4;
+    private TextView actualStartM4;
+    private TextView finishTimeH4;
+    private TextView finishTimeM4;
+    private TextView finishTimeS4;
+    private TextView finishTimeMS4;
+    private TextView stageTimeM4;
+    private TextView stageTimeS4;
+    private TextView stageTimeMS4;
+    private TextView actualTimeH4;
+    private TextView actualTimeM4;
+    private TextView dueTimeH4;
+    private TextView dueTimeM4;
+
     private Button checkIn1;
     private Button reqTime1;
     private Button checkIn2;
@@ -57,9 +126,102 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         initListeners();
 
         int compID = getIntent().getIntExtra("COMP_ID", 0);
+        fillInCards(compID);
+    }
+
+    private void fillInCards(int compID) {
         Competitor competitor = compDatabaseHelper.getCompetitor(compID);
-        int carNum = competitor.getCarNum();
-        carNumTV.setText(String.valueOf(carNum));
+        carNumTV.setText(String.valueOf(competitor.getCarNum()));
+
+        stage = stageDatabaseHelper.getStage(competitor.getStage1Id());
+        if (stage.getStartOrder() == 0) {
+            startOrder1.setText("");
+        } else {
+            startOrder1.setText(String.valueOf(stage.getStartOrder()));
+        }
+        provStartH1.setText(stage.getProvStartH());
+        provStartM1.setText(stage.getProvStartM());
+        actualStartH1.setText(stage.getActualStartH());
+        actualStartM1.setText(stage.getActualStartM());
+        finishTimeH1.setText(stage.getFinishTimeH());
+        finishTimeM1.setText(stage.getFinishTimeM());
+        finishTimeS1.setText(stage.getFinishTimeS());
+        finishTimeMS1.setText(stage.getFinishTimeMS());
+        stageTimeM1.setText(stage.getStageTimeM());
+        stageTimeS1.setText(stage.getStageTimeS());
+        stageTimeMS1.setText(stage.getStageTimeMS());
+        actualTimeH1.setText(stage.getActualTimeH());
+        actualTimeM1.setText(stage.getActualTimeM());
+        dueTimeH1.setText(stage.getDueTimeH());
+        dueTimeM1.setText(stage.getDueTimeM());
+
+
+        stage = stageDatabaseHelper.getStage(competitor.getStage2Id());
+        if (stage.getStartOrder() == 0) {
+            startOrder2.setText("");
+        } else {
+            startOrder2.setText(String.valueOf(stage.getStartOrder()));
+        }
+        provStartH2.setText(stage.getProvStartH());
+        provStartM2.setText(stage.getProvStartM());
+        actualStartH2.setText(stage.getActualStartH());
+        actualStartM2.setText(stage.getActualStartM());
+        finishTimeH2.setText(stage.getFinishTimeH());
+        finishTimeM2.setText(stage.getFinishTimeM());
+        finishTimeS2.setText(stage.getFinishTimeS());
+        finishTimeMS2.setText(stage.getFinishTimeMS());
+        stageTimeM2.setText(stage.getStageTimeM());
+        stageTimeS2.setText(stage.getStageTimeS());
+        stageTimeMS2.setText(stage.getStageTimeMS());
+        actualTimeH2.setText(stage.getActualTimeH());
+        actualTimeM2.setText(stage.getActualTimeM());
+        dueTimeH2.setText(stage.getDueTimeH());
+        dueTimeM2.setText(stage.getDueTimeM());
+
+        stage = stageDatabaseHelper.getStage(competitor.getStage3Id());
+        if (stage.getStartOrder() == 0) {
+            startOrder3.setText("");
+        } else {
+            startOrder3.setText(String.valueOf(stage.getStartOrder()));
+        }
+        provStartH3.setText(stage.getProvStartH());
+        provStartM3.setText(stage.getProvStartM());
+        actualStartH3.setText(stage.getActualStartH());
+        actualStartM3.setText(stage.getActualStartM());
+        finishTimeH3.setText(stage.getFinishTimeH());
+        finishTimeM3.setText(stage.getFinishTimeM());
+        finishTimeS3.setText(stage.getFinishTimeS());
+        finishTimeMS3.setText(stage.getFinishTimeMS());
+        stageTimeM3.setText(stage.getStageTimeM());
+        stageTimeS3.setText(stage.getStageTimeS());
+        stageTimeMS3.setText(stage.getStageTimeMS());
+        actualTimeH3.setText(stage.getActualTimeH());
+        actualTimeM3.setText(stage.getActualTimeM());
+        dueTimeH3.setText(stage.getDueTimeH());
+        dueTimeM3.setText(stage.getDueTimeM());
+
+        stage = stageDatabaseHelper.getStage(competitor.getStage4Id());
+        if (stage.getStartOrder() == 0) {
+            startOrder4.setText("");
+        } else {
+            startOrder4.setText(String.valueOf(stage.getStartOrder()));
+        }
+        provStartH4.setText(stage.getProvStartH());
+        provStartM4.setText(stage.getProvStartM());
+        actualStartH4.setText(stage.getActualStartH());
+        actualStartM4.setText(stage.getActualStartM());
+        finishTimeH4.setText(stage.getFinishTimeH());
+        finishTimeM4.setText(stage.getFinishTimeM());
+        finishTimeS4.setText(stage.getFinishTimeS());
+        finishTimeMS4.setText(stage.getFinishTimeMS());
+        stageTimeM4.setText(stage.getStageTimeM());
+        stageTimeS4.setText(stage.getStageTimeS());
+        stageTimeMS4.setText(stage.getStageTimeMS());
+        actualTimeH4.setText(stage.getActualTimeH());
+        actualTimeM4.setText(stage.getActualTimeM());
+        dueTimeH4.setText(stage.getDueTimeH());
+        dueTimeM4.setText(stage.getDueTimeM());
+
     }
 
     private void initObjects() {
@@ -72,6 +234,75 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
     private void initViews() {
         scrollView = findViewById(R.id.CompViewScrollView);
         carNumTV = findViewById(R.id.CarNum);
+
+        startOrder1 = findViewById(R.id.Sec2Oval);
+        provStartH1 = findViewById(R.id.S2PSH);
+        provStartM1 = findViewById(R.id.S2PSM);
+        actualStartH1 = findViewById(R.id.S2ASH);
+        actualStartM1 = findViewById(R.id.S2ASM);
+        finishTimeH1 = findViewById(R.id.S2FTH);
+        finishTimeM1 = findViewById(R.id.S2FTM);
+        finishTimeS1 = findViewById(R.id.S2FTS);
+        finishTimeMS1 = findViewById(R.id.S2FTMS);
+        stageTimeM1 = findViewById(R.id.S2TTM);
+        stageTimeS1 = findViewById(R.id.S2TTS);
+        stageTimeMS1 = findViewById(R.id.S2TTMS);
+        actualTimeH1 = findViewById(R.id.S2ATH);
+        actualTimeM1 = findViewById(R.id.S2ATM);
+        dueTimeH1 = findViewById(R.id.S2DTH);
+        dueTimeM1 = findViewById(R.id.S2DTM);
+
+        startOrder2 = findViewById(R.id.Sec3Oval);
+        provStartH2 = findViewById(R.id.S3PSH);
+        provStartM2 = findViewById(R.id.S3PSM);
+        actualStartH2 = findViewById(R.id.S3ASH);
+        actualStartM2 = findViewById(R.id.S3ASM);
+        finishTimeH2 = findViewById(R.id.S3FTH);
+        finishTimeM2 = findViewById(R.id.S3FTM);
+        finishTimeS2 = findViewById(R.id.S3FTS);
+        finishTimeMS2 = findViewById(R.id.S3FTMS);
+        stageTimeM2 = findViewById(R.id.S3TTM);
+        stageTimeS2 = findViewById(R.id.S3TTS);
+        stageTimeMS2 = findViewById(R.id.S3TTMS);
+        actualTimeH2 = findViewById(R.id.S3ATH);
+        actualTimeM2 = findViewById(R.id.S3ATM);
+        dueTimeH2 = findViewById(R.id.S3DTH);
+        dueTimeM2 = findViewById(R.id.S3DTM);
+
+        startOrder3 = findViewById(R.id.Sec4Oval);
+        provStartH3 = findViewById(R.id.S4PSH);
+        provStartM3 = findViewById(R.id.S4PSM);
+        actualStartH3 = findViewById(R.id.S4ASH);
+        actualStartM3 = findViewById(R.id.S4ASM);
+        finishTimeH3 = findViewById(R.id.S4FTH);
+        finishTimeM3 = findViewById(R.id.S4FTM);
+        finishTimeS3 = findViewById(R.id.S4FTS);
+        finishTimeMS3 = findViewById(R.id.S4FTMS);
+        stageTimeM3 = findViewById(R.id.S4TTM);
+        stageTimeS3 = findViewById(R.id.S4TTS);
+        stageTimeMS3 = findViewById(R.id.S4TTMS);
+        actualTimeH3 = findViewById(R.id.S4ATH);
+        actualTimeM3 = findViewById(R.id.S4ATM);
+        dueTimeH3 = findViewById(R.id.S4DTH);
+        dueTimeM3 = findViewById(R.id.S4DTM);
+
+        startOrder4 = findViewById(R.id.Sec5Oval);
+        provStartH4 = findViewById(R.id.S5PSH);
+        provStartM4 = findViewById(R.id.S5PSM);
+        actualStartH4 = findViewById(R.id.S5ASH);
+        actualStartM4 = findViewById(R.id.S5ASM);
+        finishTimeH4 = findViewById(R.id.S5FTH);
+        finishTimeM4 = findViewById(R.id.S5FTM);
+        finishTimeS4 = findViewById(R.id.S5FTS);
+        finishTimeMS4 = findViewById(R.id.S5FTMS);
+        stageTimeM4 = findViewById(R.id.S5TTM);
+        stageTimeS4 = findViewById(R.id.S5TTS);
+        stageTimeMS4 = findViewById(R.id.S5TTMS);
+        actualTimeH4 = findViewById(R.id.S5ATH);
+        actualTimeM4 = findViewById(R.id.S5ATM);
+        dueTimeH4 = findViewById(R.id.S5DTH);
+        dueTimeM4 = findViewById(R.id.S5DTM);
+
         checkIn1 = findViewById(R.id.CheckIn1);
         reqTime1 = findViewById(R.id.ReqTime1);
         checkIn2 = findViewById(R.id.CheckIn2);

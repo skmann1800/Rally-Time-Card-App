@@ -65,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
         if (!stageDatabaseHelper.checkStage(carNum, stageNum)) {
             stage.setCarNum(carNum);
             stage.setStageNum(stageNum);
+            stage.setStartOrder(0);
+            stage.setProvStart("");
+            stage.setActualStart("");
+            stage.setFinishTime("");
+            stage.setStageTime("");
+            stage.setActualTime("");
+            stage.setDueTime("");
             stageDatabaseHelper.addStage(stage);
         }
         int stageID = stageDatabaseHelper.getStageId(carNum, stageNum);

@@ -15,9 +15,11 @@ import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.helpers.InputValidation;
+import com.example.rallytimingapp.model.AControl;
 import com.example.rallytimingapp.model.Competitor;
 import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.User;
+import com.example.rallytimingapp.sql.AControlDatabaseHelper;
 import com.example.rallytimingapp.sql.CompDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
@@ -110,8 +112,10 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
     private CompDatabaseHelper compDatabaseHelper;
     private StageDatabaseHelper stageDatabaseHelper;
+    private AControlDatabaseHelper aControlDatabaseHelper;
     private Competitor competitor;
     private Stage stage;
+    private AControl aControl;
 
     private PopupWindow checkInPopup;
     private PopupWindow reqTimePopup;
@@ -130,7 +134,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void fillInCards(int compID) {
-        Competitor competitor = compDatabaseHelper.getCompetitor(compID);
+        competitor = compDatabaseHelper.getCompetitor(compID);
         carNumTV.setText(String.valueOf(competitor.getCarNum()));
 
         stage = stageDatabaseHelper.getStage(competitor.getStage1Id());
@@ -227,8 +231,10 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
     private void initObjects() {
         compDatabaseHelper = new CompDatabaseHelper(activity);
         stageDatabaseHelper = new StageDatabaseHelper(activity);
+        aControlDatabaseHelper = new AControlDatabaseHelper(activity);
         competitor = new Competitor();
         stage = new Stage();
+        aControl = new AControl();
     }
 
     private void initViews() {
@@ -324,7 +330,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         reqTime4.setOnClickListener(this);
     }
 
-    private void ShowCheckInPopup(String message) {
+    private void ShowCheckInPopup(String message, int stageNum) {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
@@ -347,7 +353,23 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         yesCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Do Something
+                //Add competitor to AControl database
+                int carNum = Integer.parseInt(String.valueOf(carNumTV.getText()));
+                int startOrder = addToAControl(stageNum, carNum);
+                switch (stageNum) {
+                    case 1:
+                        startOrder1.setText(String.valueOf(startOrder));
+                        break;
+                    case 2:
+                        startOrder2.setText(String.valueOf(startOrder));
+                        break;
+                    case 3:
+                        startOrder3.setText(String.valueOf(startOrder));
+                        break;
+                    case 4:
+                        startOrder4.setText(String.valueOf(startOrder));
+                        break;
+                }
 
                 checkInPopup.dismiss();
             }
@@ -360,6 +382,20 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 checkInPopup.dismiss();
             }
         });
+    }
+
+    private int addToAControl(int stageNum, int carNum) {
+        if (!aControlDatabaseHelper.checkAControl(stageNum, carNum)) {
+            int lastSO = aControlDatabaseHelper.getCurrStartOrder(stageNum);
+            aControl.setStartOrder(lastSO+1);
+            aControl.setStage(stageNum);
+            aControl.setCarNum(carNum);
+            competitor = compDatabaseHelper.getCompetitor(compDatabaseHelper.getCompId(carNum));
+            aControl.setStage1ID(competitor.getStageId(stageNum-1));
+            aControl.setStage2ID(competitor.getStageId(stageNum));
+            aControlDatabaseHelper.addAControl(aControl);
+        }
+        return aControlDatabaseHelper.getStartOrder(stageNum, carNum);
     }
 
     private void ShowReqTimePopup(String message) {
@@ -404,25 +440,25 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.CheckIn1:
-                ShowCheckInPopup("Check In to Stage 1?");
+                ShowCheckInPopup("Check In to Stage 1?", 1);
                 break;
             case R.id.ReqTime1:
                 ShowReqTimePopup("Request Time for Stage 1?");
                 break;
             case R.id.CheckIn2:
-                ShowCheckInPopup("Check In to Stage 2?");
+                ShowCheckInPopup("Check In to Stage 2?", 2);
                 break;
             case R.id.ReqTime2:
                 ShowReqTimePopup("Request Time for Stage 2?");
                 break;
             case R.id.CheckIn3:
-                ShowCheckInPopup("Check In to Stage 3?");
+                ShowCheckInPopup("Check In to Stage 3?", 3);
                 break;
             case R.id.ReqTime3:
                 ShowReqTimePopup("Request Time for Stage 3?");
                 break;
             case R.id.CheckIn4:
-                ShowCheckInPopup("Check In to Stage 4?");
+                ShowCheckInPopup("Check In to Stage 4?", 4);
                 break;
             case R.id.ReqTime4:
                 ShowReqTimePopup("Request Time for Stage 4?");

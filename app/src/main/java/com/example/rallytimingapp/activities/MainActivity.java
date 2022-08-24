@@ -12,6 +12,7 @@ import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.helpers.InputValidation;
 import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.User;
+import com.example.rallytimingapp.sql.AControlDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
 import com.example.rallytimingapp.model.Competitor;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private UserDatabaseHelper userDatabaseHelper;
     private CompDatabaseHelper compDatabaseHelper;
     private StageDatabaseHelper stageDatabaseHelper;
+    private AControlDatabaseHelper aControlDatabaseHelper;
     private User user;
     private Competitor competitor;
     private Stage stage;
@@ -51,11 +53,17 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initObjects();
 
+        aControlDatabaseHelper.empty();
+
         int compID1 = CreateCompetitor(1, "Hayden Paddon", "John Kennard");
         int compID2 = CreateCompetitor(5, "Emma Gilmour", "Mal Peden");
+        int compID3 = CreateCompetitor(2, "Ben Hunt", "Tony Rawstorn");
+        int compID4 = CreateCompetitor(12, "Jack Hawkeswood", "Sarah Brenna");
 
         CreateLogin("Russell", "comp", "Competitor", compID1);
         CreateLogin("Emma", "emma", "Competitor", compID2);
+        CreateLogin("Ben", "ben","Competitor", compID3);
+        CreateLogin("Jack", "jack", "Competitor", compID4);
         CreateLogin("Jared", "start", "Start", -1);
         CreateLogin("Sarah", "finish", "Finish", -1);
         CreateLogin("George", "control", "A Control", -1);
@@ -116,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         userDatabaseHelper = new UserDatabaseHelper(activity);
         compDatabaseHelper = new CompDatabaseHelper(activity);
         stageDatabaseHelper = new StageDatabaseHelper(activity);
+        aControlDatabaseHelper = new AControlDatabaseHelper(activity);
         inputValidation = new InputValidation(activity);
         user = new User();
         competitor = new Competitor();

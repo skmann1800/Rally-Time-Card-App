@@ -43,6 +43,28 @@ public class Competitor {
         this.codriver = codriver;
     }
 
+    public int getStageId(int stage) {
+        int stageID = 0;
+        switch (stage) {
+            case 0:
+                stageID = 0;
+                break;
+            case 1:
+                stageID = stage1Id;
+                break;
+            case 2:
+                stageID = stage2Id;
+                break;
+            case 3:
+                stageID = stage3Id;
+                break;
+            case 4:
+                stageID = stage4Id;
+                break;
+        }
+        return stageID;
+    }
+
     public int getStage1Id() {
         return stage1Id;
     }

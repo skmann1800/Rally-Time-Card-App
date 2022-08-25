@@ -51,53 +51,17 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/ControlLeftButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Button
+                    android:id="@+id/ControlPrevButton"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:scaleType="center"
-                    android:src="@drawable/arrow3" />
-
-                <LinearLayout
-                    android:id="@+id/ControlCarNumLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/ControlCarNumLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:gravity="top|center_horizontal"
-                        android:text="@string/cn"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/ControlCarNum"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/border"
-                        android:gravity="center"
-                        android:text="59"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:textColor="@color/black"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
+                    android:backgroundTint="@color/red"
+                    app:icon="@drawable/ic_arrow_prev_foreground"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="90dp" />
 
                 <LinearLayout
                     android:id="@+id/ControlSOLayout"
@@ -138,13 +102,56 @@
 
                 </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/ControlRightButton"
+                <LinearLayout
+                    android:id="@+id/ControlCarNumLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ControlCarNumLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="top|center_horizontal"
+                        android:text="@string/cn"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ControlCarNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:gravity="center"
+                        android:text="59"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="40sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/ControlNextButton"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:src="@drawable/arrow1" />
+                    android:backgroundTint="@color/red"
+                    app:icon="@drawable/ic_arrow_next_foreground"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="90dp" />
 
             </LinearLayout>
 

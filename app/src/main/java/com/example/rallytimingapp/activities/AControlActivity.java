@@ -32,6 +32,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
     private Button backButton;
     private Button returnTCButton;
+    private Button nextButton;
+    private Button prevButton;
 
     private TextView carNumTV;
     private TextView startOrderTV;
@@ -224,7 +226,12 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         carNumTV = findViewById(R.id.ControlCarNum);
         startOrderTV = findViewById(R.id.ControlStartOrder);
         timeCard1 = findViewById(R.id.ControlTC1);
+
         backButton = findViewById(R.id.CTCBackButton);
+        returnTCButton = findViewById(R.id.CReturnButton);
+        nextButton = findViewById(R.id.ControlNextButton);
+        prevButton = findViewById(R.id.ControlPrevButton);
+
         stageNumTV = findViewById(R.id.ControlStageNum);
         stage1Label1 = findViewById(R.id.CTC1Stage1);
         stage1Label2 = findViewById(R.id.CTC1Stage2);
@@ -248,7 +255,6 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         yellowTC2 = findViewById(R.id.CTC2YellowTC);
         S2TTH = findViewById(R.id.CTC2TaTH);
         S2TTM = findViewById(R.id.CTC2TaTM);
-        returnTCButton = findViewById(R.id.CReturnButton);
 
         startOrder1 = findViewById(R.id.CTC1Oval);
         provStartH1 = findViewById(R.id.CTC1PSH);
@@ -288,6 +294,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     private void initListeners() {
         backButton.setOnClickListener(this);
         returnTCButton.setOnClickListener(this);
+        nextButton.setOnClickListener(this);
+        prevButton.setOnClickListener(this);
     }
 
     @Override

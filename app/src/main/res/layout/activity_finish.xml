@@ -59,14 +59,17 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/FinishLeftButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Button
+                    android:id="@+id/FinishPrevButton"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:scaleType="center"
-                    android:src="@drawable/arrow3" />
+                    android:backgroundTint="@color/red"
+                    app:icon="@drawable/ic_arrow_prev_foreground"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="90dp" />
 
                 <LinearLayout
                     android:id="@+id/FinishCarNumLayout"
@@ -146,13 +149,17 @@
 
                 </LinearLayout>
 
-                <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Button
+                    android:id="@+id/FinishNextButton"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:src="@drawable/arrow1" />
+                    android:backgroundTint="@color/red"
+                    app:icon="@drawable/ic_arrow_next_foreground"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="90dp" />
 
             </LinearLayout>
 

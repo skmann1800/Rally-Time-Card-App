@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             stage.setActualTime("");
             stage.setDueTime("");
             stageDatabaseHelper.updateStage(stage);
-        }*/
+        } */
         int stageID = stageDatabaseHelper.getStageId(carNum, stageNum);
         return stageID;
     }

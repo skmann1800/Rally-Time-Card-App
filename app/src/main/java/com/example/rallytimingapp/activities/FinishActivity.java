@@ -14,8 +14,18 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
+import com.example.rallytimingapp.model.AControl;
+import com.example.rallytimingapp.model.Finish;
+import com.example.rallytimingapp.model.Stage;
+import com.example.rallytimingapp.sql.AControlDatabaseHelper;
+import com.example.rallytimingapp.sql.FinishDatabaseHelper;
+import com.example.rallytimingapp.sql.StageDatabaseHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FinishActivity extends AppCompatActivity implements View.OnClickListener {
+    private final AppCompatActivity activity = FinishActivity.this;
 
     private Button backButton;
     private Button returnTCButton;
@@ -33,9 +43,37 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     private TextView TTH;
     private TextView TTM;
 
-    private TextView carNum;
+    private TextView carNumTV;
+    private TextView finishOrderTV;
+
+    private TextView startOrder;
+    private TextView provStartH;
+    private TextView provStartM;
+    private TextView actualStartH;
+    private TextView actualStartM;
+    private TextView finishTimeH;
+    private TextView finishTimeM;
+    private TextView finishTimeS;
+    private TextView finishTimeMS;
+    private TextView stageTimeM;
+    private TextView stageTimeS;
+    private TextView stageTimeMS;
+    private TextView actualTimeH;
+    private TextView actualTimeM;
+    private TextView dueTimeH;
+    private TextView dueTimeM;
 
     private PopupWindow returnTCPopup;
+
+    private Finish finish;
+    private Stage stage;
+    private FinishDatabaseHelper finishDatabaseHelper;
+    private StageDatabaseHelper stageDatabaseHelper;
+    private List<Finish> finishList;
+
+    private int stageNum;
+    private int finishOrder;
+    private int carNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +81,12 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_finish);
 
         initViews();
+        initObjects();
         initListeners();
 
-        int stageNum = getIntent().getIntExtra("STAGE", 0);
+        stageNum = getIntent().getIntExtra("STAGE", 0);
+        finishOrder = 1;
+        fillInCards();
         switch (stageNum) {
             case 1:
                 stageNumTV.setText(R.string.s1finish);
@@ -106,8 +147,21 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    private void initObjects() {
+        stageDatabaseHelper = new StageDatabaseHelper(activity);
+        finishDatabaseHelper = new FinishDatabaseHelper(activity);
+        stage = new Stage();
+        finish = new Finish();
+        finishList = new ArrayList<>();
+    }
+
     private void initViews() {
+        carNumTV = findViewById(R.id.FinishCarNum);
+        finishOrderTV = findViewById(R.id.FinishOrder);
+
+        returnTCButton = findViewById(R.id.FReturnButton);
         backButton = findViewById(R.id.FTCBackButton);
+
         stageNumTV = findViewById(R.id.FinishStageNum);
         stageLabel1 = findViewById(R.id.FTCStage1);
         stageLabel2 = findViewById(R.id.FTCStage2);
@@ -120,8 +174,23 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         yellowTC = findViewById(R.id.FTCYellowTC);
         TTH = findViewById(R.id.FTCTaTH);
         TTM = findViewById(R.id.FTCTaTM);
-        carNum = findViewById(R.id.FinishCarNum);
-        returnTCButton = findViewById(R.id.FReturnButton);
+
+        startOrder = findViewById(R.id.FTCOval);
+        provStartH = findViewById(R.id.FTCPSH);
+        provStartM = findViewById(R.id.FTCPSM);
+        actualStartH = findViewById(R.id.FTCASH);
+        actualStartM = findViewById(R.id.FTCASM);
+        finishTimeH = findViewById(R.id.FTCFTH);
+        finishTimeM = findViewById(R.id.FTCFTM);
+        finishTimeS = findViewById(R.id.FTCFTS);
+        finishTimeMS = findViewById(R.id.FTCFTMS);
+        stageTimeM = findViewById(R.id.FTCTTM);
+        stageTimeS = findViewById(R.id.FTCTTS);
+        stageTimeMS = findViewById(R.id.FTCTTMS);
+        actualTimeH = findViewById(R.id.FTCATH);
+        actualTimeM = findViewById(R.id.FTCATM);
+        dueTimeH = findViewById(R.id.FTCDTH);
+        dueTimeM = findViewById(R.id.FTCDTM);
     }
 
     private void initListeners() {
@@ -133,12 +202,41 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.FTCBackButton:
-                Intent intent = new Intent(this, ChooseStartActivity.class);
+                Intent intent = new Intent(this, ChooseFinishActivity.class);
                 startActivity(intent);
                 break;
             case R.id.FReturnButton:
                 ShowReturnTCPopup();
                 break;
+        }
+    }
+
+    private void fillInCards() {
+        if (finishDatabaseHelper.getStage(stageNum).size() != 0) {
+            carNum = finishDatabaseHelper.getCarNum(stageNum, finishOrder);
+            carNumTV.setText(String.valueOf(carNum));
+            finish = finishDatabaseHelper.getFinish(finishDatabaseHelper.getFinishID(stageNum, carNum));
+            finishOrderTV.setText(String.valueOf(finishOrder));
+            stage = stageDatabaseHelper.getStage(finish.getStageID());
+            startOrder.setText(String.valueOf(stage.getStartOrder()));
+            provStartH.setText(stage.getProvStartH());
+            provStartM.setText(stage.getProvStartM());
+            actualStartH.setText(stage.getActualStartH());
+            actualStartM.setText(stage.getActualStartM());
+            finishTimeH.setText(stage.getFinishTimeH());
+            finishTimeM.setText(stage.getFinishTimeM());
+            finishTimeS.setText(stage.getFinishTimeS());
+            finishTimeMS.setText(stage.getFinishTimeMS());
+            stageTimeM.setText(stage.getStageTimeM());
+            stageTimeS.setText(stage.getStageTimeS());
+            stageTimeMS.setText(stage.getStageTimeMS());
+            actualTimeH.setText(stage.getActualTimeH());
+            actualTimeM.setText(stage.getActualTimeM());
+            dueTimeH.setText(stage.getDueTimeH());
+            dueTimeM.setText(stage.getDueTimeM());
+        } else {
+            finishOrderTV.setText("0");
+            carNumTV.setText("");
         }
     }
 
@@ -158,7 +256,7 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         returnTCPopup.setBackgroundDrawable(null);
         returnTCPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
-        String currCarNum = carNum.getText().toString();
+        String currCarNum = carNumTV.getText().toString();
         TextView text = layout.findViewById(R.id.ReturnTC);
         text.setText("Return Time Card to Car " + currCarNum + "?");
 

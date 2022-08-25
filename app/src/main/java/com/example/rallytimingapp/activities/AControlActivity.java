@@ -308,6 +308,12 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             case R.id.CReturnButton:
                 ShowReturnTCPopup();
                 break;
+            case R.id.ControlPrevButton:
+                previousTC();
+                break;
+            case R.id.ControlNextButton:
+                nextTC();
+                break;
         }
     }
 
@@ -410,5 +416,20 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 returnTCPopup.dismiss();
             }
         });
+    }
+
+    public void previousTC() {
+        if (startOrder > 1) {
+            startOrder = startOrder - 1;
+            fillInCards();
+        }
+    }
+
+    public void nextTC() {
+        int currStartOrder = aControlDatabaseHelper.getCurrStartOrder(stageNum);
+        if ((startOrder + 1) <= currStartOrder) {
+            startOrder = startOrder + 1;
+            fillInCards();
+        }
     }
 }

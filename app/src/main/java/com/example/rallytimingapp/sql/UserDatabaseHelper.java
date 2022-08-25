@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.User;
 
 import java.util.ArrayList;
@@ -65,6 +66,46 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         // Inserting Row
         db.insert(TABLE_USER, null, values);
         db.close();
+    }
+
+    @SuppressLint("Range")
+    public User getUser(String username, String role) {
+        String[] columns = {
+                COLUMN_USER_ID,
+                COLUMN_USER_USERNAME,
+                COLUMN_USER_PASSWORD,
+                COLUMN_USER_ROLE,
+                COLUMN_USER_COMPID
+        };
+
+        User user = new User();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_USER_USERNAME + " = ?" + " AND " + COLUMN_USER_ROLE + " = ?";
+        // selection argument
+        String[] selectionArgs = {username, role};
+
+        Cursor cursor = db.query(TABLE_USER, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            user.setUserId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
+            user.setUsername(cursor.getString(cursor.getColumnIndex(COLUMN_USER_USERNAME)));
+            user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+            user.setRole(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE)));
+            user.setCompId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_COMPID))));
+        }
+        cursor.close();
+        db.close();
+
+        return user;
     }
 
     @SuppressLint("Range")

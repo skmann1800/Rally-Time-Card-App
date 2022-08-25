@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.rallytimingapp.model.AControl;
 import com.example.rallytimingapp.model.Competitor;
 import com.example.rallytimingapp.model.Stage;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public class StageDatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 7;
 
     // Database Name
     private static final String DATABASE_NAME = "StageManager.db";
@@ -111,6 +112,13 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         return stageID;
     }
 
+    public void empty() {
+        List<Stage> stageList = getAllStages();
+        for (int i = 0; i < stageList.size(); i++) {
+            deleteStage(stageList.get(i));
+        }
+    }
+
     @SuppressLint("Range")
     public Stage getStage(int stageID) {
         String[] columns = {
@@ -134,6 +142,56 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         String selection = COLUMN_STAGE_ID + " = ?";
         // selection argument
         String[] selectionArgs = {String.valueOf(stageID)};
+
+        Cursor cursor = db.query(TABLE_STAGE, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            stage.setStageId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_ID))));
+            stage.setCarNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_CARNUM))));
+            stage.setStageNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_STAGENUM))));
+            stage.setStartOrder(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_SO))));
+            stage.setProvStart(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_PS)));
+            stage.setActualStart(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_AS)));
+            stage.setFinishTime(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_FT)));
+            stage.setStageTime(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_ST)));
+            stage.setActualTime(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_AT)));
+            stage.setDueTime(cursor.getString(cursor.getColumnIndex(COLUMN_STAGE_DT)));
+        }
+        cursor.close();
+        db.close();
+
+        return stage;
+    }
+
+    @SuppressLint("Range")
+    public Stage getStage(int carNum, int stageNum) {
+        String[] columns = {
+                COLUMN_STAGE_ID,
+                COLUMN_STAGE_CARNUM,
+                COLUMN_STAGE_STAGENUM,
+                COLUMN_STAGE_SO,
+                COLUMN_STAGE_PS,
+                COLUMN_STAGE_AS,
+                COLUMN_STAGE_FT,
+                COLUMN_STAGE_ST,
+                COLUMN_STAGE_AT,
+                COLUMN_STAGE_DT
+        };
+
+        Stage stage = new Stage();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_STAGE_CARNUM + " = ?" + " AND " + COLUMN_STAGE_STAGENUM + " = ?";
+        // selection argument
+        String[] selectionArgs = {String.valueOf(carNum), String.valueOf(stageNum)};
 
         Cursor cursor = db.query(TABLE_STAGE, //Table to query
                 columns,             //columns to return

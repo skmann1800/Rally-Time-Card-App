@@ -17,7 +17,7 @@ import java.util.List;
 public class AControlDatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "AControlManager.db";
@@ -109,6 +109,36 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         return startOrder;
     }
 
+    public int getCarNum(int stageNum, int startOrder) {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_AC_CARNUM
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection criteria
+        String selection = COLUMN_AC_STAGE + " = ?" + " AND " + COLUMN_AC_SO + " = ?";
+        // selection argument
+        String[] selectionArgs = {String.valueOf(stageNum), String.valueOf(startOrder)};
+        // query user table with condition
+
+        Cursor cursor = db.query(TABLE_ACONTROL, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+
+        int carNum = 0;
+        if (cursor.moveToFirst()) {
+            carNum = cursor.getInt(0);
+        }
+        cursor.close();
+        db.close();
+
+        return carNum;
+    }
+
     public int getAControlID(int stage, int carNum) {
         // array of columns to fetch
         String[] columns = {
@@ -158,6 +188,48 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         String selection = COLUMN_AC_ID + " = ?";
         // selection argument
         String[] selectionArgs = {String.valueOf(aControlID)};
+
+        Cursor cursor = db.query(TABLE_ACONTROL, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            aControl.setAControlID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_AC_ID))));
+            aControl.setStartOrder(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_AC_SO))));
+            aControl.setStage(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_AC_STAGE))));
+            aControl.setCarNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_AC_CARNUM))));
+            aControl.setStage1ID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_AC_STAGE1ID))));
+            aControl.setStage2ID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_AC_STAGE2ID))));
+        }
+        cursor.close();
+        db.close();
+
+        return aControl;
+    }
+
+    @SuppressLint("Range")
+    public AControl getAControl(int stageNum, int startOrder) {
+        String[] columns = {
+                COLUMN_AC_ID,
+                COLUMN_AC_SO,
+                COLUMN_AC_STAGE,
+                COLUMN_AC_CARNUM,
+                COLUMN_AC_STAGE1ID,
+                COLUMN_AC_STAGE2ID
+        };
+
+        AControl aControl = new AControl();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_AC_STAGE + " = ?" + " AND " + COLUMN_AC_SO + " = ?";
+        // selection argument
+        String[] selectionArgs = {String.valueOf(stageNum), String.valueOf(startOrder)};
 
         Cursor cursor = db.query(TABLE_ACONTROL, //Table to query
                 columns,             //columns to return

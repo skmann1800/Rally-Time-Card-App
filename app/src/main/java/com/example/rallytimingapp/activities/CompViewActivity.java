@@ -130,12 +130,15 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         initListeners();
 
         int compID = getIntent().getIntExtra("COMP_ID", 0);
-        fillInCards(compID);
+        competitor = compDatabaseHelper.getCompetitorByID(compID);
+        int carNum = competitor.getCarNum();
+        carNumTV.setText(String.valueOf(carNum));
+        fillInCards(carNum);
     }
 
-    private void fillInCards(int compID) {
-        competitor = compDatabaseHelper.getCompetitor(compID);
-        carNumTV.setText(String.valueOf(competitor.getCarNum()));
+    private void fillInCards(int carNum) {
+        competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
+        carNumTV.setText(String.valueOf(carNum));
 
         stage = stageDatabaseHelper.getStage(competitor.getStage1Id());
         if (stage.getStartOrder() == 0) {
@@ -225,7 +228,6 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeM4.setText(stage.getActualTimeM());
         dueTimeH4.setText(stage.getDueTimeH());
         dueTimeM4.setText(stage.getDueTimeM());
-
     }
 
     private void initObjects() {
@@ -355,22 +357,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             public void onClick(View view) {
                 //Add competitor to AControl database
                 int carNum = Integer.parseInt(String.valueOf(carNumTV.getText()));
-                int startOrder = addToAControl(stageNum, carNum);
-                switch (stageNum) {
-                    case 1:
-                        startOrder1.setText(String.valueOf(startOrder));
-                        break;
-                    case 2:
-                        startOrder2.setText(String.valueOf(startOrder));
-                        break;
-                    case 3:
-                        startOrder3.setText(String.valueOf(startOrder));
-                        break;
-                    case 4:
-                        startOrder4.setText(String.valueOf(startOrder));
-                        break;
-                }
-
+                addToAControl(stageNum, carNum);
                 checkInPopup.dismiss();
             }
         });
@@ -384,18 +371,18 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    private int addToAControl(int stageNum, int carNum) {
+    private void addToAControl(int stageNum, int carNum) {
         if (!aControlDatabaseHelper.checkAControl(stageNum, carNum)) {
             int lastSO = aControlDatabaseHelper.getCurrStartOrder(stageNum);
             aControl.setStartOrder(lastSO+1);
             aControl.setStage(stageNum);
             aControl.setCarNum(carNum);
-            competitor = compDatabaseHelper.getCompetitor(compDatabaseHelper.getCompId(carNum));
+            competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
             aControl.setStage1ID(competitor.getStageId(stageNum-1));
             aControl.setStage2ID(competitor.getStageId(stageNum));
             aControlDatabaseHelper.addAControl(aControl);
+            startOrder1.setText(String.valueOf(aControlDatabaseHelper.getStartOrder(stageNum, carNum)));
         }
-        return aControlDatabaseHelper.getStartOrder(stageNum, carNum);
     }
 
     private void ShowReqTimePopup(String message) {

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.rallytimingapp.model.AControl;
 import com.example.rallytimingapp.model.Competitor;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 public class CompDatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 8;
 
     // Database Name
     private static final String DATABASE_NAME = "CompetitorManager.db";
@@ -105,8 +106,15 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         return compID;
     }
 
+    public void empty() {
+        List<Competitor> competitorList = getAllCompetitors();
+        for (int i = 0; i < competitorList.size(); i++) {
+            deleteCompetitor(competitorList.get(i));
+        }
+    }
+
     @SuppressLint("Range")
-    public Competitor getCompetitor(int compID) {
+    public Competitor getCompetitorByID(int compID) {
         String[] columns = {
                 COLUMN_COMP_ID,
                 COLUMN_COMP_CARNUM,
@@ -144,6 +152,52 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
                 competitor.setStage2Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE2ID))));
                 competitor.setStage3Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE3ID))));
                 competitor.setStage4Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE4ID))));
+        }
+        cursor.close();
+        db.close();
+
+        return competitor;
+    }
+
+    @SuppressLint("Range")
+    public Competitor getCompetitorByCarNum(int carNum) {
+        String[] columns = {
+                COLUMN_COMP_ID,
+                COLUMN_COMP_CARNUM,
+                COLUMN_COMP_DRIVER,
+                COLUMN_COMP_CODRIVER,
+                COLUMN_COMP_STAGE1ID,
+                COLUMN_COMP_STAGE2ID,
+                COLUMN_COMP_STAGE3ID,
+                COLUMN_COMP_STAGE4ID
+        };
+
+        Competitor competitor = new Competitor();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_COMP_CARNUM + " = ?";
+        // selection argument
+        String[] selectionArgs = {String.valueOf(carNum)};
+
+        Cursor cursor = db.query(TABLE_COMP, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            competitor.setCompId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_ID))));
+            competitor.setCarNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_CARNUM))));
+            competitor.setDriver(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_DRIVER)));
+            competitor.setCodriver(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_CODRIVER)));
+            competitor.setStage1Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE1ID))));
+            competitor.setStage2Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE2ID))));
+            competitor.setStage3Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE3ID))));
+            competitor.setStage4Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE4ID))));
         }
         cursor.close();
         db.close();

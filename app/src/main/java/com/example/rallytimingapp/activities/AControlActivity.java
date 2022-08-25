@@ -15,13 +15,26 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
+import com.example.rallytimingapp.model.AControl;
+import com.example.rallytimingapp.model.Competitor;
+import com.example.rallytimingapp.model.Stage;
+import com.example.rallytimingapp.sql.AControlDatabaseHelper;
+import com.example.rallytimingapp.sql.CompDatabaseHelper;
+import com.example.rallytimingapp.sql.StageDatabaseHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AControlActivity extends AppCompatActivity implements View.OnClickListener {
+    private final AppCompatActivity activity = AControlActivity.this;
 
     private HorizontalScrollView timeCard1;
 
     private Button backButton;
     private Button returnTCButton;
+
+    private TextView carNumTV;
+    private TextView startOrderTV;
 
     private TextView stageNumTV;
     private TextView stage1Label1;
@@ -47,9 +60,51 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     private TextView S2TTH;
     private TextView S2TTM;
 
-    private TextView carNum;
+    private TextView startOrder1;
+    private TextView provStartH1;
+    private TextView provStartM1;
+    private TextView actualStartH1;
+    private TextView actualStartM1;
+    private TextView finishTimeH1;
+    private TextView finishTimeM1;
+    private TextView finishTimeS1;
+    private TextView finishTimeMS1;
+    private TextView stageTimeM1;
+    private TextView stageTimeS1;
+    private TextView stageTimeMS1;
+    private TextView actualTimeH1;
+    private TextView actualTimeM1;
+    private TextView dueTimeH1;
+    private TextView dueTimeM1;
+
+    private TextView startOrder2;
+    private TextView provStartH2;
+    private TextView provStartM2;
+    private TextView actualStartH2;
+    private TextView actualStartM2;
+    private TextView finishTimeH2;
+    private TextView finishTimeM2;
+    private TextView finishTimeS2;
+    private TextView finishTimeMS2;
+    private TextView stageTimeM2;
+    private TextView stageTimeS2;
+    private TextView stageTimeMS2;
+    private TextView actualTimeH2;
+    private TextView actualTimeM2;
+    private TextView dueTimeH2;
+    private TextView dueTimeM2;
 
     private PopupWindow returnTCPopup;
+
+    private AControl aControl;
+    private Stage stage;
+    private AControlDatabaseHelper aControlDatabaseHelper;
+    private StageDatabaseHelper stageDatabaseHelper;
+    private List<AControl> aControlList;
+
+    private int stageNum;
+    private int startOrder;
+    private int carNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +112,12 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_acontrol);
 
         initViews();
+        initObjects();
         initListeners();
 
-        int stageNum = getIntent().getIntExtra("STAGE", 0);
+        stageNum = getIntent().getIntExtra("STAGE", 0);
+        startOrder = 1;
+        fillInCards();
         switch (stageNum) {
             case 1:
                 stageNumTV.setText(R.string.s1control);
@@ -154,7 +212,17 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private void initObjects() {
+        stageDatabaseHelper = new StageDatabaseHelper(activity);
+        aControlDatabaseHelper = new AControlDatabaseHelper(activity);
+        stage = new Stage();
+        aControl = new AControl();
+        aControlList = new ArrayList<>();
+    }
+
     private void initViews() {
+        carNumTV = findViewById(R.id.ControlCarNum);
+        startOrderTV = findViewById(R.id.ControlStartOrder);
         timeCard1 = findViewById(R.id.ControlTC1);
         backButton = findViewById(R.id.CTCBackButton);
         stageNumTV = findViewById(R.id.ControlStageNum);
@@ -180,8 +248,41 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         yellowTC2 = findViewById(R.id.CTC2YellowTC);
         S2TTH = findViewById(R.id.CTC2TaTH);
         S2TTM = findViewById(R.id.CTC2TaTM);
-        carNum = findViewById(R.id.ControlCarNum);
         returnTCButton = findViewById(R.id.CReturnButton);
+
+        startOrder1 = findViewById(R.id.CTC1Oval);
+        provStartH1 = findViewById(R.id.CTC1PSH);
+        provStartM1 = findViewById(R.id.CTC1PSM);
+        actualStartH1 = findViewById(R.id.CTC1ASH);
+        actualStartM1 = findViewById(R.id.CTC1ASM);
+        finishTimeH1 = findViewById(R.id.CTC1FTH);
+        finishTimeM1 = findViewById(R.id.CTC1FTM);
+        finishTimeS1 = findViewById(R.id.CTC1FTS);
+        finishTimeMS1 = findViewById(R.id.CTC1FTMS);
+        stageTimeM1 = findViewById(R.id.CTC1TTM);
+        stageTimeS1 = findViewById(R.id.CTC1TTS);
+        stageTimeMS1 = findViewById(R.id.CTC1TTMS);
+        actualTimeH1 = findViewById(R.id.CTC1ATH);
+        actualTimeM1 = findViewById(R.id.CTC1ATM);
+        dueTimeH1 = findViewById(R.id.CTC1DTH);
+        dueTimeM1 = findViewById(R.id.CTC1DTM);
+
+        startOrder2 = findViewById(R.id.CTC2Oval);
+        provStartH2 = findViewById(R.id.CTC2PSH);
+        provStartM2 = findViewById(R.id.CTC2PSM);
+        actualStartH2 = findViewById(R.id.CTC2ASH);
+        actualStartM2 = findViewById(R.id.CTC2ASM);
+        finishTimeH2 = findViewById(R.id.CTC2FTH);
+        finishTimeM2 = findViewById(R.id.CTC2FTM);
+        finishTimeS2 = findViewById(R.id.CTC2FTS);
+        finishTimeMS2 = findViewById(R.id.CTC2FTMS);
+        stageTimeM2 = findViewById(R.id.CTC2TTM);
+        stageTimeS2 = findViewById(R.id.CTC2TTS);
+        stageTimeMS2 = findViewById(R.id.CTC2TTMS);
+        actualTimeH2 = findViewById(R.id.CTC2ATH);
+        actualTimeM2 = findViewById(R.id.CTC2ATM);
+        dueTimeH2 = findViewById(R.id.CTC2DTH);
+        dueTimeM2 = findViewById(R.id.CTC2DTM);
     }
 
     private void initListeners() {
@@ -202,6 +303,54 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private void fillInCards() {
+        if (aControlDatabaseHelper.getStage(stageNum).size() != 0) {
+            carNum = aControlDatabaseHelper.getCarNum(stageNum, startOrder);
+            carNumTV.setText(String.valueOf(carNum));
+            aControl = aControlDatabaseHelper.getAControl(aControlDatabaseHelper.getAControlID(stageNum, carNum));
+            startOrderTV.setText(String.valueOf(startOrder));
+            if (stageNum != 1) {
+                stage = stageDatabaseHelper.getStage(aControl.getStage1ID());
+                startOrder1.setText(String.valueOf(stage.getStartOrder()));
+                provStartH1.setText(stage.getProvStartH());
+                provStartM1.setText(stage.getProvStartM());
+                actualStartH1.setText(stage.getActualStartH());
+                actualStartM1.setText(stage.getActualStartM());
+                finishTimeH1.setText(stage.getFinishTimeH());
+                finishTimeM1.setText(stage.getFinishTimeM());
+                finishTimeS1.setText(stage.getFinishTimeS());
+                finishTimeMS1.setText(stage.getFinishTimeMS());
+                stageTimeM1.setText(stage.getStageTimeM());
+                stageTimeS1.setText(stage.getStageTimeS());
+                stageTimeMS1.setText(stage.getStageTimeMS());
+                actualTimeH1.setText(stage.getActualTimeH());
+                actualTimeM1.setText(stage.getActualTimeM());
+                dueTimeH1.setText(stage.getDueTimeH());
+                dueTimeM1.setText(stage.getDueTimeM());
+            }
+            stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
+            startOrder2.setText(String.valueOf(stage.getStartOrder()));
+            provStartH2.setText(stage.getProvStartH());
+            provStartM2.setText(stage.getProvStartM());
+            actualStartH2.setText(stage.getActualStartH());
+            actualStartM2.setText(stage.getActualStartM());
+            finishTimeH2.setText(stage.getFinishTimeH());
+            finishTimeM2.setText(stage.getFinishTimeM());
+            finishTimeS2.setText(stage.getFinishTimeS());
+            finishTimeMS2.setText(stage.getFinishTimeMS());
+            stageTimeM2.setText(stage.getStageTimeM());
+            stageTimeS2.setText(stage.getStageTimeS());
+            stageTimeMS2.setText(stage.getStageTimeMS());
+            actualTimeH2.setText(stage.getActualTimeH());
+            actualTimeM2.setText(stage.getActualTimeM());
+            dueTimeH2.setText(stage.getDueTimeH());
+            dueTimeM2.setText(stage.getDueTimeM());
+        } else {
+            carNumTV.setText("");
+            startOrderTV.setText("0");
+        }
+    }
+
     private void ShowReturnTCPopup() {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
@@ -218,7 +367,9 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         returnTCPopup.setBackgroundDrawable(null);
         returnTCPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
-        String currCarNum = carNum.getText().toString();
+        aControl = aControlDatabaseHelper.getAControl(stageNum, startOrder);
+        carNum = aControl.getCarNum();
+        String currCarNum = String.valueOf(carNum);
         TextView text = layout.findViewById(R.id.ReturnTC);
         text.setText("Return Time Card to Car " + currCarNum + "?");
 
@@ -226,8 +377,20 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         yesReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Do Something
-
+                if (stageNum != 1) {
+                    stage = stageDatabaseHelper.getStage(aControl.getStage1ID());
+                    String inputATH = actualTimeH1.getText().toString();
+                    String inputATM = actualTimeM1.getText().toString();
+                    stage.setActualTime(inputATH + ":" + inputATM);
+                    stageDatabaseHelper.updateStage(stage);
+                }
+                stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
+                String inputPSH = provStartH2.getText().toString();
+                String inputPSM = provStartM2.getText().toString();
+                stage.setProvStart(inputPSH + ":" + inputPSM);
+                String inputSO = startOrder2.getText().toString();
+                stage.setStartOrder(Integer.valueOf(inputSO));
+                stageDatabaseHelper.updateStage(stage);
                 returnTCPopup.dismiss();
             }
         });

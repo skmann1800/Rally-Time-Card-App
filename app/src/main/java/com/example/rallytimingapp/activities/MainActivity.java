@@ -60,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
         int compID3 = CreateCompetitor(2, "Ben Hunt", "Tony Rawstorn");
         int compID4 = CreateCompetitor(12, "Jack Hawkeswood", "Sarah Brenna");
 
-        CreateLogin("Russell", "comp", "Competitor", compID1);
+        CreateLogin("Hayden", "hayden", "Competitor", compID1);
         CreateLogin("Emma", "emma", "Competitor", compID2);
         CreateLogin("Ben", "ben","Competitor", compID3);
         CreateLogin("Jack", "jack", "Competitor", compID4);
         CreateLogin("Jared", "start", "Start", -1);
         CreateLogin("Sarah", "finish", "Finish", -1);
-        CreateLogin("George", "control", "A Control", -1);
+        CreateLogin("George", "ac", "A Control", -1);
     }
 
     private int CreateStage(int carNum, int stageNum) {
@@ -81,7 +81,17 @@ public class MainActivity extends AppCompatActivity {
             stage.setActualTime("");
             stage.setDueTime("");
             stageDatabaseHelper.addStage(stage);
-        }
+        } /*else {
+            stage = stageDatabaseHelper.getStage(carNum, stageNum);
+            stage.setStartOrder(0);
+            stage.setProvStart("");
+            stage.setActualStart("");
+            stage.setFinishTime("");
+            stage.setStageTime("");
+            stage.setActualTime("");
+            stage.setDueTime("");
+            stageDatabaseHelper.updateStage(stage);
+        }*/
         int stageID = stageDatabaseHelper.getStageId(carNum, stageNum);
         return stageID;
     }
@@ -97,7 +107,16 @@ public class MainActivity extends AppCompatActivity {
             competitor.setStage3Id(CreateStage(carNum, 3));
             competitor.setStage4Id(CreateStage(carNum, 4));
             compDatabaseHelper.addCompetitor(competitor);
-        }
+        } /*else {
+            competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
+            competitor.setDriver(driver);
+            competitor.setCodriver(codriver);
+            competitor.setStage1Id(CreateStage(carNum, 1));
+            competitor.setStage2Id(CreateStage(carNum, 2));
+            competitor.setStage3Id(CreateStage(carNum, 3));
+            competitor.setStage4Id(CreateStage(carNum, 4));
+            compDatabaseHelper.updateCompetitor(competitor);
+        }*/
         compID = compDatabaseHelper.getCompId(carNum);
         return compID;
     }
@@ -109,7 +128,12 @@ public class MainActivity extends AppCompatActivity {
             user.setRole(role);
             user.setCompId(compId);
             userDatabaseHelper.addUser(user);
-        }
+        } /*else {
+            user = userDatabaseHelper.getUser(username, role);
+            user.setPassword(password);
+            user.setCompId(compId);
+            userDatabaseHelper.updateUser(user);
+        }*/
     }
 
     private void initViews() {
@@ -136,39 +160,41 @@ public class MainActivity extends AppCompatActivity {
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         int checkedChipID = chips.getCheckedChipId();
-        checkedChip = chips.findViewById(checkedChipID);
-        String role = checkedChip.getText().toString().trim();
+        if (checkedChipID != -1) {
+            checkedChip = chips.findViewById(checkedChipID);
+            String role = checkedChip.getText().toString().trim();
 
-        if (verifyLogin(username, password, role)) {
-            userList.addAll(userDatabaseHelper.getAllUsers());
-            int compID = -1;
-            for (int i = 0; i < userList.size(); i++) {
-                User currUser = userList.get(i);
-                if (username.equals(currUser.getUsername())) {
-                    compID = currUser.getCompId();
+            if (verifyLogin(username, password, role)) {
+                userList.addAll(userDatabaseHelper.getAllUsers());
+                int compID = -1;
+                for (int i = 0; i < userList.size(); i++) {
+                    User currUser = userList.get(i);
+                    if (username.equals(currUser.getUsername())) {
+                        compID = currUser.getCompId();
+                    }
+                }
+
+                if (role.equals("Competitor")) {
+                    Intent intent = new Intent(this, CompViewActivity.class);
+                    intent.putExtra("COMP_ID", compID);
+                    clearInputs();
+                    startActivity(intent);
+                } else if (role.equals("Finish")) {
+                    Intent intent = new Intent(this, ChooseFinishActivity.class);
+                    clearInputs();
+                    startActivity(intent);
+                } else if (role.equals("Start")) {
+                    Intent intent = new Intent(this, ChooseStartActivity.class);
+                    clearInputs();
+                    startActivity(intent);
+                } else if (role.equals("A Control")) {
+                    Intent intent = new Intent(this, ChooseControlActivity.class);
+                    clearInputs();
+                    startActivity(intent);
                 }
             }
-
-            if (role.equals("Competitor")) {
-                Intent intent = new Intent(this, CompViewActivity.class);
-                intent.putExtra("COMP_ID", compID);
-                clearInputs();
-                startActivity(intent);
-            } else if (role.equals("Finish")) {
-                Intent intent = new Intent(this, ChooseFinishActivity.class);
-                clearInputs();
-                startActivity(intent);
-            } else if (role.equals("Start")) {
-                Intent intent = new Intent(this, ChooseStartActivity.class);
-                clearInputs();
-                startActivity(intent);
-            } else if (role.equals("A Control")) {
-                Intent intent = new Intent(this, ChooseControlActivity.class);
-                clearInputs();
-                startActivity(intent);
-            }
+            clearInputs();
         }
-        clearInputs();
     }
 
     private boolean verifyLogin(String username, String password, String role) {

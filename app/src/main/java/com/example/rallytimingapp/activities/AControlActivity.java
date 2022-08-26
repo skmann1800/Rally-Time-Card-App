@@ -18,9 +18,11 @@ import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.model.AControl;
 import com.example.rallytimingapp.model.Competitor;
 import com.example.rallytimingapp.model.Stage;
+import com.example.rallytimingapp.model.Start;
 import com.example.rallytimingapp.sql.AControlDatabaseHelper;
 import com.example.rallytimingapp.sql.CompDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
+import com.example.rallytimingapp.sql.StartDatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,10 +101,13 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     private PopupWindow returnTCPopup;
 
     private AControl aControl;
+    private Start start;
     private Stage stage;
+    private Competitor competitor;
     private AControlDatabaseHelper aControlDatabaseHelper;
+    private StartDatabaseHelper startDatabaseHelper;
     private StageDatabaseHelper stageDatabaseHelper;
-    private List<AControl> aControlList;
+    private CompDatabaseHelper compDatabaseHelper;
 
     private int stageNum;
     private int startOrder;
@@ -217,9 +222,12 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     private void initObjects() {
         stageDatabaseHelper = new StageDatabaseHelper(activity);
         aControlDatabaseHelper = new AControlDatabaseHelper(activity);
+        startDatabaseHelper = new StartDatabaseHelper(activity);
+        compDatabaseHelper = new CompDatabaseHelper(activity);
+        competitor = new Competitor();
         stage = new Stage();
         aControl = new AControl();
-        aControlList = new ArrayList<>();
+        start = new Start();
     }
 
     private void initViews() {
@@ -406,6 +414,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 stage.setStartOrder(Integer.valueOf(inputSO));
                 stageDatabaseHelper.updateStage(stage);
                 returnTCPopup.dismiss();
+
+                addToStart(stageNum);
             }
         });
 
@@ -416,6 +426,18 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 returnTCPopup.dismiss();
             }
         });
+    }
+
+    private void addToStart(int stageNum) {
+        if (!startDatabaseHelper.checkStart(stageNum, carNum)) {
+            int lastSO = startDatabaseHelper.getCurrStartOrder(stageNum);
+            start.setStartOrder(lastSO+1);
+            start.setStage(stageNum);
+            start.setCarNum(carNum);
+            competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
+            start.setStageID(competitor.getStageId(stageNum));
+            startDatabaseHelper.addStart(start);
+        }
     }
 
     public void previousTC() {

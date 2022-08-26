@@ -11,15 +11,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
+import com.example.rallytimingapp.model.Finish;
+import com.example.rallytimingapp.model.Stage;
+import com.example.rallytimingapp.model.Start;
+import com.example.rallytimingapp.sql.FinishDatabaseHelper;
+import com.example.rallytimingapp.sql.StageDatabaseHelper;
+import com.example.rallytimingapp.sql.StartDatabaseHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
+    private final AppCompatActivity activity = StartActivity.this;
 
     private Button backButton;
     private Button returnTCButton;
+    private Button prevButton;
+    private Button nextButton;
+
+    private TextView carNumTV;
+    private TextView startOrderTV;
 
     private TextView stageNumTV;
     private TextView stageLabel1;
@@ -34,9 +48,33 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     private TextView TTH;
     private TextView TTM;
 
-    private TextView carNum;
+    private TextView startOrderTC;
+    private TextView provStartH;
+    private TextView provStartM;
+    private TextView actualStartH;
+    private TextView actualStartM;
+    private TextView finishTimeH;
+    private TextView finishTimeM;
+    private TextView finishTimeS;
+    private TextView finishTimeMS;
+    private TextView stageTimeM;
+    private TextView stageTimeS;
+    private TextView stageTimeMS;
+    private TextView actualTimeH;
+    private TextView actualTimeM;
+    private TextView dueTimeH;
+    private TextView dueTimeM;
 
     private PopupWindow returnTCPopup;
+
+    private Start start;
+    private Stage stage;
+    private StartDatabaseHelper startDatabaseHelper;
+    private StageDatabaseHelper stageDatabaseHelper;
+
+    private int stageNum;
+    private int startOrder;
+    private int carNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +82,12 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_start);
 
         initViews();
+        initObjects();
         initListeners();
 
-        int stageNum = getIntent().getIntExtra("STAGE", 0);
+        stageNum = getIntent().getIntExtra("STAGE", 0);
+        startOrder = 1;
+        fillInCards();
         switch (stageNum) {
             case 1:
                 stageNumTV.setText(R.string.s1start);
@@ -107,8 +148,22 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void initObjects() {
+        stageDatabaseHelper = new StageDatabaseHelper(activity);
+        startDatabaseHelper = new StartDatabaseHelper(activity);
+        stage = new Stage();
+        start = new Start();
+    }
+
     private void initViews() {
         backButton = findViewById(R.id.STCBackButton);
+        returnTCButton = findViewById(R.id.SReturnButton);
+        prevButton = findViewById(R.id.StartPrevButton);
+        nextButton = findViewById(R.id.StartNextButton);
+
+        carNumTV = findViewById(R.id.StartCarNum);
+        startOrderTV = findViewById(R.id.StartOrder);
+
         stageNumTV = findViewById(R.id.StartStageNum);
         stageLabel1 = findViewById(R.id.STCStage1);
         stageLabel2 = findViewById(R.id.STCStage2);
@@ -121,13 +176,30 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         yellowTC = findViewById(R.id.STCYellowTC);
         TTH = findViewById(R.id.STCTaTH);
         TTM = findViewById(R.id.STCTaTM);
-        carNum = findViewById(R.id.StartCarNum);
-        returnTCButton = findViewById(R.id.SReturnButton);
+
+        startOrderTC = findViewById(R.id.STCOval);
+        provStartH = findViewById(R.id.STCPSH);
+        provStartM = findViewById(R.id.STCPSM);
+        actualStartH = findViewById(R.id.STCASH);
+        actualStartM = findViewById(R.id.STCASM);
+        finishTimeH = findViewById(R.id.STCFTH);
+        finishTimeM = findViewById(R.id.STCFTM);
+        finishTimeS = findViewById(R.id.STCFTS);
+        finishTimeMS = findViewById(R.id.STCFTMS);
+        stageTimeM = findViewById(R.id.STCTTM);
+        stageTimeS = findViewById(R.id.STCTTS);
+        stageTimeMS = findViewById(R.id.STCTTMS);
+        actualTimeH = findViewById(R.id.STCATH);
+        actualTimeM = findViewById(R.id.STCATM);
+        dueTimeH = findViewById(R.id.STCDTH);
+        dueTimeM = findViewById(R.id.STCDTM);
     }
 
     private void initListeners() {
         backButton.setOnClickListener(this);
         returnTCButton.setOnClickListener(this);
+        prevButton.setOnClickListener(this);
+        nextButton.setOnClickListener(this);
     }
 
     @Override
@@ -140,6 +212,41 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             case R.id.SReturnButton:
                 ShowReturnTCPopup();
                 break;
+            case R.id.StartPrevButton:
+                previousTC();
+                break;
+            case R.id.StartNextButton:
+                nextTC();
+                break;
+        }
+    }
+
+    private void fillInCards() {
+        if (startDatabaseHelper.getStage(stageNum).size() != 0) {
+            carNum = startDatabaseHelper.getCarNum(stageNum, startOrder);
+            carNumTV.setText(String.valueOf(carNum));
+            start = startDatabaseHelper.getStart(startDatabaseHelper.getStartID(stageNum, carNum));
+            startOrderTV.setText(String.valueOf(startOrder));
+            stage = stageDatabaseHelper.getStage(start.getStageID());
+            startOrderTC.setText(String.valueOf(stage.getStartOrder()));
+            provStartH.setText(stage.getProvStartH());
+            provStartM.setText(stage.getProvStartM());
+            actualStartH.setText(stage.getActualStartH());
+            actualStartM.setText(stage.getActualStartM());
+            finishTimeH.setText(stage.getFinishTimeH());
+            finishTimeM.setText(stage.getFinishTimeM());
+            finishTimeS.setText(stage.getFinishTimeS());
+            finishTimeMS.setText(stage.getFinishTimeMS());
+            stageTimeM.setText(stage.getStageTimeM());
+            stageTimeS.setText(stage.getStageTimeS());
+            stageTimeMS.setText(stage.getStageTimeMS());
+            actualTimeH.setText(stage.getActualTimeH());
+            actualTimeM.setText(stage.getActualTimeM());
+            dueTimeH.setText(stage.getDueTimeH());
+            dueTimeM.setText(stage.getDueTimeM());
+        } else {
+            startOrderTV.setText("0");
+            carNumTV.setText("");
         }
     }
 
@@ -159,7 +266,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         returnTCPopup.setBackgroundDrawable(null);
         returnTCPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
-        String currCarNum = carNum.getText().toString();
+        start = startDatabaseHelper.getStart(stageNum, startOrder);
+        carNum = start.getCarNum();
+        String currCarNum = String.valueOf(carNum);
         TextView text = layout.findViewById(R.id.ReturnTC);
         text.setText("Return Time Card to Car " + currCarNum + "?");
 
@@ -167,8 +276,13 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         yesReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Do Something
-
+                stage = stageDatabaseHelper.getStage(start.getStageID());
+                String inputASH = actualStartH.getText().toString();
+                String inputASM = actualStartM.getText().toString();
+                stage.setActualStart(inputASH + ":" + inputASM);
+                String inputSO = startOrderTC.getText().toString();
+                stage.setStartOrder(Integer.valueOf(inputSO));
+                stageDatabaseHelper.updateStage(stage);
                 returnTCPopup.dismiss();
             }
         });
@@ -180,5 +294,20 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 returnTCPopup.dismiss();
             }
         });
+    }
+
+    public void previousTC() {
+        if (startOrder > 1) {
+            startOrder = startOrder - 1;
+            fillInCards();
+        }
+    }
+
+    public void nextTC() {
+        int currStartOrder = startDatabaseHelper.getCurrStartOrder(stageNum);
+        if ((startOrder + 1) <= currStartOrder) {
+            startOrder = startOrder + 1;
+            fillInCards();
+        }
     }
 }

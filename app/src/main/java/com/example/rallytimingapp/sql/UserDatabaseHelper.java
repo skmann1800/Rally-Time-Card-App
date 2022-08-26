@@ -54,6 +54,13 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void empty() {
+        List<User> userList = getAllUsers();
+        for (int i = 0; i < userList.size(); i++) {
+            deleteUser(userList.get(i));
+        }
+    }
+
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 

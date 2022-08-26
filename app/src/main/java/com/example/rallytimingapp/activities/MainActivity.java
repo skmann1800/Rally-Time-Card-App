@@ -13,7 +13,9 @@ import com.example.rallytimingapp.helpers.InputValidation;
 import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.User;
 import com.example.rallytimingapp.sql.AControlDatabaseHelper;
+import com.example.rallytimingapp.sql.FinishDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
+import com.example.rallytimingapp.sql.StartDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
 import com.example.rallytimingapp.model.Competitor;
 import com.example.rallytimingapp.sql.CompDatabaseHelper;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private CompDatabaseHelper compDatabaseHelper;
     private StageDatabaseHelper stageDatabaseHelper;
     private AControlDatabaseHelper aControlDatabaseHelper;
+    private StartDatabaseHelper startDatabaseHelper;
+    private FinishDatabaseHelper finishDatabaseHelper;
     private User user;
     private Competitor competitor;
     private Stage stage;
@@ -53,7 +57,13 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initObjects();
 
-        aControlDatabaseHelper.empty();
+        /*aControlDatabaseHelper.empty();
+        startDatabaseHelper.empty();
+        finishDatabaseHelper.empty();
+        userDatabaseHelper.empty();
+        compDatabaseHelper.empty();
+        stageDatabaseHelper.empty();*/
+
 
         int compID1 = CreateCompetitor(1, "Hayden Paddon", "John Kennard");
         int compID2 = CreateCompetitor(5, "Emma Gilmour", "Mal Peden");
@@ -81,17 +91,7 @@ public class MainActivity extends AppCompatActivity {
             stage.setActualTime("");
             stage.setDueTime("");
             stageDatabaseHelper.addStage(stage);
-        } /*else {
-            stage = stageDatabaseHelper.getStage(carNum, stageNum);
-            stage.setStartOrder(0);
-            stage.setProvStart("");
-            stage.setActualStart("");
-            stage.setFinishTime("");
-            stage.setStageTime("");
-            stage.setActualTime("");
-            stage.setDueTime("");
-            stageDatabaseHelper.updateStage(stage);
-        }*/
+        }
         int stageID = stageDatabaseHelper.getStageId(carNum, stageNum);
         return stageID;
     }
@@ -107,16 +107,7 @@ public class MainActivity extends AppCompatActivity {
             competitor.setStage3Id(CreateStage(carNum, 3));
             competitor.setStage4Id(CreateStage(carNum, 4));
             compDatabaseHelper.addCompetitor(competitor);
-        } /*else {
-            competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
-            competitor.setDriver(driver);
-            competitor.setCodriver(codriver);
-            competitor.setStage1Id(CreateStage(carNum, 1));
-            competitor.setStage2Id(CreateStage(carNum, 2));
-            competitor.setStage3Id(CreateStage(carNum, 3));
-            competitor.setStage4Id(CreateStage(carNum, 4));
-            compDatabaseHelper.updateCompetitor(competitor);
-        }*/
+        }
         compID = compDatabaseHelper.getCompId(carNum);
         return compID;
     }
@@ -128,12 +119,7 @@ public class MainActivity extends AppCompatActivity {
             user.setRole(role);
             user.setCompId(compId);
             userDatabaseHelper.addUser(user);
-        } /*else {
-            user = userDatabaseHelper.getUser(username, role);
-            user.setPassword(password);
-            user.setCompId(compId);
-            userDatabaseHelper.updateUser(user);
-        }*/
+        }
     }
 
     private void initViews() {
@@ -149,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
         compDatabaseHelper = new CompDatabaseHelper(activity);
         stageDatabaseHelper = new StageDatabaseHelper(activity);
         aControlDatabaseHelper = new AControlDatabaseHelper(activity);
+        startDatabaseHelper = new StartDatabaseHelper(activity);
+        finishDatabaseHelper = new FinishDatabaseHelper(activity);
         inputValidation = new InputValidation(activity);
         user = new User();
         competitor = new Competitor();
@@ -194,6 +182,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             clearInputs();
+        } else {
+            Snackbar.make(scrollView, "Invalid Login", Snackbar.LENGTH_LONG).show();
         }
     }
 

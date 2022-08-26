@@ -17,10 +17,12 @@ import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.helpers.InputValidation;
 import com.example.rallytimingapp.model.AControl;
 import com.example.rallytimingapp.model.Competitor;
+import com.example.rallytimingapp.model.Finish;
 import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.User;
 import com.example.rallytimingapp.sql.AControlDatabaseHelper;
 import com.example.rallytimingapp.sql.CompDatabaseHelper;
+import com.example.rallytimingapp.sql.FinishDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
 
@@ -113,12 +115,17 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
     private CompDatabaseHelper compDatabaseHelper;
     private StageDatabaseHelper stageDatabaseHelper;
     private AControlDatabaseHelper aControlDatabaseHelper;
+    private FinishDatabaseHelper finishDatabaseHelper;
     private Competitor competitor;
     private Stage stage;
     private AControl aControl;
+    private Finish finish;
 
     private PopupWindow checkInPopup;
     private PopupWindow reqTimePopup;
+
+    private int compID;
+    private int carNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,14 +136,14 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         initObjects();
         initListeners();
 
-        int compID = getIntent().getIntExtra("COMP_ID", 0);
+        compID = getIntent().getIntExtra("COMP_ID", 0);
         competitor = compDatabaseHelper.getCompetitorByID(compID);
-        int carNum = competitor.getCarNum();
+        carNum = competitor.getCarNum();
         carNumTV.setText(String.valueOf(carNum));
-        fillInCards(carNum);
+        fillInCards();
     }
 
-    private void fillInCards(int carNum) {
+    private void fillInCards() {
         competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
         carNumTV.setText(String.valueOf(carNum));
 
@@ -234,9 +241,11 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         compDatabaseHelper = new CompDatabaseHelper(activity);
         stageDatabaseHelper = new StageDatabaseHelper(activity);
         aControlDatabaseHelper = new AControlDatabaseHelper(activity);
+        finishDatabaseHelper = new FinishDatabaseHelper(activity);
         competitor = new Competitor();
         stage = new Stage();
         aControl = new AControl();
+        finish = new Finish();
     }
 
     private void initViews() {
@@ -356,8 +365,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View view) {
                 //Add competitor to AControl database
-                int carNum = Integer.parseInt(String.valueOf(carNumTV.getText()));
-                addToAControl(stageNum, carNum);
+                addToAControl(stageNum);
                 checkInPopup.dismiss();
             }
         });
@@ -371,7 +379,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    private void addToAControl(int stageNum, int carNum) {
+    private void addToAControl(int stageNum) {
         if (!aControlDatabaseHelper.checkAControl(stageNum, carNum)) {
             int lastSO = aControlDatabaseHelper.getCurrStartOrder(stageNum);
             aControl.setStartOrder(lastSO+1);
@@ -381,11 +389,10 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             aControl.setStage1ID(competitor.getStageId(stageNum-1));
             aControl.setStage2ID(competitor.getStageId(stageNum));
             aControlDatabaseHelper.addAControl(aControl);
-            startOrder1.setText(String.valueOf(aControlDatabaseHelper.getStartOrder(stageNum, carNum)));
         }
     }
 
-    private void ShowReqTimePopup(String message) {
+    private void ShowReqTimePopup(String message, int stageNum) {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
@@ -408,8 +415,8 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         yesReqTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Do Something
-
+                //Add competitor to Finish database
+                addToFinish(stageNum);
                 reqTimePopup.dismiss();
             }
         });
@@ -423,6 +430,18 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    private void addToFinish(int stageNum) {
+        if (!finishDatabaseHelper.checkFinish(stageNum, carNum)) {
+            int lastFO = finishDatabaseHelper.getCurrFinishOrder(stageNum);
+            finish.setFinishOrder(lastFO+1);
+            finish.setStage(stageNum);
+            finish.setCarNum(carNum);
+            competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
+            finish.setStageID(competitor.getStageId(stageNum));
+            finishDatabaseHelper.addFinish(finish);
+        }
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -430,25 +449,25 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 ShowCheckInPopup("Check In to Stage 1?", 1);
                 break;
             case R.id.ReqTime1:
-                ShowReqTimePopup("Request Time for Stage 1?");
+                ShowReqTimePopup("Request Time for Stage 1?", 1);
                 break;
             case R.id.CheckIn2:
                 ShowCheckInPopup("Check In to Stage 2?", 2);
                 break;
             case R.id.ReqTime2:
-                ShowReqTimePopup("Request Time for Stage 2?");
+                ShowReqTimePopup("Request Time for Stage 2?", 2);
                 break;
             case R.id.CheckIn3:
                 ShowCheckInPopup("Check In to Stage 3?", 3);
                 break;
             case R.id.ReqTime3:
-                ShowReqTimePopup("Request Time for Stage 3?");
+                ShowReqTimePopup("Request Time for Stage 3?", 3);
                 break;
             case R.id.CheckIn4:
                 ShowCheckInPopup("Check In to Stage 4?", 4);
                 break;
             case R.id.ReqTime4:
-                ShowReqTimePopup("Request Time for Stage 4?");
+                ShowReqTimePopup("Request Time for Stage 4?", 4);
                 break;
         }
     }

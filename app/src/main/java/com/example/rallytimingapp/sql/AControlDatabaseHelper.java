@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.rallytimingapp.model.AControl;
-import com.example.rallytimingapp.model.Competitor;
-import com.example.rallytimingapp.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

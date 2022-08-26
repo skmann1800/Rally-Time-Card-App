@@ -29,6 +29,8 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
     private Button backButton;
     private Button returnTCButton;
+    private Button prevButton;
+    private Button nextButton;
 
     private TextView stageNumTV;
     private TextView stageLabel1;
@@ -161,6 +163,8 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
         returnTCButton = findViewById(R.id.FReturnButton);
         backButton = findViewById(R.id.FTCBackButton);
+        prevButton = findViewById(R.id.FinishPrevButton);
+        nextButton = findViewById(R.id.FinishNextButton);
 
         stageNumTV = findViewById(R.id.FinishStageNum);
         stageLabel1 = findViewById(R.id.FTCStage1);
@@ -196,6 +200,8 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     private void initListeners() {
         backButton.setOnClickListener(this);
         returnTCButton.setOnClickListener(this);
+        prevButton.setOnClickListener(this);
+        nextButton.setOnClickListener(this);
     }
 
     @Override
@@ -207,6 +213,12 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.FReturnButton:
                 ShowReturnTCPopup();
+                break;
+            case R.id.FinishPrevButton:
+                previousTC();
+                break;
+            case R.id.FinishNextButton:
+                nextTC();
                 break;
         }
     }
@@ -256,7 +268,9 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         returnTCPopup.setBackgroundDrawable(null);
         returnTCPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
-        String currCarNum = carNumTV.getText().toString();
+        finish = finishDatabaseHelper.getFinish(stageNum, finishOrder);
+        carNum = finish.getCarNum();
+        String currCarNum = String.valueOf(carNum);
         TextView text = layout.findViewById(R.id.ReturnTC);
         text.setText("Return Time Card to Car " + currCarNum + "?");
 
@@ -264,8 +278,17 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         yesReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Do Something
-
+                stage = stageDatabaseHelper.getStage(finish.getStageID());
+                String inputFTH = finishTimeH.getText().toString();
+                String inputFTM = finishTimeM.getText().toString();
+                String inputFTS = finishTimeS.getText().toString();
+                String inputFTMS = finishTimeMS.getText().toString();
+                stage.setFinishTime(inputFTH + ":" + inputFTM + ":" + inputFTS + ":" + inputFTMS);
+                String inputSTM = stageTimeM.getText().toString();
+                String inputSTS = stageTimeS.getText().toString();
+                String inputSTMS = stageTimeMS.getText().toString();
+                stage.setStageTime(inputSTM + ":" + inputSTS + ":" + inputSTMS);
+                stageDatabaseHelper.updateStage(stage);
                 returnTCPopup.dismiss();
             }
         });
@@ -277,5 +300,20 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
                 returnTCPopup.dismiss();
             }
         });
+    }
+
+    public void previousTC() {
+        if (finishOrder > 1) {
+            finishOrder = finishOrder - 1;
+            fillInCards();
+        }
+    }
+
+    public void nextTC() {
+        int currFinishOrder = finishDatabaseHelper.getCurrFinishOrder(stageNum);
+        if ((finishOrder + 1) <= currFinishOrder) {
+            finishOrder = finishOrder + 1;
+            fillInCards();
+        }
     }
 }

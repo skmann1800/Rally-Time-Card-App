@@ -439,12 +439,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
     private void initListeners() {
         checkIn1.setOnClickListener(this);
         reqTime1.setOnClickListener(this);
+        saveDT1.setOnClickListener(this);
         checkIn2.setOnClickListener(this);
         reqTime2.setOnClickListener(this);
+        saveDT2.setOnClickListener(this);
         checkIn3.setOnClickListener(this);
         reqTime3.setOnClickListener(this);
+        saveDT3.setOnClickListener(this);
         checkIn4.setOnClickListener(this);
         reqTime4.setOnClickListener(this);
+        saveDT4.setOnClickListener(this);
     }
 
     private void ShowCheckInPopup(String message, int stageNum) {
@@ -557,11 +561,25 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             case R.id.ReqTime1:
                 ShowReqTimePopup("Request Time for Stage 1?", 1);
                 break;
+            case R.id.SaveDT1:
+                stage = stageDatabaseHelper.getStage(carNum, 1);
+                String inputDTH1 = dueTimeH1.getText().toString();
+                String inputDTM1 = dueTimeM1.getText().toString();
+                stage.setDueTime(inputDTH1 + ":" + inputDTM1);
+                stageDatabaseHelper.updateStage(stage);
+                break;
             case R.id.CheckIn2:
                 ShowCheckInPopup("Check In to Stage 2?", 2);
                 break;
             case R.id.ReqTime2:
                 ShowReqTimePopup("Request Time for Stage 2?", 2);
+                break;
+            case R.id.SaveDT2:
+                stage = stageDatabaseHelper.getStage(carNum, 2);
+                String inputDTH2 = dueTimeH2.getText().toString();
+                String inputDTM2 = dueTimeM2.getText().toString();
+                stage.setDueTime(inputDTH2 + ":" + inputDTM2);
+                stageDatabaseHelper.updateStage(stage);
                 break;
             case R.id.CheckIn3:
                 ShowCheckInPopup("Check In to Stage 3?", 3);
@@ -569,11 +587,25 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             case R.id.ReqTime3:
                 ShowReqTimePopup("Request Time for Stage 3?", 3);
                 break;
+            case R.id.SaveDT3:
+                stage = stageDatabaseHelper.getStage(carNum, 3);
+                String inputDTH3 = dueTimeH3.getText().toString();
+                String inputDTM3 = dueTimeM3.getText().toString();
+                stage.setDueTime(inputDTH3 + ":" + inputDTM3);
+                stageDatabaseHelper.updateStage(stage);
+                break;
             case R.id.CheckIn4:
                 ShowCheckInPopup("Check In to Stage 4?", 4);
                 break;
             case R.id.ReqTime4:
                 ShowReqTimePopup("Request Time for Stage 4?", 4);
+                break;
+            case R.id.SaveDT4:
+                stage = stageDatabaseHelper.getStage(carNum, 4);
+                String inputDTH4 = dueTimeH4.getText().toString();
+                String inputDTM4 = dueTimeM4.getText().toString();
+                stage.setDueTime(inputDTH4 + ":" + inputDTM4);
+                stageDatabaseHelper.updateStage(stage);
                 break;
         }
     }

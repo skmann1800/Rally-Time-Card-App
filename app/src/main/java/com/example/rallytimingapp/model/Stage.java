@@ -60,7 +60,9 @@ public class Stage {
     public String getProvStartM() {
         if(provStart.contains(":")) {
             String[] provStartSplit = provStart.split(":");
-            return provStartSplit[1];
+            if (provStartSplit.length > 1) {
+                return provStartSplit[1];
+            }
         }
         return "";
     }
@@ -84,7 +86,9 @@ public class Stage {
     public String getActualStartM() {
         if(actualStart.contains(":")) {
             String[] actualStartSplit = actualStart.split(":");
-            return actualStartSplit[1];
+            if (actualStartSplit.length > 1) {
+                return actualStartSplit[1];
+            }
         }
         return "";
     }
@@ -108,7 +112,9 @@ public class Stage {
     public String getFinishTimeM() {
         if(finishTime.contains(":")) {
             String[] finishTimeSplit = finishTime.split(":");
-            return finishTimeSplit[1];
+            if (finishTimeSplit.length > 1) {
+                return finishTimeSplit[1];
+            }
         }
         return "";
     }
@@ -116,7 +122,9 @@ public class Stage {
     public String getFinishTimeS() {
         if(finishTime.contains(":")) {
             String[] finishTimeSplit = finishTime.split(":");
-            return finishTimeSplit[2];
+            if (finishTimeSplit.length > 2) {
+                return finishTimeSplit[2];
+            }
         }
         return "";
     }
@@ -124,7 +132,9 @@ public class Stage {
     public String getFinishTimeMS() {
         if(finishTime.contains(":")) {
             String[] finishTimeSplit = finishTime.split(":");
-            return finishTimeSplit[3];
+            if (finishTimeSplit.length > 3) {
+                return finishTimeSplit[3];
+            }
         }
         return "";
     }
@@ -148,7 +158,9 @@ public class Stage {
     public String getStageTimeS() {
         if(stageTime.contains(":")) {
             String[] stageTimeSplit = stageTime.split(":");
-            return stageTimeSplit[1];
+            if (stageTimeSplit.length > 1) {
+                return stageTimeSplit[1];
+            }
         }
         return "";
     }
@@ -156,7 +168,9 @@ public class Stage {
     public String getStageTimeMS() {
         if(stageTime.contains(":")) {
             String[] stageTimeSplit = stageTime.split(":");
-            return stageTimeSplit[2];
+            if (stageTimeSplit.length > 2) {
+                return stageTimeSplit[2];
+            }
         }
         return "";
     }
@@ -180,7 +194,9 @@ public class Stage {
     public String getActualTimeM() {
         if(actualTime.contains(":")) {
             String[] actualTimeSplit = actualTime.split(":");
-            return actualTimeSplit[1];
+            if (actualTimeSplit.length > 1) {
+                return actualTimeSplit[1];
+            }
         }
         return "";
     }
@@ -204,7 +220,9 @@ public class Stage {
     public String getDueTimeM() {
         if(dueTime.contains(":")) {
             String[] dueTimeSplit = dueTime.split(":");
-            return dueTimeSplit[1];
+            if (dueTimeSplit.length > 1) {
+                return dueTimeSplit[1];
+            }
         }
         return "";
     }

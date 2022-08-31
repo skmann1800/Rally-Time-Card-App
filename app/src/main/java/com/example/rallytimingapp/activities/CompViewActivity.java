@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -105,12 +107,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
     private Button checkIn1;
     private Button reqTime1;
+    private Button saveDT1;
     private Button checkIn2;
     private Button reqTime2;
+    private Button saveDT2;
     private Button checkIn3;
     private Button reqTime3;
+    private Button saveDT3;
     private Button checkIn4;
     private Button reqTime4;
+    private Button saveDT4;
 
     private CompDatabaseHelper compDatabaseHelper;
     private StageDatabaseHelper stageDatabaseHelper;
@@ -268,6 +274,30 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeM1 = findViewById(R.id.S2ATM);
         dueTimeH1 = findViewById(R.id.S2DTH);
         dueTimeM1 = findViewById(R.id.S2DTM);
+        dueTimeH1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stage = stageDatabaseHelper.getStage(carNum, 1);
+                    String inputDTH = dueTimeH1.getText().toString();
+                    String inputDTM = dueTimeM1.getText().toString();
+                    stage.setDueTime(inputDTH + ":" + inputDTM);
+                    stageDatabaseHelper.updateStage(stage);
+                }
+            }
+        });
+        dueTimeM1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stage = stageDatabaseHelper.getStage(carNum, 1);
+                    String inputDTH = dueTimeH1.getText().toString();
+                    String inputDTM = dueTimeM1.getText().toString();
+                    stage.setDueTime(inputDTH + ":" + inputDTM);
+                    stageDatabaseHelper.updateStage(stage);
+                }
+            }
+        });
 
         startOrder2 = findViewById(R.id.Sec3Oval);
         provStartH2 = findViewById(R.id.S3PSH);
@@ -285,6 +315,30 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeM2 = findViewById(R.id.S3ATM);
         dueTimeH2 = findViewById(R.id.S3DTH);
         dueTimeM2 = findViewById(R.id.S3DTM);
+        dueTimeH2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stage = stageDatabaseHelper.getStage(carNum, 2);
+                    String inputDTH = dueTimeH2.getText().toString();
+                    String inputDTM = dueTimeM2.getText().toString();
+                    stage.setDueTime(inputDTH + ":" + inputDTM);
+                    stageDatabaseHelper.updateStage(stage);
+                }
+            }
+        });
+        dueTimeM2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stage = stageDatabaseHelper.getStage(carNum, 2);
+                    String inputDTH = dueTimeH2.getText().toString();
+                    String inputDTM = dueTimeM2.getText().toString();
+                    stage.setDueTime(inputDTH + ":" + inputDTM);
+                    stageDatabaseHelper.updateStage(stage);
+                }
+            }
+        });
 
         startOrder3 = findViewById(R.id.Sec4Oval);
         provStartH3 = findViewById(R.id.S4PSH);
@@ -302,6 +356,30 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeM3 = findViewById(R.id.S4ATM);
         dueTimeH3 = findViewById(R.id.S4DTH);
         dueTimeM3 = findViewById(R.id.S4DTM);
+        dueTimeH3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stage = stageDatabaseHelper.getStage(carNum, 3);
+                    String inputDTH = dueTimeH3.getText().toString();
+                    String inputDTM = dueTimeM3.getText().toString();
+                    stage.setDueTime(inputDTH + ":" + inputDTM);
+                    stageDatabaseHelper.updateStage(stage);
+                }
+            }
+        });
+        dueTimeM3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stage = stageDatabaseHelper.getStage(carNum, 3);
+                    String inputDTH = dueTimeH3.getText().toString();
+                    String inputDTM = dueTimeM3.getText().toString();
+                    stage.setDueTime(inputDTH + ":" + inputDTM);
+                    stageDatabaseHelper.updateStage(stage);
+                }
+            }
+        });
 
         startOrder4 = findViewById(R.id.Sec5Oval);
         provStartH4 = findViewById(R.id.S5PSH);
@@ -319,15 +397,43 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeM4 = findViewById(R.id.S5ATM);
         dueTimeH4 = findViewById(R.id.S5DTH);
         dueTimeM4 = findViewById(R.id.S5DTM);
+        dueTimeH4.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stage = stageDatabaseHelper.getStage(carNum, 4);
+                    String inputDTH = dueTimeH4.getText().toString();
+                    String inputDTM = dueTimeM4.getText().toString();
+                    stage.setDueTime(inputDTH + ":" + inputDTM);
+                    stageDatabaseHelper.updateStage(stage);
+                }
+            }
+        });
+        dueTimeM4.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stage = stageDatabaseHelper.getStage(carNum, 4);
+                    String inputDTH = dueTimeH4.getText().toString();
+                    String inputDTM = dueTimeM4.getText().toString();
+                    stage.setDueTime(inputDTH + ":" + inputDTM);
+                    stageDatabaseHelper.updateStage(stage);
+                }
+            }
+        });
 
         checkIn1 = findViewById(R.id.CheckIn1);
         reqTime1 = findViewById(R.id.ReqTime1);
+        saveDT1 = findViewById(R.id.SaveDT1);
         checkIn2 = findViewById(R.id.CheckIn2);
         reqTime2 = findViewById(R.id.ReqTime2);
+        saveDT2 = findViewById(R.id.SaveDT2);
         checkIn3 = findViewById(R.id.CheckIn3);
         reqTime3 = findViewById(R.id.ReqTime3);
+        saveDT3 = findViewById(R.id.SaveDT3);
         checkIn4 = findViewById(R.id.CheckIn4);
         reqTime4 = findViewById(R.id.ReqTime4);
+        saveDT4 = findViewById(R.id.SaveDT4);
     }
 
     private void initListeners() {

@@ -24,7 +24,7 @@
                 android:padding="4dp">
 
                 <LinearLayout
-                    android:id="@+id/Sec1HLayout"
+                    android:id="@+id/Section1Layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
@@ -894,7 +894,7 @@
                 android:padding="4dp">
 
                 <LinearLayout
-                    android:id="@+id/Buttons2"
+                    android:id="@+id/Section3Buttons"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -948,7 +948,7 @@
                 android:padding="4dp">
 
                 <LinearLayout
-                    android:id="@+id/Sec3HLayout"
+                    android:id="@+id/Section3Timecard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
@@ -1648,7 +1648,7 @@
                 android:padding="4dp">
 
                 <LinearLayout
-                    android:id="@+id/Buttons3"
+                    android:id="@+id/Section4Buttons"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -1702,7 +1702,7 @@
                 android:padding="4dp">
 
                 <LinearLayout
-                    android:id="@+id/Sec4HLayout"
+                    android:id="@+id/Section4Timecard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
@@ -2403,7 +2403,7 @@
                 android:padding="4dp">
 
                 <LinearLayout
-                    android:id="@+id/Buttons4"
+                    android:id="@+id/Section5Buttons"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -2457,7 +2457,7 @@
                 android:padding="4dp">
 
                 <LinearLayout
-                    android:id="@+id/Sec5HLayout"
+                    android:id="@+id/Section5Timecard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"

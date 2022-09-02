@@ -186,8 +186,40 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         actualStartM = findViewById(R.id.FTCASM);
         finishTimeH = findViewById(R.id.FTCFTH);
         finishTimeM = findViewById(R.id.FTCFTM);
+        finishTimeM.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    int aStartM = Integer.valueOf(actualStartM.getText().toString());
+                    int fTimeM = Integer.valueOf(finishTimeM.getText().toString());
+                    int sTimeM = 0;
+                    if (fTimeM > aStartM) {
+                        sTimeM = fTimeM - aStartM;
+                    } else if (fTimeM < aStartM) {
+                        sTimeM = (60 - aStartM) + fTimeM;
+                    }
+                    stageTimeM.setText(String.valueOf(sTimeM));
+                }
+            }
+        });
         finishTimeS = findViewById(R.id.FTCFTS);
+        finishTimeS.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stageTimeS.setText(finishTimeS.getText());
+                }
+            }
+        });
         finishTimeMS = findViewById(R.id.FTCFTMS);
+        finishTimeMS.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    stageTimeMS.setText(finishTimeMS.getText());
+                }
+            }
+        });
         stageTimeM = findViewById(R.id.FTCTTM);
         stageTimeS = findViewById(R.id.FTCTTS);
         stageTimeMS = findViewById(R.id.FTCTTMS);

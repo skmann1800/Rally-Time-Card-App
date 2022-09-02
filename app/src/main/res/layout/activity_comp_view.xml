@@ -912,30 +912,12 @@
                                     android:layout_weight="1" />
                             </LinearLayout>
 
-                            <LinearLayout
+                            <View
                                 android:id="@+id/S2Yellow5"
                                 android:layout_width="match_parent"
                                 android:layout_height="54dp"
                                 android:layout_weight="1"
-                                android:background="@color/yellow"
-                                android:orientation="horizontal">
-
-                                <Button
-                                    android:id="@+id/S1SaveDT"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp"
-                                    android:layout_weight="1"
-                                    android:backgroundTint="@color/light_blue"
-                                    android:gravity="center"
-                                    android:text="SAVE"
-                                    android:textColor="@color/black"
-                                    android:textStyle="bold"
-                                    app:rippleColor="@color/blue"
-                                    app:strokeColor="@color/black"
-                                    app:strokeWidth="2dp" />
-                            </LinearLayout>
+                                android:background="@color/yellow" />
 
                         </LinearLayout>
 

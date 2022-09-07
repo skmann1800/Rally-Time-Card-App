@@ -10,6 +10,7 @@
         android:id="@+id/CompViewScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fadeScrollbars="false"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -21,7 +22,8 @@
             <HorizontalScrollView
                 android:id="@+id/Section1"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
                 android:padding="4dp">
 
                 <LinearLayout
@@ -52,26 +54,25 @@
                         <TextView
                             android:id="@+id/carNumLabel"
                             android:layout_width="wrap_content"
-                            android:layout_height="18dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/border"
                             android:gravity="top"
-                            android:paddingLeft="2dp"
-                            android:paddingRight="2dp"
+                            android:padding="3dp"
                             android:text="@string/cn"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@color/black"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/CarNum"
                             android:layout_width="match_parent"
-                            android:layout_height="55dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/border"
-                            android:gravity="center"
-                            android:textAlignment="center"
+                            android:gravity="center_horizontal|top"
+                            android:text="44"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@color/black"
                             android:textSize="40sp"
@@ -143,6 +144,7 @@
                 android:id="@+id/Section2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
                 android:padding="4dp">
 
                 <LinearLayout
@@ -155,12 +157,11 @@
                         android:id="@+id/Section2Buttons"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="4dp">
+                        android:orientation="horizontal">
 
                         <View
                             android:id="@+id/b1v1"
-                            android:layout_width="35dp"
+                            android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
@@ -179,13 +180,13 @@
 
                         <View
                             android:id="@+id/b1v2"
-                            android:layout_width="35dp"
+                            android:layout_width="65dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
                         <Button
                             android:id="@+id/ReqTime1"
-                            android:layout_width="145dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:backgroundTint="@color/yellow"
@@ -201,7 +202,7 @@
 
                         <View
                             android:id="@+id/b1v3"
-                            android:layout_width="35dp"
+                            android:layout_width="65dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
@@ -232,7 +233,7 @@
 
                         <LinearLayout
                             android:id="@+id/Sec2Blue"
-                            android:layout_width="35dp"
+                            android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -264,7 +265,7 @@
                                 android:text="@string/stage1km"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/white"
-                                android:textSize="11sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -274,6 +275,8 @@
                                 android:layout_weight="1"
                                 android:background="@color/dark_blue"
                                 android:gravity="bottom|center"
+                                android:paddingLeft="3dp"
+                                android:paddingRight="3dp"
                                 android:paddingBottom="5dp"
                                 android:text="@string/TC2"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -292,36 +295,36 @@
                             <LinearLayout
                                 android:id="@+id/Sec2Row1"
                                 android:layout_width="wrap_content"
-                                android:layout_height="20dp"
+                                android:layout_height="25dp"
                                 android:orientation="horizontal"
                                 android:paddingTop="2dp">
 
                                 <TextView
                                     android:id="@+id/Sec2Stage"
-                                    android:layout_width="150dp"
+                                    android:layout_width="175dp"
                                     android:layout_height="match_parent"
                                     android:gravity="left|center_vertical"
                                     android:paddingLeft="2dp"
                                     android:text="@string/stage1"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="14sp"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2FT"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/FT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R1V1"
-                                    android:layout_width="110dp"
+                                    android:layout_width="140dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -330,75 +333,75 @@
                             <LinearLayout
                                 android:id="@+id/Sec2Row2"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/Sec2Dist"
-                                    android:layout_width="105dp"
+                                    android:layout_width="125dp"
                                     android:layout_height="match_parent"
                                     android:gravity="top"
                                     android:paddingLeft="2dp"
                                     android:text="@string/stage1dist"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2FTH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2FTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2FTS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgrounds"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2FTMS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/background10"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R2V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <ImageView
                                     android:id="@+id/S2Flag"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:padding="6dp"
@@ -406,7 +409,7 @@
 
                                 <View
                                     android:id="@+id/S2R2V3"
-                                    android:layout_width="55dp"
+                                    android:layout_width="70dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -415,56 +418,56 @@
                             <LinearLayout
                                 android:id="@+id/Sec2Row3"
                                 android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                                android:layout_height="15dp"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/Sec2PS"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
                                     android:text="@string/PS"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R3V1"
-                                    android:layout_width="5dp"
+                                    android:layout_width="15dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec2AS"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/AS"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R3V2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="120dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec2TargT"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TargT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R3V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -473,7 +476,7 @@
                             <LinearLayout
                                 android:id="@+id/Sec2Row4"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:orientation="horizontal">
 
                                 <View
@@ -484,65 +487,69 @@
 
                                 <TextView
                                     android:id="@+id/S2PSH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2PSM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S2Arrow1"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
                                     app:srcCompat="@drawable/arrow1" />
 
                                 <TextView
                                     android:id="@+id/S2ASH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/blueh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2ASM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/bluem"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S2Arrow2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="120dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="2dp"
+                                    android:paddingRight="2dp"
                                     app:srcCompat="@drawable/arrow2" />
 
                                 <TextView
                                     android:id="@+id/S2TaTH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/border"
@@ -550,12 +557,12 @@
                                     android:text="@string/S1TTH"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2TaTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/border"
@@ -563,14 +570,16 @@
                                     android:text="@string/S1TTM"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S2Arrow3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
                                     app:srcCompat="@drawable/arrow1" />
 
                             </LinearLayout>
@@ -578,57 +587,57 @@
                             <LinearLayout
                                 android:id="@+id/Sec2Row5"
                                 android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                                android:layout_height="15dp"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/S2SS"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/SS1"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R5V1"
-                                    android:layout_width="50dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec2TT"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R5V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec2AT"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/AT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R5V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -637,7 +646,7 @@
                             <LinearLayout
                                 android:id="@+id/Sec2Row6"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal">
 
@@ -649,7 +658,7 @@
 
                                 <TextView
                                     android:id="@+id/Sec2Oval"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/oval"
@@ -660,7 +669,7 @@
 
                                 <ImageView
                                     android:id="@+id/Sec2Stop"
-                                    android:layout_width="55dp"
+                                    android:layout_width="70dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:padding="6dp"
@@ -668,68 +677,68 @@
 
                                 <TextView
                                     android:id="@+id/S2TTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2TTS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgrounds"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2TTMS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/background10"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R6V1"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/S2ATH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/blueh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S2ATM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/bluem"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R6V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -738,59 +747,59 @@
                             <LinearLayout
                                 android:id="@+id/Sec2Row7"
                                 android:layout_width="wrap_content"
-                                android:layout_height="15dp"
+                                android:layout_height="20dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal"
                                 android:paddingBottom="2dp">
 
                                 <TextView
                                     android:id="@+id/Sec2SO"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/SO"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R7V1"
-                                    android:layout_width="50dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec2Stage2"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/stage1"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R7V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec2TC"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TC2"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S2R7V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -808,7 +817,7 @@
                             <TextView
                                 android:id="@+id/S2Yellow1"
                                 android:layout_width="match_parent"
-                                android:layout_height="61dp"
+                                android:layout_height="73dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:gravity="center|top"
@@ -816,34 +825,20 @@
                                 android:paddingRight="15dp"
                                 android:text="@string/CU"
                                 android:textColor="@color/black"
-                                android:textSize="10sp"
+                                android:textSize="11sp"
                                 android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:id="@+id/S2Yellow2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                            <TextView
+                                android:id="@+id/Sec2DT"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/Sec2DT"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="@string/DT"
-                                    android:textColor="@color/black"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-
-                                <View
-                                    android:id="@+id/S2Y2V"
-                                    android:layout_width="10dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
+                                android:gravity="center"
+                                android:text="@string/DT"
+                                android:textColor="@color/black"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
 
                             <LinearLayout
                                 android:id="@+id/S2Yellow3"
@@ -852,6 +847,12 @@
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:orientation="horizontal">
+
+                                <View
+                                    android:id="@+id/S2Y3V1"
+                                    android:layout_width="5dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1" />
 
                                 <EditText
                                     android:id="@+id/S2DTH"
@@ -863,7 +864,7 @@
                                     android:inputType="number"
                                     android:maxLength="2"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <EditText
@@ -876,46 +877,32 @@
                                     android:inputType="number"
                                     android:maxLength="2"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
-                                    android:id="@+id/S2Y3V"
-                                    android:layout_width="10dp"
+                                    android:id="@+id/S2Y3V2"
+                                    android:layout_width="5dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:id="@+id/S2Yellow4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                            <TextView
+                                android:id="@+id/S2YellowTC"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/S2YellowTC"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="@string/TC2"
-                                    android:textColor="@color/black"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-
-                                <View
-                                    android:id="@+id/S2Y4V2"
-                                    android:layout_width="10dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
+                                android:gravity="center"
+                                android:text="@string/TC2"
+                                android:textColor="@color/black"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
 
                             <View
                                 android:id="@+id/S2Yellow5"
                                 android:layout_width="match_parent"
-                                android:layout_height="54dp"
+                                android:layout_height="65dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow" />
 
@@ -929,6 +916,7 @@
                 android:id="@+id/Section3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
                 android:padding="4dp">
 
                 <LinearLayout
@@ -945,7 +933,7 @@
 
                         <View
                             android:id="@+id/b2v1"
-                            android:layout_width="35dp"
+                            android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
@@ -966,13 +954,13 @@
 
                         <View
                             android:id="@+id/b2v2"
-                            android:layout_width="35dp"
+                            android:layout_width="65dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
                         <Button
                             android:id="@+id/ReqTime2"
-                            android:layout_width="145dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:backgroundTint="@color/yellow"
@@ -988,7 +976,7 @@
 
                         <View
                             android:id="@+id/b2v3"
-                            android:layout_width="35dp"
+                            android:layout_width="65dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
@@ -1019,7 +1007,7 @@
 
                         <LinearLayout
                             android:id="@+id/Sec3Blue"
-                            android:layout_width="35dp"
+                            android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -1032,7 +1020,9 @@
                                 android:layout_weight="1"
                                 android:background="@color/dark_blue"
                                 android:gravity="center|top"
+                                android:paddingLeft="3dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="3dp"
                                 android:text="@string/TC2"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/white"
@@ -1049,7 +1039,7 @@
                                 android:text="@string/stage2km"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/white"
-                                android:textSize="11sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -1059,6 +1049,8 @@
                                 android:layout_weight="1"
                                 android:background="@color/dark_blue"
                                 android:gravity="bottom|center"
+                                android:paddingLeft="3dp"
+                                android:paddingRight="3dp"
                                 android:paddingBottom="5dp"
                                 android:text="@string/TC3"
                                 android:textAlignment="center"
@@ -1078,36 +1070,36 @@
                             <LinearLayout
                                 android:id="@+id/Sec3Row1"
                                 android:layout_width="wrap_content"
-                                android:layout_height="20dp"
+                                android:layout_height="25dp"
                                 android:orientation="horizontal"
                                 android:paddingTop="2dp">
 
                                 <TextView
                                     android:id="@+id/Sec3Stage1"
-                                    android:layout_width="150dp"
+                                    android:layout_width="175dp"
                                     android:layout_height="match_parent"
                                     android:gravity="left|center_vertical"
                                     android:paddingLeft="2dp"
                                     android:text="@string/stage2"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="14sp"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/Sec3FT"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/FT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R1V1"
-                                    android:layout_width="110dp"
+                                    android:layout_width="140dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -1116,75 +1108,75 @@
                             <LinearLayout
                                 android:id="@+id/Sec3Row2"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/Sec3Dist"
-                                    android:layout_width="105dp"
+                                    android:layout_width="125dp"
                                     android:layout_height="match_parent"
                                     android:gravity="top"
                                     android:paddingLeft="2dp"
                                     android:text="@string/stage2dist"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3FTH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3FTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3FTS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgrounds"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3FTMS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/background10"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R2V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <ImageView
                                     android:id="@+id/S3Flag"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:padding="6dp"
@@ -1192,7 +1184,7 @@
 
                                 <View
                                     android:id="@+id/S3R2V3"
-                                    android:layout_width="55dp"
+                                    android:layout_width="70dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -1201,56 +1193,56 @@
                             <LinearLayout
                                 android:id="@+id/Sec3Row3"
                                 android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                                android:layout_height="15dp"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/Sec3PS"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
                                     android:text="@string/PS"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R3V1"
-                                    android:layout_width="5dp"
+                                    android:layout_width="15dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec3AS"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/AS"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R3V2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="120dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec3TargT"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TargT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R3V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -1259,7 +1251,7 @@
                             <LinearLayout
                                 android:id="@+id/Sec3Row4"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:orientation="horizontal">
 
                                 <View
@@ -1270,65 +1262,69 @@
 
                                 <TextView
                                     android:id="@+id/S3PSH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3PSM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S3Arrow1"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
                                     app:srcCompat="@drawable/arrow1" />
 
                                 <TextView
                                     android:id="@+id/S3ASH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/blueh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3ASM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/bluem"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S3Arrow2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="120dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="2dp"
+                                    android:paddingRight="2dp"
                                     app:srcCompat="@drawable/arrow2" />
 
                                 <TextView
                                     android:id="@+id/S3TaTH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/border"
@@ -1336,12 +1332,12 @@
                                     android:text="@string/S2TTH"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3TaTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/border"
@@ -1349,14 +1345,16 @@
                                     android:text="@string/S2TTM"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S3Arrow3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
                                     app:srcCompat="@drawable/arrow1" />
 
                             </LinearLayout>
@@ -1364,57 +1362,57 @@
                             <LinearLayout
                                 android:id="@+id/Sec3Row5"
                                 android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                                android:layout_height="15dp"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/S3SS"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/SS2"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R5V1"
-                                    android:layout_width="50dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec3TT"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R5V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec3AT"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/AT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R5V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -1423,7 +1421,7 @@
                             <LinearLayout
                                 android:id="@+id/Sec3Row6"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal">
 
@@ -1435,7 +1433,7 @@
 
                                 <TextView
                                     android:id="@+id/Sec3Oval"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/oval"
@@ -1446,7 +1444,7 @@
 
                                 <ImageView
                                     android:id="@+id/Sec3Stop"
-                                    android:layout_width="55dp"
+                                    android:layout_width="70dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:padding="6dp"
@@ -1454,68 +1452,68 @@
 
                                 <TextView
                                     android:id="@+id/S3TTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3TTS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgrounds"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3TTMS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/background10"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R6V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/S3ATH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/blueh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S3ATM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/bluem"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R6V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -1524,59 +1522,59 @@
                             <LinearLayout
                                 android:id="@+id/Sec3Row7"
                                 android:layout_width="wrap_content"
-                                android:layout_height="15dp"
+                                android:layout_height="20dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal"
                                 android:paddingBottom="2dp">
 
                                 <TextView
                                     android:id="@+id/Sec3SO"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/SO"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R7V1"
-                                    android:layout_width="50dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec3Stage2"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/stage2"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R7V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec3TC"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TC3"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S3R7V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -1594,7 +1592,7 @@
                             <TextView
                                 android:id="@+id/S3Yellow1"
                                 android:layout_width="match_parent"
-                                android:layout_height="61dp"
+                                android:layout_height="70dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:gravity="center|top"
@@ -1602,34 +1600,20 @@
                                 android:paddingRight="15dp"
                                 android:text="@string/CU"
                                 android:textColor="@color/black"
-                                android:textSize="10sp"
+                                android:textSize="11sp"
                                 android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:id="@+id/S3Yellow2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                            <TextView
+                                android:id="@+id/Sec3DT"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/Sec3DT"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="@string/DT"
-                                    android:textColor="@color/black"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-
-                                <View
-                                    android:id="@+id/S3Y2V1"
-                                    android:layout_width="10dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
+                                android:gravity="center"
+                                android:text="@string/DT"
+                                android:textColor="@color/black"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
 
                             <LinearLayout
                                 android:id="@+id/S3Yellow3"
@@ -1638,6 +1622,12 @@
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:orientation="horizontal">
+
+                                <View
+                                    android:id="@+id/S3Y3V1"
+                                    android:layout_width="5dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1" />
 
                                 <EditText
                                     android:id="@+id/S3DTH"
@@ -1649,7 +1639,7 @@
                                     android:inputType="number"
                                     android:maxLength="2"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <EditText
@@ -1662,46 +1652,32 @@
                                     android:inputType="number"
                                     android:maxLength="2"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
-                                    android:id="@+id/S3Y3V1"
-                                    android:layout_width="10dp"
+                                    android:id="@+id/S3Y3V2"
+                                    android:layout_width="5dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:id="@+id/S3Yellow4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                            <TextView
+                                android:id="@+id/S3YellowTC"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/S3YellowTC"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="@string/TC3"
-                                    android:textColor="@color/black"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-
-                                <View
-                                    android:id="@+id/S3Y4V1"
-                                    android:layout_width="10dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
+                                android:gravity="center"
+                                android:text="@string/TC3"
+                                android:textColor="@color/black"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
 
                             <View
                                 android:id="@+id/S3Yellow5"
                                 android:layout_width="match_parent"
-                                android:layout_height="54dp"
+                                android:layout_height="70dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow" />
 
@@ -1715,6 +1691,7 @@
                 android:id="@+id/Section4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
                 android:padding="4dp">
 
                 <LinearLayout
@@ -1731,7 +1708,7 @@
 
                         <View
                             android:id="@+id/b3v1"
-                            android:layout_width="35dp"
+                            android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
@@ -1752,13 +1729,13 @@
 
                         <View
                             android:id="@+id/b3v2"
-                            android:layout_width="35dp"
+                            android:layout_width="65dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
                         <Button
                             android:id="@+id/ReqTime3"
-                            android:layout_width="145dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:backgroundTint="@color/yellow"
@@ -1774,7 +1751,7 @@
 
                         <View
                             android:id="@+id/b3v3"
-                            android:layout_width="35dp"
+                            android:layout_width="65dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
@@ -1805,7 +1782,7 @@
 
                         <LinearLayout
                             android:id="@+id/Sec4Blue"
-                            android:layout_width="35dp"
+                            android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -1818,7 +1795,9 @@
                                 android:layout_weight="1"
                                 android:background="@color/dark_blue"
                                 android:gravity="center|top"
+                                android:paddingLeft="3dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="3dp"
                                 android:text="@string/TC3"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/white"
@@ -1835,7 +1814,7 @@
                                 android:text="@string/stage3km"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/white"
-                                android:textSize="11sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -1845,6 +1824,8 @@
                                 android:layout_weight="1"
                                 android:background="@color/dark_blue"
                                 android:gravity="bottom|center"
+                                android:paddingLeft="3dp"
+                                android:paddingRight="3dp"
                                 android:paddingBottom="5dp"
                                 android:text="@string/TC4"
                                 android:textAlignment="center"
@@ -1864,36 +1845,36 @@
                             <LinearLayout
                                 android:id="@+id/Sec4Row1"
                                 android:layout_width="wrap_content"
-                                android:layout_height="20dp"
+                                android:layout_height="25dp"
                                 android:orientation="horizontal"
                                 android:paddingTop="2dp">
 
                                 <TextView
                                     android:id="@+id/Sec4Stage1"
-                                    android:layout_width="150dp"
+                                    android:layout_width="175dp"
                                     android:layout_height="match_parent"
                                     android:gravity="left|center_vertical"
                                     android:paddingLeft="2dp"
                                     android:text="@string/stage3"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="14sp"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/Sec4FT"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/FT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R1V1"
-                                    android:layout_width="110dp"
+                                    android:layout_width="140dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -1902,75 +1883,75 @@
                             <LinearLayout
                                 android:id="@+id/Sec4Row2"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/Sec4Dist"
-                                    android:layout_width="105dp"
+                                    android:layout_width="125dp"
                                     android:layout_height="match_parent"
                                     android:gravity="top"
                                     android:paddingLeft="2dp"
                                     android:text="@string/stage3dist"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4FTH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4FTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4FTS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgrounds"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4FTMS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/background10"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R2V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <ImageView
                                     android:id="@+id/S4Flag"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:padding="6dp"
@@ -1978,7 +1959,7 @@
 
                                 <View
                                     android:id="@+id/S4R2V3"
-                                    android:layout_width="55dp"
+                                    android:layout_width="70dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -1987,56 +1968,56 @@
                             <LinearLayout
                                 android:id="@+id/Sec4Row3"
                                 android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                                android:layout_height="15dp"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/Sec4PS"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
                                     android:text="@string/PS"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R3V1"
-                                    android:layout_width="5dp"
+                                    android:layout_width="15dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec4AS"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/AS"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R3V2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="120dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec4TargT"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TargT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R3V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -2045,7 +2026,7 @@
                             <LinearLayout
                                 android:id="@+id/Sec4Row4"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:orientation="horizontal">
 
                                 <View
@@ -2056,65 +2037,69 @@
 
                                 <TextView
                                     android:id="@+id/S4PSH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4PSM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S4Arrow1"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
                                     app:srcCompat="@drawable/arrow1" />
 
                                 <TextView
                                     android:id="@+id/S4ASH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/blueh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4ASM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/bluem"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S4Arrow2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="120dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="2dp"
+                                    android:paddingRight="2dp"
                                     app:srcCompat="@drawable/arrow2" />
 
                                 <TextView
                                     android:id="@+id/S4TaTH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/border"
@@ -2122,12 +2107,12 @@
                                     android:text="@string/S3TTH"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4TaTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/border"
@@ -2135,14 +2120,16 @@
                                     android:text="@string/S3TTM"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S4Arrow3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
                                     app:srcCompat="@drawable/arrow1" />
 
                             </LinearLayout>
@@ -2150,57 +2137,57 @@
                             <LinearLayout
                                 android:id="@+id/Sec4Row5"
                                 android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                                android:layout_height="15dp"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/S4SS"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/SS3"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R5V1"
-                                    android:layout_width="50dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec4TT"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R5V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec4AT"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/AT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R5V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -2209,7 +2196,7 @@
                             <LinearLayout
                                 android:id="@+id/Sec4Row6"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal">
 
@@ -2221,7 +2208,7 @@
 
                                 <TextView
                                     android:id="@+id/Sec4Oval"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/oval"
@@ -2232,7 +2219,7 @@
 
                                 <ImageView
                                     android:id="@+id/Sec4Stop"
-                                    android:layout_width="55dp"
+                                    android:layout_width="70dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:padding="6dp"
@@ -2240,68 +2227,68 @@
 
                                 <TextView
                                     android:id="@+id/S4TTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4TTS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgrounds"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4TTMS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/background10"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R6V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/S4ATH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/blueh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S4ATM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/bluem"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R6V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -2310,59 +2297,59 @@
                             <LinearLayout
                                 android:id="@+id/Sec4Row7"
                                 android:layout_width="wrap_content"
-                                android:layout_height="15dp"
+                                android:layout_height="20dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal"
                                 android:paddingBottom="2dp">
 
                                 <TextView
                                     android:id="@+id/Sec4SO"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/SO"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R7V1"
-                                    android:layout_width="55dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec4Stage2"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/stage3"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R7V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec4TC"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TC4"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S4R7V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -2380,7 +2367,7 @@
                             <TextView
                                 android:id="@+id/S4Yellow1"
                                 android:layout_width="match_parent"
-                                android:layout_height="61dp"
+                                android:layout_height="75dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:gravity="center|top"
@@ -2388,34 +2375,20 @@
                                 android:paddingRight="15dp"
                                 android:text="@string/CU"
                                 android:textColor="@color/black"
-                                android:textSize="10sp"
+                                android:textSize="11sp"
                                 android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:id="@+id/S4Yellow2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                            <TextView
+                                android:id="@+id/Sec4DT"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/Sec4DT"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="@string/DT"
-                                    android:textColor="@color/black"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-
-                                <View
-                                    android:id="@+id/S4Y2V1"
-                                    android:layout_width="10dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
+                                android:gravity="center"
+                                android:text="@string/DT"
+                                android:textColor="@color/black"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
 
                             <LinearLayout
                                 android:id="@+id/S4Yellow3"
@@ -2424,6 +2397,12 @@
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:orientation="horizontal">
+
+                                <View
+                                    android:id="@+id/S4Y3V1"
+                                    android:layout_width="5dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1" />
 
                                 <EditText
                                     android:id="@+id/S4DTH"
@@ -2435,7 +2414,7 @@
                                     android:inputType="number"
                                     android:maxLength="2"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <EditText
@@ -2448,46 +2427,32 @@
                                     android:inputType="number"
                                     android:maxLength="2"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
-                                    android:id="@+id/S4Y3V1"
-                                    android:layout_width="10dp"
+                                    android:id="@+id/S4Y3V2"
+                                    android:layout_width="5dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:id="@+id/S4Yellow4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                            <TextView
+                                android:id="@+id/S4YellowTC"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/S4YellowTC"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="@string/TC4"
-                                    android:textColor="@color/black"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-
-                                <View
-                                    android:id="@+id/S4Y4V1"
-                                    android:layout_width="10dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
+                                android:gravity="center"
+                                android:text="@string/TC4"
+                                android:textColor="@color/black"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
 
                             <View
                                 android:id="@+id/S4Yellow5"
                                 android:layout_width="match_parent"
-                                android:layout_height="54dp"
+                                android:layout_height="65dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow" />
 
@@ -2501,6 +2466,7 @@
                 android:id="@+id/Section5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
                 android:padding="4dp">
 
                 <LinearLayout
@@ -2517,7 +2483,7 @@
 
                         <View
                             android:id="@+id/b4v1"
-                            android:layout_width="35dp"
+                            android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
@@ -2538,13 +2504,13 @@
 
                         <View
                             android:id="@+id/b4v2"
-                            android:layout_width="35dp"
+                            android:layout_width="65dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
                         <Button
                             android:id="@+id/ReqTime4"
-                            android:layout_width="145dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:backgroundTint="@color/yellow"
@@ -2560,7 +2526,7 @@
 
                         <View
                             android:id="@+id/b4v3"
-                            android:layout_width="35dp"
+                            android:layout_width="65dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
 
@@ -2591,7 +2557,7 @@
 
                         <LinearLayout
                             android:id="@+id/Sec5Blue"
-                            android:layout_width="35dp"
+                            android:layout_width="40dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="vertical"
@@ -2604,7 +2570,9 @@
                                 android:layout_weight="1"
                                 android:background="@color/dark_blue"
                                 android:gravity="center|top"
+                                android:paddingLeft="3dp"
                                 android:paddingTop="5dp"
+                                android:paddingRight="3dp"
                                 android:text="@string/TC4"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/white"
@@ -2621,7 +2589,7 @@
                                 android:text="@string/stage4km"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/white"
-                                android:textSize="11sp"
+                                android:textSize="13sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -2631,6 +2599,8 @@
                                 android:layout_weight="1"
                                 android:background="@color/dark_blue"
                                 android:gravity="bottom|center"
+                                android:paddingLeft="3dp"
+                                android:paddingRight="3dp"
                                 android:paddingBottom="5dp"
                                 android:text="@string/TC5"
                                 android:textAlignment="center"
@@ -2650,36 +2620,36 @@
                             <LinearLayout
                                 android:id="@+id/Sec5Row1"
                                 android:layout_width="wrap_content"
-                                android:layout_height="20dp"
+                                android:layout_height="25dp"
                                 android:orientation="horizontal"
                                 android:paddingTop="2dp">
 
                                 <TextView
                                     android:id="@+id/Sec5Stage1"
-                                    android:layout_width="150dp"
+                                    android:layout_width="175dp"
                                     android:layout_height="match_parent"
                                     android:gravity="left|center_vertical"
                                     android:paddingLeft="2dp"
                                     android:text="@string/stage4"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="14sp"
+                                    android:textSize="16sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/Sec5FT"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/FT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R1V1"
-                                    android:layout_width="110dp"
+                                    android:layout_width="140dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -2688,75 +2658,75 @@
                             <LinearLayout
                                 android:id="@+id/Sec5Row2"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/Sec5Dist"
-                                    android:layout_width="105dp"
+                                    android:layout_width="125dp"
                                     android:layout_height="match_parent"
                                     android:gravity="top"
                                     android:paddingLeft="2dp"
                                     android:text="@string/stage4dist"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5FTH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5FTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5FTS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgrounds"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5FTMS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/background10"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R2V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <ImageView
                                     android:id="@+id/S5Flag"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:padding="6dp"
@@ -2764,7 +2734,7 @@
 
                                 <View
                                     android:id="@+id/S5R2V3"
-                                    android:layout_width="55dp"
+                                    android:layout_width="70dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -2773,56 +2743,56 @@
                             <LinearLayout
                                 android:id="@+id/Sec5Row3"
                                 android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                                android:layout_height="15dp"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/Sec5PS"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
                                     android:text="@string/PS"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R3V1"
-                                    android:layout_width="5dp"
+                                    android:layout_width="15dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec5AS"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/AS"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R3V2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="120dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec5TargT"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TargT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R3V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -2831,7 +2801,7 @@
                             <LinearLayout
                                 android:id="@+id/Sec5Row4"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:orientation="horizontal">
 
                                 <View
@@ -2842,65 +2812,69 @@
 
                                 <TextView
                                     android:id="@+id/S5PSH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5PSM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S5Arrow1"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
                                     app:srcCompat="@drawable/arrow1" />
 
                                 <TextView
                                     android:id="@+id/S5ASH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/blueh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5ASM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/bluem"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S5Arrow2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="120dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="2dp"
+                                    android:paddingRight="2dp"
                                     app:srcCompat="@drawable/arrow2" />
 
                                 <TextView
                                     android:id="@+id/S5TaTH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/border"
@@ -2908,12 +2882,12 @@
                                     android:text="@string/S4TTH"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5TaTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/border"
@@ -2921,14 +2895,16 @@
                                     android:text="@string/S4TTM"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                     android:textColor="@color/red"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/S5Arrow3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
                                     app:srcCompat="@drawable/arrow1" />
 
                             </LinearLayout>
@@ -2936,57 +2912,57 @@
                             <LinearLayout
                                 android:id="@+id/Sec5Row5"
                                 android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                                android:layout_height="15dp"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/S5SS"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/SS4"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R5V1"
-                                    android:layout_width="50dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec5TT"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R5V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec5AT"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/AT"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R5V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -2995,7 +2971,7 @@
                             <LinearLayout
                                 android:id="@+id/Sec5Row6"
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal">
 
@@ -3007,7 +2983,7 @@
 
                                 <TextView
                                     android:id="@+id/Sec5Oval"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/oval"
@@ -3018,7 +2994,7 @@
 
                                 <ImageView
                                     android:id="@+id/Sec5Stop"
-                                    android:layout_width="55dp"
+                                    android:layout_width="70dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:padding="6dp"
@@ -3026,68 +3002,68 @@
 
                                 <TextView
                                     android:id="@+id/S5TTM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgroundm"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5TTS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/backgrounds"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5TTMS"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/background10"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R6V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/S5ATH"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/blueh"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/S5ATM"
-                                    android:layout_width="45dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="@drawable/bluem"
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R6V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -3096,59 +3072,59 @@
                             <LinearLayout
                                 android:id="@+id/Sec5Row7"
                                 android:layout_width="wrap_content"
-                                android:layout_height="15dp"
+                                android:layout_height="20dp"
                                 android:layout_weight="1"
                                 android:orientation="horizontal"
                                 android:paddingBottom="2dp">
 
                                 <TextView
                                     android:id="@+id/Sec5SO"
-                                    android:layout_width="100dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/SO"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R7V1"
-                                    android:layout_width="50dp"
+                                    android:layout_width="65dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec5Stage2"
-                                    android:layout_width="135dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/stage4"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R7V2"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
                                 <TextView
                                     android:id="@+id/Sec5TC"
-                                    android:layout_width="90dp"
+                                    android:layout_width="100dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@string/TC5"
                                     android:textColor="@color/black"
-                                    android:textSize="10sp"
+                                    android:textSize="11sp"
                                     android:textStyle="bold" />
 
                                 <View
                                     android:id="@+id/S5R7V3"
-                                    android:layout_width="10dp"
+                                    android:layout_width="20dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
 
@@ -3166,7 +3142,7 @@
                             <TextView
                                 android:id="@+id/S5Yellow1"
                                 android:layout_width="match_parent"
-                                android:layout_height="61dp"
+                                android:layout_height="75dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:gravity="center|top"
@@ -3174,34 +3150,20 @@
                                 android:paddingRight="15dp"
                                 android:text="@string/CU"
                                 android:textColor="@color/black"
-                                android:textSize="10sp"
+                                android:textSize="11sp"
                                 android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:id="@+id/S5Yellow2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                            <TextView
+                                android:id="@+id/Sec5DT"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/Sec5DT"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="@string/DT"
-                                    android:textColor="@color/black"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-
-                                <View
-                                    android:id="@+id/S5Y2V1"
-                                    android:layout_width="10dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
+                                android:gravity="center"
+                                android:text="@string/DT"
+                                android:textColor="@color/black"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
 
                             <LinearLayout
                                 android:id="@+id/S5Yellow3"
@@ -3210,6 +3172,12 @@
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:orientation="horizontal">
+
+                                <View
+                                    android:id="@+id/S5Y3V1"
+                                    android:layout_width="5dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1" />
 
                                 <EditText
                                     android:id="@+id/S5DTH"
@@ -3221,7 +3189,7 @@
                                     android:inputType="number"
                                     android:maxLength="2"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <EditText
@@ -3234,46 +3202,32 @@
                                     android:inputType="number"
                                     android:maxLength="2"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                                    android:textSize="24sp"
+                                    android:textSize="30sp"
                                     android:textStyle="bold" />
 
                                 <View
-                                    android:id="@+id/S5Y3V1"
-                                    android:layout_width="10dp"
+                                    android:id="@+id/S5Y3V2"
+                                    android:layout_width="5dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1" />
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:id="@+id/S5Yellow4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="12dp"
+                            <TextView
+                                android:id="@+id/S5YellowTC"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:id="@+id/S5YellowTC"
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="@string/TC5"
-                                    android:textColor="@color/black"
-                                    android:textSize="10sp"
-                                    android:textStyle="bold" />
-
-                                <View
-                                    android:id="@+id/S5Y4V1"
-                                    android:layout_width="10dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
+                                android:gravity="center"
+                                android:text="@string/TC5"
+                                android:textColor="@color/black"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
 
                             <View
                                 android:id="@+id/S5Yellow5"
                                 android:layout_width="match_parent"
-                                android:layout_height="54dp"
+                                android:layout_height="65dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow" />
 

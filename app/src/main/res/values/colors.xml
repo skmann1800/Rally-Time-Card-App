@@ -14,4 +14,5 @@
     <color name="light_blue">#FFCCCCFF</color>
     <color name="blue">#FFAFAFFF</color>
     <color name="red">#FFFF0000</color>
+    <color name="scrollBar">#99FFFF5D</color>
 </resources>

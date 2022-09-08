@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
@@ -20,6 +23,7 @@ import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.sql.AControlDatabaseHelper;
 import com.example.rallytimingapp.sql.FinishDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +70,8 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     private TextView dueTimeM;
 
     private PopupWindow returnTCPopup;
+
+    private ScrollView scrollView;
 
     private Finish finish;
     private Stage stage;
@@ -158,6 +164,8 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initViews() {
+        scrollView = findViewById(R.id.FinishScrollView);
+
         carNumTV = findViewById(R.id.FinishCarNum);
         finishOrderTV = findViewById(R.id.FinishOrder);
 
@@ -185,13 +193,39 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         actualStartH = findViewById(R.id.FTCASH);
         actualStartM = findViewById(R.id.FTCASM);
         finishTimeH = findViewById(R.id.FTCFTH);
+        finishTimeH.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(finishTimeH.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(finishTimeH.getText().toString()) > 24) {
+                        finishTimeH.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        finishTimeH.clearFocus();
+                        finishTimeM.requestFocus();
+                        finishTimeM.setCursorVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         finishTimeM = findViewById(R.id.FTCFTM);
         finishTimeM.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (!b) {
-                    int aStartM = Integer.valueOf(actualStartM.getText().toString());
                     int fTimeM = Integer.valueOf(finishTimeM.getText().toString());
+                    int aStartM = Integer.valueOf(actualStartM.getText().toString());
                     int sTimeM = 0;
                     if (fTimeM > aStartM) {
                         sTimeM = fTimeM - aStartM;

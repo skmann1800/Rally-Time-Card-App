@@ -6,7 +6,7 @@ public class User {
     private String username;
     private String password;
     private String role;
-    private int compId;
+    private int id;
 
     public int getUserId() {
         return userId;
@@ -40,11 +40,11 @@ public class User {
         this.role = role;
     }
 
-    public int getCompId() {
-        return compId;
+    public int getId() {
+        return id;
     }
 
-    public void setCompId(int compId) {
-        this.compId = compId;
+    public void setId(int id) {
+        this.id = id;
     }
 }

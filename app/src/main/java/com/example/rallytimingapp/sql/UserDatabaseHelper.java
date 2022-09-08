@@ -16,7 +16,7 @@ import java.util.List;
 public class UserDatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     // Database Name
     private static final String DATABASE_NAME = "UserManager.db";
@@ -29,12 +29,12 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_USERNAME = "user_username";
     private static final String COLUMN_USER_PASSWORD = "user_password";
     private static final String COLUMN_USER_ROLE = "user_role";
-    private static final String COLUMN_USER_COMPID = "user_comp_id";
+    private static final String COLUMN_USER_ROLE_ID = "user_role_id";
 
     // Create table SQL query
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_USERNAME + " TEXT,"
-            + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_ROLE + " TEXT," + COLUMN_USER_COMPID + " INTEGER" + ")";
+            + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_ROLE + " TEXT," + COLUMN_USER_ROLE_ID + " INTEGER" + ")";
 
     // Drop table SQL query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
@@ -68,7 +68,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_USERNAME, user.getUsername());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
         values.put(COLUMN_USER_ROLE, user.getRole());
-        values.put(COLUMN_USER_COMPID, user.getCompId());
+        values.put(COLUMN_USER_ROLE_ID, user.getId());
 
         // Inserting Row
         db.insert(TABLE_USER, null, values);
@@ -82,7 +82,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_USER_USERNAME,
                 COLUMN_USER_PASSWORD,
                 COLUMN_USER_ROLE,
-                COLUMN_USER_COMPID
+                COLUMN_USER_ROLE_ID
         };
 
         User user = new User();
@@ -107,7 +107,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
             user.setUsername(cursor.getString(cursor.getColumnIndex(COLUMN_USER_USERNAME)));
             user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
             user.setRole(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE)));
-            user.setCompId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_COMPID))));
+            user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE_ID))));
         }
         cursor.close();
         db.close();
@@ -122,7 +122,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_USER_USERNAME,
                 COLUMN_USER_PASSWORD,
                 COLUMN_USER_ROLE,
-                COLUMN_USER_COMPID
+                COLUMN_USER_ROLE_ID
         };
 
         String sortOrder = COLUMN_USER_USERNAME + " ASC";
@@ -145,7 +145,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
                 user.setUsername(cursor.getString(cursor.getColumnIndex(COLUMN_USER_USERNAME)));
                 user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
                 user.setRole(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE)));
-                user.setCompId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_COMPID))));
+                user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE_ID))));
                 userList.add(user);
             } while (cursor.moveToNext());
         }
@@ -161,7 +161,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_USERNAME, user.getUsername());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
         values.put(COLUMN_USER_ROLE, user.getRole());
-        values.put(COLUMN_USER_COMPID, user.getCompId());
+        values.put(COLUMN_USER_ROLE_ID, user.getId());
         // updating row
         db.update(TABLE_USER, values, COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(user.getUserId())});

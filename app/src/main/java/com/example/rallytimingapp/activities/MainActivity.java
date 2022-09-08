@@ -19,6 +19,8 @@ import com.example.rallytimingapp.sql.StartDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
 import com.example.rallytimingapp.model.Competitor;
 import com.example.rallytimingapp.sql.CompDatabaseHelper;
+import com.example.rallytimingapp.model.TimingCrew;
+import com.example.rallytimingapp.sql.TimingCrewDatabaseHelper;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
     private InputValidation inputValidation;
     private UserDatabaseHelper userDatabaseHelper;
     private CompDatabaseHelper compDatabaseHelper;
+    private TimingCrewDatabaseHelper crewDatabaseHelper;
     private StageDatabaseHelper stageDatabaseHelper;
     private AControlDatabaseHelper aControlDatabaseHelper;
     private StartDatabaseHelper startDatabaseHelper;
     private FinishDatabaseHelper finishDatabaseHelper;
     private User user;
     private Competitor competitor;
+    private TimingCrew crew;
     private Stage stage;
     private List<User> userList;
 
@@ -57,26 +61,61 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initObjects();
 
-        /*aControlDatabaseHelper.empty();
-        startDatabaseHelper.empty();
-        finishDatabaseHelper.empty();
-        userDatabaseHelper.empty();
-        compDatabaseHelper.empty();
-        stageDatabaseHelper.empty();*/
-
-
         int compID1 = CreateCompetitor(1, "Hayden Paddon", "John Kennard");
         int compID2 = CreateCompetitor(5, "Emma Gilmour", "Mal Peden");
         int compID3 = CreateCompetitor(2, "Ben Hunt", "Tony Rawstorn");
         int compID4 = CreateCompetitor(12, "Jack Hawkeswood", "Sarah Brenna");
 
+        int crewID1 = CreateTimingCrew("A Control", "George", "0219384756");
+        int crewID2 = CreateTimingCrew("Start", "Jared", "0212349879");
+        int crewID3 = CreateTimingCrew("Finish", "Sarah", "0279125769");
+
         CreateLogin("Hayden", "hayden", "Competitor", compID1);
         CreateLogin("Emma", "emma", "Competitor", compID2);
         CreateLogin("Ben", "ben","Competitor", compID3);
         CreateLogin("Jack", "jack", "Competitor", compID4);
-        CreateLogin("Jared", "start", "Start", -1);
-        CreateLogin("Sarah", "finish", "Finish", -1);
-        CreateLogin("George", "ac", "A Control", -1);
+        CreateLogin("Jared", "start", "Start", crewID1);
+        CreateLogin("Sarah", "finish", "Finish", crewID2);
+        CreateLogin("George", "ac", "A Control", crewID3);
+        CreateLogin("Admin", "admin", "Admin", -1);
+    }
+
+    private int CreateCompetitor(int carNum, String driver, String codriver) {
+        int compID = 0;
+        if (!compDatabaseHelper.checkCompetitor(carNum)) {
+            competitor.setCarNum(carNum);
+            competitor.setDriver(driver);
+            competitor.setCodriver(codriver);
+            competitor.setStage1Id(CreateStage(carNum, 1));
+            competitor.setStage2Id(CreateStage(carNum, 2));
+            competitor.setStage3Id(CreateStage(carNum, 3));
+            competitor.setStage4Id(CreateStage(carNum, 4));
+            compDatabaseHelper.addCompetitor(competitor);
+        }
+        compID = compDatabaseHelper.getCompId(carNum);
+        return compID;
+    }
+
+    private int CreateTimingCrew(String position, String postChief, String phone) {
+        int crewID = 0;
+        if (!crewDatabaseHelper.checkTimingCrew(position, postChief)) {
+            crew.setPosition(position);
+            crew.setPostChief(postChief);
+            crew.setPostChiefPhone(phone);
+            crewDatabaseHelper.addTimingCrew(crew);
+        }
+        crewID = crewDatabaseHelper.getCrewId(position, postChief);
+        return crewID;
+    }
+
+    private void CreateLogin(String username, String password, String role, int id) {
+        if (!userDatabaseHelper.checkUser(username)) {
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setRole(role);
+            user.setId(id);
+            userDatabaseHelper.addUser(user);
+        }
     }
 
     private int CreateStage(int carNum, int stageNum) {
@@ -96,32 +135,6 @@ public class MainActivity extends AppCompatActivity {
         return stageID;
     }
 
-    private int CreateCompetitor(int carNum, String driver, String codriver) {
-        int compID = 0;
-        if (!compDatabaseHelper.checkCompetitor(carNum)) {
-            competitor.setCarNum(carNum);
-            competitor.setDriver(driver);
-            competitor.setCodriver(codriver);
-            competitor.setStage1Id(CreateStage(carNum, 1));
-            competitor.setStage2Id(CreateStage(carNum, 2));
-            competitor.setStage3Id(CreateStage(carNum, 3));
-            competitor.setStage4Id(CreateStage(carNum, 4));
-            compDatabaseHelper.addCompetitor(competitor);
-        }
-        compID = compDatabaseHelper.getCompId(carNum);
-        return compID;
-    }
-
-    private void CreateLogin(String username, String password, String role, int compId) {
-        if (!userDatabaseHelper.checkUser(username)) {
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setRole(role);
-            user.setCompId(compId);
-            userDatabaseHelper.addUser(user);
-        }
-    }
-
     private void initViews() {
         scrollView = findViewById(R.id.LoginScroll);
 
@@ -133,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
     private void initObjects() {
         userDatabaseHelper = new UserDatabaseHelper(activity);
         compDatabaseHelper = new CompDatabaseHelper(activity);
+        crewDatabaseHelper = new TimingCrewDatabaseHelper(activity);
         stageDatabaseHelper = new StageDatabaseHelper(activity);
         aControlDatabaseHelper = new AControlDatabaseHelper(activity);
         startDatabaseHelper = new StartDatabaseHelper(activity);
@@ -140,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
         inputValidation = new InputValidation(activity);
         user = new User();
         competitor = new Competitor();
+        crew = new TimingCrew();
         stage = new Stage();
         userList = new ArrayList<>();
     }
@@ -154,34 +169,42 @@ public class MainActivity extends AppCompatActivity {
 
             if (verifyLogin(username, password, role)) {
                 userList.addAll(userDatabaseHelper.getAllUsers());
-                int compID = -1;
+                int id = -1;
                 for (int i = 0; i < userList.size(); i++) {
                     User currUser = userList.get(i);
                     if (username.equals(currUser.getUsername())) {
-                        compID = currUser.getCompId();
+                        id = currUser.getId();
                     }
                 }
 
                 if (role.equals("Competitor")) {
                     Intent intent = new Intent(this, CompViewActivity.class);
-                    intent.putExtra("COMP_ID", compID);
+                    intent.putExtra("COMP_ID", id);
                     clearInputs();
                     startActivity(intent);
                 } else if (role.equals("Finish")) {
                     Intent intent = new Intent(this, ChooseFinishActivity.class);
+                    intent.putExtra("CREW_ID", id);
                     clearInputs();
                     startActivity(intent);
                 } else if (role.equals("Start")) {
                     Intent intent = new Intent(this, ChooseStartActivity.class);
+                    intent.putExtra("CREW_ID", id);
                     clearInputs();
                     startActivity(intent);
                 } else if (role.equals("A Control")) {
                     Intent intent = new Intent(this, ChooseControlActivity.class);
+                    intent.putExtra("CREW_ID", id);
                     clearInputs();
                     startActivity(intent);
                 }
             }
             clearInputs();
+        } else if (verifyLogin(username, password, "Admin")) {
+            Intent intent = new Intent(this, AdminOptionsActivity.class);
+            clearInputs();
+            startActivity(intent);
+
         } else {
             Snackbar.make(scrollView, "Invalid Login", Snackbar.LENGTH_LONG).show();
         }

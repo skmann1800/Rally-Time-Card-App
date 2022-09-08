@@ -2,11 +2,17 @@ package com.example.rallytimingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.helpers.InputValidation;
@@ -32,6 +38,8 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
     private Button aControlButton;
     private Button startButton;
     private Button finishButton;
+    private Button signOutButton;
+    private Button resetButton;
 
     private ScrollView scrollView;
 
@@ -47,7 +55,8 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
     private Competitor competitor;
     private TimingCrew crew;
     private Stage stage;
-    private List<User> userList;
+
+    private PopupWindow resetPopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,8 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         aControlButton = findViewById(R.id.AControlRoleButton);
         startButton = findViewById(R.id.StartRoleButton);
         finishButton = findViewById(R.id.FinishRoleButton);
+        signOutButton = findViewById(R.id.AOSignOutButton);
+        resetButton = findViewById(R.id.AOResetButton);
 
         scrollView = findViewById(R.id.LoginScroll);
     }
@@ -73,6 +84,8 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         aControlButton.setOnClickListener(this);
         startButton.setOnClickListener(this);
         finishButton.setOnClickListener(this);
+        signOutButton.setOnClickListener(this);
+        resetButton.setOnClickListener(this);
     }
 
     private void initObjects() {
@@ -87,7 +100,6 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         competitor = new Competitor();
         crew = new TimingCrew();
         stage = new Stage();
-        userList = new ArrayList<>();
     }
 
     @Override
@@ -110,15 +122,21 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
                 intent = new Intent(this, AdminFinishActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.AOSignOutButton:
+                signOut();
+                break;
+            case R.id.AOResetButton:
+                ShowResetPopup();
+                break;
         }
     }
 
-    public void signOut(View view) {
+    public void signOut() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void resetAll(View view) {
+    public void resetAll() {
         aControlDatabaseHelper.empty();
         startDatabaseHelper.empty();
         finishDatabaseHelper.empty();
@@ -199,5 +217,39 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         }
         int stageID = stageDatabaseHelper.getStageId(carNum, stageNum);
         return stageID;
+    }
+
+    private void ShowResetPopup() {
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.reset_popup, null);
+
+        resetPopup = new PopupWindow(this);
+        resetPopup.setContentView(layout);
+        resetPopup.setWidth(width);
+        resetPopup.setHeight(height);
+        resetPopup.setFocusable(true);
+        resetPopup.setBackgroundDrawable(null);
+        resetPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
+
+        Button yesReset = layout.findViewById(R.id.YesResetButton);
+        yesReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetAll();
+                resetPopup.dismiss();
+            }
+        });
+
+        Button noReset = layout.findViewById(R.id.NoResetButton);
+        noReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetPopup.dismiss();
+            }
+        });
     }
 }

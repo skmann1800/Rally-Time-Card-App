@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
@@ -23,6 +26,7 @@ import com.example.rallytimingapp.sql.AControlDatabaseHelper;
 import com.example.rallytimingapp.sql.CompDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.StartDatabaseHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +35,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     private final AppCompatActivity activity = AControlActivity.this;
 
     private HorizontalScrollView timeCard1;
+    private ScrollView scrollView;
 
     private Button backButton;
     private Button returnTCButton;
@@ -231,6 +236,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews() {
+        scrollView = findViewById(R.id.ControlScrollView);
+
         carNumTV = findViewById(R.id.ControlCarNum);
         startOrderTV = findViewById(R.id.ControlStartOrder);
         timeCard1 = findViewById(R.id.ControlTC1);
@@ -277,13 +284,126 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         stageTimeS1 = findViewById(R.id.CTC1TTS);
         stageTimeMS1 = findViewById(R.id.CTC1TTMS);
         actualTimeH1 = findViewById(R.id.CTC1ATH);
+        actualTimeH1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(actualTimeH1.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(actualTimeH1.getText().toString()) > 24) {
+                        actualTimeH1.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        actualTimeH1.clearFocus();
+                        actualTimeM1.requestFocus();
+                        actualTimeM1.setCursorVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         actualTimeM1 = findViewById(R.id.CTC1ATM);
+        actualTimeM1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(actualTimeM1.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(actualTimeM1.getText().toString()) > 59) {
+                        actualTimeM1.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        actualTimeM1.clearFocus();
+                        provStartH2.requestFocus();
+                        provStartH2.setCursorVisible(true);
+                        int actualTimeH = Integer.valueOf(actualTimeH1.getText().toString());
+                        int actualTimeM = Integer.valueOf(actualTimeM1.getText().toString());
+                        int provStartM = actualTimeM + 3;
+                        if (provStartM > 59) {
+                            provStartH2.setText(String.valueOf(actualTimeH + 1));
+                            provStartM2.setText(String.valueOf(provStartM - 60));
+                        } else {
+                            provStartH2.setText(String.valueOf(actualTimeH));
+                            provStartM2.setText(String.valueOf(provStartM));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         dueTimeH1 = findViewById(R.id.CTC1DTH);
         dueTimeM1 = findViewById(R.id.CTC1DTM);
 
         startOrder2 = findViewById(R.id.CTC2Oval);
         provStartH2 = findViewById(R.id.CTC2PSH);
+        provStartH2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(provStartH2.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(provStartH2.getText().toString()) > 24) {
+                        provStartH2.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        provStartH2.clearFocus();
+                        provStartM2.requestFocus();
+                        provStartM2.setCursorVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         provStartM2 = findViewById(R.id.CTC2PSM);
+        provStartM2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(provStartM2.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(provStartH2.getText().toString()) > 24) {
+                        provStartM2.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        provStartM2.clearFocus();
+                        startOrder2.requestFocus();
+                        startOrder2.setCursorVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         actualStartH2 = findViewById(R.id.CTC2ASH);
         actualStartM2 = findViewById(R.id.CTC2ASM);
         finishTimeH2 = findViewById(R.id.CTC2FTH);
@@ -332,6 +452,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             aControl = aControlDatabaseHelper.getAControl(aControlDatabaseHelper.getAControlID(stageNum, carNum));
             startOrderTV.setText(String.valueOf(startOrder));
             if (stageNum != 1) {
+                actualStartH1.requestFocus();
+                actualStartH1.setCursorVisible(true);
                 stage = stageDatabaseHelper.getStage(aControl.getStage1ID());
                 startOrder1.setText(String.valueOf(stage.getStartOrder()));
                 provStartH1.setText(stage.getProvStartH());
@@ -349,6 +471,9 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 actualTimeM1.setText(stage.getActualTimeM());
                 dueTimeH1.setText(stage.getDueTimeH());
                 dueTimeM1.setText(stage.getDueTimeM());
+            } else {
+                provStartH2.requestFocus();
+                provStartH2.setCursorVisible(true);
             }
             stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
             startOrder2.setText(String.valueOf(stage.getStartOrder()));
@@ -371,6 +496,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             carNumTV.setText("");
             startOrderTV.setText("0");
         }
+
     }
 
     private void ShowReturnTCPopup() {

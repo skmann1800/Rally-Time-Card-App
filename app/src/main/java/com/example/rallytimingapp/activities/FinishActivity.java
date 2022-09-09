@@ -441,6 +441,8 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             finishOrderTV.setText("0");
             carNumTV.setText("");
         }
+        finishTimeH.requestFocus();
+        finishTimeH.setCursorVisible(true);
     }
 
     private void ShowReturnTCPopup() {

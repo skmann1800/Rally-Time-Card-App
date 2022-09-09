@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
@@ -20,12 +23,15 @@ import com.example.rallytimingapp.model.Start;
 import com.example.rallytimingapp.sql.FinishDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.StartDatabaseHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = StartActivity.this;
+
+    private ScrollView scrollView;
 
     private Button backButton;
     private Button returnTCButton;
@@ -156,6 +162,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initViews() {
+        scrollView = findViewById(R.id.StartScrollView);
+
         backButton = findViewById(R.id.STCBackButton);
         returnTCButton = findViewById(R.id.SReturnButton);
         prevButton = findViewById(R.id.StartPrevButton);
@@ -181,7 +189,59 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         provStartH = findViewById(R.id.STCPSH);
         provStartM = findViewById(R.id.STCPSM);
         actualStartH = findViewById(R.id.STCASH);
+        actualStartH.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(actualStartH.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(actualStartH.getText().toString()) > 24) {
+                        actualStartH.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        actualStartH.clearFocus();
+                        actualStartM.requestFocus();
+                        actualStartM.setCursorVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         actualStartM = findViewById(R.id.STCASM);
+        actualStartM.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(actualStartM.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(actualStartM.getText().toString()) > 59) {
+                        actualStartM.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        actualStartM.clearFocus();
+                        startOrderTC.requestFocus();
+                        startOrderTC.setCursorVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         finishTimeH = findViewById(R.id.STCFTH);
         finishTimeM = findViewById(R.id.STCFTM);
         finishTimeS = findViewById(R.id.STCFTS);
@@ -248,6 +308,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             startOrderTV.setText("0");
             carNumTV.setText("");
         }
+        actualStartH.requestFocus();
+        actualStartH.setCursorVisible(true);
     }
 
     private void ShowReturnTCPopup() {

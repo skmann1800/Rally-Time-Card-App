@@ -230,5 +230,7 @@ public class MainActivity extends AppCompatActivity {
         chips.clearCheck();
         editTextUsername.setText(null);
         editTextPassword.setText(null);
+        editTextUsername.requestFocus();
+        editTextUsername.setCursorVisible(true);
     }
 }

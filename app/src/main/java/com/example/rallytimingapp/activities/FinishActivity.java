@@ -220,43 +220,168 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
         finishTimeM = findViewById(R.id.FTCFTM);
-        finishTimeM.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        finishTimeM.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(finishTimeM.getText().toString().length()==2)
+                {
                     int fTimeM = Integer.valueOf(finishTimeM.getText().toString());
-                    int aStartM = Integer.valueOf(actualStartM.getText().toString());
-                    int sTimeM = 0;
-                    if (fTimeM > aStartM) {
-                        sTimeM = fTimeM - aStartM;
-                    } else if (fTimeM < aStartM) {
-                        sTimeM = (60 - aStartM) + fTimeM;
+                    if (fTimeM > 59) {
+                        finishTimeM.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        finishTimeM.clearFocus();
+                        finishTimeS.requestFocus();
+                        finishTimeS.setCursorVisible(true);
+                        int aStartM = Integer.valueOf(actualStartM.getText().toString());
+                        int sTimeM = 0;
+                        if (fTimeM > aStartM) {
+                            sTimeM = fTimeM - aStartM;
+                        } else if (fTimeM < aStartM) {
+                            sTimeM = (60 - aStartM) + fTimeM;
+                        }
+                        stageTimeM.setText(String.valueOf(sTimeM));
                     }
-                    stageTimeM.setText(String.valueOf(sTimeM));
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
         finishTimeS = findViewById(R.id.FTCFTS);
-        finishTimeS.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        finishTimeS.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
-                    stageTimeS.setText(finishTimeS.getText());
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(finishTimeS.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(finishTimeS.getText().toString()) > 59) {
+                        finishTimeS.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        stageTimeS.setText(finishTimeS.getText());
+                        finishTimeS.clearFocus();
+                        finishTimeMS.requestFocus();
+                        finishTimeMS.setCursorVisible(true);
+                    }
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
         finishTimeMS = findViewById(R.id.FTCFTMS);
-        finishTimeMS.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        finishTimeMS.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(finishTimeMS.getText().toString().length()==2)
+                {
+                    finishTimeMS.clearFocus();
+                    stageTimeM.requestFocus();
+                    stageTimeM.setCursorVisible(true);
                     stageTimeMS.setText(finishTimeMS.getText());
                 }
             }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
         });
         stageTimeM = findViewById(R.id.FTCTTM);
+        stageTimeM.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(stageTimeM.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(stageTimeM.getText().toString()) > 59) {
+                        stageTimeM.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        stageTimeM.clearFocus();
+                        stageTimeS.requestFocus();
+                        stageTimeS.setCursorVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         stageTimeS = findViewById(R.id.FTCTTS);
+        stageTimeS.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(stageTimeS.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(stageTimeS.getText().toString()) > 59) {
+                        stageTimeS.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        stageTimeS.clearFocus();
+                        stageTimeMS.requestFocus();
+                        stageTimeMS.setCursorVisible(true);
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         stageTimeMS = findViewById(R.id.FTCTTMS);
+        stageTimeMS.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(stageTimeMS.getText().toString().length()==2)
+                {
+                    stageTimeMS.clearFocus();
+                    finishTimeH.requestFocus();
+                    finishTimeH.setCursorVisible(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         actualTimeH = findViewById(R.id.FTCATH);
         actualTimeM = findViewById(R.id.FTCATM);
         dueTimeH = findViewById(R.id.FTCDTH);

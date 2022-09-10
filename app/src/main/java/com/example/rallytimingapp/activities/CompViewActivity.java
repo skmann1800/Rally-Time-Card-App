@@ -27,6 +27,7 @@ import com.example.rallytimingapp.sql.CompDatabaseHelper;
 import com.example.rallytimingapp.sql.FinishDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -273,29 +274,59 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeH1 = findViewById(R.id.S2ATH);
         actualTimeM1 = findViewById(R.id.S2ATM);
         dueTimeH1 = findViewById(R.id.S2DTH);
-        dueTimeM1 = findViewById(R.id.S2DTM);
-        dueTimeH1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        dueTimeH1.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
-                    stage = stageDatabaseHelper.getStage(carNum, 1);
-                    String inputDTH = dueTimeH1.getText().toString();
-                    String inputDTM = dueTimeM1.getText().toString();
-                    stage.setDueTime(inputDTH + ":" + inputDTM);
-                    stageDatabaseHelper.updateStage(stage);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(dueTimeH1.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(dueTimeH1.getText().toString()) > 24) {
+                        dueTimeH1.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        dueTimeH1.clearFocus();
+                        dueTimeM1.requestFocus();
+                        dueTimeM1.setCursorVisible(true);
+                    }
                 }
             }
-        });
-        dueTimeM1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
-                    stage = stageDatabaseHelper.getStage(carNum, 1);
-                    String inputDTH = dueTimeH1.getText().toString();
-                    String inputDTM = dueTimeM1.getText().toString();
-                    stage.setDueTime(inputDTH + ":" + inputDTM);
-                    stageDatabaseHelper.updateStage(stage);
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        dueTimeM1 = findViewById(R.id.S2DTM);
+        dueTimeM1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(dueTimeM1.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(dueTimeM1.getText().toString()) > 59) {
+                        dueTimeM1.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        stage = stageDatabaseHelper.getStage(carNum, 1);
+                        String inputDTH = dueTimeH1.getText().toString();
+                        String inputDTM = dueTimeM1.getText().toString();
+                        stage.setDueTime(inputDTH + ":" + inputDTM);
+                        stageDatabaseHelper.updateStage(stage);
+                    }
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
@@ -314,29 +345,59 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeH2 = findViewById(R.id.S3ATH);
         actualTimeM2 = findViewById(R.id.S3ATM);
         dueTimeH2 = findViewById(R.id.S3DTH);
-        dueTimeM2 = findViewById(R.id.S3DTM);
-        dueTimeH2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        dueTimeH2.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
-                    stage = stageDatabaseHelper.getStage(carNum, 2);
-                    String inputDTH = dueTimeH2.getText().toString();
-                    String inputDTM = dueTimeM2.getText().toString();
-                    stage.setDueTime(inputDTH + ":" + inputDTM);
-                    stageDatabaseHelper.updateStage(stage);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(dueTimeH2.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(dueTimeH2.getText().toString()) > 24) {
+                        dueTimeH2.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        dueTimeH2.clearFocus();
+                        dueTimeM2.requestFocus();
+                        dueTimeM2.setCursorVisible(true);
+                    }
                 }
             }
-        });
-        dueTimeM2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
-                    stage = stageDatabaseHelper.getStage(carNum, 2);
-                    String inputDTH = dueTimeH2.getText().toString();
-                    String inputDTM = dueTimeM2.getText().toString();
-                    stage.setDueTime(inputDTH + ":" + inputDTM);
-                    stageDatabaseHelper.updateStage(stage);
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        dueTimeM2 = findViewById(R.id.S3DTM);
+        dueTimeM2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(dueTimeM2.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(dueTimeM2.getText().toString()) > 59) {
+                        dueTimeM2.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        stage = stageDatabaseHelper.getStage(carNum, 2);
+                        String inputDTH = dueTimeH2.getText().toString();
+                        String inputDTM = dueTimeM2.getText().toString();
+                        stage.setDueTime(inputDTH + ":" + inputDTM);
+                        stageDatabaseHelper.updateStage(stage);
+                    }
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
@@ -355,29 +416,59 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeH3 = findViewById(R.id.S4ATH);
         actualTimeM3 = findViewById(R.id.S4ATM);
         dueTimeH3 = findViewById(R.id.S4DTH);
-        dueTimeM3 = findViewById(R.id.S4DTM);
-        dueTimeH3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        dueTimeH3.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
-                    stage = stageDatabaseHelper.getStage(carNum, 3);
-                    String inputDTH = dueTimeH3.getText().toString();
-                    String inputDTM = dueTimeM3.getText().toString();
-                    stage.setDueTime(inputDTH + ":" + inputDTM);
-                    stageDatabaseHelper.updateStage(stage);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(dueTimeH3.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(dueTimeH3.getText().toString()) > 24) {
+                        dueTimeH3.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        dueTimeH3.clearFocus();
+                        dueTimeM3.requestFocus();
+                        dueTimeM3.setCursorVisible(true);
+                    }
                 }
             }
-        });
-        dueTimeM3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
-                    stage = stageDatabaseHelper.getStage(carNum, 3);
-                    String inputDTH = dueTimeH3.getText().toString();
-                    String inputDTM = dueTimeM3.getText().toString();
-                    stage.setDueTime(inputDTH + ":" + inputDTM);
-                    stageDatabaseHelper.updateStage(stage);
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        dueTimeM3 = findViewById(R.id.S4DTM);
+        dueTimeM3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(dueTimeM3.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(dueTimeM3.getText().toString()) > 59) {
+                        dueTimeM3.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        stage = stageDatabaseHelper.getStage(carNum, 3);
+                        String inputDTH = dueTimeH3.getText().toString();
+                        String inputDTM = dueTimeM3.getText().toString();
+                        stage.setDueTime(inputDTH + ":" + inputDTM);
+                        stageDatabaseHelper.updateStage(stage);
+                    }
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
@@ -396,29 +487,59 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeH4 = findViewById(R.id.S5ATH);
         actualTimeM4 = findViewById(R.id.S5ATM);
         dueTimeH4 = findViewById(R.id.S5DTH);
-        dueTimeM4 = findViewById(R.id.S5DTM);
-        dueTimeH4.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        dueTimeH4.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
-                    stage = stageDatabaseHelper.getStage(carNum, 4);
-                    String inputDTH = dueTimeH4.getText().toString();
-                    String inputDTM = dueTimeM4.getText().toString();
-                    stage.setDueTime(inputDTH + ":" + inputDTM);
-                    stageDatabaseHelper.updateStage(stage);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(dueTimeH4.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(dueTimeH4.getText().toString()) > 24) {
+                        dueTimeH4.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        dueTimeH4.clearFocus();
+                        dueTimeM4.requestFocus();
+                        dueTimeM4.setCursorVisible(true);
+                    }
                 }
             }
-        });
-        dueTimeM4.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (!b) {
-                    stage = stageDatabaseHelper.getStage(carNum, 4);
-                    String inputDTH = dueTimeH4.getText().toString();
-                    String inputDTM = dueTimeM4.getText().toString();
-                    stage.setDueTime(inputDTH + ":" + inputDTM);
-                    stageDatabaseHelper.updateStage(stage);
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        dueTimeM4 = findViewById(R.id.S5DTM);
+        dueTimeM4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(dueTimeM4.getText().toString().length()==2)
+                {
+                    if (Integer.valueOf(dueTimeM4.getText().toString()) > 59) {
+                        dueTimeM4.setText("");
+                        Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        stage = stageDatabaseHelper.getStage(carNum, 4);
+                        String inputDTH = dueTimeH4.getText().toString();
+                        String inputDTM = dueTimeM4.getText().toString();
+                        stage.setDueTime(inputDTH + ":" + inputDTM);
+                        stageDatabaseHelper.updateStage(stage);
+                    }
                 }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
@@ -567,6 +688,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 String inputDTM1 = dueTimeM1.getText().toString();
                 stage.setDueTime(inputDTH1 + ":" + inputDTM1);
                 stageDatabaseHelper.updateStage(stage);
+                Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.CheckIn2:
                 ShowCheckInPopup("Check In to Stage 2?", 2);
@@ -580,6 +702,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 String inputDTM2 = dueTimeM2.getText().toString();
                 stage.setDueTime(inputDTH2 + ":" + inputDTM2);
                 stageDatabaseHelper.updateStage(stage);
+                Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.CheckIn3:
                 ShowCheckInPopup("Check In to Stage 3?", 3);
@@ -593,6 +716,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 String inputDTM3 = dueTimeM3.getText().toString();
                 stage.setDueTime(inputDTH3 + ":" + inputDTM3);
                 stageDatabaseHelper.updateStage(stage);
+                Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.CheckIn4:
                 ShowCheckInPopup("Check In to Stage 4?", 4);
@@ -606,6 +730,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 String inputDTM4 = dueTimeM4.getText().toString();
                 stage.setDueTime(inputDTH4 + ":" + inputDTM4);
                 stageDatabaseHelper.updateStage(stage);
+                Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
         }
     }

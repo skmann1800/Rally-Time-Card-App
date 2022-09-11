@@ -42,7 +42,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/ACUsername"
+                android:id="@+id/CompUsername"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -56,7 +56,7 @@
                 android:paddingLeft="5dp" />
 
             <EditText
-                android:id="@+id/ACPassword"
+                android:id="@+id/CompPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -70,7 +70,7 @@
                 android:paddingLeft="5dp" />
 
             <EditText
-                android:id="@+id/ACPostChief"
+                android:id="@+id/CompCarNum"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -84,7 +84,7 @@
                 android:paddingLeft="5dp" />
 
             <EditText
-                android:id="@+id/ACPhone"
+                android:id="@+id/CompDriver"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -98,7 +98,7 @@
                 android:paddingLeft="5dp" />
 
             <EditText
-                android:id="@+id/codriverET"
+                android:id="@+id/CompCodriver"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -112,7 +112,7 @@
                 android:paddingLeft="5dp" />
 
             <Button
-                android:id="@+id/loginButton"
+                android:id="@+id/saveComp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -206,6 +206,52 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
+    public Competitor getCompetitorByDriver(String driver) {
+        String[] columns = {
+                COLUMN_COMP_ID,
+                COLUMN_COMP_CARNUM,
+                COLUMN_COMP_DRIVER,
+                COLUMN_COMP_CODRIVER,
+                COLUMN_COMP_STAGE1ID,
+                COLUMN_COMP_STAGE2ID,
+                COLUMN_COMP_STAGE3ID,
+                COLUMN_COMP_STAGE4ID
+        };
+
+        Competitor competitor = new Competitor();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_COMP_DRIVER + " = ?";
+        // selection argument
+        String[] selectionArgs = {driver};
+
+        Cursor cursor = db.query(TABLE_COMP, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            competitor.setCompId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_ID))));
+            competitor.setCarNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_CARNUM))));
+            competitor.setDriver(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_DRIVER)));
+            competitor.setCodriver(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_CODRIVER)));
+            competitor.setStage1Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE1ID))));
+            competitor.setStage2Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE2ID))));
+            competitor.setStage3Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE3ID))));
+            competitor.setStage4Id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_COMP_STAGE4ID))));
+        }
+        cursor.close();
+        db.close();
+
+        return competitor;
+    }
+
+    @SuppressLint("Range")
     public List<Competitor> getAllCompetitors() {
         String[] columns = {
                 COLUMN_COMP_ID,
@@ -285,6 +331,34 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         String selection = COLUMN_COMP_CARNUM + " = ?";
         // selection argument
         String[] selectionArgs = {String.valueOf(carNum)};
+        // query user table with condition
+
+        Cursor cursor = db.query(TABLE_COMP, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+        if (cursorCount > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkCompetitor(String driver) {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_COMP_ID
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection criteria
+        String selection = COLUMN_COMP_DRIVER + " = ?";
+        // selection argument
+        String[] selectionArgs = {driver};
         // query user table with condition
 
         Cursor cursor = db.query(TABLE_COMP, //Table to query

@@ -204,6 +204,34 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public boolean checkUser(String role, int id) {
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_USER_ID
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection criteria
+        String selection = COLUMN_USER_ROLE + " = ?" + " AND " + COLUMN_USER_ROLE_ID + " = ?";
+        // selection argument
+        String[] selectionArgs = {role, String.valueOf(id)};
+        // query user table with condition
+
+        Cursor cursor = db.query(TABLE_USER, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                      //filter by row groups
+                null);                      //The sort order
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+        if (cursorCount > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean checkUser(String username, String password, String role) {
         // array of columns to fetch
         String[] columns = {

@@ -333,10 +333,15 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                         int provStartM = actualTimeM + 3;
                         if (provStartM > 59) {
                             provStartH2.setText(String.valueOf(actualTimeH + 1));
-                            provStartM2.setText(String.valueOf(provStartM - 60));
+                            provStartM2.setText("0" + (provStartM - 60));
                         } else {
                             provStartH2.setText(String.valueOf(actualTimeH));
-                            provStartM2.setText(String.valueOf(provStartM));
+                            String mins = String.valueOf(provStartM);
+                            if (mins.length() < 2) {
+                                provStartM2.setText("0" + mins);
+                            } else {
+                                provStartM2.setText(mins);
+                            }
                         }
                     }
                 }
@@ -388,7 +393,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(provStartM2.getText().toString().length()==2)
                 {
-                    if (Integer.valueOf(provStartH2.getText().toString()) > 24) {
+                    if (Integer.valueOf(provStartM2.getText().toString()) > 59) {
                         provStartM2.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {

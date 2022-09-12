@@ -107,7 +107,7 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         Intent intent;
         switch (view.getId()) {
             case R.id.CompetitorRoleButton:
-                intent = new Intent(this, AdminCompActivity.class);
+                intent = new Intent(this, CompListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.AControlRoleButton:

@@ -155,6 +155,51 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return userList;
     }
 
+    @SuppressLint("Range")
+    public List<User> getAllOfRole(String role) {
+        String[] columns = {
+                COLUMN_USER_ID,
+                COLUMN_USER_USERNAME,
+                COLUMN_USER_PASSWORD,
+                COLUMN_USER_ROLE,
+                COLUMN_USER_ROLE_ID
+        };
+
+        String sortOrder = COLUMN_USER_ROLE_ID + " ASC";
+        List<User> userList = new ArrayList<User>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_USER_ROLE + " = ?";
+        // selection argument
+        String[] selectionArgs = {role};
+
+        Cursor cursor = db.query(TABLE_USER, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                sortOrder);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            do {
+                User user = new User();
+                user.setUserId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
+                user.setUsername(cursor.getString(cursor.getColumnIndex(COLUMN_USER_USERNAME)));
+                user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+                user.setRole(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE)));
+                user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE_ID))));
+                userList.add(user);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return userList;
+    }
+
     public void updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

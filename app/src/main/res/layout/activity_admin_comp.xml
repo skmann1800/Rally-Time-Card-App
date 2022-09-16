@@ -31,14 +31,26 @@
                 app:strokeWidth="2dp" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/CompDisplay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="60dp"
                 android:text="Competitor Logins"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="48sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Username:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -47,13 +59,24 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="75dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/border"
                 android:ems="10"
                 android:hint="Enter Username"
                 android:inputType="text"
                 android:paddingLeft="5dp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Password:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/CompPassword"
@@ -61,13 +84,24 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/border"
                 android:ems="10"
                 android:hint="Enter Password"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:paddingLeft="5dp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Car Number:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/CompCarNum"
@@ -75,13 +109,24 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/border"
                 android:ems="10"
                 android:hint="Enter Car Number"
                 android:inputType="text"
                 android:paddingLeft="5dp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Driver's Name:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/CompDriver"
@@ -89,13 +134,24 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/border"
                 android:ems="10"
                 android:hint="Enter Driver's Name"
                 android:inputType="text"
                 android:paddingLeft="5dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Co-Driver's Name:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/CompCodriver"
@@ -103,11 +159,11 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/border"
                 android:ems="10"
-                android:hint="Enter Codriver's Name"
+                android:hint="Enter Co-Driver's Name"
                 android:inputType="text"
                 android:paddingLeft="5dp" />
 

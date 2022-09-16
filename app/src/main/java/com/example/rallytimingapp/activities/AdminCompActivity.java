@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.helpers.InputValidation;
@@ -32,11 +35,14 @@ public class AdminCompActivity extends AppCompatActivity implements View.OnClick
 
     private Button saveButton;
 
+    private TextView display;
     private EditText usernameET;
     private EditText passwordET;
     private EditText carNumET;
     private EditText driverET;
     private EditText codriverET;
+
+    private int compID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +53,22 @@ public class AdminCompActivity extends AppCompatActivity implements View.OnClick
         initObjects();
         initListeners();
 
+        compID = getIntent().getIntExtra("COMP_ID", 0);
+        String message = getIntent().getStringExtra("MESSAGE");
+        competitor = compDatabaseHelper.getCompetitorByID(compID);
+        user = userDatabaseHelper.getUserByRoleID("Competitor", compID);
+        display.setText(message);
+        usernameET.setText(user.getUsername());
+        passwordET.setText(user.getPassword());
+        carNumET.setText(String.valueOf(competitor.getCarNum()));
+        driverET.setText(competitor.getDriver());
+        codriverET.setText(competitor.getCodriver());
     }
 
     private void initViews() {
         saveButton = findViewById(R.id.saveComp);
 
+        display = findViewById(R.id.CompDisplay);
         usernameET = findViewById(R.id.CompUsername);
         passwordET = findViewById(R.id.CompPassword);
         carNumET = findViewById(R.id.CompCarNum);

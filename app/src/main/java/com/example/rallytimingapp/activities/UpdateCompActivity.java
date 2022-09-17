@@ -43,6 +43,7 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
     private ScrollView scrollView;
 
     private PopupWindow deletePopup;
+    private PopupWindow updatePopup;
 
     private TextView display;
     private EditText usernameET;
@@ -109,14 +110,7 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.updateCompButton:
-                if (verifyInput()) {
-                    int compID = saveCompetitor();
-                    if (compID != -1) {
-                        saveUser(compID);
-                    }
-                } else {
-                    Snackbar.make(scrollView, "Please fill in all details", Snackbar.LENGTH_LONG).show();
-                }
+                ShowUpdatePopup();
                 break;
             case R.id.deleteCompButton:
                 ShowDeletePopup();
@@ -156,6 +150,47 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onClick(View view) {
                 deletePopup.dismiss();
+            }
+        });
+    }
+
+    private void ShowUpdatePopup() {
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.update_account_popup, null);
+
+        updatePopup = new PopupWindow(this);
+        updatePopup.setContentView(layout);
+        updatePopup.setWidth(width);
+        updatePopup.setHeight(height);
+        updatePopup.setFocusable(true);
+        updatePopup.setBackgroundDrawable(null);
+        updatePopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
+
+        Button yesUpdate = layout.findViewById(R.id.YesUpdateButton);
+        yesUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (verifyInput()) {
+                    int compID = saveCompetitor();
+                    if (compID != -1) {
+                        saveUser(compID);
+                    }
+                } else {
+                    Snackbar.make(scrollView, "Please fill in all details", Snackbar.LENGTH_LONG).show();
+                }
+                updatePopup.dismiss();
+            }
+        });
+
+        Button noUpdate = layout.findViewById(R.id.NoUpdateButton);
+        noUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatePopup.dismiss();
             }
         });
     }

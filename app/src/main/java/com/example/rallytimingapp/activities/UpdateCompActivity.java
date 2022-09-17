@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
@@ -21,8 +20,8 @@ import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 
-public class AdminCompActivity extends AppCompatActivity implements View.OnClickListener {
-    private final AppCompatActivity activity = AdminCompActivity.this;
+public class UpdateCompActivity extends AppCompatActivity implements View.OnClickListener {
+    private final AppCompatActivity activity = UpdateCompActivity.this;
 
     private InputValidation inputValidation;
     private UserDatabaseHelper userDatabaseHelper;
@@ -34,6 +33,8 @@ public class AdminCompActivity extends AppCompatActivity implements View.OnClick
     private Stage stage;
 
     private Button saveButton;
+
+    private ScrollView scrollView;
 
     private TextView display;
     private EditText usernameET;
@@ -47,7 +48,7 @@ public class AdminCompActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_comp);
+        setContentView(R.layout.activity_update_comp);
 
         initViews();
         initObjects();
@@ -66,7 +67,8 @@ public class AdminCompActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initViews() {
-        saveButton = findViewById(R.id.saveComp);
+        saveButton = findViewById(R.id.updateCompButton);
+        scrollView = findViewById(R.id.UpdateCompScrollView);
 
         display = findViewById(R.id.CompDisplay);
         usernameET = findViewById(R.id.CompUsername);
@@ -91,67 +93,28 @@ public class AdminCompActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void back(View view) {
-        Intent intent = new Intent(this, AdminOptionsActivity.class);
+        Intent intent = new Intent(this, CompListActivity.class);
         startActivity(intent);
-    }
-
-    private int CreateCompetitor(int carNum, String driver, String codriver) {
-        int compID = 0;
-        if (!compDatabaseHelper.checkCompetitor(carNum)) {
-            competitor.setCarNum(carNum);
-            competitor.setDriver(driver);
-            competitor.setCodriver(codriver);
-            competitor.setStage1Id(CreateStage(carNum, 1));
-            competitor.setStage2Id(CreateStage(carNum, 2));
-            competitor.setStage3Id(CreateStage(carNum, 3));
-            competitor.setStage4Id(CreateStage(carNum, 4));
-            compDatabaseHelper.addCompetitor(competitor);
-        }
-        compID = compDatabaseHelper.getCompId(carNum);
-        return compID;
-    }
-
-    private void CreateLogin(String username, String password, String role, int id) {
-        if (!userDatabaseHelper.checkUser(username)) {
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setRole(role);
-            user.setId(id);
-            userDatabaseHelper.addUser(user);
-        }
-    }
-
-    private int CreateStage(int carNum, int stageNum) {
-        if (!stageDatabaseHelper.checkStage(carNum, stageNum)) {
-            stage.setCarNum(carNum);
-            stage.setStageNum(stageNum);
-            stage.setStartOrder(0);
-            stage.setProvStart("");
-            stage.setActualStart("");
-            stage.setFinishTime("");
-            stage.setStageTime("");
-            stage.setActualTime("");
-            stage.setDueTime("");
-            stageDatabaseHelper.addStage(stage);
-        }
-        int stageID = stageDatabaseHelper.getStageId(carNum, stageNum);
-        return stageID;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.saveComp:
-                if (!verifyInput()) {
+            case R.id.updateCompButton:
+                if (verifyInput()) {
                     int compID = saveCompetitor();
-                    saveUser(compID);
+                    if (compID != -1) {
+                        saveUser(compID);
+                    }
+                } else {
+                    Snackbar.make(scrollView, "Please fill in all details", Snackbar.LENGTH_LONG).show();
                 }
                 break;
         }
     }
 
     public int saveCompetitor() {
-        int compID = 0;
+        int compID = -1;
         int carNum = Integer.valueOf(carNumET.getText().toString().trim());
         String driver = driverET.getText().toString().trim();
         String codriver = codriverET.getText().toString().trim();
@@ -163,7 +126,7 @@ public class AdminCompActivity extends AppCompatActivity implements View.OnClick
             compID = competitor.getCompId();
 
         } else {
-            compID = CreateCompetitor(carNum, driver, codriver);
+            Snackbar.make(scrollView, "Account does not exist, please create one", Snackbar.LENGTH_LONG).show();
         }
         return compID;
     }
@@ -173,8 +136,16 @@ public class AdminCompActivity extends AppCompatActivity implements View.OnClick
         String password = passwordET.getText().toString().trim();
         if (userDatabaseHelper.checkUser(username)) {
             user = userDatabaseHelper.getUser(username, "Competitor");
+            user.setPassword(password);
+            user.setId(compID);
+            userDatabaseHelper.updateUser(user);
         } else if (userDatabaseHelper.checkUser("Competitor", compID)) {
-
+            user = userDatabaseHelper.getUserByRoleID("Competitor", compID);
+            user.setUsername(username);
+            user.setPassword(password);
+            userDatabaseHelper.updateUser(user);
+        } else {
+            Snackbar.make(scrollView, "Account does not exist, please create one", Snackbar.LENGTH_LONG).show();
         }
     }
 

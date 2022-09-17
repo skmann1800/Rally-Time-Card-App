@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AdminCompActivity">
+    tools:context=".activities.UpdateCompActivity">
 
     <ScrollView
+        android:id="@+id/UpdateCompScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -34,9 +35,9 @@
                 android:id="@+id/CompDisplay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:layout_marginBottom="60dp"
-                android:text="Competitor Logins"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:text="Update Competitor Logins"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="48sp"
@@ -168,14 +169,14 @@
                 android:paddingLeft="5dp" />
 
             <Button
-                android:id="@+id/saveComp"
+                android:id="@+id/updateCompButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
                 android:backgroundTint="@color/yellow"
-                android:text="SAVE"
+                android:text="UPDATE"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:strokeColor="@color/black"

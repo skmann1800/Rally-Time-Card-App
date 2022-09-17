@@ -71,10 +71,9 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String compName = (String) adapterView.getAdapter().getItem(position);
-        Toast.makeText(adapterView.getContext(), "Clicked " + compName, Toast.LENGTH_SHORT).show();
         competitor = compDatabaseHelper.getCompetitorByDriver(compName);
         int compID = competitor.getCompId();
-        Intent intent = new Intent(this, AdminCompActivity.class);
+        Intent intent = new Intent(this, UpdateCompActivity.class);
         intent.putExtra("MESSAGE", "Update Competitor Details");
         intent.putExtra("COMP_ID", compID);
         startActivity(intent);
@@ -114,5 +113,10 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         adapter.addAll(results);
         adapter.notifyDataSetChanged();
         return false;
+    }
+
+    public void back(View view) {
+        Intent intent = new Intent(this, AdminOptionsActivity.class);
+        startActivity(intent);
     }
 }

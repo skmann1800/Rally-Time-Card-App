@@ -2,11 +2,16 @@ package com.example.rallytimingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -36,6 +41,8 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
     private Button deleteButton;
 
     private ScrollView scrollView;
+
+    private PopupWindow deletePopup;
 
     private TextView display;
     private EditText usernameET;
@@ -112,9 +119,45 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.deleteCompButton:
-                deleteComp();
+                ShowDeletePopup();
                 break;
         }
+    }
+
+    private void ShowDeletePopup() {
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.delete_account_popup, null);
+
+        deletePopup = new PopupWindow(this);
+        deletePopup.setContentView(layout);
+        deletePopup.setWidth(width);
+        deletePopup.setHeight(height);
+        deletePopup.setFocusable(true);
+        deletePopup.setBackgroundDrawable(null);
+        deletePopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
+
+        Button yesDelete = layout.findViewById(R.id.YesDeleteButton);
+        yesDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteComp();
+                deletePopup.dismiss();
+                Intent intent = new Intent(activity, CompListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button noDelete = layout.findViewById(R.id.NoDeleteButton);
+        noDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletePopup.dismiss();
+            }
+        });
     }
 
     public int saveCompetitor() {
@@ -169,6 +212,12 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
             user = userDatabaseHelper.getUserByRoleID("Competitor", compID);
             userDatabaseHelper.deleteUser(user);
         }
+
+        usernameET.setText(null);
+        passwordET.setText(null);
+        carNumET.setText(null);
+        driverET.setText(null);
+        codriverET.setText(null);
     }
 
     private boolean verifyInput() {
@@ -181,6 +230,7 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
         if (!inputValidation.isEditTextFilled(carNumET)) {
             return false;
         }
+
         if (!inputValidation.isEditTextFilled(driverET)) {
             return false;
         }

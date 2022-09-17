@@ -115,7 +115,7 @@
                 android:background="@drawable/border"
                 android:ems="10"
                 android:hint="Enter Car Number"
-                android:inputType="text"
+                android:inputType="number"
                 android:paddingLeft="5dp" />
 
             <TextView

@@ -74,7 +74,6 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         competitor = compDatabaseHelper.getCompetitorByDriver(compName);
         int compID = competitor.getCompId();
         Intent intent = new Intent(this, UpdateCompActivity.class);
-        intent.putExtra("MESSAGE", "Update Competitor Details");
         intent.putExtra("COMP_ID", compID);
         startActivity(intent);
     }

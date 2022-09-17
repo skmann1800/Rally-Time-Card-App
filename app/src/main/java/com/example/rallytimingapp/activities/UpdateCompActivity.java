@@ -33,6 +33,7 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
     private Stage stage;
 
     private Button saveButton;
+    private Button deleteButton;
 
     private ScrollView scrollView;
 
@@ -55,10 +56,8 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
         initListeners();
 
         compID = getIntent().getIntExtra("COMP_ID", 0);
-        String message = getIntent().getStringExtra("MESSAGE");
         competitor = compDatabaseHelper.getCompetitorByID(compID);
         user = userDatabaseHelper.getUserByRoleID("Competitor", compID);
-        display.setText(message);
         usernameET.setText(user.getUsername());
         passwordET.setText(user.getPassword());
         carNumET.setText(String.valueOf(competitor.getCarNum()));
@@ -68,6 +67,7 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
 
     private void initViews() {
         saveButton = findViewById(R.id.updateCompButton);
+        deleteButton = findViewById(R.id.deleteCompButton);
         scrollView = findViewById(R.id.UpdateCompScrollView);
 
         display = findViewById(R.id.CompDisplay);
@@ -90,6 +90,7 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
 
     private void initListeners() {
         saveButton.setOnClickListener(this);
+        deleteButton.setOnClickListener(this);
     }
 
     public void back(View view) {
@@ -109,6 +110,9 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
                 } else {
                     Snackbar.make(scrollView, "Please fill in all details", Snackbar.LENGTH_LONG).show();
                 }
+                break;
+            case R.id.deleteCompButton:
+                deleteComp();
                 break;
         }
     }
@@ -146,6 +150,24 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
             userDatabaseHelper.updateUser(user);
         } else {
             Snackbar.make(scrollView, "Account does not exist, please create one", Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    public void deleteComp() {
+        int compID = -1;
+        String username = usernameET.getText().toString().trim();
+        String driver = driverET.getText().toString().trim();
+        if (compDatabaseHelper.checkCompetitor(driver)) {
+            competitor = compDatabaseHelper.getCompetitorByDriver(driver);
+            compID = competitor.getCompId();
+            compDatabaseHelper.deleteCompetitor(competitor);
+        }
+        if (userDatabaseHelper.checkUser(username)) {
+            user = userDatabaseHelper.getUser(username, "Competitor");
+            userDatabaseHelper.deleteUser(user);
+        } else if (userDatabaseHelper.checkUser("Competitor", compID)) {
+            user = userDatabaseHelper.getUserByRoleID("Competitor", compID);
+            userDatabaseHelper.deleteUser(user);
         }
     }
 

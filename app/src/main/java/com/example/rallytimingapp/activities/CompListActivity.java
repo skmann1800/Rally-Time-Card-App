@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.rallytimingapp.R;
+import com.example.rallytimingapp.adapters.CompCursorAdapter;
 import com.example.rallytimingapp.model.Competitor;
 import com.example.rallytimingapp.sql.CompDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
@@ -21,11 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CompListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
+public class CompListActivity extends AppCompatActivity {
     private List<Competitor> competitorList = new ArrayList<Competitor>();
     private List<String> drivers = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
-    private ListView compUserListView;
+    private ListView compListView;
     private SearchView searchBar;
     private CompDatabaseHelper compDatabaseHelper;
     private Competitor competitor;
@@ -36,13 +38,15 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_comp_list);
 
         // Setup Adapter
-        compUserListView = (ListView) findViewById(R.id.CompListView);
+
         compDatabaseHelper = new CompDatabaseHelper(this);
-        if (compUserListView != null) {
-            drivers = getDrivers();
-            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, drivers);
-            compUserListView.setAdapter(adapter);
-            compUserListView.setOnItemClickListener(this);
+        Cursor compCursor = compDatabaseHelper.getCursor();
+        compListView = (ListView) findViewById(R.id.CompListView);
+        CompCursorAdapter compAdapter = new CompCursorAdapter(this, compCursor);
+        compListView.setAdapter(compAdapter);
+
+        /*if (compListView != null) {
+
 
             searchBar = (SearchView) findViewById(R.id.CompSearchBar);
             searchBar.setOnQueryTextListener(this);
@@ -56,7 +60,7 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
                     return false;
                 }
             });
-        }
+        }*/
     }
 
     public List<String> getDrivers() {
@@ -68,7 +72,7 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         return currDrivers;
     }
 
-    @Override
+    /*@Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String compName = (String) adapterView.getAdapter().getItem(position);
         competitor = compDatabaseHelper.getCompetitorByDriver(compName);
@@ -112,10 +116,15 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         adapter.addAll(results);
         adapter.notifyDataSetChanged();
         return false;
-    }
+    }*/
 
     public void back(View view) {
         Intent intent = new Intent(this, AdminOptionsActivity.class);
+        startActivity(intent);
+    }
+
+    public void addNew(View view) {
+        Intent intent = new Intent(this, AddCompActivity.class);
         startActivity(intent);
     }
 }

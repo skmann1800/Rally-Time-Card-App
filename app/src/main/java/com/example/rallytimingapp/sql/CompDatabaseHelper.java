@@ -16,7 +16,7 @@ import java.util.List;
 public class CompDatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     // Database Name
     private static final String DATABASE_NAME = "CompetitorManager.db";
@@ -25,7 +25,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_COMP = "competitor";
 
     // User Table Columns names
-    private static final String COLUMN_COMP_ID = "competitor_id";
+    private static final String COLUMN_COMP_ID = "_id";
     private static final String COLUMN_COMP_CARNUM = "competitor_carNum";
     private static final String COLUMN_COMP_DRIVER = "competitor_driver";
     private static final String COLUMN_COMP_CODRIVER = "competitor_codriver";
@@ -295,6 +295,27 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return competitorList;
+    }
+
+    @SuppressLint("Range")
+    public Cursor getCursor() {
+        String[] columns = {
+                COLUMN_COMP_ID,
+                COLUMN_COMP_DRIVER,
+                COLUMN_COMP_CARNUM
+        };
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_COMP, //Table to query
+                columns,             //columns to return
+                null,        //columns for the WHERE clause
+                null,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        return cursor;
     }
 
     public void updateCompetitor(Competitor competitor) {

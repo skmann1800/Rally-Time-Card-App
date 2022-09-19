@@ -52,8 +52,6 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
     private EditText driverET;
     private EditText codriverET;
 
-    private int compID;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +61,7 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
         initObjects();
         initListeners();
 
-        compID = getIntent().getIntExtra("COMP_ID", 0);
+        int compID = getIntent().getIntExtra("COMP_ID", 0);
         competitor = compDatabaseHelper.getCompetitorByID(compID);
         user = userDatabaseHelper.getUserByRoleID("Competitor", compID);
         usernameET.setText(user.getUsername());

@@ -14,6 +14,12 @@
         android:theme="@style/Theme.RallyTimingApp"
         tools:targetApi="31">
         <activity
+            android:name=".activities.AddCompActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.FinishListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CompListActivity"
             android:exported="false" />
         <activity
@@ -29,7 +35,7 @@
             android:name=".activities.AdminOptionsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.AdminCompActivity"
+            android:name=".activities.UpdateCompActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ChooseControlActivity"

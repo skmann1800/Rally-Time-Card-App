@@ -24,10 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CompListActivity extends AppCompatActivity {
+public class CompListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
     private List<Competitor> competitorList = new ArrayList<Competitor>();
     private List<String> drivers = new ArrayList<>();
-    private ListView compListView;
+    private ArrayAdapter<String> adapter;
+    private ListView compUserListView;
     private SearchView searchBar;
     private CompDatabaseHelper compDatabaseHelper;
     private Competitor competitor;
@@ -38,15 +39,13 @@ public class CompListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comp_list);
 
         // Setup Adapter
-
+        compUserListView = (ListView) findViewById(R.id.CompListView);
         compDatabaseHelper = new CompDatabaseHelper(this);
-        Cursor compCursor = compDatabaseHelper.getCursor();
-        compListView = (ListView) findViewById(R.id.CompListView);
-        CompCursorAdapter compAdapter = new CompCursorAdapter(this, compCursor);
-        compListView.setAdapter(compAdapter);
-
-        /*if (compListView != null) {
-
+        if (compUserListView != null) {
+            drivers = getDrivers();
+            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, drivers);
+            compUserListView.setAdapter(adapter);
+            compUserListView.setOnItemClickListener(this);
 
             searchBar = (SearchView) findViewById(R.id.CompSearchBar);
             searchBar.setOnQueryTextListener(this);
@@ -60,7 +59,7 @@ public class CompListActivity extends AppCompatActivity {
                     return false;
                 }
             });
-        }*/
+        }
     }
 
     public List<String> getDrivers() {
@@ -72,7 +71,7 @@ public class CompListActivity extends AppCompatActivity {
         return currDrivers;
     }
 
-    /*@Override
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String compName = (String) adapterView.getAdapter().getItem(position);
         competitor = compDatabaseHelper.getCompetitorByDriver(compName);
@@ -116,7 +115,7 @@ public class CompListActivity extends AppCompatActivity {
         adapter.addAll(results);
         adapter.notifyDataSetChanged();
         return false;
-    }*/
+    }
 
     public void back(View view) {
         Intent intent = new Intent(this, AdminOptionsActivity.class);

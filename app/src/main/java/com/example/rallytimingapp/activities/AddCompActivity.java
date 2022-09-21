@@ -120,8 +120,8 @@ public class AddCompActivity extends AppCompatActivity implements View.OnClickLi
             newComp.setStage2Id(newStage(carNum,2));
             newComp.setStage3Id(newStage(carNum,3));
             newComp.setStage4Id(newStage(carNum,4));
-            compDatabaseHelper.addCompetitor(competitor);
-            compID = competitor.getCompId();
+            compDatabaseHelper.addCompetitor(newComp);
+            compID = compDatabaseHelper.getCompId(carNum);
 
         } else {
             Snackbar.make(scrollView, "Competitor already exists", Snackbar.LENGTH_LONG).show();
@@ -138,7 +138,7 @@ public class AddCompActivity extends AppCompatActivity implements View.OnClickLi
             newUser.setPassword(password);
             newUser.setId(compID);
             newUser.setRole("Competitor");
-            userDatabaseHelper.addUser(user);
+            userDatabaseHelper.addUser(newUser);
             Snackbar.make(scrollView, "Account created", Snackbar.LENGTH_LONG).show();
 
         } else {

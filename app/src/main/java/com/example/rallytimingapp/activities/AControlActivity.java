@@ -544,12 +544,23 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             leftSO.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (stageNum != 1) {
+                        stage = stageDatabaseHelper.getStage(aControl.getStage1ID());
+                        String inputATH = actualTimeH1.getText().toString();
+                        String inputATM = actualTimeM1.getText().toString();
+                        stage.setActualTime(inputATH + ":" + inputATM);
+                        stageDatabaseHelper.updateStage(stage);
+                    }
+                    stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
+                    String inputPSH = provStartH2.getText().toString();
+                    String inputPSM = provStartM2.getText().toString();
+                    stage.setProvStart(inputPSH + ":" + inputPSM);
+                    stage.setStartOrder(prevSO);
+                    stageDatabaseHelper.updateStage(stage);
+
                     AControl aControl2 = aControlDatabaseHelper.getAControl(stageNum, prevSO);
                     currAControl.setStartOrder(prevSO);
                     aControlDatabaseHelper.updateAControl(currAControl);
-                    stage = stageDatabaseHelper.getStage(currAControl.getStage2ID());
-                    stage.setStartOrder(prevSO);
-                    stageDatabaseHelper.updateStage(stage);
 
                     aControl2.setStartOrder(startOrder);
                     aControlDatabaseHelper.updateAControl(aControl2);

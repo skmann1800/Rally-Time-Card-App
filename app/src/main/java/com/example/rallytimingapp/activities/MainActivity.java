@@ -55,22 +55,6 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initObjects();
 
-        int compID1 = CreateCompetitor(1, "Hayden Paddon", "John Kennard");
-        int compID2 = CreateCompetitor(5, "Emma Gilmour", "Mal Peden");
-        int compID3 = CreateCompetitor(2, "Ben Hunt", "Tony Rawstorn");
-        int compID4 = CreateCompetitor(12, "Jack Hawkeswood", "Sarah Brenna");
-
-        int crewID1 = CreateTimingCrew("A Control", "George", "0219384756");
-        int crewID2 = CreateTimingCrew("Start", "Jared", "0212349879");
-        int crewID3 = CreateTimingCrew("Finish", "Sarah", "0279125769");
-
-        CreateLogin("Hayden", "hayden", "Competitor", compID1);
-        CreateLogin("Emma", "emma", "Competitor", compID2);
-        CreateLogin("Ben", "ben","Competitor", compID3);
-        CreateLogin("Jack", "jack", "Competitor", compID4);
-        CreateLogin("Jared", "start", "Start", crewID1);
-        CreateLogin("Sarah", "finish", "Finish", crewID2);
-        CreateLogin("George", "ac", "A Control", crewID3);
         CreateLogin("Admin", "admin", "Admin", -1);
     }
 

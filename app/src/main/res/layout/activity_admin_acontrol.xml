@@ -31,7 +31,7 @@
                 app:strokeWidth="2dp" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/CompDisplay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="75dp"

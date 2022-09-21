@@ -1553,19 +1553,41 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <Button
-                android:id="@+id/CReturnButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/yellow"
-                android:text="@string/returnTC"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:strokeColor="@color/black"
-                app:strokeWidth="2dp" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/CChangeSOButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/yellow"
+                    android:text="Change Start Order"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="2dp" />
+
+                <Button
+                    android:id="@+id/CReturnButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/yellow"
+                    android:text="@string/returnTC"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="2dp" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

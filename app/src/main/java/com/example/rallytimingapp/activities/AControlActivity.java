@@ -28,9 +28,6 @@ import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.StartDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AControlActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = AControlActivity.this;
 
@@ -38,6 +35,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     private ScrollView scrollView;
 
     private Button backButton;
+    private Button changeSOButton;
     private Button returnTCButton;
     private Button nextButton;
     private Button prevButton;
@@ -104,6 +102,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     private TextView dueTimeM2;
 
     private PopupWindow returnTCPopup;
+    private PopupWindow changeSOPopup;
 
     private AControl aControl;
     private Start start;
@@ -243,6 +242,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         timeCard1 = findViewById(R.id.ControlTC1);
 
         backButton = findViewById(R.id.CTCBackButton);
+        changeSOButton = findViewById(R.id.CChangeSOButton);
         returnTCButton = findViewById(R.id.CReturnButton);
         nextButton = findViewById(R.id.ControlNextButton);
         prevButton = findViewById(R.id.ControlPrevButton);
@@ -426,6 +426,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
     private void initListeners() {
         backButton.setOnClickListener(this);
+        changeSOButton.setOnClickListener(this);
         returnTCButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         prevButton.setOnClickListener(this);
@@ -437,6 +438,9 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             case R.id.CTCBackButton:
                 Intent intent = new Intent(this, ChooseControlActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.CChangeSOButton:
+                ShowChangeSOPopup();
                 break;
             case R.id.CReturnButton:
                 ShowReturnTCPopup();
@@ -481,7 +485,12 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 provStartH2.setCursorVisible(true);
             }
             stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
-            startOrder2.setText(String.valueOf(stage.getStartOrder()));
+            int sOrder = stage.getStartOrder();
+            if (sOrder == 0) {
+                startOrder2.setText(String.valueOf(startOrder));
+            } else {
+                startOrder2.setText(String.valueOf(sOrder));
+            }
             provStartH2.setText(stage.getProvStartH());
             provStartM2.setText(stage.getProvStartM());
             actualStartH2.setText(stage.getActualStartH());
@@ -502,6 +511,101 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             startOrderTV.setText("0");
         }
 
+    }
+
+    private void ShowChangeSOPopup() {
+        DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.change_so_popup, null);
+
+        changeSOPopup = new PopupWindow(this);
+        changeSOPopup.setContentView(layout);
+        changeSOPopup.setWidth(width);
+        changeSOPopup.setHeight(height);
+        changeSOPopup.setFocusable(true);
+        changeSOPopup.setBackgroundDrawable(null);
+        changeSOPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
+
+        Button leftSO = layout.findViewById(R.id.LeftSOButton);
+        Button rightSO = layout.findViewById(R.id.RightSOButton);
+
+        AControl currAControl = aControlDatabaseHelper.getAControl(stageNum, startOrder);
+
+        int currSO = aControlDatabaseHelper.getCurrStartOrder(stageNum);
+        int prevSO = startOrder - 1;
+        int nextSO = startOrder + 1;
+        if (prevSO < 1) {
+            leftSO.setText("-");
+        } else {
+            leftSO.setText(String.valueOf(prevSO));
+            leftSO.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (stageNum != 1) {
+                        stage = stageDatabaseHelper.getStage(aControl.getStage1ID());
+                        String inputATH = actualTimeH1.getText().toString();
+                        String inputATM = actualTimeM1.getText().toString();
+                        stage.setActualTime(inputATH + ":" + inputATM);
+                        stageDatabaseHelper.updateStage(stage);
+                    }
+                    stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
+                    String inputPSH = provStartH2.getText().toString();
+                    String inputPSM = provStartM2.getText().toString();
+                    stage.setProvStart(inputPSH + ":" + inputPSM);
+                    stage.setStartOrder(prevSO);
+                    stageDatabaseHelper.updateStage(stage);
+
+                    AControl aControl2 = aControlDatabaseHelper.getAControl(stageNum, prevSO);
+                    currAControl.setStartOrder(prevSO);
+                    aControlDatabaseHelper.updateAControl(currAControl);
+
+                    aControl2.setStartOrder(startOrder);
+                    aControlDatabaseHelper.updateAControl(aControl2);
+                    stage = stageDatabaseHelper.getStage(aControl2.getStage2ID());
+                    stage.setStartOrder(startOrder);
+                    stageDatabaseHelper.updateStage(stage);
+
+                    changeSOPopup.dismiss();
+                    fillInCards();
+                }
+            });
+        }
+        if (nextSO > currSO) {
+            rightSO.setText("-");
+        } else {
+            rightSO.setText(String.valueOf(nextSO));
+            rightSO.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AControl aControl2 = aControlDatabaseHelper.getAControl(stageNum, nextSO);
+                    currAControl.setStartOrder(nextSO);
+                    aControlDatabaseHelper.updateAControl(currAControl);
+                    stage = stageDatabaseHelper.getStage(currAControl.getStage2ID());
+                    stage.setStartOrder(nextSO);
+                    stageDatabaseHelper.updateStage(stage);
+
+                    aControl2.setStartOrder(startOrder);
+                    aControlDatabaseHelper.updateAControl(aControl2);
+                    stage = stageDatabaseHelper.getStage(aControl2.getStage2ID());
+                    stage.setStartOrder(startOrder);
+                    stageDatabaseHelper.updateStage(stage);
+
+                    changeSOPopup.dismiss();
+                    fillInCards();
+                }
+            });
+        }
+
+        Button cancel = layout.findViewById(R.id.CancelButton);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeSOPopup.dismiss();
+            }
+        });
     }
 
     private void ShowReturnTCPopup() {

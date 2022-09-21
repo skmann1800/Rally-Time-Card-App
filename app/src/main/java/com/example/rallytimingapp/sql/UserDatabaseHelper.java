@@ -116,6 +116,46 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
+    public User getUserByRoleID(String role, int roleID) {
+        String[] columns = {
+                COLUMN_USER_ID,
+                COLUMN_USER_USERNAME,
+                COLUMN_USER_PASSWORD,
+                COLUMN_USER_ROLE,
+                COLUMN_USER_ROLE_ID
+        };
+
+        User user = new User();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_USER_ROLE + " = ?" + " AND " + COLUMN_USER_ROLE_ID + " = ?";
+        // selection argument
+        String[] selectionArgs = {role, String.valueOf(roleID)};
+
+        Cursor cursor = db.query(TABLE_USER, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            user.setUserId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))));
+            user.setUsername(cursor.getString(cursor.getColumnIndex(COLUMN_USER_USERNAME)));
+            user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+            user.setRole(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE)));
+            user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ROLE_ID))));
+        }
+        cursor.close();
+        db.close();
+
+        return user;
+    }
+
+    @SuppressLint("Range")
     public List<User> getAllUsers() {
         String[] columns = {
                 COLUMN_USER_ID,

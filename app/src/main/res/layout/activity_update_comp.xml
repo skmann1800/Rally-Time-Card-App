@@ -217,7 +217,7 @@
                 android:layout_marginBottom="30dp"
                 android:onClick="addNew"
                 android:text="Add New Competitor Account"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
     </ScrollView>

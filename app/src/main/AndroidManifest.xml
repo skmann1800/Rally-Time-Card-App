@@ -29,15 +29,6 @@
             android:name=".activities.CompListActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.AdminFinishActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.AdminStartActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.AdminAControlActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.AdminOptionsActivity"
             android:exported="false" />
         <activity

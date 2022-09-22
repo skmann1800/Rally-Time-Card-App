@@ -141,7 +141,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public TimingCrew getTimingCrewByPostChief(String postChief) {
+    public TimingCrew getTimingCrewByPostChief(String role, String postChief) {
         String[] columns = {
                 COLUMN_CREW_ID,
                 COLUMN_CREW_POSITION,
@@ -154,9 +154,9 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         // selection criteria
-        String selection = COLUMN_CREW_POSTCHIEF + " = ?";
+        String selection = COLUMN_CREW_POSITION + " = ?" + " AND " + COLUMN_CREW_POSTCHIEF + " = ?";
         // selection argument
-        String[] selectionArgs = {postChief};
+        String[] selectionArgs = {role, postChief};
 
         Cursor cursor = db.query(TABLE_TIMING_CREW, //Table to query
                 columns,             //columns to return

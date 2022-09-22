@@ -18,31 +18,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class FinishListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
-    private List<TimingCrew> finishList = new ArrayList<TimingCrew>();
+public class StartListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
+    private List<TimingCrew> startList = new ArrayList<TimingCrew>();
     private List<String> postChiefs = new ArrayList<>();
     private ArrayAdapter<String> adapter;
-    private ListView finishUserListView;
+    private ListView startListView;
     private SearchView searchBar;
-    private TimingCrewDatabaseHelper timingCrewDatabaseHelper;
-    private TimingCrew finishCrew;
-    private final String role = "Finish";
+    private TimingCrewDatabaseHelper crewDatabaseHelper;
+    private TimingCrew startCrew;
+    private final String role = "Start";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_finish_list);
+        setContentView(R.layout.activity_start_list);
 
         // Setup Adapter
-        finishUserListView = (ListView) findViewById(R.id.FinishListView);
-        timingCrewDatabaseHelper = new TimingCrewDatabaseHelper(this);
-        if (finishUserListView != null) {
+        startListView = (ListView) findViewById(R.id.StartListView);
+        crewDatabaseHelper = new TimingCrewDatabaseHelper(this);
+        if (startListView != null) {
             postChiefs = getPostChiefs();
             adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, postChiefs);
-            finishUserListView.setAdapter(adapter);
-            finishUserListView.setOnItemClickListener(this);
+            startListView.setAdapter(adapter);
+            startListView.setOnItemClickListener(this);
 
-            searchBar = (SearchView) findViewById(R.id.FinishSearchBar);
+            searchBar = (SearchView) findViewById(R.id.StartSearchBar);
             searchBar.setOnQueryTextListener(this);
             searchBar.setOnCloseListener(new SearchView.OnCloseListener() {
                 @Override
@@ -59,9 +59,9 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
 
     public List<String> getPostChiefs() {
         List<String> currPostChiefs = new ArrayList<>();
-        finishList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
-        for (int i = 0; i < finishList.size(); i++) {
-            currPostChiefs.add(finishList.get(i).getPostChief());
+        startList = crewDatabaseHelper.getTimingCrewsByPosition(role);
+        for (int i = 0; i < startList.size(); i++) {
+            currPostChiefs.add(startList.get(i).getPostChief());
         }
         return currPostChiefs;
     }
@@ -69,9 +69,9 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String postChiefName = (String) adapterView.getAdapter().getItem(position);
-        finishCrew = timingCrewDatabaseHelper.getTimingCrewByPostChief(role, postChiefName);
-        int crewID = finishCrew.getCrewId();
-        Intent intent = new Intent(this, UpdateFinishActivity.class);
+        startCrew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChiefName);
+        int crewID = startCrew.getCrewId();
+        Intent intent = new Intent(this, UpdateStartActivity.class);
         intent.putExtra("CREW_ID", crewID);
         startActivity(intent);
     }
@@ -79,10 +79,10 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
     @Override
     public boolean onQueryTextSubmit(String query) {
         String search = query.toLowerCase(Locale.ROOT);
-        finishList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
+        startList = crewDatabaseHelper.getTimingCrewsByPosition(role);
         List<String> results = new ArrayList<>();
-        for (int i = 0; i < finishList.size(); i++) {
-            String currPostChief = finishList.get(i).getPostChief();
+        for (int i = 0; i < startList.size(); i++) {
+            String currPostChief = startList.get(i).getPostChief();
             String toMatch = currPostChief.toLowerCase(Locale.ROOT);
             if (toMatch.contains(search)) {
                 results.add(currPostChief);
@@ -97,10 +97,10 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
     @Override
     public boolean onQueryTextChange(String newText) {
         String search = newText.toLowerCase(Locale.ROOT);
-        finishList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
+        startList = crewDatabaseHelper.getTimingCrewsByPosition(role);
         List<String> results = new ArrayList<>();
-        for (int i = 0; i < finishList.size(); i++) {
-            String currPostChief = finishList.get(i).getPostChief();
+        for (int i = 0; i < startList.size(); i++) {
+            String currPostChief = startList.get(i).getPostChief();
             String toMatch = currPostChief.toLowerCase(Locale.ROOT);
             if (toMatch.contains(search)) {
                 results.add(currPostChief);
@@ -118,7 +118,7 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
     }
 
     public void addNew(View view) {
-        Intent intent = new Intent(this, AddFinishActivity.class);
+        Intent intent = new Intent(this, AddStartActivity.class);
         startActivity(intent);
     }
 }

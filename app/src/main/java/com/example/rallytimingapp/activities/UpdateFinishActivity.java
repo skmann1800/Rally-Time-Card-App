@@ -41,11 +41,12 @@ public class UpdateFinishActivity extends AppCompatActivity implements View.OnCl
     private PopupWindow deletePopup;
     private PopupWindow updatePopup;
 
-    private TextView display;
     private EditText usernameET;
     private EditText passwordET;
     private EditText postChiefET;
     private EditText phoneET;
+
+    private final String role = "Finish";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class UpdateFinishActivity extends AppCompatActivity implements View.OnCl
 
         int crewID = getIntent().getIntExtra("CREW_ID", 0);
         finishCrew = crewDatabaseHelper.getTimingCrewByID(crewID);
-        user = userDatabaseHelper.getUserByRoleID("Finish", crewID);
+        user = userDatabaseHelper.getUserByRoleID(role, crewID);
         usernameET.setText(user.getUsername());
         passwordET.setText(user.getPassword());
         postChiefET.setText(finishCrew.getPostChief());
@@ -70,7 +71,6 @@ public class UpdateFinishActivity extends AppCompatActivity implements View.OnCl
         deleteButton = findViewById(R.id.deleteFinishButton);
         scrollView = findViewById(R.id.UpdateFinishScrollView);
 
-        display = findViewById(R.id.FinishDisplay);
         usernameET = findViewById(R.id.FinishUsername);
         passwordET = findViewById(R.id.FinishPassword);
         postChiefET = findViewById(R.id.FinishPostChief);
@@ -188,8 +188,8 @@ public class UpdateFinishActivity extends AppCompatActivity implements View.OnCl
         int crewID = -1;
         String postChief = postChiefET.getText().toString().trim();
         String phone = phoneET.getText().toString().trim();
-        if (crewDatabaseHelper.checkTimingCrew("Finish", postChief)) {
-            finishCrew = crewDatabaseHelper.getTimingCrewByPostChief(postChief);
+        if (crewDatabaseHelper.checkTimingCrew(role, postChief)) {
+            finishCrew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChief);
             finishCrew.setPostChiefPhone(phone);
             crewDatabaseHelper.updateTimingCrew(finishCrew);
             crewID = finishCrew.getCrewId();
@@ -204,12 +204,12 @@ public class UpdateFinishActivity extends AppCompatActivity implements View.OnCl
         String username = usernameET.getText().toString().trim();
         String password = passwordET.getText().toString().trim();
         if (userDatabaseHelper.checkUser(username)) {
-            user = userDatabaseHelper.getUser(username, "Finish");
+            user = userDatabaseHelper.getUser(username, role);
             user.setPassword(password);
             user.setId(crewID);
             userDatabaseHelper.updateUser(user);
-        } else if (userDatabaseHelper.checkUser("Finish", crewID)) {
-            user = userDatabaseHelper.getUserByRoleID("Finish", crewID);
+        } else if (userDatabaseHelper.checkUser(role, crewID)) {
+            user = userDatabaseHelper.getUserByRoleID(role, crewID);
             user.setUsername(username);
             user.setPassword(password);
             userDatabaseHelper.updateUser(user);
@@ -222,16 +222,16 @@ public class UpdateFinishActivity extends AppCompatActivity implements View.OnCl
         int crewID = -1;
         String username = usernameET.getText().toString().trim();
         String postChief = postChiefET.getText().toString().trim();
-        if (crewDatabaseHelper.checkTimingCrew("Finish", postChief)) {
-            finishCrew = crewDatabaseHelper.getTimingCrewByPostChief(postChief);
+        if (crewDatabaseHelper.checkTimingCrew(role, postChief)) {
+            finishCrew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChief);
             crewID = finishCrew.getCrewId();
             crewDatabaseHelper.deleteTimingCrew(finishCrew);
         }
         if (userDatabaseHelper.checkUser(username)) {
-            user = userDatabaseHelper.getUser(username, "Finish");
+            user = userDatabaseHelper.getUser(username, role);
             userDatabaseHelper.deleteUser(user);
-        } else if (userDatabaseHelper.checkUser("Finish", crewID)) {
-            user = userDatabaseHelper.getUserByRoleID("Finish", crewID);
+        } else if (userDatabaseHelper.checkUser(role, crewID)) {
+            user = userDatabaseHelper.getUserByRoleID(role, crewID);
             userDatabaseHelper.deleteUser(user);
         }
 

@@ -15,6 +15,7 @@
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_acontrol.xml" value="0.22" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_add_comp.xml" value="0.14749893116716545" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_add_finish.xml" value="0.13595553655408293" />
+        <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_add_start.xml" value="0.14749893116716545" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_admin.xml" value="0.22" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_admin_acontrol.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_admin_comp.xml" value="0.22" />
@@ -33,8 +34,10 @@
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_main2.xml" value="0.1" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_start.xml" value="0.22" />
+        <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_start_list.xml" value="0.14749893116716545" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_update_comp.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_update_finish.xml" value="0.14749893116716545" />
+        <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/activity_update_start.xml" value="0.13595553655408293" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/change_so_popup.xml" value="0.1" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/checkin_popup.xml" value="0.1" />
         <entry key="..\:/Users/skman/Desktop/Uni/2022B/576/RallyTimingApp2/app/src/main/res/layout/content_main.xml" value="0.1" />

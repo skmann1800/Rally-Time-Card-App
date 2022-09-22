@@ -111,11 +111,11 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
                 startActivity(intent);
                 break;
             case R.id.AControlRoleButton:
-                intent = new Intent(this, AdminAControlActivity.class);
-                startActivity(intent);
+                //intent = new Intent(this, AdminAControlActivity.class);
+                //startActivity(intent);
                 break;
             case R.id.StartRoleButton:
-                intent = new Intent(this, AdminStartActivity.class);
+                intent = new Intent(this, StartListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.FinishRoleButton:

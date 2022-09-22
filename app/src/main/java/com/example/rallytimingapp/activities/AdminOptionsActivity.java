@@ -119,7 +119,7 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
                 startActivity(intent);
                 break;
             case R.id.FinishRoleButton:
-                intent = new Intent(this, AdminFinishActivity.class);
+                intent = new Intent(this, FinishListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.AOSignOutButton:
@@ -158,9 +158,9 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         CreateLogin("Emma", "emma", "Competitor", compID2);
         CreateLogin("Ben", "ben","Competitor", compID3);
         CreateLogin("Jack", "jack", "Competitor", compID4);
-        CreateLogin("Jared", "start", "Start", crewID1);
-        CreateLogin("Sarah", "finish", "Finish", crewID2);
-        CreateLogin("George", "ac", "A Control", crewID3);
+        CreateLogin("George", "ac", "A Control", crewID1);
+        CreateLogin("Jared", "start", "Start", crewID2);
+        CreateLogin("Sarah", "finish", "Finish", crewID3);
         CreateLogin("Admin", "admin", "Admin", -1);
     }
 

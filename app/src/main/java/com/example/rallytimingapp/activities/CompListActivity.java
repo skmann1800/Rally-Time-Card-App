@@ -1,24 +1,18 @@
 package com.example.rallytimingapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.rallytimingapp.R;
-import com.example.rallytimingapp.adapters.CompCursorAdapter;
 import com.example.rallytimingapp.model.Competitor;
 import com.example.rallytimingapp.sql.CompDatabaseHelper;
-import com.example.rallytimingapp.sql.UserDatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;

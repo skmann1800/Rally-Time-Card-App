@@ -264,7 +264,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_COMP_STAGE4ID
         };
 
-        String sortOrder = COLUMN_COMP_CARNUM + " ASC";
+        String sortOrder = COLUMN_COMP_DRIVER + " ASC";
         List<Competitor> competitorList = new ArrayList<Competitor>();
 
         SQLiteDatabase db = this.getReadableDatabase();

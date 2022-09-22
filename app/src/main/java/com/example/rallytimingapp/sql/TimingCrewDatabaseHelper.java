@@ -216,6 +216,49 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         return crewList;
     }
 
+    @SuppressLint("Range")
+    public List<TimingCrew> getTimingCrewsByPosition(String position) {
+        String[] columns = {
+                COLUMN_CREW_ID,
+                COLUMN_CREW_POSITION,
+                COLUMN_CREW_POSTCHIEF,
+                COLUMN_CREW_PHONE
+        };
+
+        String sortOrder = COLUMN_CREW_POSTCHIEF + " ASC";
+        List<TimingCrew> crewList = new ArrayList<TimingCrew>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_CREW_POSITION + " = ?";
+        // selection argument
+        String[] selectionArgs = {position};
+
+        Cursor cursor = db.query(TABLE_TIMING_CREW, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                sortOrder);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            do {
+                TimingCrew crew = new TimingCrew();
+                crew.setCrewId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_CREW_ID))));
+                crew.setPosition(cursor.getString(cursor.getColumnIndex(COLUMN_CREW_POSITION)));
+                crew.setPostChief(cursor.getString(cursor.getColumnIndex(COLUMN_CREW_POSTCHIEF)));
+                crew.setPostChiefPhone(cursor.getString(cursor.getColumnIndex(COLUMN_CREW_PHONE)));
+                crewList.add(crew);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return crewList;
+    }
+
     public void updateTimingCrew(TimingCrew crew) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

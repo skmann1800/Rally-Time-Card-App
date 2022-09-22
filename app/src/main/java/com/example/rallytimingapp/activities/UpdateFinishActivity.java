@@ -13,26 +13,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.helpers.InputValidation;
-import com.example.rallytimingapp.model.Competitor;
-import com.example.rallytimingapp.model.Stage;
+import com.example.rallytimingapp.model.TimingCrew;
 import com.example.rallytimingapp.model.User;
-import com.example.rallytimingapp.sql.CompDatabaseHelper;
-import com.example.rallytimingapp.sql.StageDatabaseHelper;
+import com.example.rallytimingapp.sql.TimingCrewDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 
-public class UpdateCompActivity extends AppCompatActivity implements View.OnClickListener {
-    private final AppCompatActivity activity = UpdateCompActivity.this;
+public class UpdateFinishActivity extends AppCompatActivity implements View.OnClickListener {
+    private final AppCompatActivity activity = UpdateFinishActivity.this;
 
     private InputValidation inputValidation;
     private UserDatabaseHelper userDatabaseHelper;
-    private CompDatabaseHelper compDatabaseHelper;
+    private TimingCrewDatabaseHelper crewDatabaseHelper;
 
     private User user;
-    private Competitor competitor;
+    private TimingCrew finishCrew;
 
     private Button saveButton;
     private Button deleteButton;
@@ -42,49 +41,48 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
     private PopupWindow deletePopup;
     private PopupWindow updatePopup;
 
+    private TextView display;
     private EditText usernameET;
     private EditText passwordET;
-    private EditText carNumET;
-    private EditText driverET;
-    private EditText codriverET;
+    private EditText postChiefET;
+    private EditText phoneET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_comp);
+        setContentView(R.layout.activity_update_finish);
 
         initViews();
         initObjects();
         initListeners();
 
-        int compID = getIntent().getIntExtra("COMP_ID", 0);
-        competitor = compDatabaseHelper.getCompetitorByID(compID);
-        user = userDatabaseHelper.getUserByRoleID("Competitor", compID);
+        int crewID = getIntent().getIntExtra("CREW_ID", 0);
+        finishCrew = crewDatabaseHelper.getTimingCrewByID(crewID);
+        user = userDatabaseHelper.getUserByRoleID("Finish", crewID);
         usernameET.setText(user.getUsername());
         passwordET.setText(user.getPassword());
-        carNumET.setText(String.valueOf(competitor.getCarNum()));
-        driverET.setText(competitor.getDriver());
-        codriverET.setText(competitor.getCodriver());
+        postChiefET.setText(finishCrew.getPostChief());
+        phoneET.setText(finishCrew.getPostChiefPhone());
     }
 
     private void initViews() {
-        saveButton = findViewById(R.id.updateCompButton);
-        deleteButton = findViewById(R.id.deleteCompButton);
-        scrollView = findViewById(R.id.UpdateCompScrollView);
+        saveButton = findViewById(R.id.updateFinishButton);
+        deleteButton = findViewById(R.id.deleteFinishButton);
+        scrollView = findViewById(R.id.UpdateFinishScrollView);
 
-        usernameET = findViewById(R.id.CompUsername);
-        passwordET = findViewById(R.id.CompPassword);
-        carNumET = findViewById(R.id.CompCarNum);
-        driverET = findViewById(R.id.CompDriver);
-        codriverET = findViewById(R.id.CompCodriver);
+        display = findViewById(R.id.FinishDisplay);
+        usernameET = findViewById(R.id.FinishUsername);
+        passwordET = findViewById(R.id.FinishPassword);
+        postChiefET = findViewById(R.id.FinishPostChief);
+        phoneET = findViewById(R.id.FinishPhone);
     }
 
     private void initObjects() {
         inputValidation = new InputValidation(activity);
         userDatabaseHelper = new UserDatabaseHelper(activity);
-        compDatabaseHelper = new CompDatabaseHelper(activity);
+        crewDatabaseHelper = new TimingCrewDatabaseHelper(activity);
         user = new User();
-        competitor = new Competitor();
+        finishCrew = new TimingCrew();
     }
 
     private void initListeners() {
@@ -93,17 +91,17 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
     }
 
     public void back(View view) {
-        Intent intent = new Intent(this, CompListActivity.class);
+        Intent intent = new Intent(this, FinishListActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.updateCompButton:
+            case R.id.updateFinishButton:
                 ShowUpdatePopup();
                 break;
-            case R.id.deleteCompButton:
+            case R.id.deleteFinishButton:
                 ShowDeletePopup();
                 break;
         }
@@ -129,9 +127,9 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
         yesDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteComp();
+                deleteFinish();
                 deletePopup.dismiss();
-                Intent intent = new Intent(activity, CompListActivity.class);
+                Intent intent = new Intent(activity, FinishListActivity.class);
                 startActivity(intent);
             }
         });
@@ -166,9 +164,9 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onClick(View view) {
                 if (verifyInput()) {
-                    int compID = saveCompetitor();
-                    if (compID != -1) {
-                        saveUser(compID);
+                    int crewID = saveFinish();
+                    if (crewID != -1) {
+                        saveUser(crewID);
                     }
                 } else {
                     Snackbar.make(scrollView, "Please fill in all details", Snackbar.LENGTH_LONG).show();
@@ -186,34 +184,32 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
-    public int saveCompetitor() {
-        int compID = -1;
-        int carNum = Integer.valueOf(carNumET.getText().toString().trim());
-        String driver = driverET.getText().toString().trim();
-        String codriver = codriverET.getText().toString().trim();
-        if (compDatabaseHelper.checkCompetitor(driver)) {
-            competitor = compDatabaseHelper.getCompetitorByDriver(driver);
-            competitor.setCarNum(carNum);
-            competitor.setCodriver(codriver);
-            compDatabaseHelper.updateCompetitor(competitor);
-            compID = competitor.getCompId();
+    public int saveFinish() {
+        int crewID = -1;
+        String postChief = postChiefET.getText().toString().trim();
+        String phone = phoneET.getText().toString().trim();
+        if (crewDatabaseHelper.checkTimingCrew("Finish", postChief)) {
+            finishCrew = crewDatabaseHelper.getTimingCrewByPostChief(postChief);
+            finishCrew.setPostChiefPhone(phone);
+            crewDatabaseHelper.updateTimingCrew(finishCrew);
+            crewID = finishCrew.getCrewId();
 
         } else {
             Snackbar.make(scrollView, "Account does not exist, please create one", Snackbar.LENGTH_LONG).show();
         }
-        return compID;
+        return crewID;
     }
 
-    public void saveUser(int compID) {
+    public void saveUser(int crewID) {
         String username = usernameET.getText().toString().trim();
         String password = passwordET.getText().toString().trim();
         if (userDatabaseHelper.checkUser(username)) {
-            user = userDatabaseHelper.getUser(username, "Competitor");
+            user = userDatabaseHelper.getUser(username, "Finish");
             user.setPassword(password);
-            user.setId(compID);
+            user.setId(crewID);
             userDatabaseHelper.updateUser(user);
-        } else if (userDatabaseHelper.checkUser("Competitor", compID)) {
-            user = userDatabaseHelper.getUserByRoleID("Competitor", compID);
+        } else if (userDatabaseHelper.checkUser("Finish", crewID)) {
+            user = userDatabaseHelper.getUserByRoleID("Finish", crewID);
             user.setUsername(username);
             user.setPassword(password);
             userDatabaseHelper.updateUser(user);
@@ -222,28 +218,27 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    public void deleteComp() {
-        int compID = -1;
+    public void deleteFinish() {
+        int crewID = -1;
         String username = usernameET.getText().toString().trim();
-        String driver = driverET.getText().toString().trim();
-        if (compDatabaseHelper.checkCompetitor(driver)) {
-            competitor = compDatabaseHelper.getCompetitorByDriver(driver);
-            compID = competitor.getCompId();
-            compDatabaseHelper.deleteCompetitor(competitor);
+        String postChief = postChiefET.getText().toString().trim();
+        if (crewDatabaseHelper.checkTimingCrew("Finish", postChief)) {
+            finishCrew = crewDatabaseHelper.getTimingCrewByPostChief(postChief);
+            crewID = finishCrew.getCrewId();
+            crewDatabaseHelper.deleteTimingCrew(finishCrew);
         }
         if (userDatabaseHelper.checkUser(username)) {
-            user = userDatabaseHelper.getUser(username, "Competitor");
+            user = userDatabaseHelper.getUser(username, "Finish");
             userDatabaseHelper.deleteUser(user);
-        } else if (userDatabaseHelper.checkUser("Competitor", compID)) {
-            user = userDatabaseHelper.getUserByRoleID("Competitor", compID);
+        } else if (userDatabaseHelper.checkUser("Finish", crewID)) {
+            user = userDatabaseHelper.getUserByRoleID("Finish", crewID);
             userDatabaseHelper.deleteUser(user);
         }
 
         usernameET.setText(null);
         passwordET.setText(null);
-        carNumET.setText(null);
-        driverET.setText(null);
-        codriverET.setText(null);
+        postChiefET.setText(null);
+        phoneET.setText(null);
         usernameET.requestFocus();
         usernameET.setCursorVisible(true);
     }
@@ -255,13 +250,10 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
         if (!inputValidation.isEditTextFilled(passwordET)) {
             return false;
         }
-        if (!inputValidation.isEditTextFilled(carNumET)) {
+        if (!inputValidation.isEditTextFilled(postChiefET)) {
             return false;
         }
-        if (!inputValidation.isEditTextFilled(driverET)) {
-            return false;
-        }
-        if (!inputValidation.isEditTextFilled(codriverET)) {
+        if (!inputValidation.isEditTextFilled(phoneET)) {
             return false;
         }
         return true;

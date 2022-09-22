@@ -266,4 +266,9 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
         }
         return true;
     }
+
+    public void addNew(View view) {
+        Intent intent = new Intent(this, AddCompActivity.class);
+        startActivity(intent);
+    }
 }

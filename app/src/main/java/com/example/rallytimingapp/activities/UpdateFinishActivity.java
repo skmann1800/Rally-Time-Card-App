@@ -258,4 +258,9 @@ public class UpdateFinishActivity extends AppCompatActivity implements View.OnCl
         }
         return true;
     }
+
+    public void addNew(View view) {
+        Intent intent = new Intent(this, AddFinishActivity.class);
+        startActivity(intent);
+    }
 }

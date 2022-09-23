@@ -17,8 +17,8 @@ import com.example.rallytimingapp.sql.TimingCrewDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 
-public class AddStartActivity extends AppCompatActivity implements View.OnClickListener {
-    private final AppCompatActivity activity = AddStartActivity.this;
+public class AddAControlActivity extends AppCompatActivity implements View.OnClickListener {
+    private final AppCompatActivity activity = AddAControlActivity.this;
 
     private InputValidation inputValidation;
     private UserDatabaseHelper userDatabaseHelper;
@@ -33,12 +33,12 @@ public class AddStartActivity extends AppCompatActivity implements View.OnClickL
     private EditText postChiefET;
     private EditText phoneET;
 
-    private final String role = "Start";
+    private final String role = "A Control";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_start);
+        setContentView(R.layout.activity_add_acontrol);
 
         initViews();
         initObjects();
@@ -46,13 +46,13 @@ public class AddStartActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews() {
-        saveButton = findViewById(R.id.SaveNewStartButton);
-        scrollView = findViewById(R.id.AddStartScrollView);
+        saveButton = findViewById(R.id.SaveNewACStartButton);
+        scrollView = findViewById(R.id.AddACScrollView);
 
-        usernameET = findViewById(R.id.AddStartUsername);
-        passwordET = findViewById(R.id.AddStartPassword);
-        postChiefET = findViewById(R.id.AddStartPostChief);
-        phoneET = findViewById(R.id.AddStartPhone);
+        usernameET = findViewById(R.id.AddACUsername);
+        passwordET = findViewById(R.id.AddACPassword);
+        postChiefET = findViewById(R.id.AddACPostChief);
+        phoneET = findViewById(R.id.AddACPhone);
     }
 
     private void initObjects() {
@@ -66,16 +66,16 @@ public class AddStartActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void back(View view) {
-        Intent intent = new Intent(this, StartListActivity.class);
+        Intent intent = new Intent(this, AControlListActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.SaveNewStartButton:
+            case R.id.SaveNewACStartButton:
                 if (verifyInput()) {
-                    int crewID = saveStart();
+                    int crewID = saveAControl();
                     if (crewID != -1) {
                         saveUser(crewID);
                     }
@@ -87,7 +87,7 @@ public class AddStartActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public int saveStart() {
+    public int saveAControl() {
         int crewID = -1;
         String postChief = postChiefET.getText().toString().trim();
         String phone = phoneET.getText().toString().trim();
@@ -100,7 +100,7 @@ public class AddStartActivity extends AppCompatActivity implements View.OnClickL
             crewID = crewDatabaseHelper.getCrewId(role, postChief);
 
         } else {
-            Snackbar.make(scrollView, "Start crew already exists", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(scrollView, "A Control crew already exists", Snackbar.LENGTH_LONG).show();
         }
         return crewID;
     }

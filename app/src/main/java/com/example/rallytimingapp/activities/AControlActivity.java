@@ -547,15 +547,29 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                     AControl aControl2 = aControlDatabaseHelper.getAControl(stageNum, prevSO);
                     currAControl.setStartOrder(prevSO);
                     aControlDatabaseHelper.updateAControl(currAControl);
+                    carNum = currAControl.getCarNum();
+                    /*if (startDatabaseHelper.checkStart(stageNum, carNum)) {
+                        Start start = startDatabaseHelper.getStart(startDatabaseHelper.getStartID(stageNum, carNum));
+                        start.setStartOrder(prevSO);
+                        startDatabaseHelper.updateStart(start);
+                    }*/
                     stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
                     stage.setStartOrder(prevSO);
                     stageDatabaseHelper.updateStage(stage);
+                    addToStart(carNum);
 
                     aControl2.setStartOrder(startOrder);
                     aControlDatabaseHelper.updateAControl(aControl2);
+                    carNum = aControl2.getCarNum();
+                    /*if (startDatabaseHelper.checkStart(stageNum, carNum)) {
+                        Start start = startDatabaseHelper.getStart(startDatabaseHelper.getStartID(stageNum, carNum));
+                        start.setStartOrder(startOrder);
+                        startDatabaseHelper.updateStart(start);
+                    }*/
                     stage = stageDatabaseHelper.getStage(aControl2.getStage2ID());
                     stage.setStartOrder(startOrder);
                     stageDatabaseHelper.updateStage(stage);
+                    addToStart(carNum);
 
                     changeSOPopup.dismiss();
                     fillInCards();
@@ -572,15 +586,29 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                     AControl aControl2 = aControlDatabaseHelper.getAControl(stageNum, nextSO);
                     currAControl.setStartOrder(nextSO);
                     aControlDatabaseHelper.updateAControl(currAControl);
+                    carNum = currAControl.getCarNum();
+                    /*if (startDatabaseHelper.checkStart(stageNum, carNum)) {
+                        Start start = startDatabaseHelper.getStart(startDatabaseHelper.getStartID(stageNum, carNum));
+                        start.setStartOrder(nextSO);
+                        startDatabaseHelper.updateStart(start);
+                    }*/
                     stage = stageDatabaseHelper.getStage(currAControl.getStage2ID());
                     stage.setStartOrder(nextSO);
                     stageDatabaseHelper.updateStage(stage);
+                    addToStart(carNum);
 
                     aControl2.setStartOrder(startOrder);
                     aControlDatabaseHelper.updateAControl(aControl2);
+                    carNum = aControl2.getCarNum();
+                    /*if (startDatabaseHelper.checkStart(stageNum, carNum)) {
+                        Start start = startDatabaseHelper.getStart(startDatabaseHelper.getStartID(stageNum, carNum));
+                        start.setStartOrder(startOrder);
+                        startDatabaseHelper.updateStart(start);
+                    }*/
                     stage = stageDatabaseHelper.getStage(aControl2.getStage2ID());
                     stage.setStartOrder(startOrder);
                     stageDatabaseHelper.updateStage(stage);
+                    addToStart(carNum);
 
                     changeSOPopup.dismiss();
                     fillInCards();
@@ -623,6 +651,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         yesReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                carNum = Integer.parseInt(carNumTV.getText().toString());
                 if (stageNum != 1) {
                     stage = stageDatabaseHelper.getStage(aControl.getStage1ID());
                     String inputATH = actualTimeH1.getText().toString();
@@ -639,7 +668,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 stageDatabaseHelper.updateStage(stage);
                 returnTCPopup.dismiss();
 
-                addToStart(stageNum);
+                addToStart(carNum);
             }
         });
 
@@ -652,15 +681,20 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    private void addToStart(int stageNum) {
-        if (!startDatabaseHelper.checkStart(stageNum, carNum)) {
-            int lastSO = startDatabaseHelper.getCurrStartOrder(stageNum);
-            start.setStartOrder(lastSO+1);
+    private void addToStart(int currCarNum) {
+        if (!startDatabaseHelper.checkStart(stageNum, currCarNum)) {
+            int currSO = Integer.parseInt(startOrderTV.getText().toString());
+            start.setStartOrder(currSO);
             start.setStage(stageNum);
-            start.setCarNum(carNum);
-            competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
+            start.setCarNum(currCarNum);
+            competitor = compDatabaseHelper.getCompetitorByCarNum(currCarNum);
             start.setStageID(competitor.getStageId(stageNum));
             startDatabaseHelper.addStart(start);
+        } else {
+            Start start = startDatabaseHelper.getStartByCarNum(stageNum, currCarNum);
+            int currSO = Integer.parseInt(startOrderTV.getText().toString());
+            start.setStartOrder(currSO);
+            startDatabaseHelper.updateStart(start);
         }
     }
 

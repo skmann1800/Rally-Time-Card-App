@@ -75,36 +75,6 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int getStartOrder(int stage, int carNum) {
-        // array of columns to fetch
-        String[] columns = {
-                COLUMN_START_ORDER
-        };
-        SQLiteDatabase db = this.getReadableDatabase();
-        // selection criteria
-        String selection = COLUMN_START_STAGE + " = ?" + " AND " + COLUMN_START_CARNUM + " = ?";
-        // selection argument
-        String[] selectionArgs = {String.valueOf(stage), String.valueOf(carNum)};
-        // query user table with condition
-
-        Cursor cursor = db.query(TABLE_START, //Table to query
-                columns,                    //columns to return
-                selection,                  //columns for the WHERE clause
-                selectionArgs,              //The values for the WHERE clause
-                null,                       //group the rows
-                null,                      //filter by row groups
-                null);                      //The sort order
-
-        int startOrder = 0;
-        if (cursor.moveToFirst()) {
-            startOrder = cursor.getInt(0);
-        }
-        cursor.close();
-        db.close();
-
-        return startOrder;
-    }
-
     public int getCarNum(int stageNum, int startOrder) {
         // array of columns to fetch
         String[] columns = {
@@ -183,6 +153,46 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         String selection = COLUMN_START_ID + " = ?";
         // selection argument
         String[] selectionArgs = {String.valueOf(startID)};
+
+        Cursor cursor = db.query(TABLE_START, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            start.setStartID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_START_ID))));
+            start.setStartOrder(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_START_ORDER))));
+            start.setStage(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_START_STAGE))));
+            start.setCarNum(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_START_CARNUM))));
+            start.setStageID(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_START_STAGEID))));
+        }
+        cursor.close();
+        db.close();
+
+        return start;
+    }
+
+    @SuppressLint("Range")
+    public Start getStartByCarNum(int stageNum, int carNum) {
+        String[] columns = {
+                COLUMN_START_ID,
+                COLUMN_START_ORDER,
+                COLUMN_START_STAGE,
+                COLUMN_START_CARNUM,
+                COLUMN_START_STAGEID
+        };
+
+        Start start = new Start();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_START_STAGE + " = ?" + " AND " + COLUMN_START_CARNUM + " = ?";
+        // selection argument
+        String[] selectionArgs = {String.valueOf(stageNum), String.valueOf(carNum)};
 
         Cursor cursor = db.query(TABLE_START, //Table to query
                 columns,             //columns to return

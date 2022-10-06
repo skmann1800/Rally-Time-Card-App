@@ -902,7 +902,7 @@
                             <View
                                 android:id="@+id/S2Yellow5"
                                 android:layout_width="match_parent"
-                                android:layout_height="65dp"
+                                android:layout_height="68dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow" />
 
@@ -1592,7 +1592,7 @@
                             <TextView
                                 android:id="@+id/S3Yellow1"
                                 android:layout_width="match_parent"
-                                android:layout_height="70dp"
+                                android:layout_height="73dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:gravity="center|top"
@@ -1677,7 +1677,7 @@
                             <View
                                 android:id="@+id/S3Yellow5"
                                 android:layout_width="match_parent"
-                                android:layout_height="70dp"
+                                android:layout_height="68dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow" />
 
@@ -2367,7 +2367,7 @@
                             <TextView
                                 android:id="@+id/S4Yellow1"
                                 android:layout_width="match_parent"
-                                android:layout_height="75dp"
+                                android:layout_height="73dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:gravity="center|top"
@@ -2452,7 +2452,7 @@
                             <View
                                 android:id="@+id/S4Yellow5"
                                 android:layout_width="match_parent"
-                                android:layout_height="65dp"
+                                android:layout_height="63dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow" />
 
@@ -3142,7 +3142,7 @@
                             <TextView
                                 android:id="@+id/S5Yellow1"
                                 android:layout_width="match_parent"
-                                android:layout_height="75dp"
+                                android:layout_height="73dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:gravity="center|top"
@@ -3227,7 +3227,7 @@
                             <View
                                 android:id="@+id/S5Yellow5"
                                 android:layout_width="match_parent"
-                                android:layout_height="65dp"
+                                android:layout_height="68dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow" />
 

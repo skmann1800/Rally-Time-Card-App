@@ -11,6 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadeScrollbars="false"
+        android:scrollbarThumbVertical="@color/dark_blue"
+        android:scrollbarTrackVertical="@color/grey"
+        android:scrollbarThumbHorizontal="@color/dark_blue"
+        android:scrollbarTrackHorizontal="@color/grey"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -24,7 +28,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
-                android:padding="4dp">
+                android:padding="4dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey">
 
                 <LinearLayout
                     android:id="@+id/Section1Layout"
@@ -145,7 +152,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
-                android:padding="4dp">
+                android:padding="4dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbarThumbHorizontal="@color/darker_blue"
+                android:scrollbarTrackHorizontal="@color/grey">
 
                 <LinearLayout
                     android:id="@+id/Section2Layout"
@@ -917,7 +927,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
-                android:padding="4dp">
+                android:padding="4dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey">
 
                 <LinearLayout
                     android:id="@+id/Section3Layout"
@@ -1692,7 +1705,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
-                android:padding="4dp">
+                android:padding="4dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey">
 
                 <LinearLayout
                     android:id="@+id/Section4Layout"
@@ -2467,7 +2483,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
-                android:padding="4dp">
+                android:padding="4dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                tools:scrollbarTrackHorizontal="@color/grey">
 
                 <LinearLayout
                     android:id="@+id/Section5Layout"

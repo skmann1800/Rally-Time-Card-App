@@ -10,6 +10,9 @@
         android:id="@+id/ControlScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fadeScrollbars="false"
+        android:scrollbarThumbVertical="@color/dark_blue"
+        android:scrollbarTrackVertical="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -160,7 +163,11 @@
                 android:id="@+id/ControlTC1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="4dp">
+                android:fadeScrollbars="false"
+                android:padding="4dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey">
 
                 <LinearLayout
                     android:id="@+id/ControlTC1HLayout"
@@ -853,7 +860,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="4dp">
+                android:fadeScrollbars="false"
+                android:padding="4dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey">
 
                 <LinearLayout
                     android:id="@+id/ControlTC2HLayout"

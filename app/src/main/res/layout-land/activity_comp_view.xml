@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadeScrollbars="false"
+        android:scrollbarThumbVertical="@color/dark_blue"
+        android:scrollbarTrackVertical="@color/grey"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -24,6 +26,8 @@
                 android:layout_width="630dp"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey"
                 android:padding="4dp">
 
                 <LinearLayout
@@ -147,6 +151,8 @@
                 android:layout_width="625dp"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey"
                 android:padding="4dp">
 
                 <LinearLayout
@@ -919,6 +925,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey"
                 android:padding="4dp">
 
                 <LinearLayout
@@ -1694,6 +1702,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey"
                 android:padding="4dp">
 
                 <LinearLayout
@@ -2469,6 +2479,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
+                android:scrollbarThumbHorizontal="@color/dark_blue"
+                android:scrollbarTrackHorizontal="@color/grey"
                 android:padding="4dp">
 
                 <LinearLayout

@@ -22,10 +22,10 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "StageManager.db";
 
-    // User table name
+    // Stage table name
     private static final String TABLE_STAGE = "stage";
 
-    // User Table Columns names
+    // Stage Table Columns names
     private static final String COLUMN_STAGE_ID = "stage_id";
     private static final String COLUMN_STAGE_CARNUM = "stage_car_num";
     private static final String COLUMN_STAGE_STAGENUM = "stage_stage_num";
@@ -62,6 +62,7 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Method to add an entry to the database
     public void addStage(Stage stage) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -81,6 +82,7 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to return the ID of the entry with the given car and stage number
     @SuppressLint("Range")
     public int getStageId(int carNum, int stageNum) {
         // array of columns to fetch
@@ -112,6 +114,7 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         return stageID;
     }
 
+    // Method to remove all entries from the database
     public void empty() {
         List<Stage> stageList = getAllStages();
         for (int i = 0; i < stageList.size(); i++) {
@@ -119,6 +122,7 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Method to return the entry with the given ID
     @SuppressLint("Range")
     public Stage getStage(int stageID) {
         String[] columns = {
@@ -169,6 +173,7 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         return stage;
     }
 
+    // Method to return the entry with the given car and stage number
     @SuppressLint("Range")
     public Stage getStage(int carNum, int stageNum) {
         String[] columns = {
@@ -219,6 +224,7 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         return stage;
     }
 
+    // Method to return a list of all entries in the database
     @SuppressLint("Range")
     public List<Stage> getAllStages() {
         String[] columns = {
@@ -269,6 +275,7 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         return stageList;
     }
 
+    // Method to update an entry in the database
     public void updateStage(Stage stage) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -287,14 +294,15 @@ public class StageDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to delete an entry in the database
     public void deleteStage(Stage stage) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // delete user record by username
         db.delete(TABLE_STAGE, COLUMN_STAGE_ID + " = ?",
                 new String[]{String.valueOf(stage.getStageId())});
         db.close();
     }
 
+    // Method to check if an entry with the given car and stage number exists
     public boolean checkStage(int carNum, int stageNum) {
         // array of columns to fetch
         String[] columns = {

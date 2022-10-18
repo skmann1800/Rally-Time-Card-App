@@ -20,10 +20,10 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "StartManager.db";
 
-    // User table name
+    // Start table name
     private static final String TABLE_START = "start";
 
-    // User Table Columns names
+    // Start Table Columns names
     private static final String COLUMN_START_ID = "start_id";
     private static final String COLUMN_START_ORDER = "start_order";
     private static final String COLUMN_START_STAGE = "start_stage";
@@ -54,6 +54,7 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Method to remove all entries from the database
     public void empty() {
         List<Start> startList = getAllStarts();
         for (int i = 0; i < startList.size(); i++) {
@@ -61,6 +62,7 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Method to add an entry to the database
     public void addStart(Start start) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -75,6 +77,7 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to return the car number of the entry with the given stage number and start order
     public int getCarNum(int stageNum, int startOrder) {
         // array of columns to fetch
         String[] columns = {
@@ -105,36 +108,7 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         return carNum;
     }
 
-    public int getStartID(int stage, int carNum) {
-        // array of columns to fetch
-        String[] columns = {
-                COLUMN_START_ID
-        };
-        SQLiteDatabase db = this.getReadableDatabase();
-        // selection criteria
-        String selection = COLUMN_START_STAGE + " = ?" + " AND " + COLUMN_START_CARNUM + " = ?";
-        // selection argument
-        String[] selectionArgs = {String.valueOf(stage), String.valueOf(carNum)};
-        // query user table with condition
-
-        Cursor cursor = db.query(TABLE_START, //Table to query
-                columns,                    //columns to return
-                selection,                  //columns for the WHERE clause
-                selectionArgs,              //The values for the WHERE clause
-                null,                       //group the rows
-                null,                      //filter by row groups
-                null);                      //The sort order
-
-        int startID = 0;
-        if (cursor.moveToFirst()) {
-            startID = cursor.getInt(0);
-        }
-        cursor.close();
-        db.close();
-
-        return startID;
-    }
-
+    // Method to return the entry with the given ID
     @SuppressLint("Range")
     public Start getStart(int startID) {
         String[] columns = {
@@ -175,6 +149,7 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         return start;
     }
 
+    // Method to return the entry with the given stage and car number
     @SuppressLint("Range")
     public Start getStartByCarNum(int stageNum, int carNum) {
         String[] columns = {
@@ -215,6 +190,7 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         return start;
     }
 
+    // Method to return the entry with the given stage number and start order
     @SuppressLint("Range")
     public Start getStart(int stageNum, int startOrder) {
         String[] columns = {
@@ -255,6 +231,7 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         return start;
     }
 
+    // Method to return a list of all entries in the database
     @SuppressLint("Range")
     public List<Start> getAllStarts() {
         String[] columns = {
@@ -295,6 +272,7 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         return startList;
     }
 
+    // Method to update an entry in the database
     public void updateStart(Start start) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -308,14 +286,15 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to delete an entry in the database
     public void deleteStart(Start start) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // delete user record by username
         db.delete(TABLE_START, COLUMN_START_ID + " = ?",
                 new String[]{String.valueOf(start.getStartID())});
         db.close();
     }
 
+    // Method to return a list of all entries with the given stage number
     @SuppressLint("Range")
     public List<Start> getStage(int stageNum) {
         String[] columns = {
@@ -360,6 +339,8 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         return startList;
     }
 
+    // Method to return the start order of the most recently added database
+    // entry with the given stage number
     @SuppressLint("Range")
     public int getCurrStartOrder(int stage) {
         String[] columns = {
@@ -393,6 +374,7 @@ public class StartDatabaseHelper extends SQLiteOpenHelper {
         return currSO;
     }
 
+    // Check if an entry with the given stage and car number exists
     public boolean checkStart(int stage, int carNum) {
         // array of columns to fetch
         String[] columns = {

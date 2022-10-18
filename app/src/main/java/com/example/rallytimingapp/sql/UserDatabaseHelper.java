@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.User;
 
 import java.util.ArrayList;
@@ -54,6 +53,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Method to remove all entries from the database
     public void empty() {
         List<User> userList = getAllUsers();
         for (int i = 0; i < userList.size(); i++) {
@@ -61,6 +61,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Method to add an entry to the database
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -75,6 +76,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to return the entry with the given username and role
     @SuppressLint("Range")
     public User getUser(String username, String role) {
         String[] columns = {
@@ -115,6 +117,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
+    // Method to return the entry with the given role and associated role ID
     @SuppressLint("Range")
     public User getUserByRoleID(String role, int roleID) {
         String[] columns = {
@@ -155,6 +158,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
+    // Method to return a list of all entries in the database
     @SuppressLint("Range")
     public List<User> getAllUsers() {
         String[] columns = {
@@ -195,6 +199,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return userList;
     }
 
+    // Method to return a list of all entries with the given role
     @SuppressLint("Range")
     public List<User> getAllOfRole(String role) {
         String[] columns = {
@@ -240,6 +245,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return userList;
     }
 
+    // Method to update an entry in the database
     public void updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -253,14 +259,15 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to delete an entry from the database
     public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // delete user record by username
         db.delete(TABLE_USER, COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(user.getUserId())});
         db.close();
     }
 
+    // Method to check if an entry with the given username exists
     public boolean checkUser(String username) {
         // array of columns to fetch
         String[] columns = {
@@ -289,6 +296,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    // Method to check if an entry with the given role and associated id exists
     public boolean checkUser(String role, int id) {
         // array of columns to fetch
         String[] columns = {
@@ -317,6 +325,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    // Method to check if a user exists which has the given username, password and role
     public boolean checkUser(String username, String password, String role) {
         // array of columns to fetch
         String[] columns = {

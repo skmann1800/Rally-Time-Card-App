@@ -20,10 +20,10 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "AControlManager.db";
 
-    // User table name
+    // A Control table name
     private static final String TABLE_ACONTROL = "acontrol";
 
-    // User Table Columns names
+    // A Control Table Columns names
     private static final String COLUMN_AC_ID = "acontrol_id";
     private static final String COLUMN_AC_SO = "acontrol_start_order";
     private static final String COLUMN_AC_STAGE = "acontrol_stage";
@@ -55,6 +55,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Method to empty the database of all entries
     public void empty() {
         List<AControl> aControlList = getAllAControl();
         for (int i = 0; i < aControlList.size(); i++) {
@@ -62,6 +63,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Method to add an entry to the database, takes an A Control object as a parameter
     public void addAControl(AControl aControl) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -77,6 +79,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to return the start order relating to the stage and car number given
     public int getStartOrder(int stage, int carNum) {
         // array of columns to fetch
         String[] columns = {
@@ -107,6 +110,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         return startOrder;
     }
 
+    // Method to get the car number relating to the given stage and start order
     public int getCarNum(int stageNum, int startOrder) {
         // array of columns to fetch
         String[] columns = {
@@ -137,6 +141,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         return carNum;
     }
 
+    // Method to return the ID in this database for the given stage and car number
     public int getAControlID(int stage, int carNum) {
         // array of columns to fetch
         String[] columns = {
@@ -167,6 +172,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         return aControlID;
     }
 
+    // Method to return the A Control object with the given ID
     @SuppressLint("Range")
     public AControl getAControl(int aControlID) {
         String[] columns = {
@@ -209,6 +215,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         return aControl;
     }
 
+    // Method to return the A Control object with the given stage number and start order
     @SuppressLint("Range")
     public AControl getAControl(int stageNum, int startOrder) {
         String[] columns = {
@@ -251,6 +258,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         return aControl;
     }
 
+    // Method to return a list of all A Control objects currently in the database
     @SuppressLint("Range")
     public List<AControl> getAllAControl() {
         String[] columns = {
@@ -293,6 +301,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         return aControlList;
     }
 
+    // Method to update and entry in the A Control database
     public void updateAControl(AControl aControl) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -307,14 +316,15 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to delete the given A Control object from the database
     public void deleteAControl(AControl aControl) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // delete user record by username
         db.delete(TABLE_ACONTROL, COLUMN_AC_ID + " = ?",
                 new String[]{String.valueOf(aControl.getAControlID())});
         db.close();
     }
 
+    // Method to return a list of A Control objects with the given stage number
     @SuppressLint("Range")
     public List<AControl> getStage(int stageNum) {
         String[] columns = {
@@ -361,6 +371,8 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         return aControlList;
     }
 
+    // Method to return the start order of the most recently added database
+    // entry with the given stage number
     @SuppressLint("Range")
     public int getCurrStartOrder(int stage) {
         String[] columns = {
@@ -394,6 +406,7 @@ public class AControlDatabaseHelper extends SQLiteOpenHelper {
         return currSO;
     }
 
+    // Check if there is a database entry with the given stage and car number
     public boolean checkAControl(int stage, int carNum) {
         // array of columns to fetch
         String[] columns = {

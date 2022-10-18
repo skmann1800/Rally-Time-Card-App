@@ -1,13 +1,15 @@
 package com.example.rallytimingapp.model;
 
 public class Finish {
+    // Object for each entry to Finish database
 
-    private int finishID;
-    private int finishOrder;
-    private int stage;
-    private int carNum;
-    private int stageID;
+    private int finishID; // Unique ID for this database
+    private int finishOrder; // Finish order for this stage
+    private int stage; // Stage number
+    private int carNum; // Car number
+    private int stageID; // Unique stage ID for the competitor for this stage
 
+    // Getters and setters for each parameter
     public int getFinishID() {
         return finishID;
     }

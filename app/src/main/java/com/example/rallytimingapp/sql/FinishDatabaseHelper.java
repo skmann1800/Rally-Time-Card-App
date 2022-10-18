@@ -20,10 +20,10 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "FinishManager.db";
 
-    // User table name
+    // Finish table name
     private static final String TABLE_FINISH = "finish";
 
-    // User Table Columns names
+    // FInish Table Columns names
     private static final String COLUMN_FINISH_ID = "finish_id";
     private static final String COLUMN_FINISH_ORDER = "finish_order";
     private static final String COLUMN_FINISH_STAGE = "finish_stage";
@@ -54,6 +54,7 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Method to remove all entries from the database
     public void empty() {
         List<Finish> finishList = getAllFinish();
         for (int i = 0; i < finishList.size(); i++) {
@@ -61,6 +62,7 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Method to add an entry to the database
     public void addFinish(Finish finish) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -75,36 +77,7 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int getFinishOrder(int stage, int carNum) {
-        // array of columns to fetch
-        String[] columns = {
-                COLUMN_FINISH_ORDER
-        };
-        SQLiteDatabase db = this.getReadableDatabase();
-        // selection criteria
-        String selection = COLUMN_FINISH_STAGE + " = ?" + " AND " + COLUMN_FINISH_CARNUM + " = ?";
-        // selection argument
-        String[] selectionArgs = {String.valueOf(stage), String.valueOf(carNum)};
-        // query user table with condition
-
-        Cursor cursor = db.query(TABLE_FINISH, //Table to query
-                columns,                    //columns to return
-                selection,                  //columns for the WHERE clause
-                selectionArgs,              //The values for the WHERE clause
-                null,                       //group the rows
-                null,                      //filter by row groups
-                null);                      //The sort order
-
-        int finishOrder = 0;
-        if (cursor.moveToFirst()) {
-            finishOrder = cursor.getInt(0);
-        }
-        cursor.close();
-        db.close();
-
-        return finishOrder;
-    }
-
+    // Method to return the car number of the entry with the given stage number and finish order
     public int getCarNum(int stageNum, int finishOrder) {
         // array of columns to fetch
         String[] columns = {
@@ -135,6 +108,7 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         return carNum;
     }
 
+    // Method to return the ID of the entry with the given stage and car number
     public int getFinishID(int stage, int carNum) {
         // array of columns to fetch
         String[] columns = {
@@ -165,6 +139,7 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         return finishID;
     }
 
+    // Method to return the entry with the given ID
     @SuppressLint("Range")
     public Finish getFinish(int finishID) {
         String[] columns = {
@@ -205,6 +180,7 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         return finish;
     }
 
+    // Method to return the entry with the given stage number and finish order
     @SuppressLint("Range")
     public Finish getFinish(int stageNum, int finishOrder) {
         String[] columns = {
@@ -245,6 +221,7 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         return finish;
     }
 
+    // Method to return a list of all the entries in the database
     @SuppressLint("Range")
     public List<Finish> getAllFinish() {
         String[] columns = {
@@ -285,6 +262,7 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         return finishList;
     }
 
+    // Method to update an entry in the database
     public void updateFinish(Finish finish) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -298,14 +276,15 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to delete an entry in the database
     public void deleteFinish(Finish finish) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // delete user record by username
         db.delete(TABLE_FINISH, COLUMN_FINISH_ID + " = ?",
                 new String[]{String.valueOf(finish.getFinishID())});
         db.close();
     }
 
+    // Method to return a list of all entries with the given stage number
     @SuppressLint("Range")
     public List<Finish> getStage(int stageNum) {
         String[] columns = {
@@ -350,6 +329,8 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         return finishList;
     }
 
+    // Method to return the finish order of the most recently added database
+    // entry with the given stage number
     @SuppressLint("Range")
     public int getCurrFinishOrder(int stage) {
         String[] columns = {
@@ -383,6 +364,7 @@ public class FinishDatabaseHelper extends SQLiteOpenHelper {
         return currFO;
     }
 
+    // Method to check if an entry exists with the given stage and car number
     public boolean checkFinish(int stage, int carNum) {
         // array of columns to fetch
         String[] columns = {

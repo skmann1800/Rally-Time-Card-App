@@ -20,10 +20,10 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "TimingCrewManager.db";
 
-    // User table name
+    // Timing Crew table name
     private static final String TABLE_TIMING_CREW = "timing_crew";
 
-    // User Table Columns names
+    // Timing Crew Table Columns names
     private static final String COLUMN_CREW_ID = "crew_id";
     private static final String COLUMN_CREW_POSITION = "crew_position";
     private static final String COLUMN_CREW_POSTCHIEF = "crew_post_chief";
@@ -52,6 +52,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Method to add an entry to the database
     public void addTimingCrew(TimingCrew crew) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -65,6 +66,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to return the ID of the entry with the given position and post chief name
     public int getCrewId(String position, String postChief) {
         // array of columns to fetch
         String[] columns = {
@@ -95,6 +97,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         return crewID;
     }
 
+    // Method to remove all entries from the database
     public void empty() {
         List<TimingCrew> crewList = getAllTimingCrews();
         for (int i = 0; i < crewList.size(); i++) {
@@ -102,6 +105,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Method to return the entry with the given ID
     @SuppressLint("Range")
     public TimingCrew getTimingCrewByID(int crewID) {
         String[] columns = {
@@ -140,6 +144,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         return crew;
     }
 
+    // Method to return the entry with the given position and post chief name
     @SuppressLint("Range")
     public TimingCrew getTimingCrewByPostChief(String role, String postChief) {
         String[] columns = {
@@ -178,6 +183,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         return crew;
     }
 
+    // Method to return a list of all entries in the database
     @SuppressLint("Range")
     public List<TimingCrew> getAllTimingCrews() {
         String[] columns = {
@@ -216,6 +222,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         return crewList;
     }
 
+    // Method to return a list of all entries with the given position
     @SuppressLint("Range")
     public List<TimingCrew> getTimingCrewsByPosition(String position) {
         String[] columns = {
@@ -259,6 +266,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         return crewList;
     }
 
+    // Method to update an entry in the database
     public void updateTimingCrew(TimingCrew crew) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -271,14 +279,15 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to delete an entry in the database
     public void deleteTimingCrew(TimingCrew timingCrew) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // delete user record by username
         db.delete(TABLE_TIMING_CREW, COLUMN_CREW_ID + " = ?",
                 new String[]{String.valueOf(timingCrew.getCrewId())});
         db.close();
     }
 
+    // Method to check if an entry with the given position and post chief name exists
     public boolean checkTimingCrew(String position, String postChief) {
         // array of columns to fetch
         String[] columns = {

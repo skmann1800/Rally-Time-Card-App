@@ -1,16 +1,18 @@
 package com.example.rallytimingapp.model;
 
 public class Competitor {
+    // Object for each entry to Competitor database
 
-    private int compId;
-    private int carNum;
-    private String driver;
-    private String codriver;
-    private int stage1Id;
-    private int stage2Id;
-    private int stage3Id;
-    private int stage4Id;
+    private int compId; // Unique ID for this database
+    private int carNum; // Car number
+    private String driver; // Driver's name
+    private String codriver; // Codriver's name
+    private int stage1Id; // Unique ID for this competitors stage 1 in the stage database
+    private int stage2Id; // Unique ID for this competitors stage 2 in the stage database
+    private int stage3Id; // Unique ID for this competitors stage 3 in the stage database
+    private int stage4Id; // Unique ID for this competitors stage 4 in the stage database
 
+    // Getters and setters for each parameter
     public int getCompId() {
         return compId;
     }
@@ -43,6 +45,7 @@ public class Competitor {
         this.codriver = codriver;
     }
 
+    // Get the stage ID for that competitor for the given stage
     public int getStageId(int stage) {
         int stageID = 0;
         switch (stage) {

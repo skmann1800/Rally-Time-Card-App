@@ -1,13 +1,15 @@
 package com.example.rallytimingapp.model;
 
 public class User {
+    // Object for each entry to Timing Crew database
 
-    private int userId;
-    private String username;
-    private String password;
-    private String role;
-    private int id;
+    private int userId; // Unique ID for this database
+    private String username; // Username for logging in with
+    private String password; // Password for logging in with
+    private String role; // Role, ie Competitor, A Control, Start, Finish or Admin
+    private int id; // Unique ID relating to users ID in their roles database
 
+    // Getters and setters for each parameter
     public int getUserId() {
         return userId;
     }

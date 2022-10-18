@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.rallytimingapp.model.AControl;
 import com.example.rallytimingapp.model.Competitor;
 
 import java.util.ArrayList;
@@ -21,10 +20,10 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "CompetitorManager.db";
 
-    // User table name
+    // Competitor table name
     private static final String TABLE_COMP = "competitor";
 
-    // User Table Columns names
+    // Competitor Table Columns names
     private static final String COLUMN_COMP_ID = "_id";
     private static final String COLUMN_COMP_CARNUM = "competitor_carNum";
     private static final String COLUMN_COMP_DRIVER = "competitor_driver";
@@ -59,6 +58,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Method to add a new entry to the database
     public void addCompetitor(Competitor competitor) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -106,6 +106,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         return compID;
     }
 
+    // Method to remove all entries from the database
     public void empty() {
         List<Competitor> competitorList = getAllCompetitors();
         for (int i = 0; i < competitorList.size(); i++) {
@@ -113,6 +114,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    // Method to return the Competitor with the given ID
     @SuppressLint("Range")
     public Competitor getCompetitorByID(int compID) {
         String[] columns = {
@@ -159,6 +161,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         return competitor;
     }
 
+    // Method to return the Competitor with the given car number
     @SuppressLint("Range")
     public Competitor getCompetitorByCarNum(int carNum) {
         String[] columns = {
@@ -205,6 +208,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         return competitor;
     }
 
+    // Method to return the Competitor with the given driver's name
     @SuppressLint("Range")
     public Competitor getCompetitorByDriver(String driver) {
         String[] columns = {
@@ -251,6 +255,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         return competitor;
     }
 
+    // Method to return a list of all Competitors in the database
     @SuppressLint("Range")
     public List<Competitor> getAllCompetitors() {
         String[] columns = {
@@ -297,27 +302,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         return competitorList;
     }
 
-    @SuppressLint("Range")
-    public Cursor getCursor() {
-        String[] columns = {
-                COLUMN_COMP_ID,
-                COLUMN_COMP_DRIVER,
-                COLUMN_COMP_CARNUM
-        };
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_COMP, //Table to query
-                columns,             //columns to return
-                null,        //columns for the WHERE clause
-                null,     //The values for the WHERE clause
-                null,        //group the rows
-                null,         //filter by row groups
-                null);         //The sort order
-
-        return cursor;
-    }
-
+    // Method to update an entry in the database
     public void updateCompetitor(Competitor competitor) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -334,14 +319,15 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to delete an entry in the database
     public void deleteCompetitor(Competitor competitor) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // delete user record by username
         db.delete(TABLE_COMP, COLUMN_COMP_ID + " = ?",
                 new String[]{String.valueOf(competitor.getCompId())});
         db.close();
     }
 
+    // Method to check if there is an entry in the database with the given car number
     public boolean checkCompetitor(int carNum) {
         // array of columns to fetch
         String[] columns = {
@@ -370,6 +356,7 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    // Method to check if there is an entry in the database with the given driver's name
     public boolean checkCompetitor(String driver) {
         // array of columns to fetch
         String[] columns = {
@@ -388,34 +375,6 @@ public class CompDatabaseHelper extends SQLiteOpenHelper {
                 selectionArgs,              //The values for the WHERE clause
                 null,                       //group the rows
                 null,                      //filter by row groups
-                null);                      //The sort order
-        int cursorCount = cursor.getCount();
-        cursor.close();
-        db.close();
-        if (cursorCount > 0) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean checkCompetitor(String carNum, String driver, String codriver) {
-        // array of columns to fetch
-        String[] columns = {
-                COLUMN_COMP_ID
-        };
-        SQLiteDatabase db = this.getReadableDatabase();
-        // selection criteria
-        String selection = COLUMN_COMP_CARNUM + " = ?" + " AND " + COLUMN_COMP_DRIVER + " = ?" + " AND " + COLUMN_COMP_CODRIVER + " = ?";
-        // selection arguments
-        String[] selectionArgs = {carNum, driver, codriver};
-        // query user table with conditions
-
-        Cursor cursor = db.query(TABLE_COMP, //Table to query
-                columns,                    //columns to return
-                selection,                  //columns for the WHERE clause
-                selectionArgs,              //The values for the WHERE clause
-                null,                       //group the rows
-                null,                       //filter by row groups
                 null);                      //The sort order
         int cursorCount = cursor.getCount();
         cursor.close();

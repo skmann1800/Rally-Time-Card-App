@@ -126,9 +126,13 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         initObjects();
         initListeners();
 
+        // Retrieve stage number from intent
         stageNum = getIntent().getIntExtra("STAGE", 0);
+        // Set default start order to be 1
         startOrder = 1;
+        // Fill in the timecards
         fillInCards();
+        // Based on the stage number, fill in the labels as follows
         switch (stageNum) {
             case 1:
                 stageNumTV.setText(R.string.s1control);
@@ -224,6 +228,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initObjects() {
+        // Initialise the objects needed for this class
         stageDatabaseHelper = new StageDatabaseHelper(activity);
         aControlDatabaseHelper = new AControlDatabaseHelper(activity);
         startDatabaseHelper = new StartDatabaseHelper(activity);
@@ -235,6 +240,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews() {
+        // Initialise the views used in this class
         scrollView = findViewById(R.id.ControlScrollView);
 
         carNumTV = findViewById(R.id.ControlCarNum);
@@ -284,6 +290,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         stageTimeS1 = findViewById(R.id.CTC1TTS);
         stageTimeMS1 = findViewById(R.id.CTC1TTMS);
         actualTimeH1 = findViewById(R.id.CTC1ATH);
+        // Add a text changed listener to prevent users from inputting an invalid input
+        // And to move onto the next text box, once this one is full
         actualTimeH1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -292,12 +300,17 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The max input length is 2 digits
                 if(actualTimeH1.getText().toString().length()==2)
                 {
+                    // This box contains the hours of a time, so this input cannot be
+                    // larger than 24
                     if (Integer.valueOf(actualTimeH1.getText().toString()) > 24) {
+                        // If input is larger than 24, reset the text and display an error message.
                         actualTimeH1.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // If the input is valid, move to the next text box
                         actualTimeH1.clearFocus();
                         actualTimeM1.requestFocus();
                         actualTimeM1.setCursorVisible(true);
@@ -311,6 +324,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         actualTimeM1 = findViewById(R.id.CTC1ATM);
+        // Add a text changed listener to prevent users from inputting an invalid input
+        // And to autofill the next box
         actualTimeM1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -319,24 +334,38 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The max input length is 2 digits
                 if(actualTimeM1.getText().toString().length()==2)
                 {
+                    // This box contains the minutes of a time, so this input cannot be
+                    // larger than 59
                     if (Integer.valueOf(actualTimeM1.getText().toString()) > 59) {
+                        // If input is larger than 59, reset the text and display an error message.
                         actualTimeM1.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // Otherwise, move to the next box.
                         actualTimeM1.clearFocus();
                         provStartH2.requestFocus();
                         provStartH2.setCursorVisible(true);
+                        // Save the values that are now in the actual time boxes
                         int actualTimeH = Integer.valueOf(actualTimeH1.getText().toString());
                         int actualTimeM = Integer.valueOf(actualTimeM1.getText().toString());
+                        // Calculate the minutes +3
                         int provStartM = actualTimeM + 3;
+                        // If that total is larger than 59, we move to the next hour
                         if (provStartM > 59) {
+                            // Fill in the provisional start hours as the next hour
                             provStartH2.setText(String.valueOf(actualTimeH + 1));
+                            // Then fill in the minutes, starting with a 0, as this result
+                            // will only ever be 0, 1 or 2
                             provStartM2.setText("0" + (provStartM - 60));
                         } else {
+                            // If it is less that 59, then fill in the same hour value
                             provStartH2.setText(String.valueOf(actualTimeH));
                             String mins = String.valueOf(provStartM);
+                            // If there is less than 1 digit in the minutes, add a 0
+                            // to make it 2 digits
                             if (mins.length() < 2) {
                                 provStartM2.setText("0" + mins);
                             } else {
@@ -356,6 +385,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
         startOrder2 = findViewById(R.id.CTC2Oval);
         provStartH2 = findViewById(R.id.CTC2PSH);
+        // Add a text changed listener to prevent users from inputting an invalid input
+        // And to move onto the next text box, once this one is full
         provStartH2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -364,12 +395,16 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Max input length is 2
                 if(provStartH2.getText().toString().length()==2)
                 {
+                    // This is an hours box, so input can't be larger than 24
                     if (Integer.valueOf(provStartH2.getText().toString()) > 24) {
+                        // If input is larger than 24, reset the text and show error message
                         provStartH2.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // If input is valid, move to the next box
                         provStartH2.clearFocus();
                         provStartM2.requestFocus();
                         provStartM2.setCursorVisible(true);
@@ -383,20 +418,25 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         provStartM2 = findViewById(R.id.CTC2PSM);
+        // Add a text changed listener to prevent users from inputting an invalid input
+        // And to move onto the next text box, once this one is full
         provStartM2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Max input length is 2
                 if(provStartM2.getText().toString().length()==2)
                 {
+                    // This is a minutes box, so input can't be larger than 59
                     if (Integer.valueOf(provStartM2.getText().toString()) > 59) {
+                        // If input is larger than 59, reset text and show error message
                         provStartM2.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // If input is valid, move to next box
                         provStartM2.clearFocus();
                         startOrder2.requestFocus();
                         startOrder2.setCursorVisible(true);
@@ -406,7 +446,6 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
         actualStartH2 = findViewById(R.id.CTC2ASH);
@@ -425,6 +464,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initListeners() {
+        // Initialise listeners for the buttons
         backButton.setOnClickListener(this);
         changeSOButton.setOnClickListener(this);
         returnTCButton.setOnClickListener(this);
@@ -434,37 +474,52 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
+        // Switch case for each button
         switch (view.getId()) {
             case R.id.CTCBackButton:
+                // Back button goes back to the choose control activity
                 Intent intent = new Intent(this, ChooseControlActivity.class);
                 startActivity(intent);
                 break;
             case R.id.CChangeSOButton:
+                // Change start order button shows a pop-up
                 ShowChangeSOPopup();
                 break;
             case R.id.CReturnButton:
+                // Return timecard button shows a pop-up
                 ShowReturnTCPopup();
                 break;
             case R.id.ControlPrevButton:
+                // Left arrow button goes to the previous start order
                 previousTC();
                 break;
             case R.id.ControlNextButton:
+                // Left arrow button goes to the next start order
                 nextTC();
                 break;
         }
     }
 
     private void fillInCards() {
+        // Fill in the text boxes of the timecards, if there is at least one entry in the database
         if (aControlDatabaseHelper.getStage(stageNum).size() != 0) {
+            // Get the number of the car in the current start order
             carNum = aControlDatabaseHelper.getCarNum(stageNum, startOrder);
             carNumTV.setText(String.valueOf(carNum));
+            // Get the A Control Database entry for the current stage and car number
             aControl = aControlDatabaseHelper.getAControl(aControlDatabaseHelper.getAControlID(stageNum, carNum));
             startOrderTV.setText(String.valueOf(startOrder));
+
+            // If it is stage 1, the first timecard is not visible, so only fill it in
+            // if the stage is not stage 1
             if (stageNum != 1) {
+                // Set what text box the focus will start on
                 actualStartH1.requestFocus();
                 actualStartH1.setCursorVisible(true);
+                // Get the first stage, which contains all the data, from the aControl object
                 stage = stageDatabaseHelper.getStage(aControl.getStage1ID());
                 startOrder1.setText(String.valueOf(stage.getStartOrder()));
+                // Fill in the timecard with the data from the stage object
                 provStartH1.setText(stage.getProvStartH());
                 provStartM1.setText(stage.getProvStartM());
                 actualStartH1.setText(stage.getActualStartH());
@@ -481,16 +536,23 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 dueTimeH1.setText(stage.getDueTimeH());
                 dueTimeM1.setText(stage.getDueTimeM());
             } else {
+                // If it is stage 1, set a different focus
                 provStartH2.requestFocus();
                 provStartH2.setCursorVisible(true);
             }
+            // All stages need the 2nd timecard filled in
+            // Get the second stage, which contains all the data, from the aControl object
             stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
+            // If the start order has not yet been set, it was initialised to be 0.
+            // If the start order is 0, change it to the current start order.
+            // Otherwise, use the value it is set to.
             int sOrder = stage.getStartOrder();
             if (sOrder == 0) {
                 startOrder2.setText(String.valueOf(startOrder));
             } else {
                 startOrder2.setText(String.valueOf(sOrder));
             }
+            // Fill in the rest of the timecard using the stage object
             provStartH2.setText(stage.getProvStartH());
             provStartM2.setText(stage.getProvStartM());
             actualStartH2.setText(stage.getActualStartH());
@@ -507,13 +569,16 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             dueTimeH2.setText(stage.getDueTimeH());
             dueTimeM2.setText(stage.getDueTimeM());
         } else {
+            // If there are no entries in the database, set the car number to
+            // null and the start order to 0 and leave everything else blank.
             carNumTV.setText("");
             startOrderTV.setText("0");
         }
-
     }
 
     private void ShowChangeSOPopup() {
+        // Displays a pop-up to confirm if the user wants to change the start order
+        // and what they want to change it to
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
@@ -532,90 +597,58 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         Button leftSO = layout.findViewById(R.id.LeftSOButton);
         Button rightSO = layout.findViewById(R.id.RightSOButton);
 
+        // Get the A Control Database entry for the current start order
         AControl currAControl = aControlDatabaseHelper.getAControl(stageNum, startOrder);
 
+        // Get the start order of the last entry to the A Control database,
+        // This will be used to ensure that a swap is not made with a start order that doesn't exist yet
         int currSO = aControlDatabaseHelper.getCurrStartOrder(stageNum);
+        // Get the start order before and after the current one
         int prevSO = startOrder - 1;
         int nextSO = startOrder + 1;
+        // If the previous start order is less than one, set the left button text to "-",
+        // as it is not possible to switch to start order 0
         if (prevSO < 1) {
             leftSO.setText("-");
         } else {
+            // Otherwise set the text of the left button to the value of prevSO
             leftSO.setText(String.valueOf(prevSO));
+            // Add an on click listener for this button
             leftSO.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AControl aControl2 = aControlDatabaseHelper.getAControl(stageNum, prevSO);
-                    currAControl.setStartOrder(prevSO);
-                    aControlDatabaseHelper.updateAControl(currAControl);
-                    carNum = currAControl.getCarNum();
-                    /*if (startDatabaseHelper.checkStart(stageNum, carNum)) {
-                        Start start = startDatabaseHelper.getStart(startDatabaseHelper.getStartID(stageNum, carNum));
-                        start.setStartOrder(prevSO);
-                        startDatabaseHelper.updateStart(start);
-                    }*/
-                    stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
-                    stage.setStartOrder(prevSO);
-                    stageDatabaseHelper.updateStage(stage);
-                    addToStart(carNum);
+                    // Call the method to swap the start orders
+                    swap(startOrder, prevSO);
 
-                    aControl2.setStartOrder(startOrder);
-                    aControlDatabaseHelper.updateAControl(aControl2);
-                    carNum = aControl2.getCarNum();
-                    /*if (startDatabaseHelper.checkStart(stageNum, carNum)) {
-                        Start start = startDatabaseHelper.getStart(startDatabaseHelper.getStartID(stageNum, carNum));
-                        start.setStartOrder(startOrder);
-                        startDatabaseHelper.updateStart(start);
-                    }*/
-                    stage = stageDatabaseHelper.getStage(aControl2.getStage2ID());
-                    stage.setStartOrder(startOrder);
-                    stageDatabaseHelper.updateStage(stage);
-                    addToStart(carNum);
-
+                    // Dismiss the pop-up then fill in the cards again
                     changeSOPopup.dismiss();
                     fillInCards();
                 }
             });
         }
+        // If the next start order is larger than the most recent start order to be added,
+        // then there is no entry in the database, so a swap is not possible, so set right button
+        // text to "-"
         if (nextSO > currSO) {
             rightSO.setText("-");
         } else {
+            // Otherwise set the text to the next start order.
             rightSO.setText(String.valueOf(nextSO));
+            // Set an on click listener for this button
             rightSO.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AControl aControl2 = aControlDatabaseHelper.getAControl(stageNum, nextSO);
-                    currAControl.setStartOrder(nextSO);
-                    aControlDatabaseHelper.updateAControl(currAControl);
-                    carNum = currAControl.getCarNum();
-                    /*if (startDatabaseHelper.checkStart(stageNum, carNum)) {
-                        Start start = startDatabaseHelper.getStart(startDatabaseHelper.getStartID(stageNum, carNum));
-                        start.setStartOrder(nextSO);
-                        startDatabaseHelper.updateStart(start);
-                    }*/
-                    stage = stageDatabaseHelper.getStage(currAControl.getStage2ID());
-                    stage.setStartOrder(nextSO);
-                    stageDatabaseHelper.updateStage(stage);
-                    addToStart(carNum);
+                    // Call the method to swap the start orders
+                    swap(startOrder, nextSO);
 
-                    aControl2.setStartOrder(startOrder);
-                    aControlDatabaseHelper.updateAControl(aControl2);
-                    carNum = aControl2.getCarNum();
-                    /*if (startDatabaseHelper.checkStart(stageNum, carNum)) {
-                        Start start = startDatabaseHelper.getStart(startDatabaseHelper.getStartID(stageNum, carNum));
-                        start.setStartOrder(startOrder);
-                        startDatabaseHelper.updateStart(start);
-                    }*/
-                    stage = stageDatabaseHelper.getStage(aControl2.getStage2ID());
-                    stage.setStartOrder(startOrder);
-                    stageDatabaseHelper.updateStage(stage);
-                    addToStart(carNum);
-
+                    // Dismiss the pop-up then fill in the cards again
                     changeSOPopup.dismiss();
                     fillInCards();
                 }
             });
         }
 
+        // Cancel button which closes the pop-up
         Button cancel = layout.findViewById(R.id.CancelButton);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -625,7 +658,42 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    public void swap(int currSO, int newSO) {
+        // Get the A Control Database entry for the current start order
+        AControl currAControl = aControlDatabaseHelper.getAControl(stageNum, currSO);
+        // Get the A Control database entry of the new start order
+        AControl aControl2 = aControlDatabaseHelper.getAControl(stageNum, newSO);
+        // Change the current entries start order and update the database
+        currAControl.setStartOrder(newSO);
+        aControlDatabaseHelper.updateAControl(currAControl);
+        // Get the car number of the current entry
+        carNum = currAControl.getCarNum();
+        // Get the stage database entry for the current entry
+        stage = stageDatabaseHelper.getStage(currAControl.getStage2ID());
+        // Change the start order in the stage database and update it
+        stage.setStartOrder(newSO);
+        stageDatabaseHelper.updateStage(stage);
+        // Call the method to add this car to the start database
+        addToStart(carNum);
+
+        // Set the start order of the other entry to the current start order and
+        // update the a control database
+        aControl2.setStartOrder(currSO);
+        aControlDatabaseHelper.updateAControl(aControl2);
+        // Get the car number of the other entry
+        carNum = aControl2.getCarNum();
+        // Get the stage database entry for the other entry
+        stage = stageDatabaseHelper.getStage(aControl2.getStage2ID());
+        // Change the start order in the stage database and update it
+        stage.setStartOrder(currSO);
+        stageDatabaseHelper.updateStage(stage);
+        // Call the method to add this car to the start database
+        addToStart(carNum);
+    }
+
     private void ShowReturnTCPopup() {
+        // Pop-up to confirm if the user wants to return the data to the competitor
+        // and add them to the start database
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
@@ -641,38 +709,46 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         returnTCPopup.setBackgroundDrawable(null);
         returnTCPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
+        // Get the database entry at the current start order and get the car number
         aControl = aControlDatabaseHelper.getAControl(stageNum, startOrder);
         carNum = aControl.getCarNum();
         String currCarNum = String.valueOf(carNum);
         TextView text = layout.findViewById(R.id.ReturnTC);
+        // Change the text to include the car number
         text.setText("Return Time Card to Car " + currCarNum + "?");
 
         Button yesReturn = layout.findViewById(R.id.YesReturnButton);
+        // Set on click listener for yes button
         yesReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                carNum = Integer.parseInt(carNumTV.getText().toString());
+                // If it is stage 1, the first timecard is not visible,
+                // so doesn't need to be saved
                 if (stageNum != 1) {
+                    // Get the first stage entry for the current a control entry
                     stage = stageDatabaseHelper.getStage(aControl.getStage1ID());
-                    String inputATH = actualTimeH1.getText().toString();
-                    String inputATM = actualTimeM1.getText().toString();
-                    stage.setActualTime(inputATH + ":" + inputATM);
+                    stage.setActualTime(actualTimeH1.getText().toString(), actualTimeM1.getText().toString());
+                    // Save the time that was put into the actual time boxes as a string
+                    // and update the entry in the stage database
                     stageDatabaseHelper.updateStage(stage);
                 }
+                // Get the second stage entry for the current a control entry
                 stage = stageDatabaseHelper.getStage(aControl.getStage2ID());
-                String inputPSH = provStartH2.getText().toString();
-                String inputPSM = provStartM2.getText().toString();
-                stage.setProvStart(inputPSH + ":" + inputPSM);
+                stage.setProvStart(provStartH2.getText().toString(), provStartM2.getText().toString());
+                // Save the time that was put into the provisional time boxes as a string
                 String inputSO = startOrder2.getText().toString();
                 stage.setStartOrder(Integer.valueOf(inputSO));
+                // Save the start order that was entered
+                // and update the entry in the stage database
                 stageDatabaseHelper.updateStage(stage);
+                // Dismiss the pop-up then add the car to the start database
                 returnTCPopup.dismiss();
-
                 addToStart(carNum);
             }
         });
 
         Button noReturn = layout.findViewById(R.id.NoReturnButton);
+        // Add an on click listener for the no button, which just dismisses the pop-up
         noReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -682,32 +758,50 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void addToStart(int currCarNum) {
+        // Method to add a car to the start database
+        // Check if the car has already been added
         if (!startDatabaseHelper.checkStart(stageNum, currCarNum)) {
-            int currSO = Integer.parseInt(startOrderTV.getText().toString());
-            start.setStartOrder(currSO);
-            start.setStage(stageNum);
-            start.setCarNum(currCarNum);
+            Start newStart = new Start();
+            // If not, get the start order for that car
+            int currSO = aControlDatabaseHelper.getStartOrder(stageNum, currCarNum);
+            // Set the start order, stage number and car number
+            newStart.setStartOrder(currSO);
+            newStart.setStage(stageNum);
+            newStart.setCarNum(currCarNum);
+            // Get the id of the stage database entry and save that
             competitor = compDatabaseHelper.getCompetitorByCarNum(currCarNum);
-            start.setStageID(competitor.getStageId(stageNum));
-            startDatabaseHelper.addStart(start);
+            newStart.setStageID(competitor.getStageId(stageNum));
+            // Add newStart to the start database
+            startDatabaseHelper.addStart(newStart);
         } else {
-            Start start = startDatabaseHelper.getStartByCarNum(stageNum, currCarNum);
-            int currSO = Integer.parseInt(startOrderTV.getText().toString());
+            // If the car has already been added, get the entry
+            start = startDatabaseHelper.getStartByCarNum(stageNum, currCarNum);
+            // Get the start order for that car and update it
+            int currSO = aControlDatabaseHelper.getStartOrder(stageNum, currCarNum);
             start.setStartOrder(currSO);
+            // Update the start entry
             startDatabaseHelper.updateStart(start);
         }
     }
 
     public void previousTC() {
+        // Method to move to the previous start order
+        // If the current start order is 1, it is not possible to go to the
+        // previous one, so do nothing
         if (startOrder > 1) {
+            // Otherwise change the start order and fill the cards again
             startOrder = startOrder - 1;
             fillInCards();
         }
     }
 
     public void nextTC() {
+        // Method to move to the next start order
+        // If the current start order is the same as the most recent entry,
+        // it is not possible to go to the next one, so do nothing
         int currStartOrder = aControlDatabaseHelper.getCurrStartOrder(stageNum);
         if ((startOrder + 1) <= currStartOrder) {
+            // Otherwise change the start order and fill the cards again
             startOrder = startOrder + 1;
             fillInCards();
         }

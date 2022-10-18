@@ -1,12 +1,14 @@
 package com.example.rallytimingapp.model;
 
 public class TimingCrew {
+    // Object for each entry to Timing Crew database
 
-    private int crewId;
-    private String position;
-    private String postChief;
-    private String postChiefPhone;
+    private int crewId; // Unique ID for this database
+    private String position; // Position, eg: Start, Finish or A Control
+    private String postChief; // Post chief's full name
+    private String postChiefPhone; // Post chief's contact number
 
+    // Getters and setters for each parameter
     public int getCrewId() {
         return crewId;
     }

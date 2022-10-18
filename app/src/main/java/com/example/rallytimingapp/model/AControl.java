@@ -1,14 +1,16 @@
 package com.example.rallytimingapp.model;
 
 public class AControl {
+    // Object for each entry to A Control database
 
-    private int aControlID;
-    private int startOrder;
-    private int stage;
-    private int carNum;
-    private int stage1ID;
-    private int stage2ID;
+    private int aControlID; // Unique ID for this database
+    private int startOrder; // Start order for the stage
+    private int stage; // Stage
+    private int carNum; // Car Number
+    private int stage1ID; // Unique stage ID for the competitor for the stage before the current one
+    private int stage2ID; // Unique stage ID for the competitor for this stage
 
+    // Getters and Setters for each parameter
     public int getAControlID() {
         return aControlID;
     }

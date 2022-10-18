@@ -23,58 +23,66 @@ import com.example.rallytimingapp.sql.TimingCrewDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 
-public class UpdateAControlActivity extends AppCompatActivity implements View.OnClickListener {
-    private final AppCompatActivity activity = UpdateAControlActivity.this;
+public class UpdateCrewActivity extends AppCompatActivity implements View.OnClickListener {
+    private final AppCompatActivity activity = UpdateCrewActivity.this;
 
     private InputValidation inputValidation;
     private UserDatabaseHelper userDatabaseHelper;
     private TimingCrewDatabaseHelper crewDatabaseHelper;
 
     private User user;
-    private TimingCrew aControlCrew;
+    private TimingCrew crew;
 
     private Button saveButton;
     private Button deleteButton;
+    private Button addNewButton;
 
     private ScrollView scrollView;
 
     private PopupWindow deletePopup;
     private PopupWindow updatePopup;
 
+    private TextView display;
     private EditText usernameET;
     private EditText passwordET;
     private EditText postChiefET;
     private EditText phoneET;
 
-    private final String role = "A Control";
+    private String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_acontrol);
+        setContentView(R.layout.activity_update_crew);
 
         initViews();
         initObjects();
         initListeners();
 
+        role = getIntent().getStringExtra("ROLE");
+        display.setText("Update " + role + " Crew Logins");
+        addNewButton.setText("Add New " + role + " Account");
+
         int crewID = getIntent().getIntExtra("CREW_ID", 0);
-        aControlCrew = crewDatabaseHelper.getTimingCrewByID(crewID);
+        crew = crewDatabaseHelper.getTimingCrewByID(crewID);
         user = userDatabaseHelper.getUserByRoleID(role, crewID);
         usernameET.setText(user.getUsername());
         passwordET.setText(user.getPassword());
-        postChiefET.setText(aControlCrew.getPostChief());
-        phoneET.setText(aControlCrew.getPostChiefPhone());
+        postChiefET.setText(crew.getPostChief());
+        phoneET.setText(crew.getPostChiefPhone());
     }
 
     private void initViews() {
-        saveButton = findViewById(R.id.updateACButton);
-        deleteButton = findViewById(R.id.deleteACButton);
-        scrollView = findViewById(R.id.UpdateACScrollView);
+        saveButton = findViewById(R.id.UpdateCrewButton);
+        deleteButton = findViewById(R.id.DeleteCrewButton);
+        addNewButton = findViewById(R.id.AddNewCrewButton);
+        scrollView = findViewById(R.id.UpdateCrewScrollView);
 
-        usernameET = findViewById(R.id.UACUsername);
-        passwordET = findViewById(R.id.UACPassword);
-        postChiefET = findViewById(R.id.UACPostChief);
-        phoneET = findViewById(R.id.UACPhone);
+        display = findViewById(R.id.UpdateCrewDisplay);
+        usernameET = findViewById(R.id.UpdateCrewUsername);
+        passwordET = findViewById(R.id.UpdateCrewPassword);
+        postChiefET = findViewById(R.id.UpdateCrewPostChief);
+        phoneET = findViewById(R.id.UpdateCrewPhone);
     }
 
     private void initObjects() {
@@ -82,7 +90,7 @@ public class UpdateAControlActivity extends AppCompatActivity implements View.On
         userDatabaseHelper = new UserDatabaseHelper(activity);
         crewDatabaseHelper = new TimingCrewDatabaseHelper(activity);
         user = new User();
-        aControlCrew = new TimingCrew();
+        crew = new TimingCrew();
     }
 
     private void initListeners() {
@@ -90,18 +98,32 @@ public class UpdateAControlActivity extends AppCompatActivity implements View.On
         deleteButton.setOnClickListener(this);
     }
 
+    // Method to return to the previous page, based on which role was passed by the intent
     public void back(View view) {
-        Intent intent = new Intent(this, AControlListActivity.class);
-        startActivity(intent);
+        Intent intent;
+        switch (role) {
+            case "Finish":
+                intent = new Intent(this, FinishListActivity.class);
+                startActivity(intent);
+                break;
+            case "Start":
+                intent = new Intent(this, StartListActivity.class);
+                startActivity(intent);
+                break;
+            case "A Control":
+                intent = new Intent(this, AControlListActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.updateACButton:
+            case R.id.UpdateCrewButton:
                 ShowUpdatePopup();
                 break;
-            case R.id.deleteACButton:
+            case R.id.DeleteCrewButton:
                 ShowDeletePopup();
                 break;
         }
@@ -127,10 +149,9 @@ public class UpdateAControlActivity extends AppCompatActivity implements View.On
         yesDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteAControl();
+                deleteCrew();
                 deletePopup.dismiss();
-                Intent intent = new Intent(activity, StartListActivity.class);
-                startActivity(intent);
+                back(view);
             }
         });
 
@@ -164,7 +185,7 @@ public class UpdateAControlActivity extends AppCompatActivity implements View.On
             @Override
             public void onClick(View view) {
                 if (verifyInput()) {
-                    int crewID = saveAControl();
+                    int crewID = saveCrew();
                     if (crewID != -1) {
                         saveUser(crewID);
                     }
@@ -184,15 +205,15 @@ public class UpdateAControlActivity extends AppCompatActivity implements View.On
         });
     }
 
-    public int saveAControl() {
+    public int saveCrew() {
         int crewID = -1;
         String postChief = postChiefET.getText().toString().trim();
         String phone = phoneET.getText().toString().trim();
         if (crewDatabaseHelper.checkTimingCrew(role, postChief)) {
-            aControlCrew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChief);
-            aControlCrew.setPostChiefPhone(phone);
-            crewDatabaseHelper.updateTimingCrew(aControlCrew);
-            crewID = aControlCrew.getCrewId();
+            crew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChief);
+            crew.setPostChiefPhone(phone);
+            crewDatabaseHelper.updateTimingCrew(crew);
+            crewID = crew.getCrewId();
 
         } else {
             Snackbar.make(scrollView, "Account does not exist, please create one", Snackbar.LENGTH_LONG).show();
@@ -218,14 +239,14 @@ public class UpdateAControlActivity extends AppCompatActivity implements View.On
         }
     }
 
-    public void deleteAControl() {
+    public void deleteCrew() {
         int crewID = -1;
         String username = usernameET.getText().toString().trim();
         String postChief = postChiefET.getText().toString().trim();
         if (crewDatabaseHelper.checkTimingCrew(role, postChief)) {
-            aControlCrew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChief);
-            crewID = aControlCrew.getCrewId();
-            crewDatabaseHelper.deleteTimingCrew(aControlCrew);
+            crew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChief);
+            crewID = crew.getCrewId();
+            crewDatabaseHelper.deleteTimingCrew(crew);
         }
         if (userDatabaseHelper.checkUser(username)) {
             user = userDatabaseHelper.getUser(username, role);
@@ -260,7 +281,8 @@ public class UpdateAControlActivity extends AppCompatActivity implements View.On
     }
 
     public void addNew(View view) {
-        Intent intent = new Intent(this, AddAControlActivity.class);
+        Intent intent = new Intent(this, AddCrewActivity.class);
+        intent.putExtra("ROLE", role);
         startActivity(intent);
     }
 }

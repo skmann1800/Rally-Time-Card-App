@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class AControlListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
-    private List<TimingCrew> aControlList = new ArrayList<TimingCrew>();
-    private List<String> postChiefs = new ArrayList<>();
+    private List<TimingCrew> aControlList = new ArrayList<TimingCrew>(); // List to contain all the a control crew entries
+    private List<String> postChiefs = new ArrayList<>(); // List to contain the names of the post chiefs
     private ArrayAdapter<String> adapter;
     private ListView aControlListView;
     private SearchView searchBar;
@@ -33,7 +33,7 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acontrol_list);
 
-        // Setup Adapter
+        // Set up Adapter
         aControlListView = (ListView) findViewById(R.id.AControlListView);
         crewDatabaseHelper = new TimingCrewDatabaseHelper(this);
         if (aControlListView != null) {
@@ -42,6 +42,7 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
             aControlListView.setAdapter(adapter);
             aControlListView.setOnItemClickListener(this);
 
+            // Set up Search Bar
             searchBar = (SearchView) findViewById(R.id.AControlSearchBar);
             searchBar.setOnQueryTextListener(this);
             searchBar.setOnCloseListener(new SearchView.OnCloseListener() {
@@ -57,6 +58,7 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
+    // Method to return a list of the names of all post chiefs of crews in the A Control role
     public List<String> getPostChiefs() {
         List<String> currPostChiefs = new ArrayList<>();
         aControlList = crewDatabaseHelper.getTimingCrewsByPosition(role);
@@ -66,16 +68,21 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
         return currPostChiefs;
     }
 
+    // Method for when a list item is clicked. The relevant crew object is found and the ID is
+    // Passed onto the intent as an extra. Switches to the page where the admin can update a crew account
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String postChiefName = (String) adapterView.getAdapter().getItem(position);
         aControlCrew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChiefName);
         int crewID = aControlCrew.getCrewId();
-        Intent intent = new Intent(this, UpdateAControlActivity.class);
+        Intent intent = new Intent(this, UpdateCrewActivity.class);
+        intent.putExtra("ROLE", role);
         intent.putExtra("CREW_ID", crewID);
         startActivity(intent);
     }
 
+    // Method for when a search is submitted. Each entry in the database is tested
+    // to see if they contain the query
     @Override
     public boolean onQueryTextSubmit(String query) {
         String search = query.toLowerCase(Locale.ROOT);
@@ -94,6 +101,8 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
         return false;
     }
 
+    // Method for when a search input is changed. Each entry in the database is tested
+    // to see if they contain the new query
     @Override
     public boolean onQueryTextChange(String newText) {
         String search = newText.toLowerCase(Locale.ROOT);
@@ -112,13 +121,16 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
         return false;
     }
 
+    // Method which returns to the admin options page
     public void back(View view) {
         Intent intent = new Intent(this, AdminOptionsActivity.class);
         startActivity(intent);
     }
 
+    // Method which changes to the add a control activity
     public void addNew(View view) {
-        Intent intent = new Intent(this, AddAControlActivity.class);
+        Intent intent = new Intent(this, AddCrewActivity.class);
+        intent.putExtra("ROLE", role);
         startActivity(intent);
     }
 }

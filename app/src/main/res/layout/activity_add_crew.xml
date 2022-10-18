@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AddFinishActivity">
+    tools:context=".activities.AddCrewActivity">
 
     <ScrollView
-        android:id="@+id/AddFinishScrollView"
+        android:id="@+id/AddCrewScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadeScrollbars="false"
@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/AddFinishBackButton"
+                android:id="@+id/AddCrewBackButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -35,12 +35,12 @@
                 app:strokeWidth="2dp" />
 
             <TextView
-                android:id="@+id/AddFinishDisplay"
+                android:id="@+id/AddCrewDisplay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="50dp"
-                android:text="Add New Finish Crew Login"
+                android:text="Add New Start Crew Login"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="48sp"
@@ -58,7 +58,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/AddFinishUsername"
+                android:id="@+id/AddCrewUsername"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -83,7 +83,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/AddFinishPassword"
+                android:id="@+id/AddCrewPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -108,7 +108,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/AddFinishPostChief"
+                android:id="@+id/AddCrewPostChief"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -133,7 +133,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/AddFinishPhone"
+                android:id="@+id/AddCrewPhone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -147,7 +147,7 @@
                 android:paddingLeft="5dp" />
 
             <Button
-                android:id="@+id/SaveNewFinishButton"
+                android:id="@+id/SaveNewCrewButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

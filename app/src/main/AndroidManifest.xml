@@ -14,25 +14,13 @@
         android:theme="@style/Theme.RallyTimingApp"
         tools:targetApi="31">
         <activity
-            android:name=".activities.UpdateAControlActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.AControlListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.AddAControlActivity"
             android:exported="false" />
         <activity
             android:name=".activities.StartListActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.UpdateStartActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.AddStartActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.AddFinishActivity"
             android:exported="false" />
         <activity
             android:name=".activities.UpdateFinishActivity"

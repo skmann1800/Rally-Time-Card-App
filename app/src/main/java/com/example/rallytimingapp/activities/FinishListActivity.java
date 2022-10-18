@@ -71,7 +71,8 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
         String postChiefName = (String) adapterView.getAdapter().getItem(position);
         finishCrew = timingCrewDatabaseHelper.getTimingCrewByPostChief(role, postChiefName);
         int crewID = finishCrew.getCrewId();
-        Intent intent = new Intent(this, UpdateFinishActivity.class);
+        Intent intent = new Intent(this, UpdateCrewActivity.class);
+        intent.putExtra("ROLE", role);
         intent.putExtra("CREW_ID", crewID);
         startActivity(intent);
     }
@@ -118,7 +119,8 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
     }
 
     public void addNew(View view) {
-        Intent intent = new Intent(this, AddFinishActivity.class);
+        Intent intent = new Intent(this, AddCrewActivity.class);
+        intent.putExtra("ROLE", role);
         startActivity(intent);
     }
 }

@@ -71,7 +71,8 @@ public class StartListActivity extends AppCompatActivity implements AdapterView.
         String postChiefName = (String) adapterView.getAdapter().getItem(position);
         startCrew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChiefName);
         int crewID = startCrew.getCrewId();
-        Intent intent = new Intent(this, UpdateStartActivity.class);
+        Intent intent = new Intent(this, UpdateCrewActivity.class);
+        intent.putExtra("ROLE", role);
         intent.putExtra("CREW_ID", crewID);
         startActivity(intent);
     }
@@ -118,7 +119,8 @@ public class StartListActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void addNew(View view) {
-        Intent intent = new Intent(this, AddStartActivity.class);
+        Intent intent = new Intent(this, AddCrewActivity.class);
+        intent.putExtra("ROLE", role);
         startActivity(intent);
     }
 }

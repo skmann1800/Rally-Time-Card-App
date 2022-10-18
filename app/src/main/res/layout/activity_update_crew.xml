@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.UpdateFinishActivity">
+    tools:context=".activities.UpdateCrewActivity">
 
     <ScrollView
-        android:id="@+id/UpdateFinishScrollView"
+        android:id="@+id/UpdateCrewScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fadeScrollbars="false"
@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/UFBackButton"
+                android:id="@+id/UCBackButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -35,7 +35,7 @@
                 app:strokeWidth="2dp" />
 
             <TextView
-                android:id="@+id/FinishDisplay"
+                android:id="@+id/UpdateCrewDisplay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -58,7 +58,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/FinishUsername"
+                android:id="@+id/UpdateCrewUsername"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -83,7 +83,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/FinishPassword"
+                android:id="@+id/UpdateCrewPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -108,7 +108,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/FinishPostChief"
+                android:id="@+id/UpdateCrewPostChief"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -133,7 +133,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/FinishPhone"
+                android:id="@+id/UpdateCrewPhone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -153,7 +153,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/updateFinishButton"
+                    android:id="@+id/UpdateCrewButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -168,7 +168,7 @@
                     app:strokeWidth="2dp" />
 
                 <Button
-                    android:id="@+id/deleteFinishButton"
+                    android:id="@+id/DeleteCrewButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -185,7 +185,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/AddNewFinishButton"
+                android:id="@+id/AddNewCrewButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

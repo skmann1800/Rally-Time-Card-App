@@ -227,8 +227,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    // Method to initialise objects
     private void initObjects() {
-        // Initialise the objects needed for this class
         stageDatabaseHelper = new StageDatabaseHelper(activity);
         aControlDatabaseHelper = new AControlDatabaseHelper(activity);
         startDatabaseHelper = new StartDatabaseHelper(activity);
@@ -239,8 +239,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         start = new Start();
     }
 
+    // Method to initialise views
     private void initViews() {
-        // Initialise the views used in this class
         scrollView = findViewById(R.id.ControlScrollView);
 
         carNumTV = findViewById(R.id.ControlCarNum);
@@ -477,8 +477,9 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         // Switch case for each button
         switch (view.getId()) {
             case R.id.CTCBackButton:
-                // Back button goes back to the choose control activity
-                Intent intent = new Intent(this, ChooseControlActivity.class);
+                // Back button goes back to the choose stage activity
+                Intent intent = new Intent(this, ChooseStageActivity.class);
+                intent.putExtra("ROLE", "Finish");
                 startActivity(intent);
                 break;
             case R.id.CChangeSOButton:

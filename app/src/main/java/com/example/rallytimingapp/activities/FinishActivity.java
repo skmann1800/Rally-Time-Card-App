@@ -17,10 +17,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
-import com.example.rallytimingapp.model.AControl;
 import com.example.rallytimingapp.model.Finish;
 import com.example.rallytimingapp.model.Stage;
-import com.example.rallytimingapp.sql.AControlDatabaseHelper;
 import com.example.rallytimingapp.sql.FinishDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
@@ -77,7 +75,6 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     private Stage stage;
     private FinishDatabaseHelper finishDatabaseHelper;
     private StageDatabaseHelper stageDatabaseHelper;
-    private List<Finish> finishList;
 
     private int stageNum;
     private int finishOrder;
@@ -92,9 +89,13 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         initObjects();
         initListeners();
 
+        // Retrieve stage number from intent
         stageNum = getIntent().getIntExtra("STAGE", 0);
+        // Set default finish order to be 1
         finishOrder = 1;
+        // Fill in the timecards
         fillInCards();
+        // Based on the stage number, fill in the labels as follows
         switch (stageNum) {
             case 1:
                 stageNumTV.setText(R.string.s1finish);
@@ -155,14 +156,15 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    // Method to initialise objects
     private void initObjects() {
         stageDatabaseHelper = new StageDatabaseHelper(activity);
         finishDatabaseHelper = new FinishDatabaseHelper(activity);
         stage = new Stage();
         finish = new Finish();
-        finishList = new ArrayList<>();
     }
 
+    // Method to initialise views
     private void initViews() {
         scrollView = findViewById(R.id.FinishScrollView);
 
@@ -193,6 +195,8 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         actualStartH = findViewById(R.id.FTCASH);
         actualStartM = findViewById(R.id.FTCASM);
         finishTimeH = findViewById(R.id.FTCFTH);
+        // Add a text changed listener to prevent users from inputting an invalid input
+        // And to move onto the next text box, once this one is full
         finishTimeH.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -201,6 +205,7 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The max input length is 2 digits
                 if(finishTimeH.getText().toString().length()==2)
                 {
                     if (Integer.valueOf(finishTimeH.getText().toString()) > 24) {
@@ -399,7 +404,8 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.FTCBackButton:
-                Intent intent = new Intent(this, ChooseFinishActivity.class);
+                Intent intent = new Intent(this, ChooseStageActivity.class);
+                intent.putExtra("ROLE", "Finish");
                 startActivity(intent);
                 break;
             case R.id.FReturnButton:

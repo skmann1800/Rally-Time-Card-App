@@ -20,12 +20,6 @@
             android:name=".activities.StartListActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.AddStartActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.UpdateFinishActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.AddCompActivity"
             android:exported="false" />
         <activity
@@ -41,19 +35,10 @@
             android:name=".activities.UpdateCompActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ChooseControlActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.AControlActivity"
             android:exported="false" />
         <activity
             android:name=".activities.StartActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.ChooseFinishActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.ChooseStartActivity"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"

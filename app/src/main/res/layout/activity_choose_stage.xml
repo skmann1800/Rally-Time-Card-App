@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ChooseFinishActivity">
+    tools:context=".activities.ChooseStageActivity">
 
     <TextView
-        android:id="@+id/ChooseFinish"
+        android:id="@+id/ChooseStage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -16,18 +16,18 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ChooseFinishScrollView"
+        app:layout_constraintBottom_toTopOf="@+id/ChooseStageScrollView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <ScrollView
-        android:id="@+id/ChooseFinishScrollView"
+        android:id="@+id/ChooseStageScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintTop_toBottomOf="@id/ChooseFinish">
+        app:layout_constraintTop_toBottomOf="@id/ChooseStage">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/Finish1Button"
+                android:id="@+id/Stage1Button"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="10dp"
@@ -45,7 +45,7 @@
                 app:rippleColor="@color/darker_blue" />
 
             <Button
-                android:id="@+id/Finish2Button"
+                android:id="@+id/Stage2Button"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="10dp"
@@ -55,7 +55,7 @@
                 app:rippleColor="@color/darker_blue" />
 
             <Button
-                android:id="@+id/Finish3Button"
+                android:id="@+id/Stage3Button"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="10dp"
@@ -65,7 +65,7 @@
                 app:rippleColor="@color/darker_blue" />
 
             <Button
-                android:id="@+id/Finish4Button"
+                android:id="@+id/Stage4Button"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="10dp"
@@ -78,7 +78,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/FSignOutButton"
+        android:id="@+id/CSSignOutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/yellow"
@@ -91,7 +91,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ChooseFinishScrollView"
+        app:layout_constraintTop_toBottomOf="@id/ChooseStageScrollView"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp" />
 

@@ -40,7 +40,7 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_finish);
+        setContentView(R.layout.activity_add_crew);
 
         initViews();
         initObjects();

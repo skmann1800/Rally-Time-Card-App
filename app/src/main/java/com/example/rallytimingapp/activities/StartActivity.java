@@ -17,11 +17,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
-import com.example.rallytimingapp.model.AControl;
-import com.example.rallytimingapp.model.Finish;
 import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.Start;
-import com.example.rallytimingapp.sql.FinishDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.StartDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
@@ -271,7 +268,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.STCBackButton:
-                Intent intent = new Intent(this, ChooseStartActivity.class);
+                Intent intent = new Intent(this, ChooseStageActivity.class);
+                intent.putExtra("ROLE", "Start");
                 startActivity(intent);
                 break;
             case R.id.SChangeSOButton:

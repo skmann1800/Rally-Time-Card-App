@@ -157,18 +157,9 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("COMP_ID", id);
                     clearInputs();
                     startActivity(intent);
-                } else if (role.equals("Finish")) {
-                    Intent intent = new Intent(this, ChooseFinishActivity.class);
-                    intent.putExtra("CREW_ID", id);
-                    clearInputs();
-                    startActivity(intent);
-                } else if (role.equals("Start")) {
-                    Intent intent = new Intent(this, ChooseStartActivity.class);
-                    intent.putExtra("CREW_ID", id);
-                    clearInputs();
-                    startActivity(intent);
-                } else if (role.equals("A Control")) {
-                    Intent intent = new Intent(this, ChooseControlActivity.class);
+                } else {
+                    Intent intent = new Intent(this, ChooseStageActivity.class);
+                    intent.putExtra("ROLE", role);
                     intent.putExtra("CREW_ID", id);
                     clearInputs();
                     startActivity(intent);

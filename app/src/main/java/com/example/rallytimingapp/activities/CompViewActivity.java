@@ -318,7 +318,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                         stage = stageDatabaseHelper.getStage(carNum, 1);
                         String inputDTH = dueTimeH1.getText().toString();
                         String inputDTM = dueTimeM1.getText().toString();
-                        stage.setDueTime(inputDTH + ":" + inputDTM);
+                        stage.setDueTime(inputDTH, inputDTM);
                         stageDatabaseHelper.updateStage(stage);
                     }
                 }
@@ -389,7 +389,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                         stage = stageDatabaseHelper.getStage(carNum, 2);
                         String inputDTH = dueTimeH2.getText().toString();
                         String inputDTM = dueTimeM2.getText().toString();
-                        stage.setDueTime(inputDTH + ":" + inputDTM);
+                        stage.setDueTime(inputDTH, inputDTM);
                         stageDatabaseHelper.updateStage(stage);
                     }
                 }
@@ -460,7 +460,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                         stage = stageDatabaseHelper.getStage(carNum, 3);
                         String inputDTH = dueTimeH3.getText().toString();
                         String inputDTM = dueTimeM3.getText().toString();
-                        stage.setDueTime(inputDTH + ":" + inputDTM);
+                        stage.setDueTime(inputDTH, inputDTM);
                         stageDatabaseHelper.updateStage(stage);
                     }
                 }
@@ -531,7 +531,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                         stage = stageDatabaseHelper.getStage(carNum, 4);
                         String inputDTH = dueTimeH4.getText().toString();
                         String inputDTM = dueTimeM4.getText().toString();
-                        stage.setDueTime(inputDTH + ":" + inputDTM);
+                        stage.setDueTime(inputDTH, inputDTM);
                         stageDatabaseHelper.updateStage(stage);
                     }
                 }
@@ -686,7 +686,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 stage = stageDatabaseHelper.getStage(carNum, 1);
                 String inputDTH1 = dueTimeH1.getText().toString();
                 String inputDTM1 = dueTimeM1.getText().toString();
-                stage.setDueTime(inputDTH1 + ":" + inputDTM1);
+                stage.setDueTime(inputDTH1, inputDTM1);
                 stageDatabaseHelper.updateStage(stage);
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
@@ -700,7 +700,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 stage = stageDatabaseHelper.getStage(carNum, 2);
                 String inputDTH2 = dueTimeH2.getText().toString();
                 String inputDTM2 = dueTimeM2.getText().toString();
-                stage.setDueTime(inputDTH2 + ":" + inputDTM2);
+                stage.setDueTime(inputDTH2, inputDTM2);
                 stageDatabaseHelper.updateStage(stage);
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
@@ -714,7 +714,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 stage = stageDatabaseHelper.getStage(carNum, 3);
                 String inputDTH3 = dueTimeH3.getText().toString();
                 String inputDTM3 = dueTimeM3.getText().toString();
-                stage.setDueTime(inputDTH3 + ":" + inputDTM3);
+                stage.setDueTime(inputDTH3, inputDTM3);
                 stageDatabaseHelper.updateStage(stage);
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
@@ -728,7 +728,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 stage = stageDatabaseHelper.getStage(carNum, 4);
                 String inputDTH4 = dueTimeH4.getText().toString();
                 String inputDTM4 = dueTimeM4.getText().toString();
-                stage.setDueTime(inputDTH4 + ":" + inputDTM4);
+                stage.setDueTime(inputDTH4, inputDTM4);
                 stageDatabaseHelper.updateStage(stage);
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;

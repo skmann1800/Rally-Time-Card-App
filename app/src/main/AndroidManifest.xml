@@ -23,6 +23,9 @@
             android:name=".activities.AddCompActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.AddCrewActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.FinishListActivity"
             android:exported="false" />
         <activity
@@ -33,6 +36,12 @@
             android:exported="false" />
         <activity
             android:name=".activities.UpdateCompActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.UpdateCrewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChooseStageActivity"
             android:exported="false" />
         <activity
             android:name=".activities.AControlActivity"

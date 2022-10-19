@@ -463,8 +463,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         dueTimeM2 = findViewById(R.id.CTC2DTM);
     }
 
+    // Method to initialise listeners for the buttons
     private void initListeners() {
-        // Initialise listeners for the buttons
         backButton.setOnClickListener(this);
         changeSOButton.setOnClickListener(this);
         returnTCButton.setOnClickListener(this);
@@ -479,7 +479,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             case R.id.CTCBackButton:
                 // Back button goes back to the choose stage activity
                 Intent intent = new Intent(this, ChooseStageActivity.class);
-                intent.putExtra("ROLE", "Finish");
+                intent.putExtra("ROLE", "A Control");
                 startActivity(intent);
                 break;
             case R.id.CChangeSOButton:
@@ -495,14 +495,14 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 previousTC();
                 break;
             case R.id.ControlNextButton:
-                // Left arrow button goes to the next start order
+                // Right arrow button goes to the next start order
                 nextTC();
                 break;
         }
     }
 
+    // Fill in the text boxes of the timecards, if there is at least one entry in the database
     private void fillInCards() {
-        // Fill in the text boxes of the timecards, if there is at least one entry in the database
         if (aControlDatabaseHelper.getStage(stageNum).size() != 0) {
             // Get the number of the car in the current start order
             carNum = aControlDatabaseHelper.getCarNum(stageNum, startOrder);
@@ -597,9 +597,6 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
         Button leftSO = layout.findViewById(R.id.LeftSOButton);
         Button rightSO = layout.findViewById(R.id.RightSOButton);
-
-        // Get the A Control Database entry for the current start order
-        AControl currAControl = aControlDatabaseHelper.getAControl(stageNum, startOrder);
 
         // Get the start order of the last entry to the A Control database,
         // This will be used to ensure that a swap is not made with a start order that doesn't exist yet
@@ -785,8 +782,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    // Method to move to the previous start order
     public void previousTC() {
-        // Method to move to the previous start order
         // If the current start order is 1, it is not possible to go to the
         // previous one, so do nothing
         if (startOrder > 1) {
@@ -796,8 +793,8 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    // Method to move to the next start order
     public void nextTC() {
-        // Method to move to the next start order
         // If the current start order is the same as the most recent entry,
         // it is not possible to go to the next one, so do nothing
         int currStartOrder = aControlDatabaseHelper.getCurrStartOrder(stageNum);

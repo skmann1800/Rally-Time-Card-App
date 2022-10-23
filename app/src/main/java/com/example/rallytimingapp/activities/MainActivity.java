@@ -55,39 +55,15 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initObjects();
 
+        // Ensure that there is always an admin login
         CreateLogin("Admin", "admin", "Admin", -1);
     }
 
-    private int CreateCompetitor(int carNum, String driver, String codriver) {
-        int compID = 0;
-        if (!compDatabaseHelper.checkCompetitor(carNum)) {
-            competitor.setCarNum(carNum);
-            competitor.setDriver(driver);
-            competitor.setCodriver(codriver);
-            competitor.setStage1Id(CreateStage(carNum, 1));
-            competitor.setStage2Id(CreateStage(carNum, 2));
-            competitor.setStage3Id(CreateStage(carNum, 3));
-            competitor.setStage4Id(CreateStage(carNum, 4));
-            compDatabaseHelper.addCompetitor(competitor);
-        }
-        compID = compDatabaseHelper.getCompId(carNum);
-        return compID;
-    }
-
-    private int CreateTimingCrew(String position, String postChief, String phone) {
-        int crewID = 0;
-        if (!crewDatabaseHelper.checkTimingCrew(position, postChief)) {
-            crew.setPosition(position);
-            crew.setPostChief(postChief);
-            crew.setPostChiefPhone(phone);
-            crewDatabaseHelper.addTimingCrew(crew);
-        }
-        crewID = crewDatabaseHelper.getCrewId(position, postChief);
-        return crewID;
-    }
-
+    // Method to create a login.
     private void CreateLogin(String username, String password, String role, int id) {
+        // Checks if an entry in the database with the given username already exists
         if (!userDatabaseHelper.checkUser(username)) {
+            // If not, add one
             user.setUsername(username);
             user.setPassword(password);
             user.setRole(role);
@@ -96,8 +72,47 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /* Method to create a competitor account. Not actually used, but kept just in case
+    private int CreateCompetitor(int carNum, String driver, String codriver) {
+        int compID = 0;
+        // Checks if an entry in the database with the given car number already exists
+        if (!compDatabaseHelper.checkCompetitor(carNum)) {
+            // If not, create one
+            competitor.setCarNum(carNum);
+            competitor.setDriver(driver);
+            competitor.setCodriver(codriver);
+            // For each stage, create a stage database entry
+            competitor.setStage1Id(CreateStage(carNum, 1));
+            competitor.setStage2Id(CreateStage(carNum, 2));
+            competitor.setStage3Id(CreateStage(carNum, 3));
+            competitor.setStage4Id(CreateStage(carNum, 4));
+            compDatabaseHelper.addCompetitor(competitor);
+        }
+        // Get the competitor ID to return
+        compID = compDatabaseHelper.getCompId(carNum);
+        return compID;
+    }
+
+    // Method to create a timing crew account. Not actually used, but kept just in case
+    private int CreateTimingCrew(String position, String postChief, String phone) {
+        int crewID = 0;
+        // Checks if an entry in the database with the given position and post chief already exists
+        if (!crewDatabaseHelper.checkTimingCrew(position, postChief)) {
+            crew.setPosition(position);
+            crew.setPostChief(postChief);
+            crew.setPostChiefPhone(phone);
+            crewDatabaseHelper.addTimingCrew(crew);
+        }
+        // Get the crew ID to return
+        crewID = crewDatabaseHelper.getCrewId(position, postChief);
+        return crewID;
+    }
+
+    // Method to create a stage database entry
     private int CreateStage(int carNum, int stageNum) {
+        // Checks if an entry in the database with the given car and stage number already exists
         if (!stageDatabaseHelper.checkStage(carNum, stageNum)) {
+            // If not, create one, with all times set to null
             stage.setCarNum(carNum);
             stage.setStageNum(stageNum);
             stage.setStartOrder(0);
@@ -109,10 +124,12 @@ public class MainActivity extends AppCompatActivity {
             stage.setDueTime("");
             stageDatabaseHelper.addStage(stage);
         }
+        // Get the stage ID to return
         int stageID = stageDatabaseHelper.getStageId(carNum, stageNum);
         return stageID;
-    }
+    }*/
 
+    // Method to initialise views
     private void initViews() {
         scrollView = findViewById(R.id.LoginScroll);
 
@@ -121,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         chips = findViewById(R.id.Chips);
     }
 
+    // Method to initialise objects
     private void initObjects() {
         userDatabaseHelper = new UserDatabaseHelper(activity);
         compDatabaseHelper = new CompDatabaseHelper(activity);
@@ -134,15 +152,22 @@ public class MainActivity extends AppCompatActivity {
         userList = new ArrayList<>();
     }
 
+    // Method to login, used when login button clicked
     public void login(View view) {
+        // Get the username and password that was inputted
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        // Get the id of the selected chip
         int checkedChipID = chips.getCheckedChipId();
         if (checkedChipID != -1) {
+            // If a chip was selected, get the role of the chip
             checkedChip = chips.findViewById(checkedChipID);
             String role = checkedChip.getText().toString().trim();
 
+            // Check if the login is valid
             if (verifyLogin(username, password, role)) {
+                // If so, get a list of all of the users in the database and get the
+                // id of the matching user
                 userList.addAll(userDatabaseHelper.getAllUsers());
                 int id = -1;
                 for (int i = 0; i < userList.size(); i++) {
@@ -153,11 +178,15 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (role.equals("Competitor")) {
+                    // If the role is a competitor, go to the competitor view activity,
+                    // passing the ID as an extra
                     Intent intent = new Intent(this, CompViewActivity.class);
                     intent.putExtra("COMP_ID", id);
                     clearInputs();
                     startActivity(intent);
                 } else {
+                    // If the role is a timing crew, go to the choose stage activity,
+                    // passing the role label and ID as an extra
                     Intent intent = new Intent(this, ChooseStageActivity.class);
                     intent.putExtra("ROLE", role);
                     intent.putExtra("CREW_ID", id);
@@ -166,32 +195,42 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             clearInputs();
+            // If there was no chip selected, see if the login was an admin
         } else if (verifyLogin(username, password, "Admin")) {
+            // If so, go to the admin options page
             Intent intent = new Intent(this, AdminOptionsActivity.class);
             clearInputs();
             startActivity(intent);
 
         } else {
+            // If not, show an error message
             Snackbar.make(scrollView, "Invalid Login", Snackbar.LENGTH_LONG).show();
         }
     }
 
+    // Method to check if the given login details are in the database
     private boolean verifyLogin(String username, String password, String role) {
+        // First check if all the input have been filled in
         if (!inputValidation.isEditTextFilled(editTextUsername)) {
             return false;
         }
         if (!inputValidation.isEditTextFilled(editTextPassword)) {
             return false;
         }
+        // Then check if there is a user in the database with the given username,
+        // password and role
         if (userDatabaseHelper.checkUser(username, password, role)) {
+            // If so, return true
             return true;
         } else {
-            // Snack Bar to show success message that record is wrong
+            // If not, show an error message
             Snackbar.make(scrollView, "Invalid Login", Snackbar.LENGTH_LONG).show();
         }
+        // Return false
         return false;
     }
 
+    // Method to clear the inputs and reset focus
     private void clearInputs() {
         chips.clearCheck();
         editTextUsername.setText(null);

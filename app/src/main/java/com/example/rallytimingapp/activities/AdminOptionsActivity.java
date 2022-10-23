@@ -12,10 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
-import com.example.rallytimingapp.helpers.InputValidation;
 import com.example.rallytimingapp.model.Competitor;
 import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.TimingCrew;
@@ -28,9 +26,6 @@ import com.example.rallytimingapp.sql.StartDatabaseHelper;
 import com.example.rallytimingapp.sql.TimingCrewDatabaseHelper;
 import com.example.rallytimingapp.sql.UserDatabaseHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AdminOptionsActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = AdminOptionsActivity.this;
 
@@ -40,8 +35,6 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
     private Button finishButton;
     private Button signOutButton;
     private Button resetButton;
-
-    private ScrollView scrollView;
 
     private AControlDatabaseHelper aControlDatabaseHelper;
     private StartDatabaseHelper startDatabaseHelper;
@@ -68,6 +61,7 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         initObjects();
     }
 
+    // Method to initialise views
     private void initViews() {
         competitorButton = findViewById(R.id.CompetitorRoleButton);
         aControlButton = findViewById(R.id.AControlRoleButton);
@@ -75,10 +69,9 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         finishButton = findViewById(R.id.FinishRoleButton);
         signOutButton = findViewById(R.id.AOSignOutButton);
         resetButton = findViewById(R.id.AOResetButton);
-
-        scrollView = findViewById(R.id.LoginScroll);
     }
 
+    // Method to initialise listeners for the buttons
     private void initListeners() {
         competitorButton.setOnClickListener(this);
         aControlButton.setOnClickListener(this);
@@ -88,6 +81,7 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         resetButton.setOnClickListener(this);
     }
 
+    // Method to initialise objects
     private void initObjects() {
         userDatabaseHelper = new UserDatabaseHelper(activity);
         compDatabaseHelper = new CompDatabaseHelper(activity);
@@ -102,41 +96,47 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         stage = new Stage();
     }
 
+    // On Click Method for the buttons
     @Override
     public void onClick(View view) {
+        // Switch case for each button
         Intent intent;
         switch (view.getId()) {
             case R.id.CompetitorRoleButton:
+                // Competitor button goes to the Comp List Activity
                 intent = new Intent(this, CompListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.AControlRoleButton:
+                // A Control button goes to the A Control List Activity
                 intent = new Intent(this, AControlListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.StartRoleButton:
+                // Start button goes to the Start List Activity
                 intent = new Intent(this, StartListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.FinishRoleButton:
+                // Finish button goes to the Finish List Activity
                 intent = new Intent(this, FinishListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.AOSignOutButton:
-                signOut();
+                // Sign out button returns to the main login page
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
             case R.id.AOResetButton:
+                // Reset button shows a pop-up
                 ShowResetPopup();
                 break;
         }
     }
 
-    public void signOut() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
+    // Method which resets all the databases and creates the basic accounts
     public void resetAll() {
+        // Empty all the databases
         aControlDatabaseHelper.empty();
         startDatabaseHelper.empty();
         finishDatabaseHelper.empty();
@@ -145,15 +145,18 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         stageDatabaseHelper.empty();
         timingCrewDatabaseHelper.empty();
 
+        // First create competitor database entries with the below data and save their IDs
         int compID1 = CreateCompetitor(1, "Hayden Paddon", "John Kennard");
         int compID2 = CreateCompetitor(5, "Emma Gilmour", "Mal Peden");
         int compID3 = CreateCompetitor(2, "Ben Hunt", "Tony Rawstorn");
         int compID4 = CreateCompetitor(12, "Jack Hawkeswood", "Sarah Brenna");
 
+        // Then create timing crew database entries with the below data and save their IDs
         int crewID1 = CreateTimingCrew("A Control", "George", "0219384756");
         int crewID2 = CreateTimingCrew("Start", "Jared", "0212349879");
         int crewID3 = CreateTimingCrew("Finish", "Sarah", "0279125769");
 
+        // Then create logins using the below data and IDs from above
         CreateLogin("Hayden", "hayden", "Competitor", compID1);
         CreateLogin("Emma", "emma", "Competitor", compID2);
         CreateLogin("Ben", "ben","Competitor", compID3);
@@ -164,46 +167,64 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         CreateLogin("Admin", "admin", "Admin", -1);
     }
 
+    // Method to create a competitor database entry
     private int CreateCompetitor(int carNum, String driver, String codriver) {
         int compID = 0;
+        // Check if an entry with the given car number already exists
         if (!compDatabaseHelper.checkCompetitor(carNum)) {
+            // If not, create one
             competitor.setCarNum(carNum);
             competitor.setDriver(driver);
             competitor.setCodriver(codriver);
+            // For each stage for this competitor, create a stage database entry
             competitor.setStage1Id(CreateStage(carNum, 1));
             competitor.setStage2Id(CreateStage(carNum, 2));
             competitor.setStage3Id(CreateStage(carNum, 3));
             competitor.setStage4Id(CreateStage(carNum, 4));
+            // Add the competitor to the database
             compDatabaseHelper.addCompetitor(competitor);
         }
+        // Get the ID of the database entry and return it
         compID = compDatabaseHelper.getCompId(carNum);
         return compID;
     }
 
+    // Method to create a timing crew database entry
     private int CreateTimingCrew(String position, String postChief, String phone) {
         int crewID = 0;
+        // Check if an entry with the given position and post chief already exists
         if (!timingCrewDatabaseHelper.checkTimingCrew(position, postChief)) {
+            // If not, create one
             crew.setPosition(position);
             crew.setPostChief(postChief);
             crew.setPostChiefPhone(phone);
+            // Add the timing crew to the database
             timingCrewDatabaseHelper.addTimingCrew(crew);
         }
+        // Get the ID of the database entry and return it
         crewID = timingCrewDatabaseHelper.getCrewId(position, postChief);
         return crewID;
     }
 
+    // Method to create a login
     private void CreateLogin(String username, String password, String role, int id) {
+        // Check if an entry with the given username already exists
         if (!userDatabaseHelper.checkUser(username)) {
+            // If not, create one
             user.setUsername(username);
             user.setPassword(password);
             user.setRole(role);
             user.setId(id);
+            // Add the login to the database
             userDatabaseHelper.addUser(user);
         }
     }
 
+    // Method to create a stage database entry
     private int CreateStage(int carNum, int stageNum) {
+        // Check if an entry with the given car and stage number already exists
         if (!stageDatabaseHelper.checkStage(carNum, stageNum)) {
+            // If not, create one. Set all values to 0 or null.
             stage.setCarNum(carNum);
             stage.setStageNum(stageNum);
             stage.setStartOrder(0);
@@ -213,12 +234,15 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
             stage.setStageTime("");
             stage.setActualTime("");
             stage.setDueTime("");
+            // Add the stage to the database
             stageDatabaseHelper.addStage(stage);
         }
+        // Get the ID of the database entry and return it
         int stageID = stageDatabaseHelper.getStageId(carNum, stageNum);
         return stageID;
     }
 
+    // Method to show the reset pop-up that is shown when the reset button is clicked
     private void ShowResetPopup() {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
@@ -235,15 +259,18 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         resetPopup.setBackgroundDrawable(null);
         resetPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
+        // Set listener for yes button
         Button yesReset = layout.findViewById(R.id.YesResetButton);
         yesReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Calls the reset all method then dismisses pop-up
                 resetAll();
                 resetPopup.dismiss();
             }
         });
 
+        // Set listener for no button, which just dismissed the pop-up
         Button noReset = layout.findViewById(R.id.NoResetButton);
         noReset.setOnClickListener(new View.OnClickListener() {
             @Override

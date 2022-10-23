@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class FinishListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
-    private List<TimingCrew> finishList = new ArrayList<TimingCrew>();
-    private List<String> postChiefs = new ArrayList<>();
+    private List<TimingCrew> finishList = new ArrayList<TimingCrew>(); // List to contain all the finish crew entries
+    private List<String> postChiefs = new ArrayList<>(); // List to contain the names of the post chiefs
     private ArrayAdapter<String> adapter;
     private ListView finishUserListView;
     private SearchView searchBar;
@@ -42,6 +42,7 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
             finishUserListView.setAdapter(adapter);
             finishUserListView.setOnItemClickListener(this);
 
+            // Set up Search Bar
             searchBar = (SearchView) findViewById(R.id.FinishSearchBar);
             searchBar.setOnQueryTextListener(this);
             searchBar.setOnCloseListener(new SearchView.OnCloseListener() {
@@ -57,6 +58,7 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
         }
     }
 
+    // Method to return a list of the names of all post chiefs of crews in the Finish role
     public List<String> getPostChiefs() {
         List<String> currPostChiefs = new ArrayList<>();
         finishList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
@@ -66,6 +68,8 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
         return currPostChiefs;
     }
 
+    // Method for when a list item is clicked. The relevant crew object is found and the ID and role type are
+    // Passed onto the intent as an extra. Switches to the page where the admin can update a crew account
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String postChiefName = (String) adapterView.getAdapter().getItem(position);
@@ -77,6 +81,8 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
         startActivity(intent);
     }
 
+    // Method for when a search is submitted. Each entry in the database is tested
+    // to see if they contain the query and results are displayed
     @Override
     public boolean onQueryTextSubmit(String query) {
         String search = query.toLowerCase(Locale.ROOT);
@@ -95,6 +101,8 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
         return false;
     }
 
+    // Method for when a search input is changed. Each entry in the database is tested
+    // to see if they contain the new query and the results are displayed
     @Override
     public boolean onQueryTextChange(String newText) {
         String search = newText.toLowerCase(Locale.ROOT);
@@ -113,11 +121,14 @@ public class FinishListActivity extends AppCompatActivity implements AdapterView
         return false;
     }
 
+    // Method which returns to the admin options page
     public void back(View view) {
         Intent intent = new Intent(this, AdminOptionsActivity.class);
         startActivity(intent);
     }
 
+    // Method which changes to the add crew activity and passes the crew type
+    // with the intent
     public void addNew(View view) {
         Intent intent = new Intent(this, AddCrewActivity.class);
         intent.putExtra("ROLE", role);

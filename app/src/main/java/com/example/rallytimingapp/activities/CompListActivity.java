@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class CompListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
-    private List<Competitor> competitorList = new ArrayList<Competitor>();
-    private List<String> drivers = new ArrayList<>();
+    private List<Competitor> competitorList = new ArrayList<Competitor>(); // List to contain all the competitor entries
+    private List<String> drivers = new ArrayList<>(); // List to contain the names of the drivers
     private ArrayAdapter<String> adapter;
     private ListView compUserListView;
     private SearchView searchBar;
@@ -32,7 +32,7 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comp_list);
 
-        // Setup Adapter
+        // Set up Adapter
         compUserListView = (ListView) findViewById(R.id.CompListView);
         compDatabaseHelper = new CompDatabaseHelper(this);
         if (compUserListView != null) {
@@ -41,6 +41,7 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
             compUserListView.setAdapter(adapter);
             compUserListView.setOnItemClickListener(this);
 
+            // Set up Search Bar
             searchBar = (SearchView) findViewById(R.id.CompSearchBar);
             searchBar.setOnQueryTextListener(this);
             searchBar.setOnCloseListener(new SearchView.OnCloseListener() {
@@ -56,6 +57,7 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
+    // Method to return a list of the names of all drivers
     public List<String> getDrivers() {
         List<String> currDrivers = new ArrayList<>();
         competitorList = compDatabaseHelper.getAllCompetitors();
@@ -65,6 +67,8 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         return currDrivers;
     }
 
+    // Method for when a list item is clicked. The relevant competitor object is found and the ID is
+    // Passed onto the intent as an extra. Switches to the page where the admin can update a competitor account
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String compName = (String) adapterView.getAdapter().getItem(position);
@@ -75,6 +79,8 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         startActivity(intent);
     }
 
+    // Method for when a search is submitted. Each entry in the database is tested
+    // to see if they contain the query and results are displayed
     @Override
     public boolean onQueryTextSubmit(String query) {
         String search = query.toLowerCase(Locale.ROOT);
@@ -93,6 +99,8 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         return false;
     }
 
+    // Method for when a search input is changed. Each entry in the database is tested
+    // to see if they contain the new query and the results are displayed
     @Override
     public boolean onQueryTextChange(String newText) {
         String search = newText.toLowerCase(Locale.ROOT);
@@ -111,11 +119,13 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         return false;
     }
 
+    // Method which returns to the admin options page
     public void back(View view) {
         Intent intent = new Intent(this, AdminOptionsActivity.class);
         startActivity(intent);
     }
 
+    // Method which changes to the add competitor activity
     public void addNew(View view) {
         Intent intent = new Intent(this, AddCompActivity.class);
         startActivity(intent);

@@ -23,9 +23,6 @@ import com.example.rallytimingapp.sql.FinishDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FinishActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = FinishActivity.this;
 

@@ -59,19 +59,25 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         initObjects();
         initListeners();
 
+        // Get the role passed through the intent
         role = getIntent().getStringExtra("ROLE");
+        // Update text
         display.setText("Update " + role + " Crew Logins");
         addNewButton.setText("Add New " + role + " Account");
 
+        // Get the crew ID passed through the intent
         int crewID = getIntent().getIntExtra("CREW_ID", 0);
+        // Get the crew and user database entries associated with that ID
         crew = crewDatabaseHelper.getTimingCrewByID(crewID);
         user = userDatabaseHelper.getUserByRoleID(role, crewID);
+        // Fill in the text boxes using these objects
         usernameET.setText(user.getUsername());
         passwordET.setText(user.getPassword());
         postChiefET.setText(crew.getPostChief());
         phoneET.setText(crew.getPostChiefPhone());
     }
 
+    // Method to initialise views
     private void initViews() {
         saveButton = findViewById(R.id.UpdateCrewButton);
         deleteButton = findViewById(R.id.DeleteCrewButton);
@@ -85,6 +91,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         phoneET = findViewById(R.id.UpdateCrewPhone);
     }
 
+    // Method to initialise objects
     private void initObjects() {
         inputValidation = new InputValidation(activity);
         userDatabaseHelper = new UserDatabaseHelper(activity);
@@ -93,6 +100,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         crew = new TimingCrew();
     }
 
+    // Method to initialise listeners for the buttons
     private void initListeners() {
         saveButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
@@ -103,32 +111,39 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         Intent intent;
         switch (role) {
             case "Finish":
+                // Finish role goes back to the finish list activity
                 intent = new Intent(this, FinishListActivity.class);
                 startActivity(intent);
                 break;
             case "Start":
+                // Start role goes back to the start list activity
                 intent = new Intent(this, StartListActivity.class);
                 startActivity(intent);
                 break;
             case "A Control":
+                // A Control role goes back to the A Control list activity
                 intent = new Intent(this, AControlListActivity.class);
                 startActivity(intent);
                 break;
         }
     }
 
+    // On Click method for the buttons
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.UpdateCrewButton:
+                // Update button shows the update pop-up
                 ShowUpdatePopup();
                 break;
             case R.id.DeleteCrewButton:
+                // Delete button shows the delete pop-up
                 ShowDeletePopup();
                 break;
         }
     }
 
+    // Method to show a pop-up asking for confirmation to delete the account
     private void ShowDeletePopup() {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
@@ -145,16 +160,21 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         deletePopup.setBackgroundDrawable(null);
         deletePopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
+        // Add an on click listener for the yes button
         Button yesDelete = layout.findViewById(R.id.YesDeleteButton);
         yesDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Call the delete crew method
                 deleteCrew();
+                // Dismiss the pop-up
                 deletePopup.dismiss();
+                // Return to the previous activity
                 back(view);
             }
         });
 
+        // Set on click listener for the no button, which dismisses the pop-up
         Button noDelete = layout.findViewById(R.id.NoDeleteButton);
         noDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +184,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
+    // Method to show a pop-up asking for confirmation to update the account
     private void ShowUpdatePopup() {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
@@ -180,22 +201,29 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         updatePopup.setBackgroundDrawable(null);
         updatePopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
+        // Add an on click listener for the yes button
         Button yesUpdate = layout.findViewById(R.id.YesUpdateButton);
         yesUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Check if all areas have been filled in
                 if (verifyInput()) {
+                    // If so, save the crew and get the ID
                     int crewID = saveCrew();
+                    // Then save the user, if there was a crew entry to update
                     if (crewID != -1) {
                         saveUser(crewID);
                     }
                 } else {
+                    // If not, prompt for all details to be filled in
                     Snackbar.make(scrollView, "Please fill in all details", Snackbar.LENGTH_LONG).show();
                 }
+                // Dismiss the pop-up
                 updatePopup.dismiss();
             }
         });
 
+        // Set an on click listener for the no button, with dismisses the pop-up
         Button noUpdate = layout.findViewById(R.id.NoUpdateButton);
         noUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,57 +233,77 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         });
     }
 
+    // Method to save the crew details
     public int saveCrew() {
         int crewID = -1;
+        // Get the inputs relevant to the timing crew database entry
         String postChief = postChiefET.getText().toString().trim();
         String phone = phoneET.getText().toString().trim();
+        // If an entry with that role and post chief already exists, update it
         if (crewDatabaseHelper.checkTimingCrew(role, postChief)) {
             crew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChief);
             crew.setPostChiefPhone(phone);
             crewDatabaseHelper.updateTimingCrew(crew);
+            // Get the ID to return
             crewID = crew.getCrewId();
 
         } else {
+            // Otherwise show an error message that the account does not exist
             Snackbar.make(scrollView, "Account does not exist, please create one", Snackbar.LENGTH_LONG).show();
         }
+        // Return the crew ID
         return crewID;
     }
 
+    // Method to save the user details
     public void saveUser(int crewID) {
+        // Get the inputs relevant to the user database entry
         String username = usernameET.getText().toString().trim();
         String password = passwordET.getText().toString().trim();
+        // If an entry with that username already exists, update it
         if (userDatabaseHelper.checkUser(username)) {
             user = userDatabaseHelper.getUser(username, role);
             user.setPassword(password);
             user.setId(crewID);
             userDatabaseHelper.updateUser(user);
         } else if (userDatabaseHelper.checkUser(role, crewID)) {
+            // Or if an entry with that role and crew ID already exists, update it
             user = userDatabaseHelper.getUserByRoleID(role, crewID);
             user.setUsername(username);
             user.setPassword(password);
             userDatabaseHelper.updateUser(user);
         } else {
+            // Otherwise show an error message
             Snackbar.make(scrollView, "Account does not exist, please create one", Snackbar.LENGTH_LONG).show();
         }
     }
 
+    // Method to delete a competitor from the databases
     public void deleteCrew() {
         int crewID = -1;
+        // Get the username and driver name
         String username = usernameET.getText().toString().trim();
         String postChief = postChiefET.getText().toString().trim();
+        // Find the entry in the crew database with that role and post cheif's name
         if (crewDatabaseHelper.checkTimingCrew(role, postChief)) {
+            // If found, get the crew ID, then delete it
             crew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChief);
             crewID = crew.getCrewId();
             crewDatabaseHelper.deleteTimingCrew(crew);
         }
+        // Find the entry in the user database with that username
         if (userDatabaseHelper.checkUser(username)) {
+            // If found, delete it
             user = userDatabaseHelper.getUser(username, role);
             userDatabaseHelper.deleteUser(user);
         } else if (userDatabaseHelper.checkUser(role, crewID)) {
+            // Otherwise find the entry in the user database with the compID found above
+            // then delete it
             user = userDatabaseHelper.getUserByRoleID(role, crewID);
             userDatabaseHelper.deleteUser(user);
         }
 
+        // Clear all inputs and reset focus
         usernameET.setText(null);
         passwordET.setText(null);
         postChiefET.setText(null);
@@ -264,6 +312,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         usernameET.setCursorVisible(true);
     }
 
+    // Check if all text boxes are filled
     private boolean verifyInput() {
         if (!inputValidation.isEditTextFilled(usernameET)) {
             return false;
@@ -280,6 +329,8 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         return true;
     }
 
+    // Method called when the "Add New Crew Account" button is clicked
+    // Pass the role as an extra
     public void addNew(View view) {
         Intent intent = new Intent(this, AddCrewActivity.class);
         intent.putExtra("ROLE", role);

@@ -16,20 +16,15 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
-import com.example.rallytimingapp.helpers.InputValidation;
 import com.example.rallytimingapp.model.AControl;
 import com.example.rallytimingapp.model.Competitor;
 import com.example.rallytimingapp.model.Finish;
 import com.example.rallytimingapp.model.Stage;
-import com.example.rallytimingapp.model.User;
 import com.example.rallytimingapp.sql.AControlDatabaseHelper;
 import com.example.rallytimingapp.sql.CompDatabaseHelper;
 import com.example.rallytimingapp.sql.FinishDatabaseHelper;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
-import com.example.rallytimingapp.sql.UserDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
 
 public class CompViewActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = CompViewActivity.this;
@@ -143,23 +138,29 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         initObjects();
         initListeners();
 
+        // Get the competitor ID which was passed through the intent from the login
         compID = getIntent().getIntExtra("COMP_ID", 0);
+        // Get the competitor object associated with that ID
         competitor = compDatabaseHelper.getCompetitorByID(compID);
+        // Get the car number and change the display
         carNum = competitor.getCarNum();
         carNumTV.setText(String.valueOf(carNum));
+        // Fill in the timecards
         fillInCards();
     }
 
+    // Method to fill in the timecards
     private void fillInCards() {
-        competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
-        carNumTV.setText(String.valueOf(carNum));
-
+        // Get the first stage object for that competitor
         stage = stageDatabaseHelper.getStage(competitor.getStage1Id());
+        // If the start order is currently set to 0, there are no details to show yet so
+        // set the text to nothing
         if (stage.getStartOrder() == 0) {
             startOrder1.setText("");
         } else {
             startOrder1.setText(String.valueOf(stage.getStartOrder()));
         }
+        // Fill in the remaining fields for stage 1
         provStartH1.setText(stage.getProvStartH());
         provStartM1.setText(stage.getProvStartM());
         actualStartH1.setText(stage.getActualStartH());
@@ -176,13 +177,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         dueTimeH1.setText(stage.getDueTimeH());
         dueTimeM1.setText(stage.getDueTimeM());
 
-
+        // Get the second stage object for that competitor
         stage = stageDatabaseHelper.getStage(competitor.getStage2Id());
+        // If the start order is currently set to 0, there are no details to show yet so
+        // set the text to nothing
         if (stage.getStartOrder() == 0) {
             startOrder2.setText("");
         } else {
             startOrder2.setText(String.valueOf(stage.getStartOrder()));
         }
+        // Fill in the remaining fields for stage 2
         provStartH2.setText(stage.getProvStartH());
         provStartM2.setText(stage.getProvStartM());
         actualStartH2.setText(stage.getActualStartH());
@@ -199,12 +203,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         dueTimeH2.setText(stage.getDueTimeH());
         dueTimeM2.setText(stage.getDueTimeM());
 
+        // Get the third stage object for that competitor
         stage = stageDatabaseHelper.getStage(competitor.getStage3Id());
+        // If the start order is currently set to 0, there are no details to show yet so
+        // set the text to nothing
         if (stage.getStartOrder() == 0) {
             startOrder3.setText("");
         } else {
             startOrder3.setText(String.valueOf(stage.getStartOrder()));
         }
+        // Fill in the remaining fields for stage 3
         provStartH3.setText(stage.getProvStartH());
         provStartM3.setText(stage.getProvStartM());
         actualStartH3.setText(stage.getActualStartH());
@@ -221,12 +229,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         dueTimeH3.setText(stage.getDueTimeH());
         dueTimeM3.setText(stage.getDueTimeM());
 
+        // Get the fourth stage object for that competitor
         stage = stageDatabaseHelper.getStage(competitor.getStage4Id());
+        // If the start order is currently set to 0, there are no details to show yet so
+        // set the text to nothing
         if (stage.getStartOrder() == 0) {
             startOrder4.setText("");
         } else {
             startOrder4.setText(String.valueOf(stage.getStartOrder()));
         }
+        // Fill in the remaining fields for stage 4
         provStartH4.setText(stage.getProvStartH());
         provStartM4.setText(stage.getProvStartM());
         actualStartH4.setText(stage.getActualStartH());
@@ -244,6 +256,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         dueTimeM4.setText(stage.getDueTimeM());
     }
 
+    // Method to initialise the objects
     private void initObjects() {
         compDatabaseHelper = new CompDatabaseHelper(activity);
         stageDatabaseHelper = new StageDatabaseHelper(activity);
@@ -255,6 +268,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         finish = new Finish();
     }
 
+    // Method to initialise the views
     private void initViews() {
         scrollView = findViewById(R.id.CompViewScrollView);
         carNumTV = findViewById(R.id.CarNum);
@@ -274,6 +288,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeH1 = findViewById(R.id.S2ATH);
         actualTimeM1 = findViewById(R.id.S2ATM);
         dueTimeH1 = findViewById(R.id.S2DTH);
+        // Add a text changed listener
         dueTimeH1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -282,12 +297,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The input has a max length of 2
                 if(dueTimeH1.getText().toString().length()==2)
                 {
+                    // This box is for hours, so the max input is 24
                     if (Integer.valueOf(dueTimeH1.getText().toString()) > 24) {
+                        // If the input is larger than 24, clear it and show an error message
                         dueTimeH1.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // Otherwise move to the next text box
                         dueTimeH1.clearFocus();
                         dueTimeM1.requestFocus();
                         dueTimeM1.setCursorVisible(true);
@@ -301,6 +320,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         dueTimeM1 = findViewById(R.id.S2DTM);
+        // Add a text changed listener
         dueTimeM1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -309,12 +329,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The input has a max length of 2
                 if(dueTimeM1.getText().toString().length()==2)
                 {
+                    // This box is for minutes, so the max input is 59
                     if (Integer.valueOf(dueTimeM1.getText().toString()) > 59) {
+                        // If the input is larger than 59, clear it and show an error message
                         dueTimeM1.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // Otherwise save the inputs to the database
                         stage = stageDatabaseHelper.getStage(carNum, 1);
                         String inputDTH = dueTimeH1.getText().toString();
                         String inputDTM = dueTimeM1.getText().toString();
@@ -345,6 +369,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeH2 = findViewById(R.id.S3ATH);
         actualTimeM2 = findViewById(R.id.S3ATM);
         dueTimeH2 = findViewById(R.id.S3DTH);
+        // Add a text changed listener
         dueTimeH2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -353,12 +378,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The input has a max length of 2
                 if(dueTimeH2.getText().toString().length()==2)
                 {
+                    // This box is for hours, so the max input is 24
                     if (Integer.valueOf(dueTimeH2.getText().toString()) > 24) {
+                        // If the input is larger than 24, clear it and show an error message
                         dueTimeH2.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // Otherwise move to the next text box
                         dueTimeH2.clearFocus();
                         dueTimeM2.requestFocus();
                         dueTimeM2.setCursorVisible(true);
@@ -372,6 +401,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         dueTimeM2 = findViewById(R.id.S3DTM);
+        // Add a text changed listener
         dueTimeM2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -380,12 +410,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The input has a max length of 2
                 if(dueTimeM2.getText().toString().length()==2)
                 {
+                    // This box is for minutes, so the max input is 59
                     if (Integer.valueOf(dueTimeM2.getText().toString()) > 59) {
+                        // If the input is larger than 59, clear it and show an error message
                         dueTimeM2.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // Otherwise save the inputs to the database
                         stage = stageDatabaseHelper.getStage(carNum, 2);
                         String inputDTH = dueTimeH2.getText().toString();
                         String inputDTM = dueTimeM2.getText().toString();
@@ -416,6 +450,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeH3 = findViewById(R.id.S4ATH);
         actualTimeM3 = findViewById(R.id.S4ATM);
         dueTimeH3 = findViewById(R.id.S4DTH);
+        // Add a text changed listener
         dueTimeH3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -424,12 +459,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The input has a max length of 2
                 if(dueTimeH3.getText().toString().length()==2)
                 {
+                    // This box is for hours, so the max input is 24
                     if (Integer.valueOf(dueTimeH3.getText().toString()) > 24) {
+                        // If the input is larger than 24, clear it and show an error message
                         dueTimeH3.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // Otherwise move to the next text box
                         dueTimeH3.clearFocus();
                         dueTimeM3.requestFocus();
                         dueTimeM3.setCursorVisible(true);
@@ -443,6 +482,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         dueTimeM3 = findViewById(R.id.S4DTM);
+        // Add a text changed listener
         dueTimeM3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -451,12 +491,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The input has a max length of 2
                 if(dueTimeM3.getText().toString().length()==2)
                 {
+                    // This box is for minutes, so the max input is 59
                     if (Integer.valueOf(dueTimeM3.getText().toString()) > 59) {
+                        // If the input is larger than 59, clear it and show an error message
                         dueTimeM3.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // Otherwise save the inputs to the database
                         stage = stageDatabaseHelper.getStage(carNum, 3);
                         String inputDTH = dueTimeH3.getText().toString();
                         String inputDTM = dueTimeM3.getText().toString();
@@ -487,6 +531,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         actualTimeH4 = findViewById(R.id.S5ATH);
         actualTimeM4 = findViewById(R.id.S5ATM);
         dueTimeH4 = findViewById(R.id.S5DTH);
+        // Add a text changed listener
         dueTimeH4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -495,12 +540,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The input has a max length of 2
                 if(dueTimeH4.getText().toString().length()==2)
                 {
+                    // This box is for hours, so the max input is 24
                     if (Integer.valueOf(dueTimeH4.getText().toString()) > 24) {
+                        // If the input is larger than 24, clear it and show an error message
                         dueTimeH4.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // Otherwise move to the next text box
                         dueTimeH4.clearFocus();
                         dueTimeM4.requestFocus();
                         dueTimeM4.setCursorVisible(true);
@@ -514,6 +563,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         dueTimeM4 = findViewById(R.id.S5DTM);
+        // Add a text changed listener
         dueTimeM4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -522,12 +572,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // The input has a max length of 2
                 if(dueTimeM4.getText().toString().length()==2)
                 {
+                    // This box is for minutes, so the max input is 59
                     if (Integer.valueOf(dueTimeM4.getText().toString()) > 59) {
+                        // If the input is larger than 59, clear it and show an error message
                         dueTimeM4.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
+                        // Otherwise save the inputs to the database
                         stage = stageDatabaseHelper.getStage(carNum, 4);
                         String inputDTH = dueTimeH4.getText().toString();
                         String inputDTM = dueTimeM4.getText().toString();
@@ -557,6 +611,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         saveDT4 = findViewById(R.id.SaveDT4);
     }
 
+    // Method to initialise listeners for the buttons
     private void initListeners() {
         checkIn1.setOnClickListener(this);
         reqTime1.setOnClickListener(this);
@@ -572,7 +627,8 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         saveDT4.setOnClickListener(this);
     }
 
-    private void ShowCheckInPopup(String message, int stageNum) {
+    // Method to show the confirm check in pop-up
+    private void ShowCheckInPopup(int stageNum) {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
@@ -588,42 +644,54 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         checkInPopup.setBackgroundDrawable(null);
         checkInPopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
+        // Customise the message depending on the stage number
         TextView text = layout.findViewById(R.id.ConfirmCheckIn);
-        text.setText(message);
+        text.setText("Check In to Stage " + stageNum + "?");
 
+        // Set on click listener for yes button
         Button yesCheckIn = layout.findViewById(R.id.YesCheckInButton);
         yesCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Add competitor to AControl database
+                // Add competitor to A Control database
                 addToAControl(stageNum);
+                // Dismiss pop-up
                 checkInPopup.dismiss();
             }
         });
 
+        // Set on click listener for yes button
         Button noCheckIn = layout.findViewById(R.id.NoCheckInButton);
         noCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Dismiss pop-up
                 checkInPopup.dismiss();
             }
         });
     }
 
+    // Method to add an entry to the A Control database
     private void addToAControl(int stageNum) {
+        // Check if there is already an entry in the database with the
+        // given stage and car number
         if (!aControlDatabaseHelper.checkAControl(stageNum, carNum)) {
+            // If not get the start order of the most recently added entry
             int lastSO = aControlDatabaseHelper.getCurrStartOrder(stageNum);
+            // Set the start order to that plus one
             aControl.setStartOrder(lastSO+1);
             aControl.setStage(stageNum);
             aControl.setCarNum(carNum);
-            competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
+            // Get the stage IDs from the competitor object
             aControl.setStage1ID(competitor.getStageId(stageNum-1));
             aControl.setStage2ID(competitor.getStageId(stageNum));
+            // Add the entry to the database
             aControlDatabaseHelper.addAControl(aControl);
         }
     }
 
-    private void ShowReqTimePopup(String message, int stageNum) {
+    // Method to show the request time pop-up
+    private void ShowReqTimePopup(int stageNum) {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
@@ -639,50 +707,65 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         reqTimePopup.setBackgroundDrawable(null);
         reqTimePopup.showAtLocation(layout, Gravity.CENTER, 1, 1);
 
+        // Customise the message depending on the stage number
         TextView text = layout.findViewById(R.id.ConfirmReqTime);
-        text.setText(message);
+        text.setText("Request Time for Stage " + stageNum + "?");
 
+        // Set an on click listener for the yes button
         Button yesReqTime = layout.findViewById(R.id.YesReqTimeButton);
         yesReqTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Add competitor to Finish database
+                // Add competitor to Finish database
                 addToFinish(stageNum);
+                // Dismiss pop-up
                 reqTimePopup.dismiss();
             }
         });
 
+        // Set an on click listener for the no button
         Button noReqTime = layout.findViewById(R.id.NoReqTimeButton);
         noReqTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Dismiss pop-up
                 reqTimePopup.dismiss();
             }
         });
     }
 
+    // Method to add an entry to the Finish database
     private void addToFinish(int stageNum) {
+        // Check if there is already an entry in the database with the
+        // given stage and car number
         if (!finishDatabaseHelper.checkFinish(stageNum, carNum)) {
+            // If not get the finish order of the most recently added entry
             int lastFO = finishDatabaseHelper.getCurrFinishOrder(stageNum);
+            // Set the finish order to that plus one
             finish.setFinishOrder(lastFO+1);
             finish.setStage(stageNum);
             finish.setCarNum(carNum);
-            competitor = compDatabaseHelper.getCompetitorByCarNum(carNum);
+            // Get the stage ID from the competitor object
             finish.setStageID(competitor.getStageId(stageNum));
+            // Add the entry to the database
             finishDatabaseHelper.addFinish(finish);
         }
     }
 
+    // On Click method for the buttons
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.CheckIn1:
-                ShowCheckInPopup("Check In to Stage 1?", 1);
+                // Show the check in pop-up for stage 1
+                ShowCheckInPopup(1);
                 break;
             case R.id.ReqTime1:
-                ShowReqTimePopup("Request Time for Stage 1?", 1);
+                // Show the request time pop-up for stage 1
+                ShowReqTimePopup(1);
                 break;
             case R.id.SaveDT1:
+                // Save the due time entered for stage 1 and show a confirmation message
                 stage = stageDatabaseHelper.getStage(carNum, 1);
                 String inputDTH1 = dueTimeH1.getText().toString();
                 String inputDTM1 = dueTimeM1.getText().toString();
@@ -691,12 +774,15 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.CheckIn2:
-                ShowCheckInPopup("Check In to Stage 2?", 2);
+                // Show the check in pop-up for stage 2
+                ShowCheckInPopup(2);
                 break;
             case R.id.ReqTime2:
-                ShowReqTimePopup("Request Time for Stage 2?", 2);
+                // Show the request time pop-up for stage 2
+                ShowReqTimePopup(2);
                 break;
             case R.id.SaveDT2:
+                // Save the due time entered for stage 2 and show a confirmation message
                 stage = stageDatabaseHelper.getStage(carNum, 2);
                 String inputDTH2 = dueTimeH2.getText().toString();
                 String inputDTM2 = dueTimeM2.getText().toString();
@@ -705,12 +791,15 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.CheckIn3:
-                ShowCheckInPopup("Check In to Stage 3?", 3);
+                // Show the check in pop-up for stage 3
+                ShowCheckInPopup(3);
                 break;
             case R.id.ReqTime3:
-                ShowReqTimePopup("Request Time for Stage 3?", 3);
+                // Show the request time pop-up for stage 3
+                ShowReqTimePopup(3);
                 break;
             case R.id.SaveDT3:
+                // Save the due time entered for stage 3 and show a confirmation message
                 stage = stageDatabaseHelper.getStage(carNum, 3);
                 String inputDTH3 = dueTimeH3.getText().toString();
                 String inputDTM3 = dueTimeM3.getText().toString();
@@ -719,12 +808,15 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.CheckIn4:
-                ShowCheckInPopup("Check In to Stage 4?", 4);
+                // Show the check in pop-up for stage 4
+                ShowCheckInPopup(4);
                 break;
             case R.id.ReqTime4:
-                ShowReqTimePopup("Request Time for Stage 4?", 4);
+                // Show the request time pop-up for stage 4
+                ShowReqTimePopup(4);
                 break;
             case R.id.SaveDT4:
+                // Save the due time entered for stage 4 and show a confirmation message
                 stage = stageDatabaseHelper.getStage(carNum, 4);
                 String inputDTH4 = dueTimeH4.getText().toString();
                 String inputDTM4 = dueTimeM4.getText().toString();

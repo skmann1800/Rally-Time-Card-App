@@ -68,7 +68,7 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
         return currPostChiefs;
     }
 
-    // Method for when a list item is clicked. The relevant crew object is found and the ID is
+    // Method for when a list item is clicked. The relevant crew object is found and the ID and role type are
     // Passed onto the intent as an extra. Switches to the page where the admin can update a crew account
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -82,7 +82,7 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
     }
 
     // Method for when a search is submitted. Each entry in the database is tested
-    // to see if they contain the query
+    // to see if they contain the query and results are displayed
     @Override
     public boolean onQueryTextSubmit(String query) {
         String search = query.toLowerCase(Locale.ROOT);
@@ -102,7 +102,7 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
     }
 
     // Method for when a search input is changed. Each entry in the database is tested
-    // to see if they contain the new query
+    // to see if they contain the new query and the results are displayed
     @Override
     public boolean onQueryTextChange(String newText) {
         String search = newText.toLowerCase(Locale.ROOT);
@@ -127,7 +127,8 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
         startActivity(intent);
     }
 
-    // Method which changes to the add a control activity
+    // Method which changes to the add crew activity and passes the crew type
+    // with the intent
     public void addNew(View view) {
         Intent intent = new Intent(this, AddCrewActivity.class);
         intent.putExtra("ROLE", role);

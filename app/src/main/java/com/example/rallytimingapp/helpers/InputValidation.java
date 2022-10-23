@@ -1,3 +1,5 @@
+// Code from http://www.androidtutorialshub.com/android-login-and-register-with-sqlite-database-tutorial/
+
 package com.example.rallytimingapp.helpers;
 
 import android.app.Activity;
@@ -7,9 +9,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
 public class InputValidation {
     private Context context;
 
@@ -17,6 +16,7 @@ public class InputValidation {
         this.context = context;
     }
 
+    // Method to check if an EditText is filled
     public boolean isEditTextFilled(EditText editText) {
         String value = editText.getText().toString().trim();
         if (value.isEmpty()) {

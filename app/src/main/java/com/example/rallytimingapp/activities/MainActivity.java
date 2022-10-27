@@ -1,10 +1,12 @@
 package com.example.rallytimingapp.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText editTextUsername;
     private EditText editTextPassword;
+    private Button loginButton;
     private ChipGroup chips;
     private Chip checkedChip;
 
@@ -134,8 +137,40 @@ public class MainActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.LoginScroll);
 
         editTextUsername = findViewById(R.id.UsernameET);
+        editTextUsername.setVisibility(View.INVISIBLE);
         editTextPassword = findViewById(R.id.PasswordET);
+        editTextPassword.setVisibility(View.INVISIBLE);
+        loginButton = findViewById(R.id.LoginButton);
+        loginButton.setVisibility(View.INVISIBLE);
         chips = findViewById(R.id.Chips);
+        chips.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
+                int checkedChipID = chips.getCheckedChipId();
+                if (checkedChipID != -1) {
+                    // If a chip was selected, get the role of the chip
+                    checkedChip = chips.findViewById(checkedChipID);
+                    String role = checkedChip.getText().toString().trim();
+                    switch (role) {
+                        case "Competitor":
+                        case "Admin":
+                            editTextUsername.setVisibility(View.VISIBLE);
+                            editTextPassword.setVisibility(View.VISIBLE);
+                            loginButton.setVisibility(View.VISIBLE);
+                            editTextUsername.requestFocus();
+                            editTextUsername.setCursorVisible(true);
+                            break;
+                        case "Timing Crew":
+                            editTextUsername.setVisibility(View.INVISIBLE);
+                            editTextPassword.setVisibility(View.INVISIBLE);
+                            loginButton.setVisibility(View.INVISIBLE);
+                            Intent intent = new Intent(activity, ChooseCrewActivity.class);
+                            startActivity(intent);
+                            break;
+                    }
+                }
+            }
+        });
     }
 
     // Method to initialise objects

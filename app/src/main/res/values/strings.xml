@@ -16,6 +16,8 @@
     <string name="acontrol">A Control</string>
     <string name="start">Start</string>
     <string name="finish">Finish</string>
+    <string name="timingCrew">Timing Crew</string>
+    <string name="admin">Admin</string>
     <string name="checkin">CHECK IN</string>
     <string name="reqtime">REQUEST TIME</string>
     <string name="FT">FINISH TIME</string>

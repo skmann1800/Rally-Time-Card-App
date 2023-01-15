@@ -25,6 +25,7 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
     private UserDatabaseHelper userDatabaseHelper;
     private TimingCrewDatabaseHelper crewDatabaseHelper;
 
+    private Button backButton;
     private Button saveButton;
 
     private ScrollView scrollView;
@@ -52,6 +53,7 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
 
     // Method to initialise the views
     private void initViews() {
+        backButton = findViewById(R.id.AddCrewBackButton);
         saveButton = findViewById(R.id.SaveNewCrewButton);
         scrollView = findViewById(R.id.AddCrewScrollView);
 
@@ -71,26 +73,16 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
 
     // Method to initialise the listener for the save button
     private void initListeners() {
+        backButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
     }
 
-    // Method to return to the previous page, based on which role was passed by the intent
-    public void back(View view) {
-        Intent intent;
-        switch (role) {
-            case "Finish":
-                intent = new Intent(this, FinishListActivity.class);
-                startActivity(intent);
-                break;
-            case "Start":
-                intent = new Intent(this, StartListActivity.class);
-                startActivity(intent);
-                break;
-            case "A Control":
-                intent = new Intent(this, AControlListActivity.class);
-                startActivity(intent);
-                break;
-        }
+    // Method to return to the crew list page, passing the role as an extra
+    private void back() {
+        Intent intent = new Intent(this, CrewListActivity.class);
+        intent.putExtra("ROLE", role);
+        startActivity(intent);
+
     }
 
     // On Click method for the button
@@ -114,6 +106,9 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
                     // If not all fields have been filled in, return an error message
                     Snackbar.make(scrollView, "Please fill in all details", Snackbar.LENGTH_LONG).show();
                 }
+                break;
+            case R.id.AddCompBackButton:
+                back();
                 break;
         }
     }

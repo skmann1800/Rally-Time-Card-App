@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AControlListActivity">
+    tools:context=".activities.CrewListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,22 +12,21 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/ACListBackButton"
+            android:id="@+id/CrewListBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/yellow"
-            android:onClick="back"
-            android:text="BACK"
+            android:text="@string/back"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:strokeColor="@color/black"
             app:strokeWidth="2dp" />
 
         <SearchView
-            android:id="@+id/AControlSearchBar"
+            android:id="@+id/CrewSearchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:queryHint="Search">
@@ -35,7 +34,7 @@
         </SearchView>
 
         <ListView
-            android:id="@+id/AControlListView"
+            android:id="@+id/CrewListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fadeScrollbars="false"
@@ -47,7 +46,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/AddAControlButton"
+        android:id="@+id/AddCrewButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -55,7 +54,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:onClick="addNew"
-        android:text="Add New A Control Account"
+        android:text="Add New Crew Account"
         android:textSize="20sp" />
 </RelativeLayout>

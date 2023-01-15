@@ -14,8 +14,11 @@
     <string name="stage4km">35.70 km 53.6 km/h</string>
     <string name="competitor">Competitor</string>
     <string name="acontrol">A Control</string>
+    <string name="ACONTROL">A CONTROL</string>
     <string name="start">Start</string>
+    <string name="START">START</string>
     <string name="finish">Finish</string>
+    <string name="FINISH">FINISH</string>
     <string name="timingCrew">Timing Crew</string>
     <string name="admin">Admin</string>
     <string name="checkin">CHECK IN</string>
@@ -45,6 +48,7 @@
     <string name="SS3">SS 3 (+3\")</string>
     <string name="SS4">SS 4 (+3\")</string>
     <string name="CS">Choose Stage:</string>
+    <string name="CC">Choose Crew:</string>
     <string name="S1TTH">00</string>
     <string name="S1TTM">07</string>
     <string name="S2TTH">00</string>

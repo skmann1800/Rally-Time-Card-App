@@ -108,19 +108,13 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
                 startActivity(intent);
                 break;
             case R.id.AControlRoleButton:
-                // A Control button goes to the A Control List Activity
-                intent = new Intent(this, AControlListActivity.class);
-                startActivity(intent);
+                goToCrewList("A Control");
                 break;
             case R.id.StartRoleButton:
-                // Start button goes to the Start List Activity
-                intent = new Intent(this, StartListActivity.class);
-                startActivity(intent);
+                goToCrewList("Start");
                 break;
             case R.id.FinishRoleButton:
-                // Finish button goes to the Finish List Activity
-                intent = new Intent(this, FinishListActivity.class);
-                startActivity(intent);
+                goToCrewList("Finish");
                 break;
             case R.id.AOSignOutButton:
                 // Sign out button returns to the main login page
@@ -132,6 +126,12 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
                 ShowResetPopup();
                 break;
         }
+    }
+
+    private void goToCrewList(String role) {
+        Intent intent = new Intent(this, CrewListActivity.class);
+        intent.putExtra("ROLE", role);
+        startActivity(intent);
     }
 
     // Method which resets all the databases and creates the basic accounts

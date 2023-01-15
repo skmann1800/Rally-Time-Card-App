@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -18,32 +19,41 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class AControlListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
-    private List<TimingCrew> aControlList = new ArrayList<TimingCrew>(); // List to contain all the a control crew entries
+public class CrewListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
+    private List<TimingCrew> crewList = new ArrayList<TimingCrew>(); // List to contain all the crew entries
     private List<String> postChiefs = new ArrayList<>(); // List to contain the names of the post chiefs
     private ArrayAdapter<String> adapter;
-    private ListView aControlListView;
+    private ListView userListView;
     private SearchView searchBar;
-    private TimingCrewDatabaseHelper crewDatabaseHelper;
-    private TimingCrew aControlCrew;
-    private final String role = "A Control";
+    private TimingCrewDatabaseHelper timingCrewDatabaseHelper;
+    private TimingCrew timingCrew;
+    private String role;
+
+    private Button addCrewButton;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acontrol_list);
+        setContentView(R.layout.activity_crew_list);
 
-        // Set up Adapter
-        aControlListView = (ListView) findViewById(R.id.AControlListView);
-        crewDatabaseHelper = new TimingCrewDatabaseHelper(this);
-        if (aControlListView != null) {
+        initViews();
+        initListeners();
+
+        // Get role from intent
+        role = getIntent().getStringExtra("ROLE");
+
+        // Setup Adapter
+        userListView = (ListView) findViewById(R.id.CrewListView);
+        timingCrewDatabaseHelper = new TimingCrewDatabaseHelper(this);
+        if (userListView != null) {
             postChiefs = getPostChiefs();
             adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, postChiefs);
-            aControlListView.setAdapter(adapter);
-            aControlListView.setOnItemClickListener(this);
+            userListView.setAdapter(adapter);
+            userListView.setOnItemClickListener(this);
 
             // Set up Search Bar
-            searchBar = (SearchView) findViewById(R.id.AControlSearchBar);
+            searchBar = (SearchView) findViewById(R.id.CrewSearchBar);
             searchBar.setOnQueryTextListener(this);
             searchBar.setOnCloseListener(new SearchView.OnCloseListener() {
                 @Override
@@ -58,12 +68,24 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
-    // Method to return a list of the names of all post chiefs of crews in the A Control role
+    // Method to initialise views
+    private void initViews() {
+        addCrewButton = findViewById(R.id.AddCrewButton);
+        backButton = findViewById(R.id.CrewListBackButton);
+    }
+
+    // Method to initialise listeners
+    private void initListeners() {
+        addCrewButton.setOnClickListener(this);
+        backButton.setOnClickListener(this);
+    }
+
+    // Method to return a list of the names of all post chiefs of crews in the specified role
     public List<String> getPostChiefs() {
         List<String> currPostChiefs = new ArrayList<>();
-        aControlList = crewDatabaseHelper.getTimingCrewsByPosition(role);
-        for (int i = 0; i < aControlList.size(); i++) {
-            currPostChiefs.add(aControlList.get(i).getPostChief());
+        crewList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
+        for (int i = 0; i < crewList.size(); i++) {
+            currPostChiefs.add(crewList.get(i).getPostChief());
         }
         return currPostChiefs;
     }
@@ -73,8 +95,8 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String postChiefName = (String) adapterView.getAdapter().getItem(position);
-        aControlCrew = crewDatabaseHelper.getTimingCrewByPostChief(role, postChiefName);
-        int crewID = aControlCrew.getCrewId();
+        timingCrew = timingCrewDatabaseHelper.getTimingCrewByPostChief(role, postChiefName);
+        int crewID = timingCrew.getCrewId();
         Intent intent = new Intent(this, UpdateCrewActivity.class);
         intent.putExtra("ROLE", role);
         intent.putExtra("CREW_ID", crewID);
@@ -86,10 +108,10 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
     @Override
     public boolean onQueryTextSubmit(String query) {
         String search = query.toLowerCase(Locale.ROOT);
-        aControlList = crewDatabaseHelper.getTimingCrewsByPosition(role);
+        crewList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
         List<String> results = new ArrayList<>();
-        for (int i = 0; i < aControlList.size(); i++) {
-            String currPostChief = aControlList.get(i).getPostChief();
+        for (int i = 0; i < crewList.size(); i++) {
+            String currPostChief = crewList.get(i).getPostChief();
             String toMatch = currPostChief.toLowerCase(Locale.ROOT);
             if (toMatch.contains(search)) {
                 results.add(currPostChief);
@@ -106,10 +128,10 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
     @Override
     public boolean onQueryTextChange(String newText) {
         String search = newText.toLowerCase(Locale.ROOT);
-        aControlList = crewDatabaseHelper.getTimingCrewsByPosition(role);
+        crewList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
         List<String> results = new ArrayList<>();
-        for (int i = 0; i < aControlList.size(); i++) {
-            String currPostChief = aControlList.get(i).getPostChief();
+        for (int i = 0; i < crewList.size(); i++) {
+            String currPostChief = crewList.get(i).getPostChief();
             String toMatch = currPostChief.toLowerCase(Locale.ROOT);
             if (toMatch.contains(search)) {
                 results.add(currPostChief);
@@ -121,15 +143,27 @@ public class AControlListActivity extends AppCompatActivity implements AdapterVi
         return false;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.AddCrewButton:
+                addNew();
+                break;
+            case R.id.CrewListBackButton:
+                back();
+                break;
+        }
+    }
+
     // Method which returns to the admin options page
-    public void back(View view) {
+    private void back() {
         Intent intent = new Intent(this, AdminOptionsActivity.class);
         startActivity(intent);
     }
 
     // Method which changes to the add crew activity and passes the crew type
     // with the intent
-    public void addNew(View view) {
+    private void addNew() {
         Intent intent = new Intent(this, AddCrewActivity.class);
         intent.putExtra("ROLE", role);
         startActivity(intent);

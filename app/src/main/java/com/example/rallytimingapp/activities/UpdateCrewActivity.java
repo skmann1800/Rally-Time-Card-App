@@ -33,6 +33,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
     private User user;
     private TimingCrew crew;
 
+    private Button backButton;
     private Button saveButton;
     private Button deleteButton;
     private Button addNewButton;
@@ -79,6 +80,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
 
     // Method to initialise views
     private void initViews() {
+        backButton = findViewById(R.id.UCBackButton);
         saveButton = findViewById(R.id.UpdateCrewButton);
         deleteButton = findViewById(R.id.DeleteCrewButton);
         addNewButton = findViewById(R.id.AddNewCrewButton);
@@ -102,30 +104,17 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
 
     // Method to initialise listeners for the buttons
     private void initListeners() {
+        backButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
+        addNewButton.setOnClickListener(this);
     }
 
     // Method to return to the previous page, based on which role was passed by the intent
-    public void back(View view) {
-        Intent intent;
-        switch (role) {
-            case "Finish":
-                // Finish role goes back to the finish list activity
-                intent = new Intent(this, FinishListActivity.class);
-                startActivity(intent);
-                break;
-            case "Start":
-                // Start role goes back to the start list activity
-                intent = new Intent(this, StartListActivity.class);
-                startActivity(intent);
-                break;
-            case "A Control":
-                // A Control role goes back to the A Control list activity
-                intent = new Intent(this, AControlListActivity.class);
-                startActivity(intent);
-                break;
-        }
+    private void back() {
+        Intent intent = new Intent(this, CrewListActivity.class);
+        intent.putExtra("ROLE", role);
+        startActivity(intent);
     }
 
     // On Click method for the buttons
@@ -139,6 +128,12 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
             case R.id.DeleteCrewButton:
                 // Delete button shows the delete pop-up
                 ShowDeletePopup();
+                break;
+            case R.id.UCBackButton:
+                back();
+                break;
+            case R.id.AddNewCrewButton:
+                addNew();
                 break;
         }
     }
@@ -170,7 +165,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
                 // Dismiss the pop-up
                 deletePopup.dismiss();
                 // Return to the previous activity
-                back(view);
+                back();
             }
         });
 
@@ -329,9 +324,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
         return true;
     }
 
-    // Method called when the "Add New Crew Account" button is clicked
-    // Pass the role as an extra
-    public void addNew(View view) {
+    private void addNew() {
         Intent intent = new Intent(this, AddCrewActivity.class);
         intent.putExtra("ROLE", role);
         startActivity(intent);

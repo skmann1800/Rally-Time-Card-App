@@ -82,7 +82,6 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
         Intent intent = new Intent(this, CrewListActivity.class);
         intent.putExtra("ROLE", role);
         startActivity(intent);
-
     }
 
     // On Click method for the button
@@ -107,7 +106,7 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
                     Snackbar.make(scrollView, "Please fill in all details", Snackbar.LENGTH_LONG).show();
                 }
                 break;
-            case R.id.AddCompBackButton:
+            case R.id.AddCrewBackButton:
                 back();
                 break;
         }

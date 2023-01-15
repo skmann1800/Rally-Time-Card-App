@@ -42,6 +42,7 @@ public class CrewListActivity extends AppCompatActivity implements View.OnClickL
 
         // Get role from intent
         role = getIntent().getStringExtra("ROLE");
+        addCrewButton.setText("Add New " + role + " Account");
 
         // Setup Adapter
         userListView = (ListView) findViewById(R.id.CrewListView);

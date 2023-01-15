@@ -15,6 +15,7 @@ public class ChooseStageActivity extends AppCompatActivity implements View.OnCli
     private Button stage2Button;
     private Button stage3Button;
     private Button stage4Button;
+    private Button backButton;
 
     private String role;
 
@@ -36,6 +37,7 @@ public class ChooseStageActivity extends AppCompatActivity implements View.OnCli
         stage2Button = findViewById(R.id.Stage2Button);
         stage3Button = findViewById(R.id.Stage3Button);
         stage4Button = findViewById(R.id.Stage4Button);
+        backButton = findViewById(R.id.CSBackButton);
     }
 
     // Method to initialise listeners
@@ -44,27 +46,32 @@ public class ChooseStageActivity extends AppCompatActivity implements View.OnCli
         stage2Button.setOnClickListener(this);
         stage3Button.setOnClickListener(this);
         stage4Button.setOnClickListener(this);
+        backButton.setOnClickListener(this);
     }
 
     // On Click method for buttons, depending on the role and which button is clicked
     @Override
     public void onClick(View view) {
-        int stage = 0;
         switch (view.getId()) {
             case R.id.Stage1Button:
-                stage = 1;
+                goToStage(1);
                 break;
             case R.id.Stage2Button:
-                stage = 2;
+                goToStage(2);
                 break;
             case R.id.Stage3Button:
-                stage = 3;
+                goToStage(3);
                 break;
             case R.id.Stage4Button:
-                stage = 4;
+                goToStage(4);
+                break;
+            case R.id.CSBackButton:
+                back();
                 break;
         }
+    }
 
+    private void goToStage(int stage) {
         // Each role is sent to a different activity, and the stage number is
         // passed as an extra
         Intent intent;
@@ -87,9 +94,9 @@ public class ChooseStageActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    // Method to return to the main login page
-    public void signOut(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+    // Method to return to the choose crew page
+    private void back() {
+        Intent intent = new Intent(this, ChooseCrewActivity.class);
         startActivity(intent);
     }
 }

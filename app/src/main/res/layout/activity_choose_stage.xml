@@ -78,13 +78,12 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/CSSignOutButton"
+        android:id="@+id/CSBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/yellow"
-        android:onClick="signOut"
         android:padding="15dp"
-        android:text="@string/signout"
+        android:text="@string/back"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"

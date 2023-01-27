@@ -103,16 +103,16 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
     private Button checkIn1;
     private Button reqTime1;
-    private Button saveDT1;
+    private Button saveDueTime1;
     private Button checkIn2;
     private Button reqTime2;
-    private Button saveDT2;
+    private Button saveDueTime2;
     private Button checkIn3;
     private Button reqTime3;
-    private Button saveDT3;
+    private Button saveDueTime3;
     private Button checkIn4;
     private Button reqTime4;
-    private Button saveDT4;
+    private Button saveDueTime4;
 
     private CompDatabaseHelper compDatabaseHelper;
     private StageDatabaseHelper stageDatabaseHelper;
@@ -273,22 +273,23 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
         scrollView = findViewById(R.id.CompViewScrollView);
         carNumTV = findViewById(R.id.CarNum);
 
-        startOrder1 = findViewById(R.id.Sec2Oval);
-        provStartH1 = findViewById(R.id.S2PSH);
-        provStartM1 = findViewById(R.id.S2PSM);
-        actualStartH1 = findViewById(R.id.S2ASH);
-        actualStartM1 = findViewById(R.id.S2ASM);
-        finishTimeH1 = findViewById(R.id.S2FTH);
-        finishTimeM1 = findViewById(R.id.S2FTM);
-        finishTimeS1 = findViewById(R.id.S2FTS);
-        finishTimeMS1 = findViewById(R.id.S2FTMS);
-        stageTimeM1 = findViewById(R.id.S2TTM);
-        stageTimeS1 = findViewById(R.id.S2TTS);
-        stageTimeMS1 = findViewById(R.id.S2TTMS);
-        actualTimeH1 = findViewById(R.id.S2ATH);
-        actualTimeM1 = findViewById(R.id.S2ATM);
-        dueTimeH1 = findViewById(R.id.S2DTH);
-        // Add a text changed listener
+        startOrder1 = findViewById(R.id.S1Oval);
+        provStartH1 = findViewById(R.id.S1ProvStartHours);
+        provStartM1 = findViewById(R.id.S1ProvStartMinutes);
+        actualStartH1 = findViewById(R.id.S1ActualStartHours);
+        actualStartM1 = findViewById(R.id.S1ActualStartMinutes);
+        finishTimeH1 = findViewById(R.id.S1FinishTimeHours);
+        finishTimeM1 = findViewById(R.id.S1FinishTimeMinutes);
+        finishTimeS1 = findViewById(R.id.S1FinishTimeSeconds);
+        finishTimeMS1 = findViewById(R.id.S1FinishTimeMilliseconds);
+        stageTimeM1 = findViewById(R.id.S1TimeTakenMinutes);
+        stageTimeS1 = findViewById(R.id.S1TimeTakenSeconds);
+        stageTimeMS1 = findViewById(R.id.S1TimeTakenMilliseconds);
+        actualTimeH1 = findViewById(R.id.S1ActualTimeHours);
+        actualTimeM1 = findViewById(R.id.S1ActualTimeMinutes);
+        dueTimeH1 = findViewById(R.id.S1DueTimeHours);
+        dueTimeM1 = findViewById(R.id.S1DueTimeMinutes);
+        // Add text changed listeners
         dueTimeH1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -319,8 +320,6 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
-        dueTimeM1 = findViewById(R.id.S2DTM);
-        // Add a text changed listener
         dueTimeM1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -354,22 +353,23 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        startOrder2 = findViewById(R.id.Sec3Oval);
-        provStartH2 = findViewById(R.id.S3PSH);
-        provStartM2 = findViewById(R.id.S3PSM);
-        actualStartH2 = findViewById(R.id.S3ASH);
-        actualStartM2 = findViewById(R.id.S3ASM);
-        finishTimeH2 = findViewById(R.id.S3FTH);
-        finishTimeM2 = findViewById(R.id.S3FTM);
-        finishTimeS2 = findViewById(R.id.S3FTS);
-        finishTimeMS2 = findViewById(R.id.S3FTMS);
-        stageTimeM2 = findViewById(R.id.S3TTM);
-        stageTimeS2 = findViewById(R.id.S3TTS);
-        stageTimeMS2 = findViewById(R.id.S3TTMS);
-        actualTimeH2 = findViewById(R.id.S3ATH);
-        actualTimeM2 = findViewById(R.id.S3ATM);
-        dueTimeH2 = findViewById(R.id.S3DTH);
-        // Add a text changed listener
+        startOrder2 = findViewById(R.id.S2Oval);
+        provStartH2 = findViewById(R.id.S2ProvStartHours);
+        provStartM2 = findViewById(R.id.S2ProvStartMinutes);
+        actualStartH2 = findViewById(R.id.S2ActualStartHours);
+        actualStartM2 = findViewById(R.id.S2ActualStartMinutes);
+        finishTimeH2 = findViewById(R.id.S2FinishTimeHours);
+        finishTimeM2 = findViewById(R.id.S2FinishTimeMinutes);
+        finishTimeS2 = findViewById(R.id.S2FinishTimeSeconds);
+        finishTimeMS2 = findViewById(R.id.S2FinishTimeMilliseconds);
+        stageTimeM2 = findViewById(R.id.S2TimeTakenMinutes);
+        stageTimeS2 = findViewById(R.id.S2TimeTakenSeconds);
+        stageTimeMS2 = findViewById(R.id.S2TimeTakenMilliseconds);
+        actualTimeH2 = findViewById(R.id.S2ActualTimeHours);
+        actualTimeM2 = findViewById(R.id.S2ActualTimeMinutes);
+        dueTimeH2 = findViewById(R.id.S2DueTimeHours);
+        dueTimeM2 = findViewById(R.id.S2DueTimeMinutes);
+        // Add text changed listeners
         dueTimeH2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -400,8 +400,6 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
-        dueTimeM2 = findViewById(R.id.S3DTM);
-        // Add a text changed listener
         dueTimeM2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -435,22 +433,23 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        startOrder3 = findViewById(R.id.Sec4Oval);
-        provStartH3 = findViewById(R.id.S4PSH);
-        provStartM3 = findViewById(R.id.S4PSM);
-        actualStartH3 = findViewById(R.id.S4ASH);
-        actualStartM3 = findViewById(R.id.S4ASM);
-        finishTimeH3 = findViewById(R.id.S4FTH);
-        finishTimeM3 = findViewById(R.id.S4FTM);
-        finishTimeS3 = findViewById(R.id.S4FTS);
-        finishTimeMS3 = findViewById(R.id.S4FTMS);
-        stageTimeM3 = findViewById(R.id.S4TTM);
-        stageTimeS3 = findViewById(R.id.S4TTS);
-        stageTimeMS3 = findViewById(R.id.S4TTMS);
-        actualTimeH3 = findViewById(R.id.S4ATH);
-        actualTimeM3 = findViewById(R.id.S4ATM);
-        dueTimeH3 = findViewById(R.id.S4DTH);
-        // Add a text changed listener
+        startOrder3 = findViewById(R.id.S3Oval);
+        provStartH3 = findViewById(R.id.S3ProvStartHours);
+        provStartM3 = findViewById(R.id.S3ProvStartMinutes);
+        actualStartH3 = findViewById(R.id.S3ActualStartHours);
+        actualStartM3 = findViewById(R.id.S3ActualStartMinutes);
+        finishTimeH3 = findViewById(R.id.S3FinishTimeHours);
+        finishTimeM3 = findViewById(R.id.S3FinishTimeMinutes);
+        finishTimeS3 = findViewById(R.id.S3FinishTimeSeconds);
+        finishTimeMS3 = findViewById(R.id.S3FinishTimeMilliseconds);
+        stageTimeM3 = findViewById(R.id.S3TimeTakenMinutes);
+        stageTimeS3 = findViewById(R.id.S3TimeTakenSeconds);
+        stageTimeMS3 = findViewById(R.id.S3TimeTakenMilliseconds);
+        actualTimeH3 = findViewById(R.id.S3ActualTimeHours);
+        actualTimeM3 = findViewById(R.id.S3ActualTimeMinutes);
+        dueTimeH3 = findViewById(R.id.S3DueTimeHours);
+        dueTimeM3 = findViewById(R.id.S3DueTimeMinutes);
+        // Add text changed listeners
         dueTimeH3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -481,8 +480,6 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
-        dueTimeM3 = findViewById(R.id.S4DTM);
-        // Add a text changed listener
         dueTimeM3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -516,22 +513,23 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        startOrder4 = findViewById(R.id.Sec5Oval);
-        provStartH4 = findViewById(R.id.S5PSH);
-        provStartM4 = findViewById(R.id.S5PSM);
-        actualStartH4 = findViewById(R.id.S5ASH);
-        actualStartM4 = findViewById(R.id.S5ASM);
-        finishTimeH4 = findViewById(R.id.S5FTH);
-        finishTimeM4 = findViewById(R.id.S5FTM);
-        finishTimeS4 = findViewById(R.id.S5FTS);
-        finishTimeMS4 = findViewById(R.id.S5FTMS);
-        stageTimeM4 = findViewById(R.id.S5TTM);
-        stageTimeS4 = findViewById(R.id.S5TTS);
-        stageTimeMS4 = findViewById(R.id.S5TTMS);
-        actualTimeH4 = findViewById(R.id.S5ATH);
-        actualTimeM4 = findViewById(R.id.S5ATM);
-        dueTimeH4 = findViewById(R.id.S5DTH);
-        // Add a text changed listener
+        startOrder4 = findViewById(R.id.S4Oval);
+        provStartH4 = findViewById(R.id.S4ProvStartHours);
+        provStartM4 = findViewById(R.id.S4ProvStartMinutes);
+        actualStartH4 = findViewById(R.id.S4ActualStartHours);
+        actualStartM4 = findViewById(R.id.S4ActualStartMinutes);
+        finishTimeH4 = findViewById(R.id.S4FinishTimeHours);
+        finishTimeM4 = findViewById(R.id.S4FinishTimeMinutes);
+        finishTimeS4 = findViewById(R.id.S4FinishTimeSeconds);
+        finishTimeMS4 = findViewById(R.id.S4FinishTimeMilliseconds);
+        stageTimeM4 = findViewById(R.id.S4TimeTakenMinutes);
+        stageTimeS4 = findViewById(R.id.S4TimeTakenSeconds);
+        stageTimeMS4 = findViewById(R.id.S4TimeTakenMilliseconds);
+        actualTimeH4 = findViewById(R.id.S4ActualTimeHours);
+        actualTimeM4 = findViewById(R.id.S4ActualTimeMinutes);
+        dueTimeH4 = findViewById(R.id.S4DueTimeHours);
+        dueTimeM4 = findViewById(R.id.S4DueTimeMinutes);
+        // Add text changed listeners
         dueTimeH4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -562,8 +560,6 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
-        dueTimeM4 = findViewById(R.id.S5DTM);
-        // Add a text changed listener
         dueTimeM4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -597,34 +593,34 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        checkIn1 = findViewById(R.id.CheckIn1);
-        reqTime1 = findViewById(R.id.ReqTime1);
-        saveDT1 = findViewById(R.id.SaveDT1);
-        checkIn2 = findViewById(R.id.CheckIn2);
-        reqTime2 = findViewById(R.id.ReqTime2);
-        saveDT2 = findViewById(R.id.SaveDT2);
-        checkIn3 = findViewById(R.id.CheckIn3);
-        reqTime3 = findViewById(R.id.ReqTime3);
-        saveDT3 = findViewById(R.id.SaveDT3);
-        checkIn4 = findViewById(R.id.CheckIn4);
-        reqTime4 = findViewById(R.id.ReqTime4);
-        saveDT4 = findViewById(R.id.SaveDT4);
+        checkIn1 = findViewById(R.id.S1CheckIn);
+        reqTime1 = findViewById(R.id.S1ReqTime);
+        saveDueTime1 = findViewById(R.id.S1SaveDueTime);
+        checkIn2 = findViewById(R.id.S2CheckIn);
+        reqTime2 = findViewById(R.id.S2ReqTime);
+        saveDueTime2 = findViewById(R.id.S2SaveDueTime);
+        checkIn3 = findViewById(R.id.S3CheckIn);
+        reqTime3 = findViewById(R.id.S3ReqTime);
+        saveDueTime3 = findViewById(R.id.S3SaveDueTime);
+        checkIn4 = findViewById(R.id.S4CheckIn);
+        reqTime4 = findViewById(R.id.S4ReqTime);
+        saveDueTime4 = findViewById(R.id.S4SaveDueTime);
     }
 
     // Method to initialise listeners for the buttons
     private void initListeners() {
         checkIn1.setOnClickListener(this);
         reqTime1.setOnClickListener(this);
-        saveDT1.setOnClickListener(this);
+        saveDueTime1.setOnClickListener(this);
         checkIn2.setOnClickListener(this);
         reqTime2.setOnClickListener(this);
-        saveDT2.setOnClickListener(this);
+        saveDueTime2.setOnClickListener(this);
         checkIn3.setOnClickListener(this);
         reqTime3.setOnClickListener(this);
-        saveDT3.setOnClickListener(this);
+        saveDueTime3.setOnClickListener(this);
         checkIn4.setOnClickListener(this);
         reqTime4.setOnClickListener(this);
-        saveDT4.setOnClickListener(this);
+        saveDueTime4.setOnClickListener(this);
     }
 
     // Method to show the confirm check in pop-up
@@ -756,15 +752,15 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.CheckIn1:
+            case R.id.S1CheckIn:
                 // Show the check in pop-up for stage 1
                 ShowCheckInPopup(1);
                 break;
-            case R.id.ReqTime1:
+            case R.id.S1ReqTime:
                 // Show the request time pop-up for stage 1
                 ShowReqTimePopup(1);
                 break;
-            case R.id.SaveDT1:
+            case R.id.S1SaveDueTime:
                 // Save the due time entered for stage 1 and show a confirmation message
                 stage = stageDatabaseHelper.getStage(carNum, 1);
                 String inputDTH1 = dueTimeH1.getText().toString();
@@ -773,15 +769,15 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 stageDatabaseHelper.updateStage(stage);
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
-            case R.id.CheckIn2:
+            case R.id.S2CheckIn:
                 // Show the check in pop-up for stage 2
                 ShowCheckInPopup(2);
                 break;
-            case R.id.ReqTime2:
+            case R.id.S2ReqTime:
                 // Show the request time pop-up for stage 2
                 ShowReqTimePopup(2);
                 break;
-            case R.id.SaveDT2:
+            case R.id.S2SaveDueTime:
                 // Save the due time entered for stage 2 and show a confirmation message
                 stage = stageDatabaseHelper.getStage(carNum, 2);
                 String inputDTH2 = dueTimeH2.getText().toString();
@@ -790,15 +786,15 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 stageDatabaseHelper.updateStage(stage);
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
-            case R.id.CheckIn3:
+            case R.id.S3CheckIn:
                 // Show the check in pop-up for stage 3
                 ShowCheckInPopup(3);
                 break;
-            case R.id.ReqTime3:
+            case R.id.S3ReqTime:
                 // Show the request time pop-up for stage 3
                 ShowReqTimePopup(3);
                 break;
-            case R.id.SaveDT3:
+            case R.id.S3SaveDueTime:
                 // Save the due time entered for stage 3 and show a confirmation message
                 stage = stageDatabaseHelper.getStage(carNum, 3);
                 String inputDTH3 = dueTimeH3.getText().toString();
@@ -807,15 +803,15 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 stageDatabaseHelper.updateStage(stage);
                 Snackbar.make(scrollView, "Due Time Saved", Snackbar.LENGTH_LONG).show();
                 break;
-            case R.id.CheckIn4:
+            case R.id.S4CheckIn:
                 // Show the check in pop-up for stage 4
                 ShowCheckInPopup(4);
                 break;
-            case R.id.ReqTime4:
+            case R.id.S4ReqTime:
                 // Show the request time pop-up for stage 4
                 ShowReqTimePopup(4);
                 break;
-            case R.id.SaveDT4:
+            case R.id.S4SaveDueTime:
                 // Save the due time entered for stage 4 and show a confirmation message
                 stage = stageDatabaseHelper.getStage(carNum, 4);
                 String inputDTH4 = dueTimeH4.getText().toString();

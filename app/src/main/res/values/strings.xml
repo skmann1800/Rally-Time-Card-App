@@ -1,17 +1,39 @@
 <resources>
     <string name="app_name">Rally Timecard App</string>
+
     <string name="stage1">SSS 1 Pohe Island 1</string>
     <string name="stage2">SSS 2 Pohe Island 2</string>
     <string name="stage3">SS 3 Helena 1</string>
     <string name="stage4">SS 4 Akerama 1</string>
-    <string name="stage1dist">1.24 km</string>
-    <string name="stage2dist">1.24 km</string>
-    <string name="stage3dist">13.51 km</string>
-    <string name="stage4dist">16.07 km</string>
-    <string name="stage1km">2.83 km 24.3 km/h</string>
-    <string name="stage2km">2.83 km 24.3 km/h</string>
-    <string name="stage3km">46.07 km 55.3 km/h</string>
-    <string name="stage4km">35.70 km 53.6 km/h</string>
+    <string-array name="stage_labels">
+        <item>@string/stage1</item>
+        <item>@string/stage2</item>
+        <item>@string/stage3</item>
+        <item>@string/stage4</item>
+    </string-array>
+
+    <string name="stage1_distance">1.24 km</string>
+    <string name="stage2_distance">1.24 km</string>
+    <string name="stage3_distance">13.51 km</string>
+    <string name="stage4_distance">16.07 km</string>
+    <string-array name="stage_distances">
+        <item>@string/stage1_distance</item>
+        <item>@string/stage2_distance</item>
+        <item>@string/stage3_distance</item>
+        <item>@string/stage4_distance</item>
+    </string-array>
+
+    <string name="stage1_km">2.83 km 24.3 km/h</string>
+    <string name="stage2_km">2.83 km 24.3 km/h</string>
+    <string name="stage3_km">46.07 km 55.3 km/h</string>
+    <string name="stage4_km">35.70 km 53.6 km/h</string>
+    <string-array name="stage_kms">
+        <item>@string/stage1_km</item>
+        <item>@string/stage2_km</item>
+        <item>@string/stage3_km</item>
+        <item>@string/stage4_km</item>
+    </string-array>
+
     <string name="competitor">Competitor</string>
     <string name="acontrol">A Control</string>
     <string name="ACONTROL">A CONTROL</string>
@@ -19,68 +41,134 @@
     <string name="START">START</string>
     <string name="finish">Finish</string>
     <string name="FINISH">FINISH</string>
-    <string name="timingCrew">Timing Crew</string>
+    <string name="timing_crew">Timing Crew</string>
     <string name="admin">Admin</string>
-    <string name="checkin">CHECK IN</string>
-    <string name="reqtime">REQUEST TIME</string>
-    <string name="FT">FINISH TIME</string>
-    <string name="PS">PROVISIONAL START</string>
-    <string name="AS">ACTUAL START</string>
-    <string name="ST">STAGE TIME</string>
-    <string name="TargT">TARGET TIME</string>
-    <string name="TT">TIME TAKEN</string>
-    <string name="AT">ACTUAL TIME</string>
-    <string name="DT">DUE TIME</string>
-    <string name="SO">START ORDER</string>
-    <string name="FO">FINISH ORDER</string>
-    <string name="CN">CAR NUMBER</string>
-    <string name="so">Start Order</string>
-    <string name="fo">Finish Order</string>
-    <string name="cn">Car Number</string>
-    <string name="CU">COMPETITOR USE</string>
+    <string name="check_in">CHECK IN</string>
+    <string name="request_time">REQUEST TIME</string>
+    <string name="finish_time">FINISH TIME</string>
+    <string name="prov_start">PROVISIONAL START</string>
+    <string name="actual_start">ACTUAL START</string>
+    <string name="stage_time">STAGE TIME</string>
+    <string name="target_time">TARGET TIME</string>
+    <string name="time_taken">TIME TAKEN</string>
+    <string name="actual_time">ACTUAL TIME</string>
+    <string name="due_time">DUE TIME</string>
+    <string name="comp_use">COMPETITOR USE</string>
+    <string name="start_order_caps">START ORDER</string>
+    <string name="start_order">Start Order</string>
+    <string name="finish_order_caps">FINISH ORDER</string>
+    <string name="finish_order">Finish Order</string>
+    <string name="car_number_caps">CAR NUMBER</string>
+    <string name="car_number">Car Number</string>
+
     <string name="TC1">TC 1</string>
     <string name="TC2">TC 2</string>
     <string name="TC3">TC 3</string>
     <string name="TC4">TC 4</string>
     <string name="TC5">TC 5</string>
+    <string-array name="TC_numbers">
+        <item>@string/TC1</item>
+        <item>@string/TC2</item>
+        <item>@string/TC3</item>
+        <item>@string/TC4</item>
+        <item>@string/TC5</item>
+    </string-array>
+
     <string name="SS1">SS 1 (+3\")</string>
     <string name="SS2">SS 2 (+3\")</string>
     <string name="SS3">SS 3 (+3\")</string>
     <string name="SS4">SS 4 (+3\")</string>
-    <string name="CS">Choose Stage:</string>
-    <string name="CC">Choose Crew:</string>
-    <string name="S1TTH">00</string>
-    <string name="S1TTM">07</string>
-    <string name="S2TTH">00</string>
-    <string name="S2TTM">07</string>
-    <string name="S3TTH">00</string>
-    <string name="S3TTM">50</string>
-    <string name="S4TTH">00</string>
-    <string name="S4TTM">40</string>
-    <string name="s1finish">Stage 1 Finish</string>
-    <string name="s2finish">Stage 2 Finish</string>
-    <string name="s3finish">Stage 3 Finish</string>
-    <string name="s4finish">Stage 4 Finish</string>
-    <string name="s1start">Stage 1 Start</string>
-    <string name="s2start">Stage 2 Start</string>
-    <string name="s3start">Stage 3 Start</string>
-    <string name="s4start">Stage 4 Start</string>
-    <string name="s1control">Stage 1 A Control</string>
-    <string name="s2control">Stage 2 A Control</string>
-    <string name="s3control">Stage 3 A Control</string>
-    <string name="s4control">Stage 4 A Control</string>
+    <string-array name="stage_numbers">
+        <item>@string/SS1</item>
+        <item>@string/SS2</item>
+        <item>@string/SS3</item>
+        <item>@string/SS4</item>
+    </string-array>
+
+    <string name="choose_stage">Choose Stage:</string>
+    <string name="choose_crew">Choose Crew:</string>
+
+    <string name="stage1_target_time_hours">00</string>
+    <string name="stage1_target_time_minutes">07</string>
+    <string name="stage2_target_time_hours">00</string>
+    <string name="stage2_target_time_minutes">07</string>
+    <string name="stage3_target_time_hours">00</string>
+    <string name="stage3_target_time_minutes">50</string>
+    <string name="stage4_target_time_hours">00</string>
+    <string name="stage4_target_time_minutes">40</string>
+    <string-array name="target_time_hours">
+        <item>@string/stage1_target_time_hours</item>
+        <item>@string/stage2_target_time_hours</item>
+        <item>@string/stage3_target_time_hours</item>
+        <item>@string/stage4_target_time_hours</item>
+    </string-array>
+    <string-array name="target_time_minutes">
+        <item>@string/stage1_target_time_minutes</item>
+        <item>@string/stage2_target_time_minutes</item>
+        <item>@string/stage3_target_time_minutes</item>
+        <item>@string/stage4_target_time_minutes</item>
+    </string-array>
+
+    <string name="stage1_finish">Stage 1 Finish</string>
+    <string name="stage2_finish">Stage 2 Finish</string>
+    <string name="stage3_finish">Stage 3 Finish</string>
+    <string name="stage4_finish">Stage 4 Finish</string>
+    <string-array name="stage_finish">
+        <item>@string/stage1_finish</item>
+        <item>@string/stage2_finish</item>
+        <item>@string/stage3_finish</item>
+        <item>@string/stage4_finish</item>
+    </string-array>
+
+    <string name="stage1_start">Stage 1 Start</string>
+    <string name="stage2_start">Stage 2 Start</string>
+    <string name="stage3_start">Stage 3 Start</string>
+    <string name="stage4_start">Stage 4 Start</string>
+    <string-array name="stage_start">
+        <item>@string/stage1_start</item>
+        <item>@string/stage2_start</item>
+        <item>@string/stage3_start</item>
+        <item>@string/stage4_start</item>
+    </string-array>
+
+    <string name="stage1_acontrol">Stage 1 A Control</string>
+    <string name="stage2_acontrol">Stage 2 A Control</string>
+    <string name="stage3_acontrol">Stage 3 A Control</string>
+    <string name="stage4_acontrol">Stage 4 A Control</string>
+    <string-array name="stage_acontrol">
+        <item>@string/stage1_acontrol</item>
+        <item>@string/stage2_acontrol</item>
+        <item>@string/stage3_acontrol</item>
+        <item>@string/stage4_acontrol</item>
+    </string-array>
+
     <string name="back">BACK</string>
-    <string name="signout">SIGN OUT</string>
+    <string name="sign_out">SIGN OUT</string>
     <string name="login">LOGIN</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="checkin1">Check In to Stage 1?</string>
-    <string name="checkin2">Check In to Stage 2?</string>
-    <string name="checkin3">Check In to Stage 3?</string>
-    <string name="checkin4">Check In to Stage 4?</string>
-    <string name="reqtime1">Request Time for Stage 1?</string>
-    <string name="reqtime2">Request Time for Stage 2?</string>
-    <string name="reqtime3">Request Time for Stage 3?</string>
-    <string name="reqtime4">Request Time for Stage 4?</string>
-    <string name="returnTC">RETURN TIME CARD</string>
+
+    <string name="check_in_1">Check In to Stage 1?</string>
+    <string name="check_in_2">Check In to Stage 2?</string>
+    <string name="check_in_3">Check In to Stage 3?</string>
+    <string name="check_in_4">Check In to Stage 4?</string>
+    <string-array name="check_in_labels">
+        <item>@string/check_in_1</item>
+        <item>@string/check_in_2</item>
+        <item>@string/check_in_3</item>
+        <item>@string/check_in_4</item>
+    </string-array>
+
+    <string name="request_time_1">Request Time for Stage 1?</string>
+    <string name="request_time_2">Request Time for Stage 2?</string>
+    <string name="request_time_3">Request Time for Stage 3?</string>
+    <string name="request_time_4">Request Time for Stage 4?</string>
+    <string-array name="request_time_labels">
+        <item>@string/request_time_1</item>
+        <item>@string/request_time_2</item>
+        <item>@string/request_time_3</item>
+        <item>@string/request_time_4</item>
+    </string-array>
+
+    <string name="return_time_card">RETURN TIME CARD</string>
 </resources>

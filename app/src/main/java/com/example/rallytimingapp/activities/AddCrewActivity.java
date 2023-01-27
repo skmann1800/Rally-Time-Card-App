@@ -77,13 +77,6 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
         saveButton.setOnClickListener(this);
     }
 
-    // Method to return to the crew list page, passing the role as an extra
-    private void back() {
-        Intent intent = new Intent(this, CrewListActivity.class);
-        intent.putExtra("ROLE", role);
-        startActivity(intent);
-    }
-
     // On Click method for the button
     @Override
     public void onClick(View view) {
@@ -107,7 +100,10 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
             case R.id.AddCrewBackButton:
-                back();
+                // Return to the crew list page, passing the role as an extra
+                Intent intent = new Intent(this, CrewListActivity.class);
+                intent.putExtra("ROLE", role);
+                startActivity(intent);
                 break;
         }
     }

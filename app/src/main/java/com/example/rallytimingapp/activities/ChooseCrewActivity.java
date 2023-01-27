@@ -57,7 +57,9 @@ public class ChooseCrewActivity extends AppCompatActivity implements View.OnClic
                 chooseStage("Finish");
                 break;
             case R.id.CCBackButton:
-                back();
+                // Return to the main login page
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -65,12 +67,6 @@ public class ChooseCrewActivity extends AppCompatActivity implements View.OnClic
     private void chooseStage(String role) {
         Intent intent = new Intent(this, ChooseStageActivity.class);
         intent.putExtra("ROLE", role);
-        startActivity(intent);
-    }
-
-    // Method to return to the main login page
-    private void back() {
-        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

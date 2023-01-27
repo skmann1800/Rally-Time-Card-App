@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CompListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
+public class CompListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, SearchView.OnQueryTextListener {
     private List<Competitor> competitorList = new ArrayList<Competitor>(); // List to contain all the competitor entries
     private List<String> drivers = new ArrayList<>(); // List to contain the names of the drivers
     private ArrayAdapter<String> adapter;
@@ -27,10 +28,16 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
     private CompDatabaseHelper compDatabaseHelper;
     private Competitor competitor;
 
+    private Button backButton;
+    private Button addCompButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comp_list);
+
+        initViews();
+        initListeners();
 
         // Set up Adapter
         compUserListView = (ListView) findViewById(R.id.CompListView);
@@ -55,6 +62,18 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
                 }
             });
         }
+    }
+
+    // Method to initialise views
+    private void initViews() {
+        addCompButton = findViewById(R.id.AddCompButton);
+        backButton = findViewById(R.id.CompListBackButton);
+    }
+
+    // Method to initialise listeners
+    private void initListeners() {
+        addCompButton.setOnClickListener(this);
+        backButton.setOnClickListener(this);
     }
 
     // Method to return a list of the names of all drivers
@@ -119,15 +138,20 @@ public class CompListActivity extends AppCompatActivity implements AdapterView.O
         return false;
     }
 
-    // Method which returns to the admin options page
-    public void back(View view) {
-        Intent intent = new Intent(this, AdminOptionsActivity.class);
-        startActivity(intent);
-    }
-
-    // Method which changes to the add competitor activity
-    public void addNew(View view) {
-        Intent intent = new Intent(this, AddCompActivity.class);
-        startActivity(intent);
+    @Override
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.AddCrewButton:
+                // Go to Add Competitor page
+                intent = new Intent(this, AddCompActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.CrewListBackButton:
+                // Go back to the Admin Options page
+                intent = new Intent(this, AdminOptionsActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

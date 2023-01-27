@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,35 +35,35 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     private TextView stageNumTV;
     private TextView stageLabel1;
     private TextView stageLabel2;
-    private TextView stageDist;
-    private TextView SS;
+    private TextView stageDistance;
+    private TextView stageNumber;
     private TextView blueTC1;
     private TextView blueTC2;
-    private TextView stageKM;
-    private TextView finishTC;
+    private TextView blueKM;
+    private TextView nextTC;
     private TextView yellowTC;
-    private TextView TTH;
-    private TextView TTM;
+    private TextView targetTimeHours;
+    private TextView targetTimeMinutes;
 
     private TextView carNumTV;
     private TextView finishOrderTV;
 
     private TextView startOrder;
-    private TextView provStartH;
-    private TextView provStartM;
-    private TextView actualStartH;
-    private TextView actualStartM;
-    private TextView finishTimeH;
-    private TextView finishTimeM;
-    private TextView finishTimeS;
-    private TextView finishTimeMS;
-    private TextView stageTimeM;
-    private TextView stageTimeS;
-    private TextView stageTimeMS;
-    private TextView actualTimeH;
-    private TextView actualTimeM;
-    private TextView dueTimeH;
-    private TextView dueTimeM;
+    private TextView provStartHours;
+    private TextView provStartMinutes;
+    private TextView actualStartHours;
+    private TextView actualStartMinutes;
+    private TextView finishTimeHours;
+    private TextView finishTimeMinutes;
+    private TextView finishTimeSeconds;
+    private TextView finishTimeMilliseconds;
+    private TextView stageTimeMinutes;
+    private TextView stageTimeSeconds;
+    private TextView stageTimeMilliseconds;
+    private TextView actualTimeHours;
+    private TextView actualTimeMinutes;
+    private TextView dueTimeHours;
+    private TextView dueTimeMinutes;
 
     private PopupWindow returnTCPopup;
 
@@ -77,6 +78,16 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
     private int finishOrder;
     private int carNum;
 
+    private String[] stageLabels;
+    private String[] stageDistances;
+    private String[] stageKMs;
+    private String[] TCNumbers;
+    private String[] stageNumbers;
+    private String[] stageTargetTimeHours;
+    private String[] stageTargetTimeMinutes;
+    private String[] stageFinishLabels;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,72 +96,29 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         initViews();
         initObjects();
         initListeners();
+        initResources();
 
         // Retrieve stage number from intent
         stageNum = getIntent().getIntExtra("STAGE", 0);
         // Set default finish order to be 1
-        finishOrder = 1;
-        // Fill in the timecards
-        fillInCards();
+        finishOrder = finishDatabaseHelper.getCurrFinishOrder(stageNum) + 1;
+        finishOrderTV.setText(finishOrder);
+        carNumTV.requestFocus();
+        carNumTV.setCursorVisible(true);
+
         // Based on the stage number, fill in the labels as follows
-        switch (stageNum) {
-            case 1:
-                stageNumTV.setText(R.string.s1finish);
-                stageLabel1.setText(R.string.stage1);
-                stageLabel2.setText(R.string.stage1);
-                stageDist.setText(R.string.stage1dist);
-                stageKM.setText(R.string.stage1km);
-                SS.setText(R.string.SS1);
-                blueTC1.setText(R.string.TC1);
-                blueTC2.setText(R.string.TC2);
-                finishTC.setText(R.string.TC2);
-                yellowTC.setText(R.string.TC2);
-                TTH.setText(R.string.S1TTH);
-                TTM.setText(R.string.S1TTM);
-                break;
-            case 2:
-                stageNumTV.setText(R.string.s2finish);
-                stageLabel1.setText(R.string.stage2);
-                stageLabel2.setText(R.string.stage2);
-                stageDist.setText(R.string.stage2dist);
-                stageKM.setText(R.string.stage2km);
-                SS.setText(R.string.SS2);
-                blueTC1.setText(R.string.TC2);
-                blueTC2.setText(R.string.TC3);
-                finishTC.setText(R.string.TC3);
-                yellowTC.setText(R.string.TC3);
-                TTH.setText(R.string.S2TTH);
-                TTM.setText(R.string.S2TTM);
-                break;
-            case 3:
-                stageNumTV.setText(R.string.s3finish);
-                stageLabel1.setText(R.string.stage3);
-                stageLabel2.setText(R.string.stage3);
-                stageDist.setText(R.string.stage3dist);
-                stageKM.setText(R.string.stage3km);
-                SS.setText(R.string.SS3);
-                blueTC1.setText(R.string.TC3);
-                blueTC2.setText(R.string.TC4);
-                finishTC.setText(R.string.TC4);
-                yellowTC.setText(R.string.TC4);
-                TTH.setText(R.string.S3TTH);
-                TTM.setText(R.string.S3TTM);
-                break;
-            case 4:
-                stageNumTV.setText(R.string.s4finish);
-                stageLabel1.setText(R.string.stage4);
-                stageLabel2.setText(R.string.stage4);
-                stageDist.setText(R.string.stage4dist);
-                stageKM.setText(R.string.stage4km);
-                SS.setText(R.string.SS4);
-                blueTC1.setText(R.string.TC4);
-                blueTC2.setText(R.string.TC5);
-                finishTC.setText(R.string.TC5);
-                yellowTC.setText(R.string.TC5);
-                TTH.setText(R.string.S4TTH);
-                TTM.setText(R.string.S4TTM);
-                break;
-        }
+        stageNumTV.setText(stageFinishLabels[stageNum - 1]);
+        stageLabel1.setText(stageLabels[stageNum - 1]);
+        stageLabel2.setText(stageLabels[stageNum - 1]);
+        stageDistance.setText(stageDistances[stageNum - 1]);
+        blueKM.setText(stageKMs[stageNum - 1]);
+        stageNumber.setText(stageNumbers[stageNum - 1]);
+        blueTC1.setText(TCNumbers[stageNum - 1]);
+        blueTC2.setText(TCNumbers[stageNum]);
+        nextTC.setText(TCNumbers[stageNum]);
+        yellowTC.setText(TCNumbers[stageNum]);
+        targetTimeHours.setText(stageTargetTimeHours[stageNum - 1]);
+        targetTimeMinutes.setText(stageTargetTimeMinutes[stageNum - 1]);
     }
 
     // Method to initialise objects
@@ -166,35 +134,54 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         scrollView = findViewById(R.id.FinishScrollView);
 
         carNumTV = findViewById(R.id.FinishCarNum);
+        carNumTV.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         finishOrderTV = findViewById(R.id.FinishOrder);
 
-        returnTCButton = findViewById(R.id.FReturnButton);
+        returnTCButton = findViewById(R.id.FinishReturnButton);
         backButton = findViewById(R.id.FTCBackButton);
         prevButton = findViewById(R.id.FinishPrevButton);
         nextButton = findViewById(R.id.FinishNextButton);
 
         stageNumTV = findViewById(R.id.FinishStageNum);
-        stageLabel1 = findViewById(R.id.FTCStage1);
-        stageLabel2 = findViewById(R.id.FTCStage2);
-        stageDist = findViewById(R.id.FTCDist);
-        SS = findViewById(R.id.FTCSS);
+        stageLabel1 = findViewById(R.id.FTCStageLabel1);
+        stageLabel2 = findViewById(R.id.FTCStageLabel2);
+        stageDistance = findViewById(R.id.FTCDistance);
+        stageNumber = findViewById(R.id.FTCStageNumber);
         blueTC1 = findViewById(R.id.FTCTC1);
         blueTC2 = findViewById(R.id.FTCTC2);
-        stageKM = findViewById(R.id.FTCKM);
-        finishTC = findViewById(R.id.FTCTC);
+        blueKM = findViewById(R.id.FTCKM);
+        nextTC = findViewById(R.id.FTCNextTC);
         yellowTC = findViewById(R.id.FTCYellowTC);
-        TTH = findViewById(R.id.FTCTaTH);
-        TTM = findViewById(R.id.FTCTaTM);
+        targetTimeHours = findViewById(R.id.FTCTargetTimeHours);
+        targetTimeMinutes = findViewById(R.id.FTCTargetTimeMinutes);
 
         startOrder = findViewById(R.id.FTCOval);
-        provStartH = findViewById(R.id.FTCPSH);
-        provStartM = findViewById(R.id.FTCPSM);
-        actualStartH = findViewById(R.id.FTCASH);
-        actualStartM = findViewById(R.id.FTCASM);
-        finishTimeH = findViewById(R.id.FTCFTH);
+        provStartHours = findViewById(R.id.FTCProvStartHours);
+        provStartMinutes = findViewById(R.id.FTCProvStartMinutes);
+        actualStartHours = findViewById(R.id.FTCActualStartHours);
+        actualStartMinutes = findViewById(R.id.FTCActualStartMinutes);
+        finishTimeHours = findViewById(R.id.FTCFinishTimeHours);
+        finishTimeMinutes = findViewById(R.id.FTCFinishTimeMinutes);
+        finishTimeSeconds = findViewById(R.id.FTCFinishTimeSeconds);
+        finishTimeMilliseconds = findViewById(R.id.FTCFinishTimeMilliseconds);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to move onto the next text box, once this one is full
-        finishTimeH.addTextChangedListener(new TextWatcher() {
+        finishTimeHours.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -203,19 +190,19 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // The max input length is 2 digits
-                if(finishTimeH.getText().toString().length()==2)
+                if(finishTimeHours.getText().toString().length()==2)
                 {
                     // This box contains the hours of a time, so this input cannot be
                     // larger than 24
-                    if (Integer.valueOf(finishTimeH.getText().toString()) > 24) {
+                    if (Integer.valueOf(finishTimeHours.getText().toString()) > 24) {
                         // If input is larger than 24, reset the text and display an error message.
-                        finishTimeH.setText("");
+                        finishTimeHours.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
                         // If the input is valid, move to the next text box
-                        finishTimeH.clearFocus();
-                        finishTimeM.requestFocus();
-                        finishTimeM.setCursorVisible(true);
+                        finishTimeHours.clearFocus();
+                        finishTimeMinutes.requestFocus();
+                        finishTimeMinutes.setCursorVisible(true);
                     }
                 }
             }
@@ -225,10 +212,9 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        finishTimeM = findViewById(R.id.FTCFTM);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to autofill the next box
-        finishTimeM.addTextChangedListener(new TextWatcher() {
+        finishTimeMinutes.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -237,23 +223,23 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // The max input length is 2 digits
-                if(finishTimeM.getText().toString().length()==2)
+                if(finishTimeMinutes.getText().toString().length()==2)
                 {
                     // This box contains the minutes of a time, so this input cannot be
                     // larger than 59
-                    int fTimeM = Integer.valueOf(finishTimeM.getText().toString());
+                    int fTimeM = Integer.valueOf(finishTimeMinutes.getText().toString());
                     if (fTimeM > 59) {
                         // If input is larger than 59, reset the text and display an error message.
-                        finishTimeM.setText("");
+                        finishTimeMinutes.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
                         // Otherwise, move to the next box.
-                        finishTimeM.clearFocus();
-                        finishTimeS.requestFocus();
-                        finishTimeS.setCursorVisible(true);
+                        finishTimeMinutes.clearFocus();
+                        finishTimeSeconds.requestFocus();
+                        finishTimeSeconds.setCursorVisible(true);
                         // Autofill the minutes box of the stage time box by deducting the
                         // actual start time from the finish time
-                        int aStartM = Integer.valueOf(actualStartM.getText().toString());
+                        int aStartM = Integer.valueOf(actualStartMinutes.getText().toString());
                         int sTimeM = 0;
                         if (fTimeM > aStartM) {
                             sTimeM = fTimeM - aStartM;
@@ -262,7 +248,7 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
                             // eg start at 12:59, finish at 13:03, then calculate the difference
                             sTimeM = (60 - aStartM) + fTimeM;
                         }
-                        stageTimeM.setText(String.valueOf(sTimeM));
+                        stageTimeMinutes.setText(String.valueOf(sTimeM));
                     }
                 }
             }
@@ -272,10 +258,9 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        finishTimeS = findViewById(R.id.FTCFTS);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to move onto the next text box, once this one is full
-        finishTimeS.addTextChangedListener(new TextWatcher() {
+        finishTimeSeconds.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -284,21 +269,21 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // The maximum input length is 2
-                if(finishTimeS.getText().toString().length()==2)
+                if(finishTimeSeconds.getText().toString().length()==2)
                 {
                     // This box contains the seconds of a time, so this input cannot be
                     // larger than 59
-                    if (Integer.valueOf(finishTimeS.getText().toString()) > 59) {
+                    if (Integer.valueOf(finishTimeSeconds.getText().toString()) > 59) {
                         // If input is larger than 59, reset the text and show error message
-                        finishTimeS.setText("");
+                        finishTimeSeconds.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
                         // If input is valid, copy the text into the seconds box of the finish time,
                         // and move to the next box
-                        stageTimeS.setText(finishTimeS.getText());
-                        finishTimeS.clearFocus();
-                        finishTimeMS.requestFocus();
-                        finishTimeMS.setCursorVisible(true);
+                        stageTimeSeconds.setText(finishTimeSeconds.getText());
+                        finishTimeSeconds.clearFocus();
+                        finishTimeMilliseconds.requestFocus();
+                        finishTimeMilliseconds.setCursorVisible(true);
                     }
                 }
             }
@@ -308,10 +293,9 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        finishTimeMS = findViewById(R.id.FTCFTMS);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to move onto the next text box, once this one is full
-        finishTimeMS.addTextChangedListener(new TextWatcher() {
+        finishTimeMilliseconds.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -321,14 +305,14 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // This box contains the milliseconds of a time, so there is no numerical
                 // limit for this one, but there can only be 2 digits max
-                if(finishTimeMS.getText().toString().length()==2)
+                if(finishTimeMilliseconds.getText().toString().length()==2)
                 {
                     // Once the box is full, copy the text to the milliseconds
                     // box of the stage time and move to the next box
-                    stageTimeMS.setText(finishTimeMS.getText());
-                    finishTimeMS.clearFocus();
-                    stageTimeM.requestFocus();
-                    stageTimeM.setCursorVisible(true);
+                    stageTimeMilliseconds.setText(finishTimeMilliseconds.getText());
+                    finishTimeMilliseconds.clearFocus();
+                    stageTimeMinutes.requestFocus();
+                    stageTimeMinutes.setCursorVisible(true);
                 }
             }
 
@@ -337,10 +321,12 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        stageTimeM = findViewById(R.id.FTCTTM);
+        stageTimeMinutes = findViewById(R.id.FTCTimeTakenMinutes);
+        stageTimeSeconds = findViewById(R.id.FTCTimeTakenSeconds);
+        stageTimeMilliseconds = findViewById(R.id.FTCTimeTakenMilliseconds);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to autofill the next box
-        stageTimeM.addTextChangedListener(new TextWatcher() {
+        stageTimeMinutes.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -349,16 +335,16 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Max input length is 2
-                if(stageTimeM.getText().toString().length()==2)
+                if(stageTimeMinutes.getText().toString().length()==2)
                 {
                     // This is a minutes box, so input cannot be larger than 59
-                    if (Integer.valueOf(stageTimeM.getText().toString()) > 59) {
-                        stageTimeM.setText("");
+                    if (Integer.valueOf(stageTimeMinutes.getText().toString()) > 59) {
+                        stageTimeMinutes.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
-                        stageTimeM.clearFocus();
-                        stageTimeS.requestFocus();
-                        stageTimeS.setCursorVisible(true);
+                        stageTimeMinutes.clearFocus();
+                        stageTimeSeconds.requestFocus();
+                        stageTimeSeconds.setCursorVisible(true);
                     }
                 }
             }
@@ -368,10 +354,9 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        stageTimeS = findViewById(R.id.FTCTTS);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to autofill the next box
-        stageTimeS.addTextChangedListener(new TextWatcher() {
+        stageTimeSeconds.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -380,16 +365,16 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Max input length is 2
-                if(stageTimeS.getText().toString().length()==2)
+                if(stageTimeSeconds.getText().toString().length()==2)
                 {
                     // This is a seconds box, so input cannot be larger than 59
-                    if (Integer.valueOf(stageTimeS.getText().toString()) > 59) {
-                        stageTimeS.setText("");
+                    if (Integer.valueOf(stageTimeSeconds.getText().toString()) > 59) {
+                        stageTimeSeconds.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
                     } else {
-                        stageTimeS.clearFocus();
-                        stageTimeMS.requestFocus();
-                        stageTimeMS.setCursorVisible(true);
+                        stageTimeSeconds.clearFocus();
+                        stageTimeMilliseconds.requestFocus();
+                        stageTimeMilliseconds.setCursorVisible(true);
                     }
                 }
             }
@@ -399,10 +384,9 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        stageTimeMS = findViewById(R.id.FTCTTMS);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to autofill the next box
-        stageTimeMS.addTextChangedListener(new TextWatcher() {
+        stageTimeMilliseconds.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -412,11 +396,11 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // This is a milliseconds box, so input can be any number,
                 // but has a max length of 2 digits
-                if(stageTimeMS.getText().toString().length()==2)
+                if(stageTimeMilliseconds.getText().toString().length()==2)
                 {
-                    stageTimeMS.clearFocus();
-                    finishTimeH.requestFocus();
-                    finishTimeH.setCursorVisible(true);
+                    stageTimeMilliseconds.clearFocus();
+                    finishTimeHours.requestFocus();
+                    finishTimeHours.setCursorVisible(true);
                 }
             }
 
@@ -425,10 +409,10 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
-        actualTimeH = findViewById(R.id.FTCATH);
-        actualTimeM = findViewById(R.id.FTCATM);
-        dueTimeH = findViewById(R.id.FTCDTH);
-        dueTimeM = findViewById(R.id.FTCDTM);
+        actualTimeHours = findViewById(R.id.FTCActualTimeHours);
+        actualTimeMinutes = findViewById(R.id.FTCActualTimeMinutes);
+        dueTimeHours = findViewById(R.id.FTCDueTimeHours);
+        dueTimeMinutes = findViewById(R.id.FTCDueTimeMinutes);
     }
 
     // Method to initialise the listeners for the buttons
@@ -439,18 +423,30 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         nextButton.setOnClickListener(this);
     }
 
+    private void initResources() {
+        Resources res = getResources();
+        stageLabels = res.getStringArray(R.array.stage_labels);
+        stageDistances = res.getStringArray(R.array.stage_distances);
+        stageKMs = res.getStringArray(R.array.stage_kms);
+        TCNumbers = res.getStringArray(R.array.TC_numbers);
+        stageNumbers = res.getStringArray(R.array.stage_numbers);
+        stageTargetTimeHours = res.getStringArray(R.array.target_time_hours);
+        stageTargetTimeMinutes = res.getStringArray(R.array.target_time_minutes);
+        stageFinishLabels = res.getStringArray(R.array.stage_finish);
+    }
+
     // On Click Method for the buttons
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            // The back button returns to the choose stage page
             case R.id.FTCBackButton:
+                // The back button returns to the choose stage page
                 Intent intent = new Intent(this, ChooseStageActivity.class);
                 intent.putExtra("ROLE", "Finish");
                 startActivity(intent);
                 break;
             // The return button shows a pop-up
-            case R.id.FReturnButton:
+            case R.id.FinishReturnButton:
                 ShowReturnTCPopup();
                 break;
             // The left arrow button goes to the previous finish order
@@ -466,36 +462,27 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
 
     // Method to fill in all the fields of the timecard, from various databases
     private void fillInCards() {
-        // First check if there are any entries in the database for this stage
-        if (finishDatabaseHelper.getStage(stageNum).size() != 0) {
-            carNum = finishDatabaseHelper.getCarNum(stageNum, finishOrder);
+        carNum = finishDatabaseHelper.getCarNum(stageNum, finishOrder);
             carNumTV.setText(String.valueOf(carNum));
             finish = finishDatabaseHelper.getFinish(finishDatabaseHelper.getFinishID(stageNum, carNum));
             finishOrderTV.setText(String.valueOf(finishOrder));
             stage = stageDatabaseHelper.getStage(finish.getStageID());
             startOrder.setText(String.valueOf(stage.getStartOrder()));
-            provStartH.setText(stage.getProvStartH());
-            provStartM.setText(stage.getProvStartM());
-            actualStartH.setText(stage.getActualStartH());
-            actualStartM.setText(stage.getActualStartM());
-            finishTimeH.setText(stage.getFinishTimeH());
-            finishTimeM.setText(stage.getFinishTimeM());
-            finishTimeS.setText(stage.getFinishTimeS());
-            finishTimeMS.setText(stage.getFinishTimeMS());
-            stageTimeM.setText(stage.getStageTimeM());
-            stageTimeS.setText(stage.getStageTimeS());
-            stageTimeMS.setText(stage.getStageTimeMS());
-            actualTimeH.setText(stage.getActualTimeH());
-            actualTimeM.setText(stage.getActualTimeM());
-            dueTimeH.setText(stage.getDueTimeH());
-            dueTimeM.setText(stage.getDueTimeM());
-        } else {
-            // Otherwise set everything to null
-            finishOrderTV.setText("0");
-            carNumTV.setText("");
-        }
-        finishTimeH.requestFocus();
-        finishTimeH.setCursorVisible(true);
+            provStartHours.setText(stage.getProvStartH());
+            provStartMinutes.setText(stage.getProvStartM());
+            actualStartHours.setText(stage.getActualStartH());
+            actualStartMinutes.setText(stage.getActualStartM());
+            finishTimeHours.setText(stage.getFinishTimeH());
+            finishTimeMinutes.setText(stage.getFinishTimeM());
+            finishTimeSeconds.setText(stage.getFinishTimeS());
+            finishTimeMilliseconds.setText(stage.getFinishTimeMS());
+            stageTimeMinutes.setText(stage.getStageTimeM());
+            stageTimeSeconds.setText(stage.getStageTimeS());
+            stageTimeMilliseconds.setText(stage.getStageTimeMS());
+            actualTimeHours.setText(stage.getActualTimeH());
+            actualTimeMinutes.setText(stage.getActualTimeM());
+            dueTimeHours.setText(stage.getDueTimeH());
+            dueTimeMinutes.setText(stage.getDueTimeM());
     }
 
     // Method to show a pop-up
@@ -528,14 +515,14 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
             public void onClick(View view) {
                 // Save inputs to the database
                 stage = stageDatabaseHelper.getStage(finish.getStageID());
-                String inputFTH = finishTimeH.getText().toString();
-                String inputFTM = finishTimeM.getText().toString();
-                String inputFTS = finishTimeS.getText().toString();
-                String inputFTMS = finishTimeMS.getText().toString();
+                String inputFTH = finishTimeHours.getText().toString();
+                String inputFTM = finishTimeMinutes.getText().toString();
+                String inputFTS = finishTimeSeconds.getText().toString();
+                String inputFTMS = finishTimeMilliseconds.getText().toString();
                 stage.setFinishTime(inputFTH, inputFTM, inputFTS, inputFTMS);
-                String inputSTM = stageTimeM.getText().toString();
-                String inputSTS = stageTimeS.getText().toString();
-                String inputSTMS = stageTimeMS.getText().toString();
+                String inputSTM = stageTimeMinutes.getText().toString();
+                String inputSTS = stageTimeSeconds.getText().toString();
+                String inputSTMS = stageTimeMilliseconds.getText().toString();
                 stage.setStageTime(inputSTM, inputSTS, inputSTMS);
                 stageDatabaseHelper.updateStage(stage);
                 returnTCPopup.dismiss();

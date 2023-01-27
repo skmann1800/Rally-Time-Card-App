@@ -32,8 +32,10 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
     private User user;
     private Competitor competitor;
 
+    private Button backButton;
     private Button saveButton;
     private Button deleteButton;
+    private Button addNewButton;
 
     private ScrollView scrollView;
 
@@ -73,8 +75,10 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
 
     // Method to initialise views
     private void initViews() {
-        saveButton = findViewById(R.id.updateCompButton);
-        deleteButton = findViewById(R.id.deleteCompButton);
+        backButton = findViewById(R.id.UpdateCompBackButton);
+        saveButton = findViewById(R.id.UpdateCompButton);
+        deleteButton = findViewById(R.id.DeleteCompButton);
+        addNewButton = findViewById(R.id.AddNewCompButton);
         scrollView = findViewById(R.id.UpdateCompScrollView);
 
         usernameET = findViewById(R.id.CompUsername);
@@ -95,27 +99,34 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
 
     // Method to initialise listeners for the buttons
     private void initListeners() {
+        backButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
-    }
-
-    // Method to return to the competitor list activity
-    public void back(View view) {
-        Intent intent = new Intent(this, CompListActivity.class);
-        startActivity(intent);
+        addNewButton.setOnClickListener(this);
     }
 
     // On Click method for the buttons
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
-            case R.id.updateCompButton:
+            case R.id.UpdateCompButton:
                 // Update button shows the update pop-up
                 ShowUpdatePopup();
                 break;
-            case R.id.deleteCompButton:
+            case R.id.DeleteCompButton:
                 // Delete button shows the delete pop-up
                 ShowDeletePopup();
+                break;
+            case R.id.UpdateCompBackButton:
+                // Return to the competitor list activity
+                intent = new Intent(this, CompListActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.AddNewCompButton:
+                // Go to the Add Competitor Activity
+                intent = new Intent(this, AddCompActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -311,12 +322,5 @@ public class UpdateCompActivity extends AppCompatActivity implements View.OnClic
             return false;
         }
         return true;
-    }
-
-    // Method called when the "Add New Competitor Account" button is clicked
-    public void addNew(View view) {
-        // Goes to the Add Competitor Activity
-        Intent intent = new Intent(this, AddCompActivity.class);
-        startActivity(intent);
     }
 }

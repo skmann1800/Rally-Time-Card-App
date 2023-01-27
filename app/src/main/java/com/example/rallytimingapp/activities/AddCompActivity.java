@@ -32,6 +32,7 @@ public class AddCompActivity extends AppCompatActivity implements View.OnClickLi
     private Competitor competitor;
     private Stage stage;
 
+    private Button backButton;
     private Button saveButton;
 
     private ScrollView scrollView;
@@ -54,6 +55,7 @@ public class AddCompActivity extends AppCompatActivity implements View.OnClickLi
 
     // Method to initialise the views
     private void initViews() {
+        backButton = findViewById(R.id.AddCompBackButton);
         saveButton = findViewById(R.id.SaveNewCompButton);
         scrollView = findViewById(R.id.AddCompScrollView);
 
@@ -77,13 +79,8 @@ public class AddCompActivity extends AppCompatActivity implements View.OnClickLi
 
     // Method to initialise the listener for the save button
     private void initListeners() {
+        backButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
-    }
-
-    // Method to return to the Competitor List page
-    public void back(View view) {
-        Intent intent = new Intent(this, CompListActivity.class);
-        startActivity(intent);
     }
 
     // On Click Method for the save button
@@ -107,6 +104,11 @@ public class AddCompActivity extends AppCompatActivity implements View.OnClickLi
                     // If not all fields have been filled in, return an error message
                     Snackbar.make(scrollView, "Please fill in all details", Snackbar.LENGTH_LONG).show();
                 }
+                break;
+            case R.id.AddCompBackButton:
+                // Return to the Competitor List page
+                Intent intent = new Intent(this, CompListActivity.class);
+                startActivity(intent);
                 break;
         }
     }

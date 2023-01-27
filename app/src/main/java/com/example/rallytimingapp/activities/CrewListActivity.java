@@ -146,27 +146,19 @@ public class CrewListActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.AddCrewButton:
-                addNew();
+                // Changes to the add crew activity and passes the crew type with the intent
+                intent = new Intent(this, AddCrewActivity.class);
+                intent.putExtra("ROLE", role);
+                startActivity(intent);
                 break;
             case R.id.CrewListBackButton:
-                back();
+                // Returns to the admin options page
+                intent = new Intent(this, AdminOptionsActivity.class);
+                startActivity(intent);
                 break;
         }
-    }
-
-    // Method which returns to the admin options page
-    private void back() {
-        Intent intent = new Intent(this, AdminOptionsActivity.class);
-        startActivity(intent);
-    }
-
-    // Method which changes to the add crew activity and passes the crew type
-    // with the intent
-    private void addNew() {
-        Intent intent = new Intent(this, AddCrewActivity.class);
-        intent.putExtra("ROLE", role);
-        startActivity(intent);
     }
 }

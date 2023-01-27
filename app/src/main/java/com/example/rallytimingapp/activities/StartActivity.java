@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,15 +18,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rallytimingapp.R;
-import com.example.rallytimingapp.model.AControl;
 import com.example.rallytimingapp.model.Stage;
 import com.example.rallytimingapp.model.Start;
 import com.example.rallytimingapp.sql.StageDatabaseHelper;
 import com.example.rallytimingapp.sql.StartDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = StartActivity.this;
@@ -44,15 +41,15 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     private TextView stageNumTV;
     private TextView stageLabel1;
     private TextView stageLabel2;
-    private TextView stageDist;
-    private TextView SS;
+    private TextView stageDistance;
+    private TextView stageNumber;
     private TextView blueTC1;
     private TextView blueTC2;
-    private TextView stageKM;
-    private TextView finishTC;
+    private TextView blueKM;
+    private TextView nextTC;
     private TextView yellowTC;
-    private TextView TTH;
-    private TextView TTM;
+    private TextView targetTimeHours;
+    private TextView targetTimeMinutes;
 
     private TextView startOrderTC;
     private TextView provStartH;
@@ -83,6 +80,15 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     private int startOrder;
     private int carNum;
 
+    private String[] stageLabels;
+    private String[] stageDistances;
+    private String[] stageKMs;
+    private String[] TCNumbers;
+    private String[] stageNumbers;
+    private String[] stageTargetTimeHours;
+    private String[] stageTargetTimeMinutes;
+    private String[] stageStartLabels;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +97,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         initViews();
         initObjects();
         initListeners();
+        initResources();
 
         // Retrieve stage number from intent
         stageNum = getIntent().getIntExtra("STAGE", 0);
@@ -99,64 +106,20 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         // Fill in the timecards
         fillInCards();
         // Based on the stage number, fill in the labels as follows
-        switch (stageNum) {
-            case 1:
-                stageNumTV.setText(R.string.s1start);
-                stageLabel1.setText(R.string.stage1);
-                stageLabel2.setText(R.string.stage1);
-                stageDist.setText(R.string.stage1dist);
-                stageKM.setText(R.string.stage1km);
-                SS.setText(R.string.SS1);
-                blueTC1.setText(R.string.TC1);
-                blueTC2.setText(R.string.TC2);
-                finishTC.setText(R.string.TC2);
-                yellowTC.setText(R.string.TC2);
-                TTH.setText(R.string.S1TTH);
-                TTM.setText(R.string.S1TTM);
-                break;
-            case 2:
-                stageNumTV.setText(R.string.s2start);
-                stageLabel1.setText(R.string.stage2);
-                stageLabel2.setText(R.string.stage2);
-                stageDist.setText(R.string.stage2dist);
-                stageKM.setText(R.string.stage2km);
-                SS.setText(R.string.SS2);
-                blueTC1.setText(R.string.TC2);
-                blueTC2.setText(R.string.TC3);
-                finishTC.setText(R.string.TC3);
-                yellowTC.setText(R.string.TC3);
-                TTH.setText(R.string.S2TTH);
-                TTM.setText(R.string.S2TTM);
-                break;
-            case 3:
-                stageNumTV.setText(R.string.s3start);
-                stageLabel1.setText(R.string.stage3);
-                stageLabel2.setText(R.string.stage3);
-                stageDist.setText(R.string.stage3dist);
-                stageKM.setText(R.string.stage3km);
-                SS.setText(R.string.SS3);
-                blueTC1.setText(R.string.TC3);
-                blueTC2.setText(R.string.TC4);
-                finishTC.setText(R.string.TC4);
-                yellowTC.setText(R.string.TC4);
-                TTH.setText(R.string.S3TTH);
-                TTM.setText(R.string.S3TTM);
-                break;
-            case 4:
-                stageNumTV.setText(R.string.s4start);
-                stageLabel1.setText(R.string.stage4);
-                stageLabel2.setText(R.string.stage4);
-                stageDist.setText(R.string.stage4dist);
-                stageKM.setText(R.string.stage4km);
-                SS.setText(R.string.SS4);
-                blueTC1.setText(R.string.TC4);
-                blueTC2.setText(R.string.TC5);
-                finishTC.setText(R.string.TC5);
-                yellowTC.setText(R.string.TC5);
-                TTH.setText(R.string.S4TTH);
-                TTM.setText(R.string.S4TTM);
-                break;
-        }
+
+        // Based on the stage number, fill in the labels as follows
+        stageNumTV.setText(stageStartLabels[stageNum - 1]);
+        stageLabel1.setText(stageLabels[stageNum - 1]);
+        stageLabel2.setText(stageLabels[stageNum - 1]);
+        stageDistance.setText(stageDistances[stageNum - 1]);
+        blueKM.setText(stageKMs[stageNum - 1]);
+        stageNumber.setText(stageNumbers[stageNum - 1]);
+        blueTC1.setText(TCNumbers[stageNum - 1]);
+        blueTC2.setText(TCNumbers[stageNum]);
+        nextTC.setText(TCNumbers[stageNum]);
+        yellowTC.setText(TCNumbers[stageNum]);
+        targetTimeHours.setText(stageTargetTimeHours[stageNum - 1]);
+        targetTimeMinutes.setText(stageTargetTimeMinutes[stageNum - 1]);
     }
 
     // Method to initialise objects
@@ -172,8 +135,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         scrollView = findViewById(R.id.StartScrollView);
 
         backButton = findViewById(R.id.STCBackButton);
-        changeSOButton = findViewById(R.id.SChangeSOButton);
-        returnTCButton = findViewById(R.id.SReturnButton);
+        changeSOButton = findViewById(R.id.StartChangeStartOrderButton);
+        returnTCButton = findViewById(R.id.StartReturnButton);
         prevButton = findViewById(R.id.StartPrevButton);
         nextButton = findViewById(R.id.StartNextButton);
 
@@ -181,22 +144,22 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         startOrderTV = findViewById(R.id.StartOrder);
 
         stageNumTV = findViewById(R.id.StartStageNum);
-        stageLabel1 = findViewById(R.id.STCStage1);
-        stageLabel2 = findViewById(R.id.STCStage2);
-        stageDist = findViewById(R.id.STCDist);
-        SS = findViewById(R.id.STCSS);
+        stageLabel1 = findViewById(R.id.STCStageLabel1);
+        stageLabel2 = findViewById(R.id.STCStageLabel2);
+        stageDistance = findViewById(R.id.STCDistance);
+        stageNumber = findViewById(R.id.STCStageNumber);
         blueTC1 = findViewById(R.id.STCTC1);
         blueTC2 = findViewById(R.id.STCTC2);
-        stageKM = findViewById(R.id.STCKM);
-        finishTC = findViewById(R.id.STCTC);
+        blueKM = findViewById(R.id.STCKM);
+        nextTC = findViewById(R.id.STCNextTC);
         yellowTC = findViewById(R.id.STCYellowTC);
-        TTH = findViewById(R.id.STCTaTH);
-        TTM = findViewById(R.id.STCTaTM);
+        targetTimeHours = findViewById(R.id.STCTargetTimeHours);
+        targetTimeMinutes = findViewById(R.id.STCTargetTimeMinutes);
 
         startOrderTC = findViewById(R.id.STCOval);
-        provStartH = findViewById(R.id.STCPSH);
-        provStartM = findViewById(R.id.STCPSM);
-        actualStartH = findViewById(R.id.STCASH);
+        provStartH = findViewById(R.id.STCProvStartHours);
+        provStartM = findViewById(R.id.STCProvStartMinutes);
+        actualStartH = findViewById(R.id.STCActualStartHours);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to move onto the next text box, once this one is full
         actualStartH.addTextChangedListener(new TextWatcher() {
@@ -230,7 +193,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-        actualStartM = findViewById(R.id.STCASM);
+        actualStartM = findViewById(R.id.STCActualStartMinutes);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to autofill the next box
         actualStartM.addTextChangedListener(new TextWatcher() {
@@ -264,17 +227,17 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-        finishTimeH = findViewById(R.id.STCFTH);
-        finishTimeM = findViewById(R.id.STCFTM);
-        finishTimeS = findViewById(R.id.STCFTS);
-        finishTimeMS = findViewById(R.id.STCFTMS);
-        stageTimeM = findViewById(R.id.STCTTM);
-        stageTimeS = findViewById(R.id.STCTTS);
-        stageTimeMS = findViewById(R.id.STCTTMS);
-        actualTimeH = findViewById(R.id.STCATH);
-        actualTimeM = findViewById(R.id.STCATM);
-        dueTimeH = findViewById(R.id.STCDTH);
-        dueTimeM = findViewById(R.id.STCDTM);
+        finishTimeH = findViewById(R.id.STCFinishTimeHours);
+        finishTimeM = findViewById(R.id.STCFinishTimeMinutes);
+        finishTimeS = findViewById(R.id.STCFinishTimeSeconds);
+        finishTimeMS = findViewById(R.id.STCFinishTimeMilliseconds);
+        stageTimeM = findViewById(R.id.STCTimeTakenMinutes);
+        stageTimeS = findViewById(R.id.STCTimeTakenSeconds);
+        stageTimeMS = findViewById(R.id.STCTimeTakenMilliseconds);
+        actualTimeH = findViewById(R.id.STCActualTimeHours);
+        actualTimeM = findViewById(R.id.STCActualTimeMinutes);
+        dueTimeH = findViewById(R.id.STCDueTimeHours);
+        dueTimeM = findViewById(R.id.STCDueTimeMinutes);
     }
 
     // Method to initialise listeners for the buttons
@@ -284,6 +247,18 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         returnTCButton.setOnClickListener(this);
         prevButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
+    }
+
+    private void initResources() {
+        Resources res = getResources();
+        stageLabels = res.getStringArray(R.array.stage_labels);
+        stageDistances = res.getStringArray(R.array.stage_distances);
+        stageKMs = res.getStringArray(R.array.stage_kms);
+        TCNumbers = res.getStringArray(R.array.TC_numbers);
+        stageNumbers = res.getStringArray(R.array.stage_numbers);
+        stageTargetTimeHours = res.getStringArray(R.array.target_time_hours);
+        stageTargetTimeMinutes = res.getStringArray(R.array.target_time_minutes);
+        stageStartLabels = res.getStringArray(R.array.stage_start);
     }
 
     // On Click method for each button
@@ -296,11 +271,11 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 intent.putExtra("ROLE", "Start");
                 startActivity(intent);
                 break;
-            case R.id.SChangeSOButton:
+            case R.id.StartChangeStartOrderButton:
                 // Change start order button shows a pop-up
                 ShowChangeSOPopup();
                 break;
-            case R.id.SReturnButton:
+            case R.id.StartReturnButton:
                 // Return timecard button shows a pop-up
                 ShowReturnTCPopup();
                 break;
@@ -419,7 +394,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         }
 
         // Cancel button which closes the pop-up
-        Button cancel = layout.findViewById(R.id.CancelButton);
+        Button cancel = layout.findViewById(R.id.CancelChangeSOButton);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

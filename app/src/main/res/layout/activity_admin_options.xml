@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/yellow"
         android:padding="15dp"
-        android:text="@string/signout"
+        android:text="@string/sign_out"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"

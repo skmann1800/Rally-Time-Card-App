@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -46,26 +47,26 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     private TextView stageNumTV;
     private TextView stage1Label1;
     private TextView stage1Label2;
-    private TextView stage1Dist;
-    private TextView SS1;
+    private TextView stage1Distance;
+    private TextView stageNumber1;
     private TextView blue1TC1;
     private TextView blue1TC2;
-    private TextView stage1KM;
-    private TextView finishTC1;
+    private TextView blue1KM;
+    private TextView nextTC1;
     private TextView yellowTC1;
-    private TextView S1TTH;
-    private TextView S1TTM;
+    private TextView s1TargetTimeH;
+    private TextView s1TargetTimeM;
     private TextView stage2Label1;
     private TextView stage2Label2;
-    private TextView stage2Dist;
-    private TextView SS2;
+    private TextView stage2Distance;
+    private TextView stageNumber2;
     private TextView blue2TC1;
     private TextView blue2TC2;
-    private TextView stage2KM;
-    private TextView finishTC2;
+    private TextView blue2KM;
+    private TextView nextTC2;
     private TextView yellowTC2;
-    private TextView S2TTH;
-    private TextView S2TTM;
+    private TextView s2TargetTimeH;
+    private TextView S2TargetTimeM;
 
     private TextView startOrder1;
     private TextView provStartH1;
@@ -117,6 +118,15 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
     private int startOrder;
     private int carNum;
 
+    private String[] stageLabels;
+    private String[] stageDistances;
+    private String[] stageKMs;
+    private String[] TCNumbers;
+    private String[] stageNumbers;
+    private String[] stageTargetTimeHours;
+    private String[] stageTargetTimeMinutes;
+    private String[] stageAcontrolLabels;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +135,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         initViews();
         initObjects();
         initListeners();
+        initResources();
 
         // Retrieve stage number from intent
         stageNum = getIntent().getIntExtra("STAGE", 0);
@@ -133,98 +144,33 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         // Fill in the timecards
         fillInCards();
         // Based on the stage number, fill in the labels as follows
-        switch (stageNum) {
-            case 1:
-                stageNumTV.setText(R.string.s1control);
-                timeCard1.setVisibility(View.GONE);
-                stage2Label1.setText(R.string.stage1);
-                stage2Label2.setText(R.string.stage1);
-                stage2Dist.setText(R.string.stage1dist);
-                stage2KM.setText(R.string.stage1km);
-                SS2.setText(R.string.SS1);
-                blue2TC1.setText(R.string.TC1);
-                blue2TC2.setText(R.string.TC2);
-                finishTC2.setText(R.string.TC2);
-                yellowTC2.setText(R.string.TC2);
-                S2TTH.setText(R.string.S1TTH);
-                S2TTM.setText(R.string.S1TTM);
-                break;
-            case 2:
-                stageNumTV.setText(R.string.s2control);
-                stage1Label1.setText(R.string.stage1);
-                stage1Label2.setText(R.string.stage1);
-                stage1Dist.setText(R.string.stage1dist);
-                stage1KM.setText(R.string.stage1km);
-                SS1.setText(R.string.SS1);
-                blue1TC1.setText(R.string.TC1);
-                blue1TC2.setText(R.string.TC2);
-                finishTC1.setText(R.string.TC2);
-                yellowTC1.setText(R.string.TC2);
-                S1TTH.setText(R.string.S1TTH);
-                S1TTM.setText(R.string.S1TTM);
-                stage2Label1.setText(R.string.stage2);
-                stage2Label2.setText(R.string.stage2);
-                stage2Dist.setText(R.string.stage2dist);
-                stage2KM.setText(R.string.stage2km);
-                SS2.setText(R.string.SS2);
-                blue2TC1.setText(R.string.TC2);
-                blue2TC2.setText(R.string.TC3);
-                finishTC2.setText(R.string.TC3);
-                yellowTC2.setText(R.string.TC3);
-                S2TTH.setText(R.string.S2TTH);
-                S2TTM.setText(R.string.S2TTM);
-                break;
-            case 3:
-                stageNumTV.setText(R.string.s3control);
-                stage1Label1.setText(R.string.stage2);
-                stage1Label2.setText(R.string.stage2);
-                stage1Dist.setText(R.string.stage2dist);
-                stage1KM.setText(R.string.stage2km);
-                SS1.setText(R.string.SS2);
-                blue1TC1.setText(R.string.TC2);
-                blue1TC2.setText(R.string.TC3);
-                finishTC1.setText(R.string.TC3);
-                yellowTC1.setText(R.string.TC3);
-                S1TTH.setText(R.string.S2TTH);
-                S1TTM.setText(R.string.S2TTM);
-                stage2Label1.setText(R.string.stage3);
-                stage2Label2.setText(R.string.stage3);
-                stage2Dist.setText(R.string.stage3dist);
-                stage2KM.setText(R.string.stage3km);
-                SS2.setText(R.string.SS3);
-                blue2TC1.setText(R.string.TC3);
-                blue2TC2.setText(R.string.TC4);
-                finishTC2.setText(R.string.TC4);
-                yellowTC2.setText(R.string.TC4);
-                S2TTH.setText(R.string.S3TTH);
-                S2TTM.setText(R.string.S3TTM);
-                break;
-            case 4:
-                stageNumTV.setText(R.string.s4control);
-                stage1Label1.setText(R.string.stage3);
-                stage1Label2.setText(R.string.stage3);
-                stage1Dist.setText(R.string.stage3dist);
-                stage1KM.setText(R.string.stage3km);
-                SS1.setText(R.string.SS3);
-                blue1TC1.setText(R.string.TC3);
-                blue1TC2.setText(R.string.TC4);
-                finishTC1.setText(R.string.TC4);
-                yellowTC1.setText(R.string.TC4);
-                S1TTH.setText(R.string.S3TTH);
-                S1TTM.setText(R.string.S3TTM);
-                stage2Label1.setText(R.string.stage4);
-                stage2Label2.setText(R.string.stage4);
-                stage2Dist.setText(R.string.stage4dist);
-                stage2KM.setText(R.string.stage4km);
-                SS2.setText(R.string.SS4);
-                blue2TC1.setText(R.string.TC4);
-                blue2TC2.setText(R.string.TC5);
-                finishTC2.setText(R.string.TC5);
-                yellowTC2.setText(R.string.TC5);
-                S2TTH.setText(R.string.S4TTH);
-                S2TTM.setText(R.string.S4TTM);
-                break;
+        if (stageNum > 1) {
+            stage1Label1.setText(stageLabels[stageNum - 2]);
+            stage1Label2.setText(stageLabels[stageNum - 2]);
+            stage1Distance.setText(stageDistances[stageNum - 2]);
+            blue1KM.setText(stageKMs[stageNum - 2]);
+            stageNumber1.setText(stageNumbers[stageNum - 2]);
+            blue1TC1.setText(TCNumbers[stageNum - 2]);
+            blue1TC2.setText(TCNumbers[stageNum - 1]);
+            nextTC1.setText(TCNumbers[stageNum - 1]);
+            yellowTC1.setText(TCNumbers[stageNum - 1]);
+            s1TargetTimeH.setText(stageTargetTimeHours[stageNum - 2]);
+            s1TargetTimeM.setText(stageTargetTimeMinutes[stageNum - 2]);
+        } else {
+            timeCard1.setVisibility(View.GONE);
         }
+        stageNumTV.setText(stageAcontrolLabels[stageNum - 1]);
+        stage2Label1.setText(stageLabels[stageNum - 1]);
+        stage2Label2.setText(stageLabels[stageNum - 1]);
+        stage2Distance.setText(stageDistances[stageNum - 1]);
+        blue2KM.setText(stageKMs[stageNum - 1]);
+        stageNumber2.setText(stageNumbers[stageNum - 1]);
+        blue2TC1.setText(TCNumbers[stageNum - 1]);
+        blue2TC2.setText(TCNumbers[stageNum]);
+        nextTC2.setText(TCNumbers[stageNum]);
+        yellowTC2.setText(TCNumbers[stageNum]);
+        s2TargetTimeH.setText(stageTargetTimeHours[stageNum - 1]);
+        S2TargetTimeM.setText(stageTargetTimeMinutes[stageNum - 1]);
     }
 
     // Method to initialise objects
@@ -248,48 +194,51 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         timeCard1 = findViewById(R.id.ControlTC1);
 
         backButton = findViewById(R.id.CTCBackButton);
-        changeSOButton = findViewById(R.id.CChangeSOButton);
-        returnTCButton = findViewById(R.id.CReturnButton);
+        changeSOButton = findViewById(R.id.ControlChangeStartOrderButton);
+        returnTCButton = findViewById(R.id.ControlReturnButton);
         nextButton = findViewById(R.id.ControlNextButton);
         prevButton = findViewById(R.id.ControlPrevButton);
 
         stageNumTV = findViewById(R.id.ControlStageNum);
-        stage1Label1 = findViewById(R.id.CTC1Stage1);
-        stage1Label2 = findViewById(R.id.CTC1Stage2);
-        stage1Dist = findViewById(R.id.CTC1Dist);
-        SS1 = findViewById(R.id.CTC1SS);
+
+        stage1Label1 = findViewById(R.id.CTC1StageLabel1);
+        stage1Label2 = findViewById(R.id.CTC1StageLabel2);
+        stage1Distance = findViewById(R.id.CTC1Distance);
+        stageNumber1 = findViewById(R.id.CTC1StageNumber);
         blue1TC1 = findViewById(R.id.CTC1TC1);
         blue1TC2 = findViewById(R.id.CTC1TC2);
-        stage1KM = findViewById(R.id.CTC1KM);
-        finishTC1 = findViewById(R.id.CTC1TC);
+        blue1KM = findViewById(R.id.CTC1KM);
+        nextTC1 = findViewById(R.id.CTC1NextTC);
         yellowTC1 = findViewById(R.id.CTC1YellowTC);
-        S1TTH = findViewById(R.id.CTC1TaTH);
-        S1TTM = findViewById(R.id.CTC1TaTM);
-        stage2Label1 = findViewById(R.id.CTC2Stage1);
-        stage2Label2 = findViewById(R.id.CTC2Stage2);
-        stage2Dist = findViewById(R.id.CTC2Dist);
-        SS2 = findViewById(R.id.CTC2SS);
+        s1TargetTimeH = findViewById(R.id.CTC1TargetTimeHours);
+        s1TargetTimeM = findViewById(R.id.CTC1TargetTimeMinutes);
+
+        stage2Label1 = findViewById(R.id.CTC2StageLabel1);
+        stage2Label2 = findViewById(R.id.CTC2StageLabel2);
+        stage2Distance = findViewById(R.id.CTC2Distance);
+        stageNumber2 = findViewById(R.id.CTC2StageNumber);
         blue2TC1 = findViewById(R.id.CTC2TC1);
         blue2TC2 = findViewById(R.id.CTC2TC2);
-        stage2KM = findViewById(R.id.CTC2KM);
-        finishTC2 = findViewById(R.id.CTC2TC);
+        blue2KM = findViewById(R.id.CTC2KM);
+        nextTC2 = findViewById(R.id.CTC2NextTC);
         yellowTC2 = findViewById(R.id.CTC2YellowTC);
-        S2TTH = findViewById(R.id.CTC2TaTH);
-        S2TTM = findViewById(R.id.CTC2TaTM);
+        s2TargetTimeH = findViewById(R.id.CTC2TargetTimeHours);
+        S2TargetTimeM = findViewById(R.id.CTC2TargetTimeMinutes);
 
         startOrder1 = findViewById(R.id.CTC1Oval);
-        provStartH1 = findViewById(R.id.CTC1PSH);
-        provStartM1 = findViewById(R.id.CTC1PSM);
-        actualStartH1 = findViewById(R.id.CTC1ASH);
-        actualStartM1 = findViewById(R.id.CTC1ASM);
-        finishTimeH1 = findViewById(R.id.CTC1FTH);
-        finishTimeM1 = findViewById(R.id.CTC1FTM);
-        finishTimeS1 = findViewById(R.id.CTC1FTS);
-        finishTimeMS1 = findViewById(R.id.CTC1FTMS);
-        stageTimeM1 = findViewById(R.id.CTC1TTM);
-        stageTimeS1 = findViewById(R.id.CTC1TTS);
-        stageTimeMS1 = findViewById(R.id.CTC1TTMS);
-        actualTimeH1 = findViewById(R.id.CTC1ATH);
+        provStartH1 = findViewById(R.id.CTC1ProvStartHours);
+        provStartM1 = findViewById(R.id.CTC1ProvStartMinutes);
+        actualStartH1 = findViewById(R.id.CTC1ActualStartHours);
+        actualStartM1 = findViewById(R.id.CTC1ActualStartMinutes);
+        finishTimeH1 = findViewById(R.id.CTC1FinishTimeHours);
+        finishTimeM1 = findViewById(R.id.CTC1FinishTimeMinutes);
+        finishTimeS1 = findViewById(R.id.CTC1FinishTimeSeconds);
+        finishTimeMS1 = findViewById(R.id.CTC1FinishTimeMilliseconds);
+        stageTimeM1 = findViewById(R.id.CTC1TimeTakenMinutes);
+        stageTimeS1 = findViewById(R.id.CTC1TimeTakenSeconds);
+        stageTimeMS1 = findViewById(R.id.CTC1TimeTakenMilliseconds);
+        actualTimeH1 = findViewById(R.id.CTC1ActualTimeHours);
+        actualTimeM1 = findViewById(R.id.CTC1ActualTimeMinutes);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to move onto the next text box, once this one is full
         actualTimeH1.addTextChangedListener(new TextWatcher() {
@@ -323,7 +272,6 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
-        actualTimeM1 = findViewById(R.id.CTC1ATM);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to autofill the next box
         actualTimeM1.addTextChangedListener(new TextWatcher() {
@@ -380,11 +328,12 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             public void afterTextChanged(Editable editable) {
             }
         });
-        dueTimeH1 = findViewById(R.id.CTC1DTH);
-        dueTimeM1 = findViewById(R.id.CTC1DTM);
+        dueTimeH1 = findViewById(R.id.CTC1DueTimeHours);
+        dueTimeM1 = findViewById(R.id.CTC1DueTimeMinutes);
 
         startOrder2 = findViewById(R.id.CTC2Oval);
-        provStartH2 = findViewById(R.id.CTC2PSH);
+        provStartH2 = findViewById(R.id.CTC2ProvStartHours);
+        provStartM2 = findViewById(R.id.CTC2ProvStartMinutes);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to move onto the next text box, once this one is full
         provStartH2.addTextChangedListener(new TextWatcher() {
@@ -417,7 +366,6 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
-        provStartM2 = findViewById(R.id.CTC2PSM);
         // Add a text changed listener to prevent users from inputting an invalid input
         // And to move onto the next text box, once this one is full
         provStartM2.addTextChangedListener(new TextWatcher() {
@@ -448,19 +396,19 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
             public void afterTextChanged(Editable editable) {
             }
         });
-        actualStartH2 = findViewById(R.id.CTC2ASH);
-        actualStartM2 = findViewById(R.id.CTC2ASM);
-        finishTimeH2 = findViewById(R.id.CTC2FTH);
-        finishTimeM2 = findViewById(R.id.CTC2FTM);
-        finishTimeS2 = findViewById(R.id.CTC2FTS);
-        finishTimeMS2 = findViewById(R.id.CTC2FTMS);
-        stageTimeM2 = findViewById(R.id.CTC2TTM);
-        stageTimeS2 = findViewById(R.id.CTC2TTS);
-        stageTimeMS2 = findViewById(R.id.CTC2TTMS);
-        actualTimeH2 = findViewById(R.id.CTC2ATH);
-        actualTimeM2 = findViewById(R.id.CTC2ATM);
-        dueTimeH2 = findViewById(R.id.CTC2DTH);
-        dueTimeM2 = findViewById(R.id.CTC2DTM);
+        actualStartH2 = findViewById(R.id.CTC2ActualStartHours);
+        actualStartM2 = findViewById(R.id.CTC2ActualStartMinutes);
+        finishTimeH2 = findViewById(R.id.CTC2FinishTimeHours);
+        finishTimeM2 = findViewById(R.id.CTC2FinishTimeMinutes);
+        finishTimeS2 = findViewById(R.id.CTC2FinishTimeSeconds);
+        finishTimeMS2 = findViewById(R.id.CTC2FinishTimeMilliseconds);
+        stageTimeM2 = findViewById(R.id.CTC2TimeTakenMinutes);
+        stageTimeS2 = findViewById(R.id.CTC2TimeTakenSeconds);
+        stageTimeMS2 = findViewById(R.id.CTC2TimeTakenMilliseconds);
+        actualTimeH2 = findViewById(R.id.CTC2ActualTimeHours);
+        actualTimeM2 = findViewById(R.id.CTC2ActualTimeMinutes);
+        dueTimeH2 = findViewById(R.id.CTC2DueTimeHours);
+        dueTimeM2 = findViewById(R.id.CTC2DueTimeMinutes);
     }
 
     // Method to initialise listeners for the buttons
@@ -470,6 +418,18 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         returnTCButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         prevButton.setOnClickListener(this);
+    }
+
+    private void initResources() {
+        Resources res = getResources();
+        stageLabels = res.getStringArray(R.array.stage_labels);
+        stageDistances = res.getStringArray(R.array.stage_distances);
+        stageKMs = res.getStringArray(R.array.stage_kms);
+        TCNumbers = res.getStringArray(R.array.TC_numbers);
+        stageNumbers = res.getStringArray(R.array.stage_numbers);
+        stageTargetTimeHours = res.getStringArray(R.array.target_time_hours);
+        stageTargetTimeMinutes = res.getStringArray(R.array.target_time_minutes);
+        stageAcontrolLabels = res.getStringArray(R.array.stage_acontrol);
     }
 
     @Override
@@ -482,11 +442,11 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtra("ROLE", "A Control");
                 startActivity(intent);
                 break;
-            case R.id.CChangeSOButton:
+            case R.id.ControlChangeStartOrderButton:
                 // Change start order button shows a pop-up
                 ShowChangeSOPopup();
                 break;
-            case R.id.CReturnButton:
+            case R.id.ControlReturnButton:
                 // Return timecard button shows a pop-up
                 ShowReturnTCPopup();
                 break;
@@ -647,7 +607,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
         }
 
         // Cancel button which closes the pop-up
-        Button cancel = layout.findViewById(R.id.CancelButton);
+        Button cancel = layout.findViewById(R.id.CancelChangeSOButton);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

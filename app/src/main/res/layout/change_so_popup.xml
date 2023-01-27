@@ -68,7 +68,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/CancelButton"
+            android:id="@+id/CancelChangeSOButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

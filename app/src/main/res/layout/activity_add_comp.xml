@@ -27,7 +27,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/yellow"
-                android:onClick="back"
                 android:text="BACK"
                 android:textColor="@color/black"
                 android:textSize="20sp"

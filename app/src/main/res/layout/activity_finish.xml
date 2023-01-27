@@ -42,7 +42,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:text="@string/s1finish"
+                android:text="@string/stage1_finish"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                 android:textColor="@color/black"
@@ -85,7 +85,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border"
                         android:gravity="top|center_horizontal"
-                        android:text="@string/fo"
+                        android:text="@string/finish_order"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -124,20 +124,19 @@
                         android:layout_weight="1"
                         android:background="@drawable/border"
                         android:gravity="top|center_horizontal"
-                        android:text="@string/cn"
+                        android:text="@string/car_number"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/FinishCarNum"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_weight="1"
                         android:background="@drawable/border"
                         android:gravity="center"
-                        android:text="59"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/black"
@@ -161,7 +160,7 @@
             </LinearLayout>
 
             <HorizontalScrollView
-                android:id="@+id/FinishTC"
+                android:id="@+id/FinishTimecard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fadeScrollbars="false"
@@ -209,7 +208,7 @@
                             android:layout_weight="2"
                             android:background="@color/dark_blue"
                             android:gravity="center"
-                            android:text="@string/stage1km"
+                            android:text="@string/stage1_km"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@color/white"
                             android:textSize="13sp"
@@ -248,24 +247,23 @@
                             android:paddingTop="2dp">
 
                             <TextView
-                                android:id="@+id/FTCStage1"
+                                android:id="@+id/FTCStageLabel1"
                                 android:layout_width="175dp"
                                 android:layout_height="match_parent"
                                 android:gravity="left|center_vertical"
                                 android:paddingLeft="2dp"
                                 android:text="@string/stage1"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/FTCFT"
+                                android:id="@+id/FTCFinishTime"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/FT"
+                                android:text="@string/finish_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -286,19 +284,19 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/FTCDist"
+                                android:id="@+id/FTCDistance"
                                 android:layout_width="125dp"
                                 android:layout_height="match_parent"
                                 android:gravity="top"
                                 android:paddingLeft="2dp"
-                                android:text="@string/stage1dist"
+                                android:text="@string/stage1_distance"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/FTCFTH"
+                                android:id="@+id/FTCFinishTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -311,7 +309,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/FTCFTM"
+                                android:id="@+id/FTCFinishTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -324,7 +322,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/FTCFTS"
+                                android:id="@+id/FTCFinishTimeSeconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -337,7 +335,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/FTCFTMS"
+                                android:id="@+id/FTCFinishTimeMilliseconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -378,11 +376,11 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/FTCPS"
+                                android:id="@+id/FTCProvStart"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:text="@string/PS"
+                                android:text="@string/prov_start"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -394,12 +392,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/FTCAS"
+                                android:id="@+id/FTCActualStart"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/AS"
+                                android:text="@string/actual_start"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -411,12 +409,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/FTCTargT"
+                                android:id="@+id/FTCTargetTime"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/TargT"
+                                android:text="@string/target_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -442,7 +440,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/FTCPSH"
+                                android:id="@+id/FTCProvStartHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -453,7 +451,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/FTCPSM"
+                                android:id="@+id/FTCProvStartMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -473,7 +471,7 @@
                                 app:srcCompat="@drawable/arrow1" />
 
                             <TextView
-                                android:id="@+id/FTCASH"
+                                android:id="@+id/FTCActualStartHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -484,7 +482,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/FTCASM"
+                                android:id="@+id/FTCActualStartMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -501,29 +499,29 @@
                                 android:layout_weight="1"
                                 android:paddingLeft="2dp"
                                 android:paddingRight="2dp"
-                                app:srcCompat="@drawable/arrow2" />
+                                app:srcCompat="@drawable/arrow_with_flag" />
 
                             <TextView
-                                android:id="@+id/FTCTaTH"
+                                android:id="@+id/FTCTargetTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/border"
                                 android:gravity="center"
-                                android:text="@string/S1TTH"
+                                android:text="@string/stage1_target_time_hours"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="30sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/FTCTaTM"
+                                android:id="@+id/FTCTargetTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/border"
                                 android:gravity="center"
-                                android:text="@string/S1TTM"
+                                android:text="@string/stage1_target_time_minutes"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="30sp"
@@ -547,7 +545,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/FTCSS"
+                                android:id="@+id/FTCStageNumber"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -564,12 +562,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/FTCTT"
+                                android:id="@+id/FTCTimeTaken"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/TT"
+                                android:text="@string/time_taken"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -581,12 +579,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/FTCAT"
+                                android:id="@+id/FTCActualTime"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/AT"
+                                android:text="@string/actual_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -607,7 +605,7 @@
                             android:orientation="horizontal">
 
                             <View
-                                android:id="@+id/FTCR4V1"
+                                android:id="@+id/FTCR6V1"
                                 android:layout_width="5dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1" />
@@ -632,7 +630,7 @@
                                 app:srcCompat="@drawable/stop" />
 
                             <EditText
-                                android:id="@+id/FTCTTM"
+                                android:id="@+id/FTCTimeTakenMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -645,7 +643,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/FTCTTS"
+                                android:id="@+id/FTCTimeTakenSeconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -658,7 +656,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/FTCTTMS"
+                                android:id="@+id/FTCTimeTakenMilliseconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -677,7 +675,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/FTCATH"
+                                android:id="@+id/FTCActualTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -688,7 +686,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/FTCATM"
+                                android:id="@+id/FTCActualTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -715,12 +713,12 @@
                             android:paddingBottom="2dp">
 
                             <TextView
-                                android:id="@+id/FTCSO"
+                                android:id="@+id/FTCStartOrder"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/SO"
+                                android:text="@string/start_order_caps"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -732,7 +730,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/FTCStage2"
+                                android:id="@+id/FTCStageLabel2"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -749,7 +747,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/FTCTC"
+                                android:id="@+id/FTCNextTC"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -785,19 +783,19 @@
                             android:gravity="center|top"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:text="@string/CU"
+                            android:text="@string/comp_use"
                             android:textColor="@color/black"
                             android:textSize="11sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/FTCDT"
+                            android:id="@+id/FTCDueTime"
                             android:layout_width="match_parent"
                             android:layout_height="15dp"
                             android:layout_weight="1"
                             android:gravity="center"
                             android:background="@color/yellow"
-                            android:text="@string/DT"
+                            android:text="@string/due_time"
                             android:textColor="@color/black"
                             android:textSize="11sp"
                             android:textStyle="bold" />
@@ -817,7 +815,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/FTCDTH"
+                                android:id="@+id/FTCDueTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -828,7 +826,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/FTCDTM"
+                                android:id="@+id/FTCDueTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -869,13 +867,13 @@
             </HorizontalScrollView>
 
             <Button
-                android:id="@+id/FReturnButton"
+                android:id="@+id/FinishReturnButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/yellow"
-                android:text="@string/returnTC"
+                android:text="@string/return_time_card"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"

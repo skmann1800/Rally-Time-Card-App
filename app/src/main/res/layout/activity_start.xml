@@ -43,7 +43,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:text="@string/s1start"
+                android:text="@string/stage1_start"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                 android:textColor="@color/black"
@@ -70,7 +70,7 @@
                     app:iconSize="90dp" />
 
                 <LinearLayout
-                    android:id="@+id/SOLayout"
+                    android:id="@+id/StartOrderLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -80,13 +80,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/SOLabel"
+                        android:id="@+id/StartOrderLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/border"
                         android:gravity="top|center_horizontal"
-                        android:text="@string/so"
+                        android:text="@string/start_order"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -125,7 +125,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border"
                         android:gravity="top|center_horizontal"
-                        android:text="@string/cn"
+                        android:text="@string/car_number"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -180,7 +180,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/STCBlue"
+                        android:id="@+id/StartTCBlue"
                         android:layout_width="40dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -210,7 +210,7 @@
                             android:layout_weight="2"
                             android:background="@color/dark_blue"
                             android:gravity="center"
-                            android:text="@string/stage1km"
+                            android:text="@string/stage1_km"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@color/white"
                             android:textSize="13sp"
@@ -242,14 +242,14 @@
                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:id="@+id/STCRow1"
+                            android:id="@+id/StartTCRow1"
                             android:layout_width="wrap_content"
                             android:layout_height="25dp"
                             android:orientation="horizontal"
                             android:paddingTop="2dp">
 
                             <TextView
-                                android:id="@+id/STCStage1"
+                                android:id="@+id/STCStageLabel1"
                                 android:layout_width="175dp"
                                 android:layout_height="match_parent"
                                 android:gravity="left|center_vertical"
@@ -261,12 +261,12 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCFT"
+                                android:id="@+id/STCFinishTime"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/FT"
+                                android:text="@string/finish_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -280,26 +280,26 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/STCRow2"
+                            android:id="@+id/StartTCRow2"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/STCDist"
+                                android:id="@+id/STCDistance"
                                 android:layout_width="125dp"
                                 android:layout_height="match_parent"
                                 android:gravity="top"
                                 android:paddingLeft="2dp"
-                                android:text="@string/stage1dist"
+                                android:text="@string/stage1_distance"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCFTH"
+                                android:id="@+id/STCFinishTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -310,7 +310,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCFTM"
+                                android:id="@+id/STCFinishTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -321,7 +321,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCFTS"
+                                android:id="@+id/STCFinishTimeSeconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -332,7 +332,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCFTMS"
+                                android:id="@+id/STCFinishTimeMilliseconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -365,17 +365,17 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/STCRow3"
+                            android:id="@+id/StartTCRow3"
                             android:layout_width="wrap_content"
                             android:layout_height="15dp"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/STCPS"
+                                android:id="@+id/STCProvStart"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:text="@string/PS"
+                                android:text="@string/prov_start"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -387,12 +387,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/STCAS"
+                                android:id="@+id/STCActualStart"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/AS"
+                                android:text="@string/actual_start"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -404,12 +404,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/STCTargT"
+                                android:id="@+id/STCTargetTime"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/TargT"
+                                android:text="@string/target_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -423,7 +423,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/STCRow4"
+                            android:id="@+id/StartTCRow4"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:orientation="horizontal">
@@ -435,7 +435,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/STCPSH"
+                                android:id="@+id/STCProvStartHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -446,7 +446,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCPSM"
+                                android:id="@+id/STCProvStartMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -466,7 +466,7 @@
                                 app:srcCompat="@drawable/arrow1" />
 
                             <EditText
-                                android:id="@+id/STCASH"
+                                android:id="@+id/STCActualStartHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -479,7 +479,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/STCASM"
+                                android:id="@+id/STCActualStartMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -498,29 +498,29 @@
                                 android:layout_weight="1"
                                 android:paddingLeft="2dp"
                                 android:paddingRight="2dp"
-                                app:srcCompat="@drawable/arrow2" />
+                                app:srcCompat="@drawable/arrow_with_flag" />
 
                             <TextView
-                                android:id="@+id/STCTaTH"
+                                android:id="@+id/STCTargetTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/border"
                                 android:gravity="center"
-                                android:text="@string/S1TTH"
+                                android:text="@string/stage1_target_time_hours"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="30sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCTaTM"
+                                android:id="@+id/STCTargetTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/border"
                                 android:gravity="center"
-                                android:text="@string/S1TTM"
+                                android:text="@string/stage1_target_time_minutes"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="30sp"
@@ -538,13 +538,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/STCRow5"
+                            android:id="@+id/StartTCRow5"
                             android:layout_width="wrap_content"
                             android:layout_height="15dp"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/STCSS"
+                                android:id="@+id/STCStageNumber"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -561,12 +561,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/STCTT"
+                                android:id="@+id/STCTimeTaken"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/TT"
+                                android:text="@string/time_taken"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -578,12 +578,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/STCAT"
+                                android:id="@+id/STCActualTime"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/AT"
+                                android:text="@string/actual_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -597,7 +597,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/STCRow6"
+                            android:id="@+id/StartTCRow6"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:layout_weight="1"
@@ -631,7 +631,7 @@
                                 app:srcCompat="@drawable/stop" />
 
                             <TextView
-                                android:id="@+id/STCTTM"
+                                android:id="@+id/STCTimeTakenMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -642,7 +642,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCTTS"
+                                android:id="@+id/STCTimeTakenSeconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -653,7 +653,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCTTMS"
+                                android:id="@+id/STCTimeTakenMilliseconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -670,7 +670,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/STCATH"
+                                android:id="@+id/STCActualTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -681,7 +681,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCATM"
+                                android:id="@+id/STCActualTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -700,7 +700,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/STCRow7"
+                            android:id="@+id/StartTCRow7"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:layout_weight="1"
@@ -708,12 +708,12 @@
                             android:paddingBottom="2dp">
 
                             <TextView
-                                android:id="@+id/STCSO"
+                                android:id="@+id/STCStartOrder"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/SO"
+                                android:text="@string/start_order_caps"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -725,7 +725,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/STCStage2"
+                                android:id="@+id/STCStageLabel2"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -742,7 +742,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/STCTC"
+                                android:id="@+id/STCNextTC"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -763,7 +763,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/STCYellow"
+                        android:id="@+id/StartTCYellow"
                         android:layout_width="110dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
@@ -778,19 +778,19 @@
                             android:gravity="center|top"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:text="@string/CU"
+                            android:text="@string/comp_use"
                             android:textColor="@color/black"
                             android:textSize="11sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/STCDT"
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
+                            android:id="@+id/STCDueTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
                             android:layout_weight="1"
                             android:background="@color/yellow"
                             android:gravity="center"
-                            android:text="@string/DT"
+                            android:text="@string/due_time"
                             android:textColor="@color/black"
                             android:textSize="11sp"
                             android:textStyle="bold" />
@@ -810,7 +810,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/STCDTH"
+                                android:id="@+id/STCDueTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -821,7 +821,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/STCDTM"
+                                android:id="@+id/STCDueTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -840,8 +840,8 @@
 
                             <TextView
                                 android:id="@+id/STCYellowTC"
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
                                 android:layout_weight="1"
                                 android:background="@color/yellow"
                                 android:gravity="center"
@@ -867,7 +867,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/SChangeSOButton"
+                    android:id="@+id/StartChangeStartOrderButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -882,14 +882,14 @@
                     app:strokeWidth="2dp" />
 
                 <Button
-                    android:id="@+id/SReturnButton"
+                    android:id="@+id/StartReturnButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/yellow"
-                    android:text="@string/returnTC"
+                    android:text="@string/return_time_card"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"

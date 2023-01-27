@@ -21,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = MainActivity.this;
 
     private EditText editTextUsername;
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
         initObjects();
+        initListeners();
     }
 
     // Method to initialise views
@@ -66,20 +67,19 @@ public class MainActivity extends AppCompatActivity {
                     checkedChip = chips.findViewById(checkedChipID);
                     String role = checkedChip.getText().toString().trim();
                     switch (role) {
-                        case "Competitor":
-                        case "Admin":
-                            editTextUsername.setVisibility(View.VISIBLE);
-                            editTextPassword.setVisibility(View.VISIBLE);
-                            loginButton.setVisibility(View.VISIBLE);
-                            editTextUsername.requestFocus();
-                            editTextUsername.setCursorVisible(true);
-                            break;
                         case "Timing Crew":
                             editTextUsername.setVisibility(View.INVISIBLE);
                             editTextPassword.setVisibility(View.INVISIBLE);
                             loginButton.setVisibility(View.INVISIBLE);
                             Intent intent = new Intent(activity, ChooseCrewActivity.class);
                             startActivity(intent);
+                            break;
+                        default:
+                            editTextUsername.setVisibility(View.VISIBLE);
+                            editTextPassword.setVisibility(View.VISIBLE);
+                            loginButton.setVisibility(View.VISIBLE);
+                            editTextUsername.requestFocus();
+                            editTextUsername.setCursorVisible(true);
                             break;
                     }
                 }
@@ -94,8 +94,23 @@ public class MainActivity extends AppCompatActivity {
         userList = new ArrayList<>();
     }
 
+    // Method to initialise listeners for the buttons
+    private void initListeners() {
+        loginButton.setOnClickListener(this);
+    }
+
+    // On Click method for each button
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.LoginButton:
+                login();
+                break;
+        }
+    }
+
     // Method to login, used when login button clicked
-    public void login(View view) {
+    private void login() {
         // Get the username and password that was inputted
         String username = editTextUsername.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();

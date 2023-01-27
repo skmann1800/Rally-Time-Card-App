@@ -41,7 +41,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:text="@string/s1control"
+                android:text="@string/stage1_acontrol"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                 android:textColor="@color/black"
@@ -84,7 +84,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border"
                         android:gravity="top|center_horizontal"
-                        android:text="@string/so"
+                        android:text="@string/start_order"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -123,7 +123,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/border"
                         android:gravity="top|center_horizontal"
-                        android:text="@string/cn"
+                        android:text="@string/car_number"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -208,7 +208,7 @@
                             android:layout_weight="2"
                             android:background="@color/dark_blue"
                             android:gravity="center"
-                            android:text="@string/stage1km"
+                            android:text="@string/stage1_km"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@color/white"
                             android:textSize="13sp"
@@ -245,7 +245,7 @@
                             android:paddingTop="2dp">
 
                             <TextView
-                                android:id="@+id/CTC1Stage1"
+                                android:id="@+id/CTC1StageLabel1"
                                 android:layout_width="175dp"
                                 android:layout_height="match_parent"
                                 android:gravity="left|center_vertical"
@@ -257,12 +257,12 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1FT"
+                                android:id="@+id/CTC1FinishTime"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/FT"
+                                android:text="@string/finish_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -283,19 +283,19 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/CTC1Dist"
+                                android:id="@+id/CTC1Distance"
                                 android:layout_width="125dp"
                                 android:layout_height="match_parent"
                                 android:gravity="top"
                                 android:paddingLeft="2dp"
-                                android:text="@string/stage1dist"
+                                android:text="@string/stage1_distance"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1FTH"
+                                android:id="@+id/CTC1FinishTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -306,7 +306,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1FTM"
+                                android:id="@+id/CTC1FinishTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -317,7 +317,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1FTS"
+                                android:id="@+id/CTC1FinishTimeSeconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -328,7 +328,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1FTMS"
+                                android:id="@+id/CTC1FinishTimeMilliseconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -367,11 +367,11 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/CTC1PS"
+                                android:id="@+id/CTC1ProvStart"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:text="@string/PS"
+                                android:text="@string/prov_start"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -383,12 +383,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC1AS"
+                                android:id="@+id/CTC1ActualStart"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/AS"
+                                android:text="@string/actual_start"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -400,12 +400,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC1TargT"
+                                android:id="@+id/CTC1TargetTime"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/TargT"
+                                android:text="@string/target_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -431,7 +431,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC1PSH"
+                                android:id="@+id/CTC1ProvStartHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -442,7 +442,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1PSM"
+                                android:id="@+id/CTC1ProvStartMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -462,7 +462,7 @@
                                 app:srcCompat="@drawable/arrow1" />
 
                             <TextView
-                                android:id="@+id/CTC1ASH"
+                                android:id="@+id/CTC1ActualStartHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -473,7 +473,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1ASM"
+                                android:id="@+id/CTC1ActualStartMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -490,29 +490,29 @@
                                 android:layout_weight="1"
                                 android:paddingLeft="2dp"
                                 android:paddingRight="2dp"
-                                app:srcCompat="@drawable/arrow2" />
+                                app:srcCompat="@drawable/arrow_with_flag" />
 
                             <TextView
-                                android:id="@+id/CTC1TaTH"
+                                android:id="@+id/CTC1TargetTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/border"
                                 android:gravity="center"
-                                android:text="@string/S1TTH"
+                                android:text="@string/stage1_target_time_hours"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="30sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1TaTM"
+                                android:id="@+id/CTC1TargetTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/border"
                                 android:gravity="center"
-                                android:text="@string/S1TTM"
+                                android:text="@string/stage1_target_time_minutes"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="30sp"
@@ -536,7 +536,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/CTC1SS"
+                                android:id="@+id/CTC1StageNumber"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -553,12 +553,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC1TT"
+                                android:id="@+id/CTC1TimeTaken"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/TT"
+                                android:text="@string/time_taken"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -570,12 +570,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC1AT"
+                                android:id="@+id/CTC1ActualTime"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/AT"
+                                android:text="@string/actual_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -621,7 +621,7 @@
                                 app:srcCompat="@drawable/stop" />
 
                             <TextView
-                                android:id="@+id/CTC1TTM"
+                                android:id="@+id/CTC1TimeTakenMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -632,7 +632,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1TTS"
+                                android:id="@+id/CTC1TimeTakenSeconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -643,7 +643,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1TTMS"
+                                android:id="@+id/CTC1TimeTakenMilliseconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -660,7 +660,7 @@
                                 android:layout_weight="1" />
 
                             <EditText
-                                android:id="@+id/CTC1ATH"
+                                android:id="@+id/CTC1ActualTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -673,7 +673,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/CTC1ATM"
+                                android:id="@+id/CTC1ActualTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -702,12 +702,12 @@
                             android:paddingBottom="2dp">
 
                             <TextView
-                                android:id="@+id/CTC1SO"
+                                android:id="@+id/CTC1StartOrder"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/SO"
+                                android:text="@string/start_order_caps"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -719,7 +719,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC1Stage2"
+                                android:id="@+id/CTC1StageLabel2"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -736,7 +736,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC1TC"
+                                android:id="@+id/CTC1NextTC"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -772,19 +772,19 @@
                             android:gravity="center|top"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:text="@string/CU"
+                            android:text="@string/comp_use"
                             android:textColor="@color/black"
                             android:textSize="11sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/CTC1DT"
+                            android:id="@+id/CTC1DueTime"
                             android:layout_width="match_parent"
                             android:layout_height="15dp"
                             android:layout_weight="1"
                             android:background="@color/yellow"
                             android:gravity="center"
-                            android:text="@string/DT"
+                            android:text="@string/due_time"
                             android:textColor="@color/black"
                             android:textSize="11sp"
                             android:textStyle="bold" />
@@ -804,7 +804,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC1DTH"
+                                android:id="@+id/CTC1DueTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -815,7 +815,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC1DTM"
+                                android:id="@+id/CTC1DueTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -905,7 +905,7 @@
                             android:layout_weight="2"
                             android:background="@color/dark_blue"
                             android:gravity="center"
-                            android:text="@string/stage2km"
+                            android:text="@string/stage2_km"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@color/white"
                             android:textSize="13sp"
@@ -944,7 +944,7 @@
                             android:paddingTop="2dp">
 
                             <TextView
-                                android:id="@+id/CTC2Stage1"
+                                android:id="@+id/CTC2StageLabel1"
                                 android:layout_width="175dp"
                                 android:layout_height="match_parent"
                                 android:gravity="left|center_vertical"
@@ -956,12 +956,12 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2FT"
+                                android:id="@+id/CTC2FinishTime"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/FT"
+                                android:text="@string/finish_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -982,19 +982,19 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/CTC2Dist"
+                                android:id="@+id/CTC2Distance"
                                 android:layout_width="125dp"
                                 android:layout_height="match_parent"
                                 android:gravity="top"
                                 android:paddingLeft="2dp"
-                                android:text="@string/stage2dist"
+                                android:text="@string/stage2_distance"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2FTH"
+                                android:id="@+id/CTC2FinishTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1005,7 +1005,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2FTM"
+                                android:id="@+id/CTC2FinishTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1016,7 +1016,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2FTS"
+                                android:id="@+id/CTC2FinishTimeSeconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1027,7 +1027,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2FTMS"
+                                android:id="@+id/CTC2FinishTimeMilliseconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1066,11 +1066,11 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/CTC2PS"
+                                android:id="@+id/CTC2ProvStart"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:text="@string/PS"
+                                android:text="@string/prov_start"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -1082,12 +1082,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC2AS"
+                                android:id="@+id/CTC2ActualStart"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/AS"
+                                android:text="@string/actual_start"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -1099,12 +1099,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC2TargT"
+                                android:id="@+id/CTC2TargetTime"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/TargT"
+                                android:text="@string/target_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -1130,7 +1130,7 @@
                                 android:layout_weight="1" />
 
                             <EditText
-                                android:id="@+id/CTC2PSH"
+                                android:id="@+id/CTC2ProvStartHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1143,7 +1143,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/CTC2PSM"
+                                android:id="@+id/CTC2ProvStartMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1165,7 +1165,7 @@
                                 app:srcCompat="@drawable/arrow1" />
 
                             <TextView
-                                android:id="@+id/CTC2ASH"
+                                android:id="@+id/CTC2ActualStartHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1176,7 +1176,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2ASM"
+                                android:id="@+id/CTC2ActualStartMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1193,29 +1193,29 @@
                                 android:layout_weight="1"
                                 android:paddingLeft="2dp"
                                 android:paddingRight="2dp"
-                                app:srcCompat="@drawable/arrow2" />
+                                app:srcCompat="@drawable/arrow_with_flag" />
 
                             <TextView
-                                android:id="@+id/CTC2TaTH"
+                                android:id="@+id/CTC2TargetTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/border"
                                 android:gravity="center"
-                                android:text="@string/S2TTH"
+                                android:text="@string/stage2_target_time_hours"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="30sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2TaTM"
+                                android:id="@+id/CTC2TargetTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@drawable/border"
                                 android:gravity="center"
-                                android:text="@string/S2TTM"
+                                android:text="@string/stage2_target_time_minutes"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/red"
                                 android:textSize="30sp"
@@ -1239,7 +1239,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/CTC2SS"
+                                android:id="@+id/CTC2StageNumber"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1256,12 +1256,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC2TT"
+                                android:id="@+id/CTC2TimeTaken"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/TT"
+                                android:text="@string/time_taken"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -1273,12 +1273,12 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC2AT"
+                                android:id="@+id/CTC2ActualTime"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/AT"
+                                android:text="@string/actual_time"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -1326,7 +1326,7 @@
                                 app:srcCompat="@drawable/stop" />
 
                             <TextView
-                                android:id="@+id/CTC2TTM"
+                                android:id="@+id/CTC2TimeTakenMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1337,7 +1337,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2TTS"
+                                android:id="@+id/CTC2TimeTakenSeconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1348,7 +1348,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2TTMS"
+                                android:id="@+id/CTC2TimeTakenMilliseconds"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1365,7 +1365,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC2ATH"
+                                android:id="@+id/CTC2ActualTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1376,7 +1376,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2ATM"
+                                android:id="@+id/CTC2ActualTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1403,12 +1403,12 @@
                             android:paddingBottom="2dp">
 
                             <TextView
-                                android:id="@+id/CTC2SO"
+                                android:id="@+id/CTC2StartOrder"
                                 android:layout_width="110dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="@string/SO"
+                                android:text="@string/start_order_caps"
                                 android:textColor="@color/black"
                                 android:textSize="11sp"
                                 android:textStyle="bold" />
@@ -1420,7 +1420,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC2Stage2"
+                                android:id="@+id/CTC2StageLabel2"
                                 android:layout_width="150dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1437,7 +1437,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC2TC"
+                                android:id="@+id/CTC2NextTC"
                                 android:layout_width="100dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1473,19 +1473,19 @@
                             android:gravity="center|top"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:text="@string/CU"
+                            android:text="@string/comp_use"
                             android:textColor="@color/black"
                             android:textSize="11sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/CTC2DT"
+                            android:id="@+id/CTC2DueTime"
                             android:layout_width="match_parent"
                             android:layout_height="15dp"
                             android:layout_weight="1"
                             android:background="@color/yellow"
                             android:gravity="center"
-                            android:text="@string/DT"
+                            android:text="@string/due_time"
                             android:textColor="@color/black"
                             android:textSize="11sp"
                             android:textStyle="bold" />
@@ -1505,7 +1505,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
-                                android:id="@+id/CTC2DTH"
+                                android:id="@+id/CTC2DueTimeHours"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1516,7 +1516,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/CTC2DTM"
+                                android:id="@+id/CTC2DueTimeMinutes"
                                 android:layout_width="50dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -1562,7 +1562,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/CChangeSOButton"
+                    android:id="@+id/ControlChangeStartOrderButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -1577,14 +1577,14 @@
                     app:strokeWidth="2dp" />
 
                 <Button
-                    android:id="@+id/CReturnButton"
+                    android:id="@+id/ControlReturnButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/yellow"
-                    android:text="@string/returnTC"
+                    android:text="@string/return_time_card"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"

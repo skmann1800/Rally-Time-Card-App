@@ -80,7 +80,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
 
     // Method to initialise views
     private void initViews() {
-        backButton = findViewById(R.id.UCBackButton);
+        backButton = findViewById(R.id.UpdateCrewBackButton);
         saveButton = findViewById(R.id.UpdateCrewButton);
         deleteButton = findViewById(R.id.DeleteCrewButton);
         addNewButton = findViewById(R.id.AddNewCrewButton);
@@ -129,7 +129,7 @@ public class UpdateCrewActivity extends AppCompatActivity implements View.OnClic
                 // Delete button shows the delete pop-up
                 ShowDeletePopup();
                 break;
-            case R.id.UCBackButton:
+            case R.id.UpdateCrewBackButton:
                 back();
                 break;
             case R.id.AddNewCrewButton:

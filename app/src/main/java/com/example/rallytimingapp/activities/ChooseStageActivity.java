@@ -66,7 +66,9 @@ public class ChooseStageActivity extends AppCompatActivity implements View.OnCli
                 goToStage(4);
                 break;
             case R.id.CSBackButton:
-                back();
+                // Return to the choose crew page
+                Intent intent = new Intent(this, ChooseCrewActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -92,11 +94,5 @@ public class ChooseStageActivity extends AppCompatActivity implements View.OnCli
                 startActivity(intent);
                 break;
         }
-    }
-
-    // Method to return to the choose crew page
-    private void back() {
-        Intent intent = new Intent(this, ChooseCrewActivity.class);
-        startActivity(intent);
     }
 }

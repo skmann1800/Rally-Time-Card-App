@@ -34,6 +34,12 @@
         <item>@string/stage4_km</item>
     </string-array>
 
+    <string-array name="roles">
+        <item>A Control</item>
+        <item>Start</item>
+        <item>Finish</item>
+    </string-array>
+
     <string name="competitor">Competitor</string>
     <string name="acontrol">A Control</string>
     <string name="ACONTROL">A CONTROL</string>

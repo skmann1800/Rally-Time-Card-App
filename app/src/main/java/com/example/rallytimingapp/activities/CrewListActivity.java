@@ -27,7 +27,6 @@ public class CrewListActivity extends AppCompatActivity implements View.OnClickL
     private SearchView searchBar;
     private TimingCrewDatabaseHelper timingCrewDatabaseHelper;
     private TimingCrew timingCrew;
-    private String role;
 
     private Button addCrewButton;
     private Button backButton;
@@ -39,10 +38,6 @@ public class CrewListActivity extends AppCompatActivity implements View.OnClickL
 
         initViews();
         initListeners();
-
-        // Get role from intent
-        role = getIntent().getStringExtra("ROLE");
-        addCrewButton.setText("Add New " + role + " Account");
 
         // Setup Adapter
         userListView = (ListView) findViewById(R.id.CrewListView);
@@ -84,7 +79,7 @@ public class CrewListActivity extends AppCompatActivity implements View.OnClickL
     // Method to return a list of the names of all post chiefs of crews in the specified role
     public List<String> getPostChiefs() {
         List<String> currPostChiefs = new ArrayList<>();
-        crewList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
+        crewList = timingCrewDatabaseHelper.getAllTimingCrews();
         for (int i = 0; i < crewList.size(); i++) {
             currPostChiefs.add(crewList.get(i).getPostChief());
         }
@@ -96,10 +91,9 @@ public class CrewListActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String postChiefName = (String) adapterView.getAdapter().getItem(position);
-        timingCrew = timingCrewDatabaseHelper.getTimingCrewByPostChief(role, postChiefName);
+        timingCrew = timingCrewDatabaseHelper.getTimingCrewByPostChief(postChiefName);
         int crewID = timingCrew.getCrewId();
         Intent intent = new Intent(this, UpdateCrewActivity.class);
-        intent.putExtra("ROLE", role);
         intent.putExtra("CREW_ID", crewID);
         startActivity(intent);
     }
@@ -109,7 +103,7 @@ public class CrewListActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onQueryTextSubmit(String query) {
         String search = query.toLowerCase(Locale.ROOT);
-        crewList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
+        crewList = timingCrewDatabaseHelper.getAllTimingCrews();
         List<String> results = new ArrayList<>();
         for (int i = 0; i < crewList.size(); i++) {
             String currPostChief = crewList.get(i).getPostChief();
@@ -129,7 +123,7 @@ public class CrewListActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onQueryTextChange(String newText) {
         String search = newText.toLowerCase(Locale.ROOT);
-        crewList = timingCrewDatabaseHelper.getTimingCrewsByPosition(role);
+        crewList = timingCrewDatabaseHelper.getAllTimingCrews();
         List<String> results = new ArrayList<>();
         for (int i = 0; i < crewList.size(); i++) {
             String currPostChief = crewList.get(i).getPostChief();
@@ -151,7 +145,6 @@ public class CrewListActivity extends AppCompatActivity implements View.OnClickL
             case R.id.AddCrewButton:
                 // Changes to the add crew activity and passes the crew type with the intent
                 intent = new Intent(this, AddCrewActivity.class);
-                intent.putExtra("ROLE", role);
                 startActivity(intent);
                 break;
             case R.id.CrewListBackButton:

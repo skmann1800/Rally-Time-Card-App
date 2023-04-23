@@ -175,7 +175,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 {
                     // This box contains the hours, so this input cannot be
                     // larger than 24
-                    if (Integer.valueOf(actualStartH.getText().toString()) > 24) {
+                    if (Integer.valueOf(actualStartH.getText().toString()) >= 24) {
                         // If input is larger than 24, reset the text and display an error message.
                         actualStartH.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();

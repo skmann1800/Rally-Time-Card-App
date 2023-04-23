@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
-import android.widget.ScrollView;
 
 import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.model.Competitor;
@@ -30,9 +29,9 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
     private final AppCompatActivity activity = AdminOptionsActivity.this;
 
     private Button competitorButton;
-    private Button aControlButton;
-    private Button startButton;
-    private Button finishButton;
+    private Button crewButton;
+    private Button createEventButton;
+    private Button editEventButton;
     private Button signOutButton;
     private Button resetButton;
 
@@ -63,10 +62,10 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
 
     // Method to initialise views
     private void initViews() {
-        competitorButton = findViewById(R.id.CompetitorRoleButton);
-        aControlButton = findViewById(R.id.AControlRoleButton);
-        startButton = findViewById(R.id.StartRoleButton);
-        finishButton = findViewById(R.id.FinishRoleButton);
+        competitorButton = findViewById(R.id.CompAccountsButton);
+        crewButton = findViewById(R.id.CrewAccountsButton);
+        createEventButton = findViewById(R.id.CreateEventButton);
+        editEventButton = findViewById(R.id.EditEventButton);
         signOutButton = findViewById(R.id.AOSignOutButton);
         resetButton = findViewById(R.id.AOResetButton);
     }
@@ -74,9 +73,9 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
     // Method to initialise listeners for the buttons
     private void initListeners() {
         competitorButton.setOnClickListener(this);
-        aControlButton.setOnClickListener(this);
-        startButton.setOnClickListener(this);
-        finishButton.setOnClickListener(this);
+        crewButton.setOnClickListener(this);
+        createEventButton.setOnClickListener(this);
+        editEventButton.setOnClickListener(this);
         signOutButton.setOnClickListener(this);
         resetButton.setOnClickListener(this);
     }
@@ -102,19 +101,18 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         // Switch case for each button
         Intent intent;
         switch (view.getId()) {
-            case R.id.CompetitorRoleButton:
+            case R.id.CompAccountsButton:
                 // Competitor button goes to the Comp List Activity
                 intent = new Intent(this, CompListActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.AControlRoleButton:
-                goToCrewList("A Control");
+            case R.id.CrewAccountsButton:
+                intent = new Intent(this, CrewListActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.StartRoleButton:
-                goToCrewList("Start");
-                break;
-            case R.id.FinishRoleButton:
-                goToCrewList("Finish");
+            case R.id.CreateEventButton:
+                intent = new Intent(this, CreateEventActivity.class);
+                startActivity(intent);
                 break;
             case R.id.AOSignOutButton:
                 // Sign out button returns to the main login page
@@ -126,12 +124,6 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
                 ShowResetPopup();
                 break;
         }
-    }
-
-    private void goToCrewList(String role) {
-        Intent intent = new Intent(this, CrewListActivity.class);
-        intent.putExtra("ROLE", role);
-        startActivity(intent);
     }
 
     // Method which resets all the databases and creates the basic accounts
@@ -152,18 +144,15 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
         int compID4 = CreateCompetitor(12, "Jack Hawkeswood", "Sarah Brenna");
 
         // Then create timing crew database entries with the below data and save their IDs
-        int crewID1 = CreateTimingCrew("A Control", "George", "0219384756");
-        int crewID2 = CreateTimingCrew("Start", "Jared", "0212349879");
-        int crewID3 = CreateTimingCrew("Finish", "Sarah", "0279125769");
+        CreateTimingCrew("A Control", "George", "0219384756");
+        CreateTimingCrew("Start", "Jared", "0212349879");
+        CreateTimingCrew("Finish", "Sarah", "0279125769");
 
         // Then create logins using the below data and IDs from above
         CreateLogin("Hayden", "hayden", "Competitor", compID1);
         CreateLogin("Emma", "emma", "Competitor", compID2);
         CreateLogin("Ben", "ben","Competitor", compID3);
         CreateLogin("Jack", "jack", "Competitor", compID4);
-        CreateLogin("George", "ac", "A Control", crewID1);
-        CreateLogin("Jared", "start", "Start", crewID2);
-        CreateLogin("Sarah", "finish", "Finish", crewID3);
         CreateLogin("Admin", "admin", "Admin", -1);
     }
 
@@ -190,8 +179,7 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
     }
 
     // Method to create a timing crew database entry
-    private int CreateTimingCrew(String position, String postChief, String phone) {
-        int crewID = 0;
+    private void CreateTimingCrew(String position, String postChief, String phone) {
         // Check if an entry with the given position and post chief already exists
         if (!timingCrewDatabaseHelper.checkTimingCrew(position, postChief)) {
             // If not, create one
@@ -201,9 +189,6 @@ public class AdminOptionsActivity extends AppCompatActivity implements View.OnCl
             // Add the timing crew to the database
             timingCrewDatabaseHelper.addTimingCrew(crew);
         }
-        // Get the ID of the database entry and return it
-        crewID = timingCrewDatabaseHelper.getCrewId(position, postChief);
-        return crewID;
     }
 
     // Method to create a login

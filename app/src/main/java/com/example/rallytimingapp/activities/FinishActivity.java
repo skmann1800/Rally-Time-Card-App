@@ -102,7 +102,7 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
         stageNum = getIntent().getIntExtra("STAGE", 0);
         // Set default finish order to be 1
         finishOrder = finishDatabaseHelper.getCurrFinishOrder(stageNum) + 1;
-        finishOrderTV.setText(finishOrder);
+        finishOrderTV.setText(String.valueOf(finishOrder));
         carNumTV.requestFocus();
         carNumTV.setCursorVisible(true);
 
@@ -194,7 +194,7 @@ public class FinishActivity extends AppCompatActivity implements View.OnClickLis
                 {
                     // This box contains the hours of a time, so this input cannot be
                     // larger than 24
-                    if (Integer.valueOf(finishTimeHours.getText().toString()) > 24) {
+                    if (Integer.valueOf(finishTimeHours.getText().toString()) >= 24) {
                         // If input is larger than 24, reset the text and display an error message.
                         finishTimeHours.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();

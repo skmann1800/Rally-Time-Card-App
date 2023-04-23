@@ -146,7 +146,7 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
 
     // Method to return the entry with the given position and post chief name
     @SuppressLint("Range")
-    public TimingCrew getTimingCrewByPostChief(String role, String postChief) {
+    public TimingCrew getTimingCrewByRoleAndPostChief(String role, String postChief) {
         String[] columns = {
                 COLUMN_CREW_ID,
                 COLUMN_CREW_POSITION,
@@ -162,6 +162,44 @@ public class TimingCrewDatabaseHelper extends SQLiteOpenHelper {
         String selection = COLUMN_CREW_POSITION + " = ?" + " AND " + COLUMN_CREW_POSTCHIEF + " = ?";
         // selection argument
         String[] selectionArgs = {role, postChief};
+
+        Cursor cursor = db.query(TABLE_TIMING_CREW, //Table to query
+                columns,             //columns to return
+                selection,        //columns for the WHERE clause
+                selectionArgs,     //The values for the WHERE clause
+                null,        //group the rows
+                null,         //filter by row groups
+                null);         //The sort order
+
+        if (cursor.moveToFirst()) {
+            crew.setCrewId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_CREW_ID))));
+            crew.setPosition(cursor.getString(cursor.getColumnIndex(COLUMN_CREW_POSITION)));
+            crew.setPostChief(cursor.getString(cursor.getColumnIndex(COLUMN_CREW_POSTCHIEF)));
+            crew.setPostChiefPhone(cursor.getString(cursor.getColumnIndex(COLUMN_CREW_PHONE)));
+        }
+        cursor.close();
+        db.close();
+
+        return crew;
+    }
+
+    @SuppressLint("Range")
+    public TimingCrew getTimingCrewByPostChief(String postChief) {
+        String[] columns = {
+                COLUMN_CREW_ID,
+                COLUMN_CREW_POSITION,
+                COLUMN_CREW_POSTCHIEF,
+                COLUMN_CREW_PHONE
+        };
+
+        TimingCrew crew = new TimingCrew();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // selection criteria
+        String selection = COLUMN_CREW_POSTCHIEF + " = ?";
+        // selection argument
+        String[] selectionArgs = {postChief};
 
         Cursor cursor = db.query(TABLE_TIMING_CREW, //Table to query
                 columns,             //columns to return

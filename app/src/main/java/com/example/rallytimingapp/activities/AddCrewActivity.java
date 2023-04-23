@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Spinner;
 
 import com.example.rallytimingapp.R;
 import com.example.rallytimingapp.helpers.InputValidation;
@@ -31,12 +33,9 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
     private ScrollView scrollView;
 
     private TextView label;
-    private EditText usernameET;
-    private EditText passwordET;
+    private Spinner crewRole;
     private EditText postChiefET;
     private EditText phoneET;
-
-    private String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,10 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
         initObjects();
         initListeners();
 
-        role = getIntent().getStringExtra("ROLE");
-        label.setText("Add New " + role + " Crew Login");
+        // Set-up role dropdown
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.roles, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        crewRole.setAdapter(adapter);
     }
 
     // Method to initialise the views
@@ -58,8 +59,7 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
         scrollView = findViewById(R.id.AddCrewScrollView);
 
         label = findViewById(R.id.AddCrewDisplay);
-        usernameET = findViewById(R.id.AddCrewUsername);
-        passwordET = findViewById(R.id.AddCrewPassword);
+        crewRole = findViewById(R.id.AddCrewRole);
         postChiefET = findViewById(R.id.AddCrewPostChief);
         phoneET = findViewById(R.id.AddCrewPhone);
     }
@@ -86,12 +86,6 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
                 if (verifyInput()) {
                     // If so, create a crew database entry and get the ID
                     int crewID = saveCrew();
-                    // If a crew entry already existed, shown by an ID of -1,
-                    // then do not save a user
-                    if (crewID != -1) {
-                        // Otherwise save a user account, with the ID given above
-                        saveUser(crewID);
-                    }
                     // Clear all of the text boxes
                     clearInputs();
                 } else {
@@ -102,7 +96,6 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.AddCrewBackButton:
                 // Return to the crew list page, passing the role as an extra
                 Intent intent = new Intent(this, CrewListActivity.class);
-                intent.putExtra("ROLE", role);
                 startActivity(intent);
                 break;
         }
@@ -111,6 +104,7 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
     // Method to add an entry to the crew database and return the ID
     public int saveCrew() {
         int crewID = -1;
+        String role = crewRole.getSelectedItem().toString();
         String postChief = postChiefET.getText().toString().trim();
         String phone = phoneET.getText().toString().trim();
         // Check if there is already an entry in the database with that role and post
@@ -132,37 +126,8 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
         return crewID;
     }
 
-    // Method to add an entry to the user database
-    public void saveUser(int crewID) {
-        String username = usernameET.getText().toString().trim();
-        String password = passwordET.getText().toString().trim();
-        // Check if there is already an entry in the database with that username
-        // or role and crew ID first
-        if (!userDatabaseHelper.checkUser(username) && !userDatabaseHelper.checkUser(role, crewID)) {
-            // If there isn't, add one
-            User newUser = new User();
-            newUser.setUsername(username);
-            newUser.setPassword(password);
-            newUser.setId(crewID);
-            newUser.setRole(role);
-            userDatabaseHelper.addUser(newUser);
-            // Show a message stating that the account has been created
-            Snackbar.make(scrollView, "Account created", Snackbar.LENGTH_LONG).show();
-
-        } else {
-            // If an account already exists, return the following error message
-            Snackbar.make(scrollView, "Account already exists", Snackbar.LENGTH_LONG).show();
-        }
-    }
-
     // Method to check if all the text fields have been filled
     private boolean verifyInput() {
-        if (!inputValidation.isEditTextFilled(usernameET)) {
-            return false;
-        }
-        if (!inputValidation.isEditTextFilled(passwordET)) {
-            return false;
-        }
         if (!inputValidation.isEditTextFilled(postChiefET)) {
             return false;
         }
@@ -174,11 +139,7 @@ public class AddCrewActivity extends AppCompatActivity implements View.OnClickLi
 
     // Method to clear all of the text fields and reset the focus
     public void clearInputs() {
-        usernameET.setText(null);
-        passwordET.setText(null);
         postChiefET.setText(null);
         phoneET.setText(null);
-        usernameET.requestFocus();
-        usernameET.setCursorVisible(true);
     }
 }

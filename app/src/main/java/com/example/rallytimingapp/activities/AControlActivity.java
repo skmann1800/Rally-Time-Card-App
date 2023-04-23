@@ -254,7 +254,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 {
                     // This box contains the hours of a time, so this input cannot be
                     // larger than 24
-                    if (Integer.valueOf(actualTimeH1.getText().toString()) > 24) {
+                    if (Integer.valueOf(actualTimeH1.getText().toString()) >= 24) {
                         // If input is larger than 24, reset the text and display an error message.
                         actualTimeH1.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
@@ -348,7 +348,7 @@ public class AControlActivity extends AppCompatActivity implements View.OnClickL
                 if(provStartH2.getText().toString().length()==2)
                 {
                     // This is an hours box, so input can't be larger than 24
-                    if (Integer.valueOf(provStartH2.getText().toString()) > 24) {
+                    if (Integer.valueOf(provStartH2.getText().toString()) >= 24) {
                         // If input is larger than 24, reset the text and show error message
                         provStartH2.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();

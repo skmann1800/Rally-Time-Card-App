@@ -302,7 +302,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 if(dueTimeH1.getText().toString().length()==2)
                 {
                     // This box is for hours, so the max input is 24
-                    if (Integer.valueOf(dueTimeH1.getText().toString()) > 24) {
+                    if (Integer.valueOf(dueTimeH1.getText().toString()) >= 24) {
                         // If the input is larger than 24, clear it and show an error message
                         dueTimeH1.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
@@ -382,7 +382,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 if(dueTimeH2.getText().toString().length()==2)
                 {
                     // This box is for hours, so the max input is 24
-                    if (Integer.valueOf(dueTimeH2.getText().toString()) > 24) {
+                    if (Integer.valueOf(dueTimeH2.getText().toString()) >= 24) {
                         // If the input is larger than 24, clear it and show an error message
                         dueTimeH2.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
@@ -462,7 +462,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 if(dueTimeH3.getText().toString().length()==2)
                 {
                     // This box is for hours, so the max input is 24
-                    if (Integer.valueOf(dueTimeH3.getText().toString()) > 24) {
+                    if (Integer.valueOf(dueTimeH3.getText().toString()) >= 24) {
                         // If the input is larger than 24, clear it and show an error message
                         dueTimeH3.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
@@ -542,7 +542,7 @@ public class CompViewActivity extends AppCompatActivity implements View.OnClickL
                 if(dueTimeH4.getText().toString().length()==2)
                 {
                     // This box is for hours, so the max input is 24
-                    if (Integer.valueOf(dueTimeH4.getText().toString()) > 24) {
+                    if (Integer.valueOf(dueTimeH4.getText().toString()) >= 24) {
                         // If the input is larger than 24, clear it and show an error message
                         dueTimeH4.setText("");
                         Snackbar.make(scrollView, "Invalid Input", Snackbar.LENGTH_LONG).show();
